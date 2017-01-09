@@ -1,0 +1,59 @@
+*{
+  padding: 0;
+  margin: 0;
+  font-family: Calibri
+}
+
+.boxLogin{
+  height: 400px;
+  width: 350px;
+  background: #bef0ff;
+}
+
+.boxLogin > div:nth-child(1){
+  width: 100%;
+  height: 40px;
+  background: #3fada3;
+  line-height: 40px;
+  text-align: center;
+  color: white;
+  font-size: 22px;
+}
+
+.boxLogin ._bxL{
+  padding: 10px;
+  position: relative;
+  box-sizing: border-box;
+}
+
+.boxLogin ._bxL .otherCont > div{
+  padding: 10px 0 5px 0;
+
+}
+.boxLogin .notificacion{
+  overflow: hidden;
+  width: 0;
+}
+.boxLogin .notificacion > div:nth-of-type(1){
+  float: right;
+  width: 100%
+}
+
+.boxLogin .butons {
+  overflow: hidden;
+}
+
+.boxLogin .butons > div:nth-child(1){
+  float: left;
+}
+
+.boxLogin .butons > div:nth-child(2){
+  float: right;
+  width: 200px;
+}
+
+.boxLogin .resultadoLo{
+  background: red;
+  height: 50px;
+  width: 100%;
+}
