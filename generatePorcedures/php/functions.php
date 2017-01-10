@@ -58,6 +58,9 @@ function DATA($conn,$sql)
     $rawdata = array();
     $i=0;
 
+    if (!is_object($result)){
+      die('{"PROCESO":"EXITOSO","DATA":[{"resultado":"PROCEDIMIENTO EXECUTADO"}],"HEAD":["resultado"]}');
+    }
 
     while($row = $result->fetch_array(MYSQLI_ASSOC)){$rawdata[$i] = $row;$i++;}
 
@@ -69,6 +72,10 @@ function DATA($conn,$sql)
       $i++;
     }
 
+    if (is_object($result)){
+      $result->free();
+      $result2 = null;
+    }
 
     discDB($conn);
 

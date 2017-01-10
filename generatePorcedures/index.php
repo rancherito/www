@@ -52,7 +52,11 @@
     </div>
 
     <div class="llllll">
-      <button type="button" name="button" class="connLocal">Coneccion local</button>
+      <button type="button" name="button" class="connLocal" style="display:none">Coneccion local</button>
+    </div>
+
+    <div class="escritor">
+      <textarea name="name" rows="80" cols="150" class="textarea"></textarea>
     </div>
 
   </body>

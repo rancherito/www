@@ -45,17 +45,41 @@ $(document).ready(function() {
     var _conn = {rutine:_call,rutine_schema:_rtna};
     $.post('php/query.php',_conn, function(data) {
       var DATA = $.parseJSON(data);
-      console.log(DATA);
 
-      _data.setDataQuery(new dataQuery(DATA));
-      $('.asdda').append(_data.getContainer());
+      var dtQ = new dataQuery(DATA)
+      _data.setDataQuery(dtQ);
+      //$('.asdda').append(_data.getContainer());
+
+      var texto = '';
+      var jmp = '\n';
+
+      var antes = '';
+      for (var i = 0; i < dtQ.getTable()['SPECIFIC_NAME'].length; i++) {
+        var valor = dtQ.getTable()['SPECIFIC_NAME'][i];
+        if (antes!=valor) {
+
+          texto += 'function '+valor+'($proc){'+jmp;
+          texto += '\t$sql = "call  '+valor+'".parametros($proc);'+jmp;
+          texto += '\t$DATA = DATA(connectDB(),$sql);'+jmp;
+          texto += '\techo \'{"PROCESO":"EXITOSO","DATA":\'.json_encode($DATA[0]).\',"HEAD":\'.json_encode($DATA[1]).\'}\';'+jmp;
+          texto += '}'+jmp;
+          texto += jmp+jmp;
+        }
+        antes=valor;
+      }
+
+      $('.textarea').text(texto);
+
+
+
+
     });
+
 
   });
 
   $('.connLocal').click(function(event) {
-    console.log('dasfdaesv');
-    var _call = call('bussCrear',['2','40','48','DDFSF452PE','A']);
+    var _call = call('bussCrear',['2','40','48','A2055','A']);
     var _conn = {procedure:_call};
       $.post('php/query.php',_conn, function(data) {
         console.log(data);
