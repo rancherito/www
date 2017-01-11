@@ -1,9 +1,11 @@
 <?php
 
+  error_reporting(E_ERROR | E_WARNING | E_PARSE | E_NOTICE);
+
   include 'functions.php';
   include 'procedures.php';
   if ($_POST) {
-    if ($_POST['conecction']) {
+    if (!empty($_POST['conecction'])) {
         $dbconn = 'information_schema';
         $proc = gCall($_POST['conecction']);
         $sql = 'SELECT * FROM SCHEMATA';
@@ -12,8 +14,8 @@
         echo '{"PROCESO":"EXITOSO","DATA":'.json_encode($DATA[0]).',"HEAD":'.json_encode($DATA[1]).'}';
 
     }
-    elseif ($_POST['rutine']) {
-      if ($_POST['rutine_schema']) {
+    elseif (!empty($_POST['rutine'])) {
+      if (!empty($_POST['rutine_schema'])) {
         $dbconn = 'information_schema';
         $RUTINA = $_POST['rutine_schema'];
         $proc = gCall($_POST['rutine']);
@@ -28,7 +30,7 @@
 
     }
 
-    else if ($_POST['procedure']) {
+    else if (!empty($_POST['procedure'])) {
       $proc = gCall($_POST['procedure']);
       include 'listProcedures.php';
     }

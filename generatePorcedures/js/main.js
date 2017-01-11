@@ -21,7 +21,6 @@ $(document).ready(function() {
     var _call = call('conecctServer',[_serv,_puer,_user,_pass]);
     var _conn = {conecction:_call,rutine_schema:'null'};
     $.post('php/query.php',_conn, function(data) {
-
       var DATA = $.parseJSON(data);
       _listViewCG.setDataQuery(new dataQuery(DATA)).setView('SCHEMA_NAME').setValue("SCHEMA_NAME");
       _listViewCG.setContainer(slbd);
@@ -48,30 +47,38 @@ $(document).ready(function() {
 
       var dtQ = new dataQuery(DATA)
       _data.setDataQuery(dtQ);
-      //$('.asdda').append(_data.getContainer());
+      $('.asdda').append(_data.getContainer());
 
       var texto = '';
+      var texto2 = '';
       var jmp = '\n';
-
       var antes = '';
+
+      texto += '<?php'+jmp;;
       for (var i = 0; i < dtQ.getTable()['SPECIFIC_NAME'].length; i++) {
         var valor = dtQ.getTable()['SPECIFIC_NAME'][i];
         if (antes!=valor) {
 
-          texto += 'function '+valor+'($proc){'+jmp;
-          texto += '\t$sql = "call  '+valor+'".parametros($proc);'+jmp;
-          texto += '\t$DATA = DATA(connectDB(),$sql);'+jmp;
-          texto += '\techo \'{"PROCESO":"EXITOSO","DATA":\'.json_encode($DATA[0]).\',"HEAD":\'.json_encode($DATA[1]).\'}\';'+jmp;
-          texto += '}'+jmp;
+
+          texto += '\tfunction '+valor+'($proc){'+jmp;
+          texto += '\t\t$sql = "call  '+valor+'".parametros($proc);'+jmp;
+          texto += '\t\t$DATA = DATA(connectDB(),$sql);'+jmp;
+          texto += '\t\techo \'{"PROCESO":"EXITOSO","DATA":\'.json_encode($DATA[0]).\',"HEAD":\'.json_encode($DATA[1]).\'}\';'+jmp;
+          texto += '\t}'+jmp;
           texto += jmp+jmp;
+
+          texto2+=valor+jmp;
+
         }
         antes=valor;
       }
-
+      texto += '?>'+jmp;;
       $('.textarea').text(texto);
 
 
 
+
+      $('.textarea2').text(texto2);
 
     });
 

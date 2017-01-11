@@ -56,7 +56,8 @@
     </div>
 
     <div class="escritor">
-      <textarea name="name" rows="80" cols="150" class="textarea"></textarea>
+      <textarea name="name" rows="20" cols="150" class="textarea"></textarea>
+      <textarea name="name" rows="20" cols="150" class="textarea2"></textarea>
     </div>
 
   </body>

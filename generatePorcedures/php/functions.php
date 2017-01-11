@@ -18,7 +18,7 @@ function gCall($procedure)
     $temm='';$count=0;
     for ($i=0; $i < strlen($procedure); $i++) {
 
-      if (!$limites[$procedure[$i]]) {
+      if (empty($limites[$procedure[$i]])) {
         $temm = $temm.$procedure[$i];
       }else {
 
