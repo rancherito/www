@@ -11,6 +11,7 @@ $(document).ready(function() {
   var user = $('.user');
   var pass = $('.pass');
 
+
   $('.conec').click(function(event) {
 
     var _serv = serv.val();
@@ -31,7 +32,7 @@ $(document).ready(function() {
       tablaTest.append(_dataViewCG.getContainer());
       bdver.css('display', 'block');
 
-      });
+    });
   });
   bdver.click(function(event) {
     var _rtna = slbd.val();
@@ -54,7 +55,8 @@ $(document).ready(function() {
       var jmp = '\n';
       var antes = '';
 
-      texto += '<?php'+jmp;;
+      texto += '<?php'+jmp;
+      texto2 += '<?php'+jmp;
       for (var i = 0; i < dtQ.getTable()['SPECIFIC_NAME'].length; i++) {
         var valor = dtQ.getTable()['SPECIFIC_NAME'][i];
         if (antes!=valor) {
@@ -65,19 +67,26 @@ $(document).ready(function() {
           texto += '\t\t$DATA = DATA(connectDB(),$sql);'+jmp;
           texto += '\t\techo \'{"PROCESO":"EXITOSO","DATA":\'.json_encode($DATA[0]).\',"HEAD":\'.json_encode($DATA[1]).\'}\';'+jmp;
           texto += '\t}'+jmp;
-          texto += jmp+jmp;
+          texto += jmp;
 
-          texto2+=valor+jmp;
+          var t2V = valor.replace(/sp_|tb_|_/gi,'');
+
+          texto2 += i===0?'\tif ($proc[0]===\''+t2V+'\') {'+jmp:'\telse if ($proc[0]===\''+t2V+'\') {'+jmp;
+          texto2 += '\t\t'+valor+'($proc);'+jmp;
+          texto2 += '\t}'+jmp;
+          texto2 += jmp;
 
         }
         antes=valor;
       }
-      texto += '?>'+jmp;;
+
+      texto2 += '\telse {'+jmp;
+      texto2 += '\t\techo \'{"PROCESO":"FALLIDO"}\';'+jmp;
+      texto2 += '\t}'+jmp;
+
+      texto += '?>'+jmp;
+      texto2 += '?>'+jmp;
       $('.textarea').text(texto);
-
-
-
-
       $('.textarea2').text(texto2);
 
     });
@@ -88,8 +97,8 @@ $(document).ready(function() {
   $('.connLocal').click(function(event) {
     var _call = call('bussCrear',['2','40','48','A2055','A']);
     var _conn = {procedure:_call};
-      $.post('php/query.php',_conn, function(data) {
-        console.log(data);
-      });
+    $.post('php/query.php',_conn, function(data) {
+      console.log(data);
+    });
   });
 });

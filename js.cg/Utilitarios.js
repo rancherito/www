@@ -1,3 +1,20 @@
+
+String.prototype.clStr = function (clear) {
+  console.log(clear);
+  var cgar = '';
+  var last = 0;
+  for (var i = 0; i < this.length - clear .length+1; i++) {
+    if (clear===this.substring(i,clear.length + i)) {
+      cgar+=this.substring(last,i);
+      console.log(this.substring(last,i));
+      last=i+clear.length;
+    }
+  }
+  console.log(this.substring(last,this.length));
+  cgar+=this.substring(last,this.length);
+  return cgar;
+};
+
 function setCookie(cname, cvalue, exdays) {
     var d = new Date();
     d.setTime(d.getTime() + (exdays * 24 * 60 * 60 * 1000));
