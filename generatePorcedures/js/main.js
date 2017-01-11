@@ -69,7 +69,7 @@ $(document).ready(function() {
           texto += '\t}'+jmp;
           texto += jmp;
 
-          var t2V = valor.replace(/sp_|tb_|_/gi,'');
+          var t2V = valor.replace(/usp_|sp_|tb_|_/gi,'');
 
           texto2 += i===0?'\tif ($proc[0]===\''+t2V+'\') {'+jmp:'\telse if ($proc[0]===\''+t2V+'\') {'+jmp;
           texto2 += '\t\t'+valor+'($proc);'+jmp;

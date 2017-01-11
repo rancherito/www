@@ -15,7 +15,9 @@
   </head>
   <body>
 
-    HOLA
+    <select class="area_trabajo" name="">
+
+    </select>
 
   </body>
 </html>
