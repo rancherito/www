@@ -23,16 +23,12 @@
 		sp_validar_login($proc);
 	}
 
-	else if ($proc[0]==='sspareatrabajoAgregar') {
-		ssptb_area_trabajo_Agregar($proc);
-	}
-
-	else if ($proc[0]==='ssppersonalAgregar') {
-		ssptb_personal_Agregar($proc);
-	}
-
 	else if ($proc[0]==='sareatrabajoActualizarByID') {
 		ssp_tb_area_trabajo_Actualizar_ByID($proc);
+	}
+
+	else if ($proc[0]==='sareatrabajoAgregar') {
+		ssp_tb_area_trabajo_Agregar($proc);
 	}
 
 	else if ($proc[0]==='sareatrabajoEliminarByID') {
@@ -45,6 +41,18 @@
 
 	else if ($proc[0]==='sareatrabajoListarByID') {
 		ssp_tb_area_trabajo_Listar_ByID($proc);
+	}
+
+	else if ($proc[0]==='sbusesActualizarByID') {
+		ssp_tb_buses_Actualizar_ByID($proc);
+	}
+
+	else if ($proc[0]==='sbusesListar') {
+		ssp_tb_buses_Listar($proc);
+	}
+
+	else if ($proc[0]==='sbusesListarByID') {
+		ssp_tb_buses_Listar_ByID($proc);
 	}
 
 	else if ($proc[0]==='sestadoActualizarByID') {
@@ -69,6 +77,10 @@
 
 	else if ($proc[0]==='spersonalActualizarByID') {
 		ssp_tb_personal_Actualizar_ByID($proc);
+	}
+
+	else if ($proc[0]==='spersonalAgregar') {
+		ssp_tb_personal_Agregar($proc);
 	}
 
 	else if ($proc[0]==='spersonalEliminarByID') {

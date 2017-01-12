@@ -35,20 +35,14 @@
 		echo '{"PROCESO":"EXITOSO","DATA":'.json_encode($DATA[0]).',"HEAD":'.json_encode($DATA[1]).'}';
 	}
 
-	function ssptb_area_trabajo_Agregar($proc){
-		$sql = "call  ssptb_area_trabajo_Agregar".parametros($proc);
-		$DATA = DATA(connectDB(),$sql);
-		echo '{"PROCESO":"EXITOSO","DATA":'.json_encode($DATA[0]).',"HEAD":'.json_encode($DATA[1]).'}';
-	}
-
-	function ssptb_personal_Agregar($proc){
-		$sql = "call  ssptb_personal_Agregar".parametros($proc);
-		$DATA = DATA(connectDB(),$sql);
-		echo '{"PROCESO":"EXITOSO","DATA":'.json_encode($DATA[0]).',"HEAD":'.json_encode($DATA[1]).'}';
-	}
-
 	function ssp_tb_area_trabajo_Actualizar_ByID($proc){
 		$sql = "call  ssp_tb_area_trabajo_Actualizar_ByID".parametros($proc);
+		$DATA = DATA(connectDB(),$sql);
+		echo '{"PROCESO":"EXITOSO","DATA":'.json_encode($DATA[0]).',"HEAD":'.json_encode($DATA[1]).'}';
+	}
+
+	function ssp_tb_area_trabajo_Agregar($proc){
+		$sql = "call  ssp_tb_area_trabajo_Agregar".parametros($proc);
 		$DATA = DATA(connectDB(),$sql);
 		echo '{"PROCESO":"EXITOSO","DATA":'.json_encode($DATA[0]).',"HEAD":'.json_encode($DATA[1]).'}';
 	}
@@ -67,6 +61,24 @@
 
 	function ssp_tb_area_trabajo_Listar_ByID($proc){
 		$sql = "call  ssp_tb_area_trabajo_Listar_ByID".parametros($proc);
+		$DATA = DATA(connectDB(),$sql);
+		echo '{"PROCESO":"EXITOSO","DATA":'.json_encode($DATA[0]).',"HEAD":'.json_encode($DATA[1]).'}';
+	}
+
+	function ssp_tb_buses_Actualizar_ByID($proc){
+		$sql = "call  ssp_tb_buses_Actualizar_ByID".parametros($proc);
+		$DATA = DATA(connectDB(),$sql);
+		echo '{"PROCESO":"EXITOSO","DATA":'.json_encode($DATA[0]).',"HEAD":'.json_encode($DATA[1]).'}';
+	}
+
+	function ssp_tb_buses_Listar($proc){
+		$sql = "call  ssp_tb_buses_Listar".parametros($proc);
+		$DATA = DATA(connectDB(),$sql);
+		echo '{"PROCESO":"EXITOSO","DATA":'.json_encode($DATA[0]).',"HEAD":'.json_encode($DATA[1]).'}';
+	}
+
+	function ssp_tb_buses_Listar_ByID($proc){
+		$sql = "call  ssp_tb_buses_Listar_ByID".parametros($proc);
 		$DATA = DATA(connectDB(),$sql);
 		echo '{"PROCESO":"EXITOSO","DATA":'.json_encode($DATA[0]).',"HEAD":'.json_encode($DATA[1]).'}';
 	}
@@ -103,6 +115,12 @@
 
 	function ssp_tb_personal_Actualizar_ByID($proc){
 		$sql = "call  ssp_tb_personal_Actualizar_ByID".parametros($proc);
+		$DATA = DATA(connectDB(),$sql);
+		echo '{"PROCESO":"EXITOSO","DATA":'.json_encode($DATA[0]).',"HEAD":'.json_encode($DATA[1]).'}';
+	}
+
+	function ssp_tb_personal_Agregar($proc){
+		$sql = "call  ssp_tb_personal_Agregar".parametros($proc);
 		$DATA = DATA(connectDB(),$sql);
 		echo '{"PROCESO":"EXITOSO","DATA":'.json_encode($DATA[0]).',"HEAD":'.json_encode($DATA[1]).'}';
 	}
