@@ -118,7 +118,6 @@ var inputsCG = function () {
   }
 
   this.disable = function() {
-    console.log(this.getValue());
     this.getInput().css('display', 'none');
   }
 
@@ -295,21 +294,29 @@ var dataQuery = function (DATA) {
   }
 
   this.getTable = function () {
+
     if (proceso) {
 
       var sub = {};
       var run = 0;
-      for (var variable in DATA.DATA) {
-        if (run===0) {
-          for (var _var in DATA.DATA[variable]) {
-            sub[_var] = [];
+      if (data.DATA.length > 0) {
+        for (var variable in data.DATA) {
+          if (run===0) {
+            for (var _var in data.DATA[variable]) {
+              sub[_var] = [];
+            }
           }
+          for (var _var in data.DATA[variable]) {
+            sub[_var] = sub[_var].concat([data.DATA[variable][_var]]);
+          }
+          run++;
         }
-        for (var _var in DATA.DATA[variable]) {
-          sub[_var] = sub[_var].concat([DATA.DATA[variable][_var]]);
+      }else {
+        for (var i = 0; i < data.HEAD.length; i++) {
+          sub[data.HEAD[i]] = [];
         }
-        run++;
       }
+
       return sub;
     }
     return {};
@@ -340,6 +347,8 @@ var listView = function () {
   var view = 0;
   var value = 0;
   var list = [];
+  var selected = '';
+
 
   this.setView = function (newView) {
     view = newView;
@@ -358,6 +367,11 @@ var listView = function () {
     }
 
     return this;
+  }
+
+  this.setSelected = function (newSelected) {
+    selected = newSelected;
+    return this
   }
 
   this.setValue = function (newValue) {
@@ -379,6 +393,7 @@ var listView = function () {
   }
 
   this.setContainer = function (newContainer) {
+
     this.error();
     for (var i = 0; i < list.length; i++) {
       list[i].remove();
@@ -389,7 +404,9 @@ var listView = function () {
       for (var e = 0; e < this.indexInTable[value].length; e++) {
         list.push($('<option></option>'));
         list[e].val(this.indexInTable[value][e]);
-
+        if (list[e].val()===selected) {
+          list[e].attr('selected', selected);
+        }
       }
 
       for (var e = 0; e < this.indexInTable[view].length; e++) {
@@ -419,7 +436,11 @@ var dataView = function () {
   var thHeader = [];
   var filas = [];
   var table = [];
+  var personal = {};
 
+  this.setPersonal = function (newPersonal) {
+    personal = newPersonal;
+  }
   this.makeHeaders = function () {
     for (var i = 0; i < thHeader.length; i++) {
       thHeader[i].remove();
@@ -435,6 +456,16 @@ var dataView = function () {
     container.append(header);
 
   }
+
+
+  function addSelect(_conn,select,selected) {
+    $.post('php/query.php',_conn, function(data) {
+      var DATA = $.parseJSON(data);
+      var lisst = listViewCG();
+      lisst.setDataQuery(new dataQuery(DATA)).setSelected(selected).setContainer(select);
+    });
+  }
+
   this.makeTables = function () {
     for (var i = 0; i < filas.length; i++) {filas[i].remove();}
     filas = [];
@@ -449,7 +480,43 @@ var dataView = function () {
           table.push([]);
           container.append(filas[e]);
         }
-        table[e].push($('<td></td>').text(this.indexInTable[i][e]));
+
+        var aadd;
+
+        var est = false;
+
+        for (var variable in personal) {
+          if (i===this.dataQuery.getHeaders().indexOf(variable)) {
+
+              if (personal[variable]['type']==='select') {
+                est=true;
+                aadd = $('<select></select>').val(this.indexInTable[i][e]);
+
+                if (personal[variable]['dbconnect']) {
+                  addSelect(personal[variable]['dbconnect'],aadd,this.indexInTable[i][e]);
+                  aadd.val(this.indexInTable[i][e]);
+                }else {
+                  aadd.append(optionCG(this.indexInTable[i][e],this.indexInTable[i][e]))
+                }
+
+              }
+              else {
+                aadd = $('<label></label>').text(this.indexInTable[i][e]);
+              }
+              //dbconnect
+
+
+
+
+          }
+        }
+        if (!est) {
+          aadd = $('<label></label>').text(this.indexInTable[i][e]);
+        }
+
+
+        table[e].push($('<td></td>').append(aadd));
+
         filas[e].append(table[e][i]);
       }
     }

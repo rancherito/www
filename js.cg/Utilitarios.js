@@ -409,3 +409,7 @@ function indexJson(newJson) {
   }
   return array;
 }
+
+function optionCG(value,view){
+  return $('<option value="'+value+'">'+view+'</option>');
+}

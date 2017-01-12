@@ -4,7 +4,10 @@ include 'server.php';
 function parametros($proce)
   {
     $valor = '(';
-    for ($i=1; $i < count($proce); $i++)$valor.=($i!=1?",":"")."'".$proce[$i]."'";
+
+    for ($i=1; $i < count($proce); $i++){
+      $valor.=($i!=1?",":"").(strlen($proce[$i])==0?"":"'".$proce[$i]."'");
+    }
 
     $valor.=')';
     return $valor;

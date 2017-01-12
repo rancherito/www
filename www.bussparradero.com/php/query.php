@@ -19,7 +19,7 @@
         $dbconn = 'information_schema';
         $RUTINA = $_POST['rutine_schema'];
         $proc = gCall($_POST['rutine']);
-        $sql = "SELECT * FROM PARAMETERS WHERE SPECIFIC_SCHEMA = '$RUTINA' AND ROUTINE_TYPE='PROCEDURE'";
+        $sql = "SELECT * FROM ROUTINES WHERE ROUTINE_SCHEMA = '$RUTINA' AND ROUTINE_TYPE='PROCEDURE'";
 
         $DATA = DATA(DB($proc,$dbconn),$sql);
         echo '{"PROCESO":"EXITOSO","DATA":'.json_encode($DATA[0]).',"HEAD":'.json_encode($DATA[1]).'}';
