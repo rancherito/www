@@ -81,7 +81,7 @@
       <div class="spersonalEliminarByID-mensaje"></div>
     </p>
 
-    <br><br>
+    <br><br><br>
     <p class="busscrear">
       <span>Agregar Bus</span>
       <table>
@@ -104,5 +104,45 @@
         <div class="busscrear-mensaje"></div>
     </p>
 
+    <br><br><br>
+    <p class="busActualizar">
+      <span>Cambiar estado del personal</span>
+      <table>
+        <tr>
+          <td>TIPO BUS</td>
+          <td>ESTADO</td>
+          <td>PLACA</td>
+        </tr>
+        <tr>
+          <td><select class="busActualizar-1" name="">
+            <option value="%">Todos</option>
+            <option value="1">1 PISO</option>
+            <option value="2">2 PISOS</option>
+          </select></td>
+          <td><select class="busActualizar-2" name=""><option value="%">Todos</option></select></td>
+          <td><select class="busActualizar-3" name=""><option value="%">Todos</option></select></td>
+        </tr>
+      </table>
+      <div class="busActualizar-tableList">
+
+      </div>
+      <br>
+      <div class="">
+        <label for="">Ingrese la PLACA del buss que desea cambiar</label><input type="text" name="" value="" class="busActualizar-changeIn">
+      </div>
+
+      <div class="">
+        <table>
+          <tr>
+            <th>Nuevo Estado</th>
+          </tr>
+          <tr>
+            <td><select class="busActualizar-E1" name=""><option value="null">Ninguno</option></select></td>
+          </tr>
+        </table>
+      </div>
+      <br>
+      <button type="button" class="busActualizar-button">CAMBIAR</button>
+      <div class="busActualizar-mensaje"></div>
   </body>
   </html>

@@ -505,9 +505,6 @@ var dataView = function () {
               }
               //dbconnect
 
-
-
-
           }
         }
         if (!est) {

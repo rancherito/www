@@ -8,6 +8,7 @@ $(document).ready(function() {
   ssppersonalAgregar();
   spersonalEliminarByID();
   busscrear();
+  busActualizar();
 });
 
 function ssppersonalAgregar() {
@@ -135,7 +136,7 @@ function spersonalEliminarByID() {
 }
 
 function busscrear() {
-  var _listViewCG = {lAT:listViewCG(),lET:listViewCG(),lpdni:listViewCG(),lNET:listViewCG(),lNAT:listViewCG()};
+  var _listViewCG = {lAT:listViewCG(),lET:listViewCG()};
   var _dataViewCG = dataViewCG();
   var _call;
   var _conn;
@@ -162,9 +163,97 @@ function busscrear() {
 }
 
 
-function f_sestadoListar(_listViewCG,container){
+
+function busActualizar() {
+  var _listViewCG = {ltipo:listViewCG(),lestado:listViewCG(),lplaca:listViewCG(),lNestado:listViewCG()};
+  var _dataViewCG = dataViewCG();
+  var _call;
+  var _conn;
+
+  var tag = '.busActualizar';
+  var button = $(tag+'-button');
+  var mensaje = $(tag+'-mensaje');
+  var tableList = $(tag+'-tableList');
+
+  var parametros = {tipo:$(tag+'-1'),estado:$(tag+'-2'),placa:$(tag+'-3')};
+  var nParametros = {estado:$('.busActualizar-E1'),placa:$(tag+'-changeIn')};
+
+  f_sestadoListar(_listViewCG.lestado,parametros.estado);
+  f_sestadoListar(_listViewCG.lNestado,nParametros.estado);
+
+  /*_conn = {procedure:_call = call('sareatrabajoListar',[])};
+  dataListas(_conn,_listViewCG.ltipo,'tipo','nombre',parametros.tipo,function () {
+    _conn = {procedure:_call = call('spersonalListarByID',upParam(parametros))};
+    dataTablas(_conn,_dataViewCG,tableList,{});
+    dataListas(_conn,_listViewCG.lpplaca,'placa','placa',parametros.placa);
+  });
+
+
+  _conn = {procedure:_call = call('spersonalListarByID',upParam(parametros))};
+  dataListas(_conn,_listViewCG.lpplaca,'placa','placa',parametros.placa,function () {
+    _conn = {procedure:_call = call('spersonalListarByID',upParam(parametros))};
+    dataTablas(_conn,_dataViewCG,tableList);
+  });
+
+
+  _conn = {procedure:_call = call('sestadoListar',[])};
+  dataListas(_conn,_listViewCG.lestado,'estado','nombre',parametros.estado,function () {
+    _conn = {procedure:_call = call('spersonalListarByID',upParam(parametros))};
+    dataTablas(_conn,_dataViewCG,tableList,{});
+    dataListas(_conn,_listViewCG.lpplaca,'placa','placa',parametros.placa);
+  });
+
+  _conn = {procedure:_call = call('sestadoListar',[])};
+  dataListas(_conn,_listViewCG.lNestado,'estado','nombre',nParametros.estado);
+
+  _conn = {procedure:_call = call('sareatrabajoListar',[])};
+  dataListas(_conn,_listViewCG.lNAT,'tipo','nombre',nParametros.tipo);
+
+  button.click(function () {
+    _conn = {procedure:call('spersonalActualizarByID',upParam(nParametros))};
+    //console.log(call('spersonalActualizarByID',upParam(nParametros)));
+    $.post('php/query.php',_conn,function (data) {
+      var DATA = $.parseJSON(data);
+      if (dataE(DATA)) {
+        mensaje.text('('+DATA.PROCESO+')')
+      }else {
+        mensaje.text('No se guardo la informacion ('+DATA.PROCESO+')')
+      }
+    });
+  });*/
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+function f_sestadoListar(_listViewCG,container,f){
   var _conn = {procedure:call('sestadoListar',[])};
-  dataListas(_conn,_listViewCG,'estado','nombre',container);
+  dataListas(_conn,_listViewCG,'estado','nombre',container,function () {
+    if (f) {
+      f();
+    }
+  });
 }
 
 
