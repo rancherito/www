@@ -176,43 +176,32 @@ function busActualizar() {
   var tableList = $(tag+'-tableList');
 
   var parametros = {tipo:$(tag+'-1'),estado:$(tag+'-2'),placa:$(tag+'-3')};
-  var nParametros = {estado:$('.busActualizar-E1'),placa:$(tag+'-changeIn')};
+  var nParametros = {estado:$(tag+'-E1'),placa:$(tag+'-changeIn')};
 
-  f_sestadoListar(_listViewCG.lestado,parametros.estado);
+
+
+  parametros.tipo.change(function(event) {
+    dataListas(upcall('sbusesListarByID',parametros),_listViewCG.lplaca,'placa','placa',parametros.placa,function () {
+      dataTablas(upcall('sbusesListarByID',parametros),_dataViewCG,tableList,{});
+    });
+  });
+
+  f_sestadoListar(_listViewCG.lestado,parametros.estado,function () {
+    dataListas(upcall('sbusesListarByID',parametros),_listViewCG.lplaca,'placa','placa',parametros.placa,function () {
+      dataTablas(upcall('sbusesListarByID',parametros),_dataViewCG,tableList,{});
+    });
+  });
+
+  parametros.placa.change(function(event) {
+    dataTablas(upcall('sbusesListarByID',parametros),_dataViewCG,tableList,{});
+  });
+
+
   f_sestadoListar(_listViewCG.lNestado,nParametros.estado);
 
-  /*_conn = {procedure:_call = call('sareatrabajoListar',[])};
-  dataListas(_conn,_listViewCG.ltipo,'tipo','nombre',parametros.tipo,function () {
-    _conn = {procedure:_call = call('spersonalListarByID',upParam(parametros))};
-    dataTablas(_conn,_dataViewCG,tableList,{});
-    dataListas(_conn,_listViewCG.lpplaca,'placa','placa',parametros.placa);
-  });
-
-
-  _conn = {procedure:_call = call('spersonalListarByID',upParam(parametros))};
-  dataListas(_conn,_listViewCG.lpplaca,'placa','placa',parametros.placa,function () {
-    _conn = {procedure:_call = call('spersonalListarByID',upParam(parametros))};
-    dataTablas(_conn,_dataViewCG,tableList);
-  });
-
-
-  _conn = {procedure:_call = call('sestadoListar',[])};
-  dataListas(_conn,_listViewCG.lestado,'estado','nombre',parametros.estado,function () {
-    _conn = {procedure:_call = call('spersonalListarByID',upParam(parametros))};
-    dataTablas(_conn,_dataViewCG,tableList,{});
-    dataListas(_conn,_listViewCG.lpplaca,'placa','placa',parametros.placa);
-  });
-
-  _conn = {procedure:_call = call('sestadoListar',[])};
-  dataListas(_conn,_listViewCG.lNestado,'estado','nombre',nParametros.estado);
-
-  _conn = {procedure:_call = call('sareatrabajoListar',[])};
-  dataListas(_conn,_listViewCG.lNAT,'tipo','nombre',nParametros.tipo);
-
-  button.click(function () {
-    _conn = {procedure:call('spersonalActualizarByID',upParam(nParametros))};
-    //console.log(call('spersonalActualizarByID',upParam(nParametros)));
-    $.post('php/query.php',_conn,function (data) {
+  button.click(function(event) {
+    _conn = {procedure:call('sbusesActualizarByID',upParam(nParametros))};
+    $.post('php/query.php',upcall(sbusesActualizarByID,nParametros),function (data) {
       var DATA = $.parseJSON(data);
       if (dataE(DATA)) {
         mensaje.text('('+DATA.PROCESO+')')
@@ -220,7 +209,7 @@ function busActualizar() {
         mensaje.text('No se guardo la informacion ('+DATA.PROCESO+')')
       }
     });
-  });*/
+  });
 
 }
 
@@ -229,23 +218,9 @@ function busActualizar() {
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+function upcall(consulta,parametros) {
+  return {procedure:call(consulta,upParam(parametros))};
+}
 
 function f_sestadoListar(_listViewCG,container,f){
   var _conn = {procedure:call('sestadoListar',[])};
@@ -274,7 +249,7 @@ function dataListas(_conn,_listViewCG,val,view,container,funEnd) {
     .setContainer(container);
 
     if (funEnd) {
-      funEnd();
+      funEnd(data);
     }
   });
   container.change(function(event) {

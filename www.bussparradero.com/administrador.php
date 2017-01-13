@@ -106,7 +106,7 @@
 
     <br><br><br>
     <p class="busActualizar">
-      <span>Cambiar estado del personal</span>
+      <span>Cambiar estado de los buses</span>
       <table>
         <tr>
           <td>TIPO BUS</td>
