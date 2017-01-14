@@ -10,6 +10,7 @@ $(document).ready(function() {
   busscrear();
   busActualizar();
   crearSucursal();
+  actualizarSucursal();
 });
 
 function ssppersonalAgregar() {
@@ -123,7 +124,6 @@ function spersonalEliminarByID() {
 
   button.click(function () {
     _conn = {procedure:call('spersonalActualizarByID',upParam(nParametros))};
-    //console.log(call('spersonalActualizarByID',upParam(nParametros)));
     $.post('php/query.php',_conn,function (data) {
       var DATA = $.parseJSON(data);
       if (dataE(DATA)) {
@@ -220,8 +220,8 @@ function crearSucursal() {
     {type:'in'},
     {type:'in'},
     {type:'in'},
-    {type:'select',optionsDB:{procedure:call('spersonalListarByID',['ADM','AC','%'])},opList:['area_trabajo','dni']},
-    {type:'select',optionsDB:{procedure:call('sestadoListar',[])},opList:['estado','nombre']}
+    {type:'select',optionsDB:['spersonalListarByID',['ADM','DT','%']],opList:['dni','nombre_completo']},
+    {type:'select',optionsDB:['sestadoListar',[]],opList:['estado','nombre']}
   ]);
   _makeAddBlock.save('sucursalAgregar');
   _makeAddBlock.setTitulo('AGREGAR SUCURSALES');
@@ -230,15 +230,15 @@ function crearSucursal() {
 
 }
 
-
-
-
-
-
-
-
-
-
+function actualizarSucursal() {
+  var _makeUpBlock = new makeUpBlock();
+  _makeUpBlock.setHeadTable(['ESTADO','SUCURSAL']);
+  _makeUpBlock.setType([
+    {type:'select',options:[optionCG('%','TODOS')],optionsDB:['sestadoListar',[]],opList:['estado','nombre']},
+    {type:'select',options:[optionCG('%','TODOS')],optionsDB:['sucursalListarByID',['%','%']],opList:['sucursal','nombre'],dependeces:[1]}
+  ]);
+  $('.actualizarSucursal').append(_makeUpBlock.getContainer());
+}
 
 var tableCG = function () {
   var container = $('<table></table>');
@@ -294,6 +294,7 @@ var makeAddBlock = function(nameBLock) {
   var mensaje = $('<div></div>');
   var types = [];
   this.cell = [];
+  var _listViewCGS = [];
   nuevoBlock
   .append(titulo)
   .append($('<br>'))
@@ -316,7 +317,10 @@ var makeAddBlock = function(nameBLock) {
 
       if (newTypes[i]['type'] === 'select') {
         var select = $('<select></select>');
+        var _listViewCG = listViewCG();
+        _listViewCGS.push(_listViewCG);
         this.cell.push(select);
+
         if (newTypes[i]['options']) {
           for (var e = 0; e < newTypes[i]['options'].length; e++) {
             var O = newTypes[i]['options'][e].clone();
@@ -325,11 +329,19 @@ var makeAddBlock = function(nameBLock) {
         }
 
         if (newTypes[i]['optionsDB']) {
-          if (newTypes[i]['opList']) {
-            dataListas(newTypes[i]['optionsDB'],listViewCG(),newTypes[i]['opList'][0],newTypes[i]['opList'][1],select);
-          }else {
-            dataListas(newTypes[i]['optionsDB'],listViewCG(),'sd','sd',select);
-          }
+          var opDB = newTypes[i]['optionsDB'];
+          var opList = newTypes[i]['opList'];
+            dataListas({procedure:call(opDB[0],opDB[1])},_listViewCG,opList?opList[0]:'SDA',opList?opList[1]:'FSD',select);
+            if(newTypes[i]['dependeces']){
+              var depen = newTypes[i]['dependeces'];
+              var cells = this.cell;
+              for (var f = 0; f < depen.length; f++) {
+                this.cell[depen[f]-1].on('change', function(event) {
+                  dataListas(upcall(opDB[0],cells),_listViewCG,opList?opList[0]:'SDA',opList?opList[1]:'FSD',select);
+                });
+              }
+            }
+
         }
 
       }else {
@@ -346,8 +358,9 @@ var makeAddBlock = function(nameBLock) {
   }
 
   this.save = function (procedure) {
+    var ta = this.cell;
     boton.click(function(event) {
-      _conn = {procedure:call(procedure,upParam(this.cell))};
+      _conn = {procedure:call(procedure,upParam(ta))};
       $.post('php/query.php',_conn,function (data) {
         var DATA = $.parseJSON(data);
         if (dataE(DATA)) {
@@ -360,6 +373,78 @@ var makeAddBlock = function(nameBLock) {
   }
 
 
+}
+
+
+var makeUpBlock = function (nameBLock) {
+  var nuevoBlock = $('<div></div>').addClass(nameBLock);
+  var titulo = $('<span></span>').text('title');
+  var _tableCG = new tableCG();
+  var boton = $('<button></button>').text('GUARDAR');
+  var mensaje = $('<div></div>');
+  var types = [];
+  this.cell = [];
+  var _listViewCGS = [];
+  nuevoBlock
+  .append(titulo)
+  .append($('<br>'))
+  .append($('<br>'))
+  .append(_tableCG.getContainer())
+  .append(boton)
+  .append(mensaje)
+  ;
+
+  this.setTitulo = function (newTitulo) {
+    titulo.text(newTitulo);
+  }
+  this.setHeadTable = function (newHeadTable) {
+    _tableCG.setTable(newHeadTable,1);
+  }
+
+  this.setType = function (newTypes) {
+    for (var i = 0; i < newTypes.length; i++) {
+
+      if (newTypes[i]['type'] === 'select') {
+        var select = $('<select></select>');
+        var _listViewCG = listViewCG();
+        _listViewCGS.push(_listViewCG);
+        this.cell.push(select);
+
+        if (newTypes[i]['options']) {
+          for (var e = 0; e < newTypes[i]['options'].length; e++) {
+            var O = newTypes[i]['options'][e].clone();
+            select.append(O);
+          }
+        }
+
+        if (newTypes[i]['optionsDB']) {
+          var opDB = newTypes[i]['optionsDB'];
+          var opList = newTypes[i]['opList'];
+            dataListas({procedure:call(opDB[0],opDB[1])},_listViewCG,opList?opList[0]:'SDA',opList?opList[1]:'FSD',select);
+            if(newTypes[i]['dependeces']){
+              var depen = newTypes[i]['dependeces'];
+              var cells = this.cell;
+              for (var f = 0; f < depen.length; f++) {
+                this.cell[depen[f]-1].on('change', function(event) {
+                  dataListas(upcall(opDB[0],cells),_listViewCG,opList?opList[0]:'SDA',opList?opList[1]:'FSD',select);
+                });
+              }
+            }
+
+        }
+
+      }else {
+        this.cell.push($('<input></input>').attr('type', 'text'));
+
+      }
+      _tableCG.getTable()[0][i].append(this.cell[i]);
+
+    }
+  }
+
+  this.getContainer = function () {
+    return nuevoBlock;
+  }
 }
 
 

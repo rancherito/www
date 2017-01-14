@@ -145,12 +145,11 @@
       <button type="button" class="busActualizar-button">CAMBIAR</button>
       <div class="busActualizar-mensaje"></div>
     </p>
-    
+
     <br><br><br>
-    <p class="crearSucursal">
-
-    </p>
-
+    <p class="crearSucursal"></p>
+    <br><br><br>
+    <p class="actualizarSucursal"></p>
 
   </body>
   </html>
