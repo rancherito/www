@@ -23,6 +23,36 @@
 		echo '{"PROCESO":"EXITOSO","DATA":'.json_encode($DATA[0]).',"HEAD":'.json_encode($DATA[1]).'}';
 	}
 
+	function sp_sucursal_Actualizar_ByID($proc){
+		$sql = "call  sp_sucursal_Actualizar_ByID".parametros($proc);
+		$DATA = DATA(connectDB(),$sql);
+		echo '{"PROCESO":"EXITOSO","DATA":'.json_encode($DATA[0]).',"HEAD":'.json_encode($DATA[1]).'}';
+	}
+
+	function sp_sucursal_Agregar($proc){
+		$sql = "call  sp_sucursal_Agregar".parametros($proc);
+		$DATA = DATA(connectDB(),$sql);
+		echo '{"PROCESO":"EXITOSO","DATA":'.json_encode($DATA[0]).',"HEAD":'.json_encode($DATA[1]).'}';
+	}
+
+	function sp_sucursal_Eliminar_ByID($proc){
+		$sql = "call  sp_sucursal_Eliminar_ByID".parametros($proc);
+		$DATA = DATA(connectDB(),$sql);
+		echo '{"PROCESO":"EXITOSO","DATA":'.json_encode($DATA[0]).',"HEAD":'.json_encode($DATA[1]).'}';
+	}
+
+	function sp_sucursal_Listar($proc){
+		$sql = "call  sp_sucursal_Listar".parametros($proc);
+		$DATA = DATA(connectDB(),$sql);
+		echo '{"PROCESO":"EXITOSO","DATA":'.json_encode($DATA[0]).',"HEAD":'.json_encode($DATA[1]).'}';
+	}
+
+	function sp_sucursal_Listar_ByID($proc){
+		$sql = "call  sp_sucursal_Listar_ByID".parametros($proc);
+		$DATA = DATA(connectDB(),$sql);
+		echo '{"PROCESO":"EXITOSO","DATA":'.json_encode($DATA[0]).',"HEAD":'.json_encode($DATA[1]).'}';
+	}
+
 	function sp_user_listar($proc){
 		$sql = "call  sp_user_listar".parametros($proc);
 		$DATA = DATA(connectDB(),$sql);

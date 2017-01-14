@@ -15,6 +15,26 @@
 		sp_existe_user($proc);
 	}
 
+	else if ($proc[0]==='sucursalActualizarByID') {
+		sp_sucursal_Actualizar_ByID($proc);
+	}
+
+	else if ($proc[0]==='sucursalAgregar') {
+		sp_sucursal_Agregar($proc);
+	}
+
+	else if ($proc[0]==='sucursalEliminarByID') {
+		sp_sucursal_Eliminar_ByID($proc);
+	}
+
+	else if ($proc[0]==='sucursalListar') {
+		sp_sucursal_Listar($proc);
+	}
+
+	else if ($proc[0]==='sucursalListarByID') {
+		sp_sucursal_Listar_ByID($proc);
+	}
+
 	else if ($proc[0]==='userlistar') {
 		sp_user_listar($proc);
 	}

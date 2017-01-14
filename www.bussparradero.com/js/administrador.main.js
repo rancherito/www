@@ -217,11 +217,13 @@ function crearSucursal() {
   var _makeAddBlock = new makeAddBlock();
   _makeAddBlock.setHeadTable(['SUCURSAL','UBICACION','NOMBRE','GERENTE','ESTADO']);
   _makeAddBlock.setType([
-    {type:'in'},{type:'in'},{type:'in'},
+    {type:'in'},
+    {type:'in'},
+    {type:'in'},
     {type:'select',optionsDB:{procedure:call('spersonalListarByID',['ADM','AC','%'])},opList:['area_trabajo','dni']},
-    {type:'select'}
+    {type:'select',optionsDB:{procedure:call('sestadoListar',[])},opList:['estado','nombre']}
   ]);
-
+  _makeAddBlock.save('sucursalAgregar');
   _makeAddBlock.setTitulo('AGREGAR SUCURSALES');
 
   $('.crearSucursal').append(_makeAddBlock.getContainer());
@@ -288,6 +290,8 @@ var makeAddBlock = function(nameBLock) {
   var nuevoBlock = $('<div></div>').addClass(nameBLock);
   var titulo = $('<span></span>').text('title');
   var _tableCG = new tableCG();
+  var boton = $('<button></button>').text('GUARDAR');
+  var mensaje = $('<div></div>');
   var types = [];
   this.cell = [];
   nuevoBlock
@@ -295,6 +299,8 @@ var makeAddBlock = function(nameBLock) {
   .append($('<br>'))
   .append($('<br>'))
   .append(_tableCG.getContainer())
+  .append(boton)
+  .append(mensaje)
   ;
 
 
@@ -327,7 +333,7 @@ var makeAddBlock = function(nameBLock) {
         }
 
       }else {
-        this.cell.push($('<input></input>'));
+        this.cell.push($('<input></input>').attr('type', 'text'));
 
       }
       _tableCG.getTable()[0][i].append(this.cell[i]);
@@ -338,6 +344,21 @@ var makeAddBlock = function(nameBLock) {
   this.getContainer = function () {
     return nuevoBlock;
   }
+
+  this.save = function (procedure) {
+    boton.click(function(event) {
+      _conn = {procedure:call(procedure,upParam(this.cell))};
+      $.post('php/query.php',_conn,function (data) {
+        var DATA = $.parseJSON(data);
+        if (dataE(DATA)) {
+          mensaje.text('('+DATA.PROCESO+')')
+        }else {
+          mensaje.text('No se guardo la informacion ('+DATA.PROCESO+')')
+        }
+      });
+    });
+  }
+
 
 }
 
