@@ -348,7 +348,7 @@ var listView = function () {
   var value = 0;
   var list = [];
   var selected = '';
-
+  var exist = [];
 
   this.setView = function (newView) {
     view = newView;
@@ -361,10 +361,18 @@ var listView = function () {
     }else {
       view = 0;
     }
-
+    exist = [];
     for (var e = 0; e < list.length; e++) {
-      list[e].html(this.indexInTable[view][e]);
+      list[e].text(this.indexInTable[view][e]);
+      var op = list[e].val()+'-'+list[e].text();
+      if (exist.indexOf(op)===-1) {
+        exist.push(op);
+        list[e].css('display', 'block');
+      }else {
+        list[e].css('display', 'none');
+      }
     }
+
 
     return this;
   }
@@ -385,8 +393,17 @@ var listView = function () {
       value = 0;
     }
 
+
+    exist = [];
     for (var e = 0; e < list.length; e++) {
-      list[e].html(this.indexInTable[value][e]);
+      list[e].val(this.indexInTable[value][e]);
+      var op = list[e].val()+'-'+list[e].text();
+      if (exist.indexOf(op)===-1) {
+        exist.push(op);
+        list[e].css('display', 'block');
+      }else {
+        list[e].css('display', 'none');
+      }
     }
 
     return this;
@@ -401,18 +418,26 @@ var listView = function () {
     list = [];
 
     if (this.dataQuery.getHeaders().length > 0) {
+      exist = [];
       for (var e = 0; e < this.indexInTable[value].length; e++) {
         list.push($('<option></option>'));
         list[e].val(this.indexInTable[value][e]);
+        list[e].text(this.indexInTable[view][e]);
         if (list[e].val()===selected) {
           list[e].attr('selected', selected);
         }
+
+        var op = list[e].val()+'-'+list[e].text();
+        if (exist.indexOf(op)===-1) {
+          exist.push(op);
+          list[e].css('display', 'block');
+        }else {
+          list[e].css('display', 'none');
+        }
+
       }
 
-      for (var e = 0; e < this.indexInTable[view].length; e++) {
-        list[e].text(this.indexInTable[view][e]);
 
-      }
     }
 
     for (var i = 0; i < list.length; i++) {

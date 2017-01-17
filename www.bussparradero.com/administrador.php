@@ -5,6 +5,7 @@
   <script type="text/javascript" src='../js.cg/jquery-3.1.1.js'></script>
   <script type="text/javascript" src='../js.cg/Utilitarios.js'></script>
   <script type="text/javascript" src='../js.cg/class.js'></script>
+  <script type="text/javascript" src='js/tools.js'></script>
   <script type="text/javascript" src='js/administrador.main.js'></script>
   <style media="screen">
   th,td{
@@ -150,6 +151,9 @@
     <p class="crearSucursal"></p>
     <br><br><br>
     <p class="actualizarSucursal"></p>
-
+    <br><br><br>
+    <p class="actualizarDestinos"></p>
+    <br><br><br>
+    <p class="crearDestinos"></p>
   </body>
   </html>

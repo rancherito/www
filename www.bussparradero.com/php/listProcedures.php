@@ -11,6 +11,26 @@
 		sp_buss_eliminar($proc);
 	}
 
+	else if ($proc[0]==='destinosbusesActualizarByID') {
+		sp_destinos_buses_Actualizar_ByID($proc);
+	}
+
+	else if ($proc[0]==='destinosbusesAgregar') {
+		sp_destinos_buses_Agregar($proc);
+	}
+
+	else if ($proc[0]==='destinosbusesEliminarByID') {
+		sp_destinos_buses_Eliminar_ByID($proc);
+	}
+
+	else if ($proc[0]==='destinosbusesListar') {
+		sp_destinos_buses_Listar($proc);
+	}
+
+	else if ($proc[0]==='destinosbusesListarByID') {
+		sp_destinos_buses_Listar_ByID($proc);
+	}
+
 	else if ($proc[0]==='existeuser') {
 		sp_existe_user($proc);
 	}
@@ -41,6 +61,10 @@
 
 	else if ($proc[0]==='validarlogin') {
 		sp_validar_login($proc);
+	}
+
+	else if ($proc[0]==='sspdestinosbusesAgregar') {
+		ssptb_destinos_buses_Agregar($proc);
 	}
 
 	else if ($proc[0]==='sareatrabajoActualizarByID') {

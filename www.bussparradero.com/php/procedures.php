@@ -17,6 +17,36 @@
 		echo '{"PROCESO":"EXITOSO","DATA":'.json_encode($DATA[0]).',"HEAD":'.json_encode($DATA[1]).'}';
 	}
 
+	function sp_destinos_buses_Actualizar_ByID($proc){
+		$sql = "call  sp_destinos_buses_Actualizar_ByID".parametros($proc);
+		$DATA = DATA(connectDB(),$sql);
+		echo '{"PROCESO":"EXITOSO","DATA":'.json_encode($DATA[0]).',"HEAD":'.json_encode($DATA[1]).'}';
+	}
+
+	function sp_destinos_buses_Agregar($proc){
+		$sql = "call  sp_destinos_buses_Agregar".parametros($proc);
+		$DATA = DATA(connectDB(),$sql);
+		echo '{"PROCESO":"EXITOSO","DATA":'.json_encode($DATA[0]).',"HEAD":'.json_encode($DATA[1]).'}';
+	}
+
+	function sp_destinos_buses_Eliminar_ByID($proc){
+		$sql = "call  sp_destinos_buses_Eliminar_ByID".parametros($proc);
+		$DATA = DATA(connectDB(),$sql);
+		echo '{"PROCESO":"EXITOSO","DATA":'.json_encode($DATA[0]).',"HEAD":'.json_encode($DATA[1]).'}';
+	}
+
+	function sp_destinos_buses_Listar($proc){
+		$sql = "call  sp_destinos_buses_Listar".parametros($proc);
+		$DATA = DATA(connectDB(),$sql);
+		echo '{"PROCESO":"EXITOSO","DATA":'.json_encode($DATA[0]).',"HEAD":'.json_encode($DATA[1]).'}';
+	}
+
+	function sp_destinos_buses_Listar_ByID($proc){
+		$sql = "call  sp_destinos_buses_Listar_ByID".parametros($proc);
+		$DATA = DATA(connectDB(),$sql);
+		echo '{"PROCESO":"EXITOSO","DATA":'.json_encode($DATA[0]).',"HEAD":'.json_encode($DATA[1]).'}';
+	}
+
 	function sp_existe_user($proc){
 		$sql = "call  sp_existe_user".parametros($proc);
 		$DATA = DATA(connectDB(),$sql);
@@ -61,6 +91,12 @@
 
 	function sp_validar_login($proc){
 		$sql = "call  sp_validar_login".parametros($proc);
+		$DATA = DATA(connectDB(),$sql);
+		echo '{"PROCESO":"EXITOSO","DATA":'.json_encode($DATA[0]).',"HEAD":'.json_encode($DATA[1]).'}';
+	}
+
+	function ssptb_destinos_buses_Agregar($proc){
+		$sql = "call  ssptb_destinos_buses_Agregar".parametros($proc);
 		$DATA = DATA(connectDB(),$sql);
 		echo '{"PROCESO":"EXITOSO","DATA":'.json_encode($DATA[0]).',"HEAD":'.json_encode($DATA[1]).'}';
 	}
