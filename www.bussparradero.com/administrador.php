@@ -81,30 +81,6 @@
       <button type="button" class="spersonalEliminarByID-button">CAMBIAR</button>
       <div class="spersonalEliminarByID-mensaje"></div>
     </p>
-
-    <br><br><br>
-    <p class="busscrear">
-      <span>Agregar Bus</span>
-      <table>
-        <tr>
-          <td>TIPO</td>
-          <td>AFORO PRIMER PISO</td>
-          <td>AFORO SEGUNDO PISO</td>
-          <td>PLACA</td>
-          <td>ESTADO</td>
-        </tr>
-        <tr>
-          <td><select class="busscrear-1" name=""><option value="1">1 PISO</option><option value="2">2 PISOS</option></select></td>
-          <td><input type="number" name="" value="" class="busscrear-2"></td>
-          <td><input type="number" name="" value="" class="busscrear-3"></select></td>
-          <td><input type="text" name="" maxlength="9" value="" class="busscrear-4"></td>
-          <td><select class="busscrear-5" name=""></td>
-          </tr>
-      </table>
-        <button type="button" class="busscrear-button">Guardar</button>
-        <div class="busscrear-mensaje"></div>
-    </p>
-
     <br><br><br>
     <p class="busActualizar">
       <span>Cambiar estado de los buses</span>
@@ -146,11 +122,36 @@
       <button type="button" class="busActualizar-button">CAMBIAR</button>
       <div class="busActualizar-mensaje"></div>
     </p>
+    <br><br><br>
+    <p class="busscrear">
+      <span>Agregar Bus</span>
+      <table>
+        <tr>
+          <td>TIPO</td>
+          <td>AFORO PRIMER PISO</td>
+          <td>AFORO SEGUNDO PISO</td>
+          <td>PLACA</td>
+          <td>ESTADO</td>
+        </tr>
+        <tr>
+          <td><select class="busscrear-1" name=""><option value="1">1 PISO</option><option value="2">2 PISOS</option></select></td>
+          <td><input type="number" name="" value="" class="busscrear-2"></td>
+          <td><input type="number" name="" value="" class="busscrear-3"></select></td>
+          <td><input type="text" name="" maxlength="9" value="" class="busscrear-4"></td>
+          <td><select class="busscrear-5" name=""></td>
+          </tr>
+      </table>
+        <button type="button" class="busscrear-button">Guardar</button>
+        <div class="busscrear-mensaje"></div>
+    </p>
+
+
 
     <br><br><br>
-    <p class="crearSucursal"></p>
-    <br><br><br>
     <p class="actualizarSucursal"></p>
+    <br><br><br>
+    <p class="crearSucursal"></p>
+
     <br><br><br>
     <p class="actualizarDestinos"></p>
     <br><br><br>

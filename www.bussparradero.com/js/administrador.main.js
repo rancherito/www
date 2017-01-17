@@ -4,13 +4,12 @@ $(document).ready(function() {
     window.open('administrador.php', '_self');
   });
 
-
-  ssppersonalAgregar();
   spersonalEliminarByID();
-  busscrear();
+  ssppersonalAgregar();
   busActualizar();
-  crearSucursal();
+  busscrear();
   actualizarSucursal();
+  crearSucursal();
   actualizarDestinos();
   crearDestinos();
 });
@@ -254,14 +253,12 @@ function actualizarDestinos() {
   var _makeUpBlock = new makeUpBlock();
   _makeUpBlock.setTitulo('ACTUALIZAR DESTINOS');
   _makeUpBlock.setTextChange('Ingrese codigo del DESTINO que desea cambiar');
-  _makeUpBlock.setHeadTable(['CONDUCTOR','ESTADO','PLACA EL BUSS','COD. DESTINO'],['NUEVO CONDUCTOR','NUEVO ESTADO']);
-  _makeUpBlock.personalTable({optionsDB:['destinosbusesListarByID',['%','%','%','%']]});
+  _makeUpBlock.setHeadTable(['ESTADO','PLACA EL BUSS','COD. DESTINO'],['NUEVO ESTADO']);
+  _makeUpBlock.personalTable({optionsDB:['destinosbusesListarByID',['%','%','%']]});
   _makeUpBlock.setTypeEdit([
-    {type:'select',options:[optionCG('null','NINGUNO')]},
     {type:'select',options:[optionCG('null','NINGUNO')]}
   ]);
   _makeUpBlock.setType([
-    {type:'select',options:[optionCG('%','TODOS')]},
     {type:'select',options:[optionCG('%','TODOS')]},
     {type:'select',options:[optionCG('%','TODOS')]},
     {type:'select',options:[optionCG('%','TODOS')]}
@@ -270,27 +267,24 @@ function actualizarDestinos() {
 
   ;
 
-  dataListas(upcall('destinosbusesListarByID',_makeUpBlock.cell),_makeUpBlock._listViewCGS[0],'personal_conductor','personal_conductor',_makeUpBlock.cell[0],function () {
-    dataListas(upcall('destinosbusesListarByID',_makeUpBlock.cell),_makeUpBlock._listViewCGS[1],'estado','estado',_makeUpBlock.cell[1],function () {
-      dataListas(upcall('destinosbusesListarByID',_makeUpBlock.cell),_makeUpBlock._listViewCGS[2],'placa_bus','placa_bus',_makeUpBlock.cell[2],function () {
-        dataListas(upcall('destinosbusesListarByID',_makeUpBlock.cell),_makeUpBlock._listViewCGS[3],'cod_destino','cod_destino',_makeUpBlock.cell[3],function () {
+  dataListas(upcall('destinosbusesListarByID',_makeUpBlock.cell),_makeUpBlock._listViewCGS[0],'estado','estado',_makeUpBlock.cell[0],function () {
+      dataListas(upcall('destinosbusesListarByID',_makeUpBlock.cell),_makeUpBlock._listViewCGS[1],'placa_bus','placa_bus',_makeUpBlock.cell[1],function () {
+        dataListas(upcall('destinosbusesListarByID',_makeUpBlock.cell),_makeUpBlock._listViewCGS[2],'cod_destino','cod_destino',_makeUpBlock.cell[2],function () {
           dataTablas(upcall('destinosbusesListarByID',_makeUpBlock.cell),_makeUpBlock._dataViewCG,_makeUpBlock.putTabla,{});
         });
       });
-    });
   });
 
-  dataListas({procedure:call('sestadoListarByID',['%','GRAL'])},_makeUpBlock._listViewCGS[5],'estado','nombre',_makeUpBlock.cell2[1]);
-  dataListas({procedure:call('spersonalListarByID',['CON', '%', '%'])},_makeUpBlock._listViewCGS[4],'dni','nombre_completo',_makeUpBlock.cell2[0]);
+
+  dataListas({procedure:call('sestadoListarByID',['%','GRAL'])},_makeUpBlock._listViewCGS[3],'estado','nombre',_makeUpBlock.cell2[0]);
 
   _makeUpBlock.save('destinosbusesActualizarByID');
 }
 
 function crearDestinos() {
   var _makeAddBlock = new makeAddBlock();
-  _makeAddBlock.setHeadTable(['PLACA DEL BUS','SUCURSAL DE ORIGEN','SUCURSAL DE DESTINO','CONDUCTOR','ESTADO']);
+  _makeAddBlock.setHeadTable(['PLACA DEL BUS','SUCURSAL DE ORIGEN','SUCURSAL DE DESTINO','ESTADO']);
   _makeAddBlock.setType([
-    {type:'select'},
     {type:'select'},
     {type:'select'},
     {type:'select'},
@@ -301,8 +295,7 @@ function crearDestinos() {
   dataListas({procedure:call('sbusesListar',[])},_makeAddBlock._listViewCGS[0],'placa','placa',_makeAddBlock.cell[0]);
   dataListas({procedure:call('sucursalListar',[])},_makeAddBlock._listViewCGS[1],'sucursal','nombre',_makeAddBlock.cell[1]);
   dataListas({procedure:call('sucursalListar',[])},_makeAddBlock._listViewCGS[2],'sucursal','nombre',_makeAddBlock.cell[2]);
-  dataListas({procedure:call('spersonalListarByID',['CON', '%', '%'])},_makeAddBlock._listViewCGS[3],'placa','nombre_completo',_makeAddBlock.cell[3]);
-  dataListas({procedure:call('sestadoListarByID',['%','GRAL'])},_makeAddBlock._listViewCGS[4],'estado','nombre',_makeAddBlock.cell[4]);
+  dataListas({procedure:call('sestadoListarByID',['%','GRAL'])},_makeAddBlock._listViewCGS[3],'estado','nombre',_makeAddBlock.cell[3]);
 
   _makeAddBlock.save('sucursalAgregar');
 
