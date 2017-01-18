@@ -35,6 +35,26 @@
 		sp_existe_user($proc);
 	}
 
+	else if ($proc[0]==='pagosActualizarByID') {
+		sp_pagos_Actualizar_ByID($proc);
+	}
+
+	else if ($proc[0]==='pagosAgregar') {
+		sp_pagos_Agregar($proc);
+	}
+
+	else if ($proc[0]==='pagosEliminarByID') {
+		sp_pagos_Eliminar_ByID($proc);
+	}
+
+	else if ($proc[0]==='pagosListar') {
+		sp_pagos_Listar($proc);
+	}
+
+	else if ($proc[0]==='pagosListarByID') {
+		sp_pagos_Listar_ByID($proc);
+	}
+
 	else if ($proc[0]==='sucursalActualizarByID') {
 		sp_sucursal_Actualizar_ByID($proc);
 	}

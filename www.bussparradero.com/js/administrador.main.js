@@ -297,7 +297,7 @@ function crearDestinos() {
   dataListas({procedure:call('sucursalListar',[])},_makeAddBlock._listViewCGS[2],'sucursal','nombre',_makeAddBlock.cell[2]);
   dataListas({procedure:call('sestadoListarByID',['%','GRAL'])},_makeAddBlock._listViewCGS[3],'estado','nombre',_makeAddBlock.cell[3]);
 
-  _makeAddBlock.save('sucursalAgregar');
+  _makeAddBlock.save('destinosbusesAgregar');
 
   $('.crearDestinos').append(_makeAddBlock.getContainer());
 }

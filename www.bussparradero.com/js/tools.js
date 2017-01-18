@@ -117,8 +117,10 @@ var makeAddBlock = function(nameBLock) {
 
   this.save = function (procedure) {
     var ta = this.cell;
+    console.log(procedure);
     boton.click(function(event) {
       _conn = {procedure:call(procedure,upParam(ta))};
+      console.log(_conn);
       $.post('php/query.php',_conn,function (data) {
         var DATA = $.parseJSON(data);
         if (dataE(DATA)) {
@@ -129,8 +131,6 @@ var makeAddBlock = function(nameBLock) {
       });
     });
   }
-
-
 }
 
 var makeUpBlock = function (nameBLock) {
@@ -177,8 +177,6 @@ var makeUpBlock = function (nameBLock) {
     changeTable.setTable(_newHeadTable,1);
   }
   this.setTypeEdit = function (newTypesEdit) {
-    console.log(newTypesEdit);
-
     for (var i = 0; i < newTypesEdit.length; i++) {
 
       if (newTypesEdit[i]['type'] === 'select') {
