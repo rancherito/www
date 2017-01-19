@@ -229,10 +229,12 @@ var boxShowCG = function () {
   var container = $('<div></div>').addClass('boxShowCG').css({width:'0',overflow:'hidden'});
 
   this.show = function () {
-    container.css('width','0').animate({opacity:1,width: '100%'}, 100);
+    container.animate({opacity:1,width: '100%'}, 100);
   }
   this.hide = function () {
-    container.animate({opacity: '0'}, 500);
+    container.animate({opacity: '0'}, 500,function(){
+      container.css('width','0');
+    });
   }
   this.getContainer = function () {
     return container;
@@ -241,7 +243,9 @@ var boxShowCG = function () {
   this.append = function (newJObj) {
     container.append(newJObj);
   }
-
+  this.addClass = function(newClass){
+    container.addClass(newClass);
+  }
 
 }
 
