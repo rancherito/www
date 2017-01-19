@@ -245,14 +245,9 @@ var boxShowCG = function () {
 
 }
 
-
-
-
 function skinNotify(jclass) {
   jclass.addClass('skinNotify');
 }
-
-//
 function skinInputLeyenda(jclass) {
   jclass.addClass('skinInputLeyenda');
   jclass.inputs.getInput()
@@ -265,23 +260,12 @@ function skinInputLeyenda(jclass) {
     }
   });
 }
-
 function skinButton(jclass) {
   jclass.addClass('skinButton');
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
+function skinInputLeyenda_theme01(jclass){
+  jclass.addClass('inputLeyenda-theme01');
+}
 
 var dataQuery = function (DATA) {
   var data = DATA;
@@ -445,8 +429,6 @@ var listView = function () {
     }
     return this;
   }
-
-
 }
 var listViewCG = function(newDataQuery) {
   if (newDataQuery) {

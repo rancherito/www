@@ -1,0 +1,152 @@
+
+@mixin center-horizontal(){
+  left: 50%;
+	transform: translateX(-50%);
+}
+@mixin center-vertical(){
+  top: 50%;
+	transform: translateY(-50%);
+}
+@mixin center-box(){
+  left: 50%;
+	top: 50%;
+	transform: translate(-50%,-50%);
+}
+
+@mixin linear-gradient($a,$b){
+  background: $a;
+	background: -webkit-linear-gradient($a,$b);
+	background: -o-linear-gradient($a,$b);
+	background: -moz-linear-gradient($a,$b);
+	background: linear-gradient($a,$b);
+}
+
+@mixin width-desde($a){
+  @media only screen and (min-width: $a){
+    @content;
+  }
+}
+
+
+@mixin height-desde($a){
+  @media only screen and (min-height: $a){
+    @content;
+  }
+}
+
+@mixin width-antes($a){
+  @media only screen and (max-width: $a){
+    @content;
+  }
+
+}
+
+@mixin height-antes($a){
+  @media only screen and (max-height: $a){
+    @content;
+  }
+}
+
+@mixin trasition-200($a){
+  transition: $a 0.2s linear;
+}
+
+@mixin border-radius($radius) {
+  border-radius: $radius;
+  -webkit-border-radius: $radius;
+  -moz-border-radius: $radius;
+  -ms-border-radius: $radius;
+  -o-border-radius: $radius;
+}
+
+@mixin full(){
+  width: 100%;
+  height: 100%;
+}
+div.box-login-theme01{
+  @include linear-gradient(#159abc,rgba(5,100,128,0.8));
+  @include full();
+  div.icon-box{
+    width: 100%;
+    height: 200px;
+    position: relative;
+    div.text-icon{
+      width: 100%;
+      height: 100px;
+      position: relative;
+      padding: 25px 0;
+      div._i_content{
+        height: 100px;
+        width: 100px;
+        position: absolute;
+        border-radius: 50%;
+        border: 2px white solid;
+        box-sizing: border-box;
+        @include center-box;
+        i{
+          color: #f90956;
+          position: absolute;
+          @include center-box;
+          font-size: 70px;
+        }
+      }
+    }
+    div.leyenda{
+      width: 100%;
+      height: 50px;
+      position: relative;
+      color: white;
+      text-align: center;
+      font-size: 30px;
+      font-weight: lighter;
+      line-height: 50px;
+    }
+  }
+  div.form-section{
+    position: relative;
+    height: calc(100% - 200px);
+    padding-bottom: 80px;
+    background: red;
+  }
+  div.send-section{
+    height: 80px;
+    width: 100%;
+    background: blue;
+    position: absolute;
+    bottom: 0;
+  }
+}
+div.inputLeyenda-theme01{
+  background: blue;
+  height: 65px;
+  div._CG{
+    position: relative;
+    height: 100%;
+    > div{
+      position: absolute;
+      width: 100%;
+      height: 40px;
+      bottom: 0;
+      overflow: hidden;
+      &:nth-of-type(1){
+        z-index: 5;
+        background: green;
+        line-height: 40px;
+        font-size: 20px;
+        color: white;
+        cursor: text;
+        i{
+          width: 40px;
+          display: block;
+          float: left;
+          text-align: center;
+          font-size: 40px;
+        }
+      }
+      &:nth-of-type(2){
+        z-index: 4;
+      }
+    }
+  }
+
+}

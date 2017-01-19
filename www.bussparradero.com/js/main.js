@@ -29,17 +29,12 @@ $(document).ready(function() {
   _inLCG.pass.setIcon('ion-ios-locked');
   _inLCG.pass.inputs.setPlaceholder('Igrese contraseña');
   skinInputLeyenda(_inLCG.pass);
-
   skinNotify(_notifyCG);
-
 
 
   _bttCG.send = new buttonCG()
   _bttCG.send.setLeyenda('Enviar');
   _bttCG.send.setIcon('ion-android-send');
-
-
-
   skinButton(_bttCG.send);
 
   _bttCG.cCuenta = new buttonCG()

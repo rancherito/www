@@ -1,0 +1,142 @@
+
+@mixin center-horizontal(){
+  left: 50%;
+	transform: translateX(-50%);
+}
+@mixin center-vertical(){
+  top: 50%;
+	transform: translateY(-50%);
+}
+@mixin center-box(){
+  left: 50%;
+	top: 50%;
+	transform: translate(-50%,-50%);
+}
+
+@mixin linear-gradient($a,$b){
+  background: $a;
+	background: -webkit-linear-gradient($a,$b);
+	background: -o-linear-gradient($a,$b);
+	background: -moz-linear-gradient($a,$b);
+	background: linear-gradient($a,$b);
+}
+
+@mixin width-desde($a){
+  @media only screen and (min-width: $a){
+    @content;
+  }
+}
+
+
+@mixin height-desde($a){
+  @media only screen and (min-height: $a){
+    @content;
+  }
+}
+
+@mixin width-antes($a){
+  @media only screen and (max-width: $a){
+    @content;
+  }
+
+}
+
+@mixin height-antes($a){
+  @media only screen and (max-height: $a){
+    @content;
+  }
+}
+
+@mixin trasition-200($a){
+  transition: $a 0.2s linear;
+}
+
+@mixin border-radius($radius) {
+  border-radius: $radius;
+  -webkit-border-radius: $radius;
+  -moz-border-radius: $radius;
+  -ms-border-radius: $radius;
+  -o-border-radius: $radius;
+}
+
+@mixin full(){
+  width: 100%;
+  height: 100%;
+}
+
+
+*{
+  padding: 0;
+  margin: 0;
+  font-family: Calibri;
+}
+body,html{
+  @include full;
+}
+
+div.control-main,div.control-main_s,div.control-panel,div.control-panel_s{
+  @include full;
+  position: relative;
+}
+
+
+div.control-main{
+  background: #0ca2c8;
+  overflow: visible;
+  > div.control-main_s{
+    overflow: visible;
+    > div.control-panel{
+      > div.control-panel_s{
+        > div.control-panel{
+          width: 50%;
+          float: left;
+          &:nth-of-type(1){
+            > div.control-panel_s{
+              div.bienvenida{
+                position: absolute;
+                width: 100%;
+                text-align: center;
+                box-sizing: border-box;
+                padding: 10px;
+                @include center-box();
+                div._bienvenida{
+                  position: relative;
+                  div.title{
+                    font-size: 22px;
+                    color: #464646;
+                  }
+                  div.title2{
+                    color: #00d0ff;
+                    font-size: 50px;
+                    border-bottom: 1px white solid;
+                    padding: 10px 0;
+                  }
+                  div.leyenda{
+                    color: white;
+                    font-size: 18px;
+
+                  }
+                }
+              }
+            }
+          }
+          &:nth-of-type(2){
+            > div.control-panel_s{
+              div.content_box-log{
+                position: absolute;
+                @include full;
+                max-height: 600px;
+                max-width: 350px;
+                @include center-box();
+                @include border-radius(3px);
+                overflow: hidden;
+              }
+            }
+          }
+
+        }
+
+      }
+    }
+  }
+}
