@@ -47,7 +47,11 @@ $(document).ready(function() {
       var DATA = $.parseJSON(data);
       if (dataE(DATA)) {
         notificacion.setTextAlerta(dataR(DATA));
-        
+        if (dataR(DATA)==='USUARIO CORRECTO') {
+          $.post('php/processWeb.php',{function:call('startSecionAdm',[user,pass])}, function(data) {
+            window.open('administrator.php', '_self');
+          });
+        }
       }
     });
 
@@ -60,5 +64,14 @@ $(document).ready(function() {
   formSection.append(inLCG.pass.getContainer());
   boxSCG.append(notificacion.getContainer());
   $('.bienvenida').parent().append(boxSCG.getContainer());
+
+  $('.closeSesion').click(function(event) {
+    $.post('php/processWeb.php',{function:'cerrarSecion()'}, function(data) {
+      window.open('administrator.php', '_self');
+    });
+  });
+
+
+
 
 });

@@ -1,12 +1,16 @@
 
-<?php 
-  include 'php/functions.php';
+<?php
   session_start();
-  $_SESSION['user'] = 'admin';
-  $_SESSION['pass'] = '123';
-  //lala();
+  include 'php/functions.php';
+  include 'php/query_php.php';
+  $saa = '';
+  if(!empty($_SESSION['user']) && !empty($_SESSION['pass'])){
+    if(count($_SESSION['user']) > 0 && count($_SESSION['pass']) > 0){
+      $saa = usuarioNombre('nFDGn($'.$_SESSION['user'].',$'.$_SESSION['pass'].',$PERS,$GGRL)')['DATA'][0]['nombre_completo'];
+    }
+  }
   $content = matrix('widget/login.administrator.php');
-  $page = <<<EOT
+  $head = <<<EOT
  <!DOCTYPE html>
 <head>
   <meta charset="utf-8">
@@ -20,7 +24,10 @@
   <link rel="stylesheet" href="css/styleInputs-theme01.css" type="text/css">
   <link rel="stylesheet" href="css/styles-theme01.css" type="text/css">
   <link rel="stylesheet" href="css/style.administrator.css" type="text/css">
-</head>
+</head> 
+EOT;
+  $page = <<<EOT
+ 
 <body>
   <div class="controler control-main">
     <div class="controler control-main_s">
@@ -48,6 +55,35 @@
   </div>
 </body> 
 EOT;
-echo $page;
-if(count($_SESSION['user']) > 0 && count($_SESSION['pass']) > 0){}
+ 
+$logPage = <<<EOT
+ 
+<body>
+  <div class="controler control-main">
+    <div class="controler control-main_s">
+      <div class="controler control-panel">
+        <div class="controler control-panel_s">
+          <button class="closeSesion">MY BUTTON</button>
+          <div>$saa</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</body> 
+EOT;
+ 
+if(!empty($_SESSION['user']) && !empty($_SESSION['pass'])){
+  if(count($_SESSION['user']) > 0 && count($_SESSION['pass']) > 0){
+    echo $head;
+    echo $logPage;
+  }
+  else{
+    echo $head;
+    echo $page;
+  }
+}
+else{
+  echo $head;
+  echo $page;
+}
 ?>

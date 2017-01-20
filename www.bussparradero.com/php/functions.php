@@ -24,7 +24,6 @@ function matrix($dir)
 
 function gCall($procedure)
   {
-
     $limites = arrayCompletar(str_split('(),'));
     $ar = array();
     $temm='';$count=0;
@@ -94,6 +93,39 @@ function DATA($conn,$sql)
 
     return [0 => $rawdata,1 => $rawdata2];
   }
+
+  function DATAPHP($conn,$sql)
+    {
+      $conn->set_charset("utf8");
+      if(!$result = mysqli_query($conn, $sql)) return '{"PROCESO":"CONSULTA_INTERRUMPIDA"}';
+      $result2 = $result;
+      $rawdata = array();
+      $i=0;
+
+      if (!is_object($result)){
+        return '{"PROCESO":"EXITOSO","DATA":[{"resultado":"PROCEDIMIENTO EXECUTADO"}],"HEAD":["resultado"]}';
+      }
+
+      while($row = $result->fetch_array(MYSQLI_ASSOC)){$rawdata[$i] = $row;$i++;}
+
+      $rawdata2 = array();
+      $i=0;
+      $info_campo = $result2->fetch_fields();
+      foreach ($info_campo as $valor) {
+        $rawdata2[$i] = $valor->name;
+        $i++;
+      }
+
+      if (is_object($result)){
+        $result->free();
+        $result2 = null;
+      }
+
+      discDB($conn);
+      return '{"PROCESO":"EXITOSO","DATA":'.json_encode($rawdata).',"HEAD":'.json_encode($rawdata2).'}';
+    }
+
+
 
 
  ?>
