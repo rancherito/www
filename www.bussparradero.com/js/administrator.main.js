@@ -38,9 +38,19 @@ $(document).ready(function() {
   bttCG.send.setLeyenda('Enviar');
   bttCG.send.setIcon('ion-android-send');
   bttCG.send.getContainer().click(function(event) {
-    var text = inLCG.user.inputs.getValue()+' '+inLCG.pass.inputs.getValue();
-    //notificacion.setTextAlerta('Enviando Datos');
-    notificacion.setTextAlerta(text);
+    var user = inLCG.user.inputs.getValue();
+    var pass = inLCG.pass.inputs.getValue();
+    notificacion.setTextAlerta('Enviando Datos');
+    //notificacion.setTextAlerta(text);
+
+    $.post('php/query.php',{procedure:call('usuarioValidarContrasena',[user, pass, 'PERS', 'GGRL'])}, function(data) {
+      var DATA = $.parseJSON(data);
+      if (dataE(DATA)) {
+        notificacion.setTextAlerta(dataR(DATA));
+        
+      }
+    });
+
     boxSCG.show();
   });
   skinButton(bttCG.send);

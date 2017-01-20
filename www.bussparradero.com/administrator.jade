@@ -1,4 +1,13 @@
 //output:administrator.php, pretty:true
+| <?php 
+|   include 'php/functions.php';
+|   session_start();
+|   $_SESSION['user'] = 'admin';
+|   $_SESSION['pass'] = '123';
+|   //lala();
+|   $content = matrix('widget/login.administrator.php');
+|   $page = <<<EOT
+| 
 doctype html
 head
   meta(charset="utf-8")
@@ -15,7 +24,6 @@ head
 body
   div.controler.control-main
     div.controler.control-main_s
-    
       div.controler.control-panel
         div.controler.control-panel_s
         
@@ -33,4 +41,9 @@ body
           div.controler.control-panel
             div.controler.control-panel_s
               div.content_box-log
-                | <?php include 'widget/login.administrator.php';?>
+                | $content
+| 
+| EOT;
+| echo $page;
+| if(count($_SESSION['user']) > 0 && count($_SESSION['pass']) > 0){}
+| ?>

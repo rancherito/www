@@ -1,14 +1,50 @@
 <?php
-	if ($proc[0]==='registrarusuario') {
-		registrar_usuario($proc);
+	if ($proc[0]==='areatrabajoActualizarByID') {
+		sp_area_trabajo_Actualizar_ByID($proc);
 	}
 
-	else if ($proc[0]==='busscrear') {
-		sp_buss_crear($proc);
+	else if ($proc[0]==='areatrabajoAgregar') {
+		sp_area_trabajo_Agregar($proc);
 	}
 
-	else if ($proc[0]==='busseliminar') {
-		sp_buss_eliminar($proc);
+	else if ($proc[0]==='areatrabajoEliminarByID') {
+		sp_area_trabajo_Eliminar_ByID($proc);
+	}
+
+	else if ($proc[0]==='areatrabajoListar') {
+		sp_area_trabajo_Listar($proc);
+	}
+
+	else if ($proc[0]==='areatrabajoListarByID') {
+		sp_area_trabajo_Listar_ByID($proc);
+	}
+
+	else if ($proc[0]==='busesActualizarByID') {
+		sp_buses_Actualizar_ByID($proc);
+	}
+
+	else if ($proc[0]==='busesAgregar') {
+		sp_buses_Agregar($proc);
+	}
+
+	else if ($proc[0]==='busesEliminarByID') {
+		sp_buses_Eliminar_ByID($proc);
+	}
+
+	else if ($proc[0]==='busesListar') {
+		sp_buses_Listar($proc);
+	}
+
+	else if ($proc[0]==='busesListarByID') {
+		sp_buses_Listar_ByID($proc);
+	}
+
+	else if ($proc[0]==='clienteagregar') {
+		sp_cliente_agregar($proc);
+	}
+
+	else if ($proc[0]==='clientelistar') {
+		sp_cliente_listar($proc);
 	}
 
 	else if ($proc[0]==='destinosbusesActualizarByID') {
@@ -29,6 +65,26 @@
 
 	else if ($proc[0]==='destinosbusesListarByID') {
 		sp_destinos_buses_Listar_ByID($proc);
+	}
+
+	else if ($proc[0]==='estadoActualizarByID') {
+		sp_estado_Actualizar_ByID($proc);
+	}
+
+	else if ($proc[0]==='estadoAgregar') {
+		sp_estado_Agregar($proc);
+	}
+
+	else if ($proc[0]==='estadoEliminarByID') {
+		sp_estado_Eliminar_ByID($proc);
+	}
+
+	else if ($proc[0]==='estadoListar') {
+		sp_estado_Listar($proc);
+	}
+
+	else if ($proc[0]==='estadoListarByID') {
+		sp_estado_Listar_ByID($proc);
 	}
 
 	else if ($proc[0]==='existeuser') {
@@ -55,6 +111,26 @@
 		sp_pagos_Listar_ByID($proc);
 	}
 
+	else if ($proc[0]==='personalActualizarByID') {
+		sp_personal_Actualizar_ByID($proc);
+	}
+
+	else if ($proc[0]==='personalAgregar') {
+		sp_personal_Agregar($proc);
+	}
+
+	else if ($proc[0]==='personalEliminarByID') {
+		sp_personal_Eliminar_ByID($proc);
+	}
+
+	else if ($proc[0]==='personalListar') {
+		sp_personal_Listar($proc);
+	}
+
+	else if ($proc[0]==='personalListarByID') {
+		sp_personal_Listar_ByID($proc);
+	}
+
 	else if ($proc[0]==='sucursalActualizarByID') {
 		sp_sucursal_Actualizar_ByID($proc);
 	}
@@ -75,88 +151,12 @@
 		sp_sucursal_Listar_ByID($proc);
 	}
 
-	else if ($proc[0]==='userlistar') {
-		sp_user_listar($proc);
+	else if ($proc[0]==='usuarioValidar') {
+		sp_usuario_Validar($proc);
 	}
 
-	else if ($proc[0]==='validarlogin') {
-		sp_validar_login($proc);
-	}
-
-	else if ($proc[0]==='sspdestinosbusesAgregar') {
-		ssptb_destinos_buses_Agregar($proc);
-	}
-
-	else if ($proc[0]==='sareatrabajoActualizarByID') {
-		ssp_tb_area_trabajo_Actualizar_ByID($proc);
-	}
-
-	else if ($proc[0]==='sareatrabajoAgregar') {
-		ssp_tb_area_trabajo_Agregar($proc);
-	}
-
-	else if ($proc[0]==='sareatrabajoEliminarByID') {
-		ssp_tb_area_trabajo_Eliminar_ByID($proc);
-	}
-
-	else if ($proc[0]==='sareatrabajoListar') {
-		ssp_tb_area_trabajo_Listar($proc);
-	}
-
-	else if ($proc[0]==='sareatrabajoListarByID') {
-		ssp_tb_area_trabajo_Listar_ByID($proc);
-	}
-
-	else if ($proc[0]==='sbusesActualizarByID') {
-		ssp_tb_buses_Actualizar_ByID($proc);
-	}
-
-	else if ($proc[0]==='sbusesListar') {
-		ssp_tb_buses_Listar($proc);
-	}
-
-	else if ($proc[0]==='sbusesListarByID') {
-		ssp_tb_buses_Listar_ByID($proc);
-	}
-
-	else if ($proc[0]==='sestadoActualizarByID') {
-		ssp_tb_estado_Actualizar_ByID($proc);
-	}
-
-	else if ($proc[0]==='sestadoAgregar') {
-		ssp_tb_estado_Agregar($proc);
-	}
-
-	else if ($proc[0]==='sestadoEliminarByID') {
-		ssp_tb_estado_Eliminar_ByID($proc);
-	}
-
-	else if ($proc[0]==='sestadoListar') {
-		ssp_tb_estado_Listar($proc);
-	}
-
-	else if ($proc[0]==='sestadoListarByID') {
-		ssp_tb_estado_Listar_ByID($proc);
-	}
-
-	else if ($proc[0]==='spersonalActualizarByID') {
-		ssp_tb_personal_Actualizar_ByID($proc);
-	}
-
-	else if ($proc[0]==='spersonalAgregar') {
-		ssp_tb_personal_Agregar($proc);
-	}
-
-	else if ($proc[0]==='spersonalEliminarByID') {
-		ssp_tb_personal_Eliminar_ByID($proc);
-	}
-
-	else if ($proc[0]==='spersonalListar') {
-		ssp_tb_personal_Listar($proc);
-	}
-
-	else if ($proc[0]==='spersonalListarByID') {
-		ssp_tb_personal_Listar_ByID($proc);
+	else if ($proc[0]==='usuarioValidarContrasena') {
+		sp_usuario_Validar_Contrasena($proc);
 	}
 
 	else {

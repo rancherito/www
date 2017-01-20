@@ -13,6 +13,15 @@ function parametros($proce)
     return $valor;
   }
 
+function matrix($dir)
+{
+  ob_start();
+  require_once($dir);
+  $contenido = ob_get_contents();
+  ob_end_clean();
+  return $contenido;
+}
+
 function gCall($procedure)
   {
 

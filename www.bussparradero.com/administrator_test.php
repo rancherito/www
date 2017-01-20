@@ -1,12 +1,10 @@
 
 <?php 
-  include 'php/functions.php';
   session_start();
   $_SESSION['user'] = 'admin';
   $_SESSION['pass'] = '123';
-  //lala();
-  $content = matrix('widget/login.administrator.php');
-  $page = <<<EOT
+ 
+?>
  <!DOCTYPE html>
 <head>
   <meta charset="utf-8">
@@ -39,15 +37,11 @@
           </div>
           <div class="controler control-panel">
             <div class="controler control-panel_s">
-              <div class="content_box-log">$content</div>
+              <div class="content_box-log"><?php include 'widget/login.administrator.php';?></div>
             </div>
           </div>
         </div>
       </div>
     </div>
   </div>
-</body> 
-EOT;
-echo $page;
-if(count($_SESSION['user']) > 0 && count($_SESSION['pass']) > 0){}
-?>
+</body>
