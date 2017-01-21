@@ -548,7 +548,7 @@ var dataViewCG = function(newDataQuery) {
 }
 
 
-var tableCG = function () {
+var tableMake = function () {
   var container = $('<table></table>');
   var header = $('<tr></tr>');
   var thHeader = [];
@@ -581,6 +581,8 @@ var tableCG = function () {
       container.append(filas[i]);
     }
 
+    return this;
+
   }
 
   this.getContainer = function (){
@@ -599,7 +601,10 @@ var tableCG = function () {
     var importReplace = $('cgimt.'+dom);
     importReplace.after(container);
     importReplace.remove();
-    
+
     return this;
   };
+}
+function tableMake(argument) {
+  // body...
 }
