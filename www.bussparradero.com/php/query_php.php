@@ -4,7 +4,7 @@
 
   function usuarioNombre($call){
     $proc = gCall($call);
-		$sql = "call  sp_usuario_Nombre".parametros($proc);
+		$sql = "call  sp_usuario_Recuperar_Nombre".parametros($proc);
 		$DATA = DATAPHP(connectDB(),$sql);
 		return json_decode($DATA,true);
 	}

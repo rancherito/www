@@ -6,7 +6,7 @@
   $saa = '';
   if(!empty($_SESSION['user']) && !empty($_SESSION['pass'])){
     if(count($_SESSION['user']) > 0 && count($_SESSION['pass']) > 0){
-      $saa = usuarioNombre('nFDGn($'.$_SESSION['user'].',$'.$_SESSION['pass'].',$PERS,$GGRL)')['DATA'][0]['nombre_completo'];
+      $saa = usuarioNombre('user($'.$_SESSION['user'].',$'.$_SESSION['pass'].',$PERS,$GGRL)')['DATA'][0]['nombre_completo'];
     }
   }
   $content = matrix('widget/login.administrator.php');
