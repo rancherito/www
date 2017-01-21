@@ -16,5 +16,5 @@
 
 </head>
 <div>
-    hello world
+    <cgimt class='claustro'></cgimt>
 </div>

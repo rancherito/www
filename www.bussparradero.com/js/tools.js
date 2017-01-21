@@ -1,47 +1,4 @@
 
-var tableCG = function () {
-  var container = $('<table></table>');
-  var header = $('<tr></tr>');
-  var thHeader = [];
-  var filas = [];
-  var table = [];
-  container.append(header);
-  this.setTable= function (newHead,newfilas) {
-
-    header.empty();
-    thHeader = [];
-    for (var i = 0; i < filas.length; i++) {
-      filas[i].remove();
-    }
-    filas = [];
-    table = [];
-
-    for (var i = 0; i < newHead.length; i++) {
-      thHeader.push($('<th></th>').text(newHead[i]));
-      header.append(thHeader[i]);
-    }
-
-    for (var i = 0; i < newfilas; i++) {
-      filas.push($('<tr></tr>'));
-      table.push([]);
-      for (var e = 0; e < thHeader.length; e++) {
-        table[i].push($('<td></td>'));
-        filas[i].append(table[i][e]);
-      }
-
-      container.append(filas[i]);
-    }
-
-  }
-
-  this.getContainer = function (){
-    return container;
-  }
-
-  this.getTable = function () {
-    return table;
-  }
-}
 
 
 var makeAddBlock = function(nameBLock) {

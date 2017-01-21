@@ -413,3 +413,7 @@ function indexJson(newJson) {
 function optionCG(value,view){
   return $('<option value="'+value+'">'+view+'</option>');
 }
+
+function $etq(dom) {
+  return $('<'+dom+'></'+dom+'>');
+}
