@@ -21,8 +21,8 @@ div.lister div.titleListC {
   background: #ff225e;
   padding: 0 15px;
   box-sizing: border-box;
-  height: 40px;
-  line-height: 40px;
+  height: 35px;
+  line-height: 35px;
   margin: 10px 0;
   float: left;
   border-radius: 50px;
@@ -30,18 +30,63 @@ div.lister div.titleListC {
   color: white;
 }
 
+div.lister div.notify {
+  float: right;
+  height: 30px;
+  line-height: 30px;
+  margin-top: 20px;
+  white-space: nowrap;
+  opacity: 0;
+}
+
+div.lister button {
+  border: 0;
+  height: 30px;
+  padding: 0 15px;
+  border-radius: 30px;
+  border: 1px #3a90ff solid;
+  box-sizing: border-box;
+  outline: 0;
+  background: transparent;
+  color: #002c5a;
+  margin-top: 20px;
+  transition: all 0.2s linear;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+div.lister button:hover {
+  background: #3a90ff;
+  color: white;
+}
+
+div.lister button:active {
+  transform: scaleX(1.1);
+}
+
 div.lister table {
   width: 100%;
   overflow: hidden;
   border-radius: 3px;
+  text-align: center;
+  border: 2px #0b7de2 solid;
+}
+
+div.lister table:nth-of-type(2) {
+  margin-top: 20px;
+}
+
+div.lister table:nth-of-type(3) {
+  margin-top: 20px;
 }
 
 div.lister table tr {
   height: 30px;
+  width: 100%;
 }
 
 div.lister table tr:nth-of-type(2n) {
-  background: #c4d8ff;
+  background: #f0f0f0;
 }
 
 div.lister table tr:nth-of-type(1) {

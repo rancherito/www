@@ -318,10 +318,13 @@ var processData = function () {
       throw new Error('No se instancio la clase: dataQuery');
     }
   }
+
+  this.endDataQuery = function() {}
   this.setDataQuery = function(newDataQuery) {
     this.dataQuery = newDataQuery;
     this.indexInTable = JsonIndex(this.dataQuery.getTable());
 
+    this.endDataQuery();
 
     return this;
   }
@@ -444,31 +447,59 @@ var dataView = function () {
   processData.call(this);
   var container = $('<table></table>');
   var header = $('<tr></tr>');
+  var headerText = []
   var thHeader = [];
   var filas = [];
   var table = [];
-  var personal = {};
+  var hideColum = [];
 
-  this.setPersonal = function (newPersonal) {
-    personal = newPersonal;
+  this.appendTo = function(dom) {
+    container.appendTo(dom);
+    return this;
   }
+
+  this.import = function(dom){
+    dom.replaceWith(container);
+    return this;
+  };
+
+  this.hideColums = function (newHideColum) {
+    hideColum = newHideColum;
+
+    for (var i = 0; i < hideColum.length; i++) {
+      if (headerText.indexOf(hideColum[i])!=-1) {
+        thHeader[headerText.indexOf(hideColum[i])].css('display', 'none');
+      }
+    }
+    for (var i = 0; i < table.length; i++) {
+        for (var e = 0; e < hideColum.length; e++) {
+          if (headerText.indexOf(hideColum[e])!=-1) {
+            table[i][headerText.indexOf(hideColum[e])].css('display', 'none');
+
+          }
+        }
+    }
+
+    return this;
+  }
+
   this.makeHeaders = function () {
     for (var i = 0; i < thHeader.length; i++) {
       thHeader[i].remove();
     }
     thHeader = [];
-
+    headerText = [];
     for (var i = 0; i < this.dataQuery.getHeaders().length; i++) {
       thHeader.push($('<th></th>').text(this.dataQuery.getHeaders()[i]));
-
+      headerText.push(this.dataQuery.getHeaders()[i]);
       header.append(thHeader[i]);
     }
+
+
 
     container.append(header);
 
   }
-
-
   function addSelect(_conn,select,selected) {
     $.post('php/query.php',_conn, function(data) {
       var DATA = $.parseJSON(data);
@@ -476,7 +507,6 @@ var dataView = function () {
       lisst.setDataQuery(new dataQuery(DATA)).setSelected(selected).setContainer(select);
     });
   }
-
   this.makeTables = function () {
     for (var i = 0; i < filas.length; i++) {filas[i].remove();}
     filas = [];
@@ -492,54 +522,41 @@ var dataView = function () {
           container.append(filas[e]);
         }
 
-        var aadd;
-
-        var est = false;
-
-        for (var variable in personal) {
-          if (i===this.dataQuery.getHeaders().indexOf(variable)) {
-
-              if (personal[variable]['type']==='select') {
-                est=true;
-                aadd = $('<select></select>').val(this.indexInTable[i][e]);
-
-                if (personal[variable]['dbconnect']) {
-                  addSelect(personal[variable]['dbconnect'],aadd,this.indexInTable[i][e]);
-                  aadd.val(this.indexInTable[i][e]);
-                }else {
-                  aadd.append(optionCG(this.indexInTable[i][e],this.indexInTable[i][e]))
-                }
-
-              }
-              else {
-                aadd = $('<label></label>').text(this.indexInTable[i][e]);
-              }
-              //dbconnect
-
-          }
-        }
-        if (!est) {
-          aadd = $('<label></label>').text(this.indexInTable[i][e]);
-        }
-
-
-        table[e].push($('<td></td>').append(aadd));
+        table[e].push($('<td></td>').text(this.indexInTable[i][e]));
 
         filas[e].append(table[e][i]);
       }
     }
 
+    for (var i = 0; i < hideColum.length; i++) {
+      if (headerText.indexOf(hideColum[i])!=-1) {
+        thHeader[headerText.indexOf(hideColum[i])].css('display', 'none');
+      }
+    }
+    for (var i = 0; i < table.length; i++) {
+        for (var e = 0; e < hideColum.length; e++) {
+          if (headerText.indexOf(hideColum[e])!=-1) {
+            table[i][headerText.indexOf(hideColum[e])].css('display', 'none');
+
+          }
+        }
+    }
+
 
   }
-  this.getContainer = function () {
+  this.proceed = function () {
     this.makeHeaders();
     this.makeTables();
+    return this;
+  }
+  this.getCells= function (column,row) {
+    return table[column][row].text();
+  }
+  this.getContainer = function () {
     return container;
   }
-  this.appendTo = function() {
-
-  }
 }
+
 var dataViewCG = function(newDataQuery) {
   if (newDataQuery) {
     return new dataView().setDataQuery(newDataQuery);
@@ -625,6 +642,10 @@ var tableMake = function () {
   this.setCells = function(column,row,newValue){
     table[column][row].append(newValue);
     return this;
+  }
+
+  this.getCells = function (column,row) {
+    return table[column][row];
   }
 
   this.appendTo = function(dom) {

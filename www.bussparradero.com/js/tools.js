@@ -74,10 +74,8 @@ var makeAddBlock = function(nameBLock) {
 
   this.save = function (procedure) {
     var ta = this.cell;
-    console.log(procedure);
     boton.click(function(event) {
       _conn = {procedure:call(procedure,upParam(ta))};
-      console.log(_conn);
       $.post('php/query.php',_conn,function (data) {
         var DATA = $.parseJSON(data);
         if (dataE(DATA)) {
@@ -254,7 +252,6 @@ var makeUpBlock = function (nameBLock) {
     ta.push(inChange);
     boton.click(function(event) {
       _conn = {procedure:call(procedure,upParam(ta))};
-      console.log(_conn);
       $.post('php/query.php',_conn,function (data) {
         var DATA = $.parseJSON(data);
         if (dataE(DATA)) {
@@ -291,6 +288,7 @@ function upParam(parametros){
 }
 
 function dataListas(_conn,_listViewCG,val,view,container,funEnd) {
+
   $.post('php/query.php',_conn, function(data) {
     var DATA = $.parseJSON(data);
 
@@ -312,12 +310,24 @@ function dataListas(_conn,_listViewCG,val,view,container,funEnd) {
 
 }
 
-function dataTablas(_conn,_dataViewCG,container,personal,funEnd) {
+function dataTablas(_conn,_dataViewCG,container,funEnd) {
   $.post('php/query.php',_conn, function(data) {
     var DATA = $.parseJSON(data);
     _dataViewCG.setDataQuery(new dataQuery(DATA));
-    _dataViewCG.setPersonal(personal);
     container.append(_dataViewCG.getContainer());
+    if (funEnd) {
+      funEnd();
+    }
+
+  });
+}
+
+function dataTablas2(_conn,_dataViewCG,funEnd) {
+
+  $.post('php/query.php',_conn, function(data) {
+    var DATA = $.parseJSON(data);
+    _dataViewCG.setDataQuery(new dataQuery(DATA));
+    _dataViewCG.proceed();
     if (funEnd) {
       funEnd();
     }
@@ -327,6 +337,5 @@ function dataTablas(_conn,_dataViewCG,container,personal,funEnd) {
 
 function dependenceList(array_dependencias,_conn,_listViewCG,value,view,container,funEnd){
   for (var i = 0; i < array_dependencias.length; i++) {
-
   }
 }
