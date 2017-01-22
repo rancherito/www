@@ -10,8 +10,13 @@ $(document).ready(function() {
 	.addClass('lister')
 	;
 
-	console.log(la.listViews);
+	console.log(la.filters);
+	la.filters[0].append(optionCG('%','TODO'));
+	la.filters[1].append(optionCG('%','TODO'));
+	la.filters[2].append(optionCG('%','TODO'));
+	la.filters[3].append(optionCG('%','TODO'));
 
+	dataListas({procedure:call('areatrabajoListar',[])},la.listViews[0],'area_trabajo','nombre',la.filters[0]);
 
 });
 
