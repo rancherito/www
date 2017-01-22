@@ -5,6 +5,7 @@
   <script type="text/javascript" src="../js.cg/jquery-3.1.1.js"></script>
   <script type="text/javascript" src="../js.cg/Utilitarios.js"></script>
   <script type="text/javascript" src="../js.cg/class.js"></script>
+  <script type="text/javascript" src="js/tools.js"></script>
   <script type="text/javascript" src="js/administrator.main.js"></script>
   <script type="text/javascript" src="js/js_test.js"></script>
   <link href="Ionicons/css/ionicons.css" rel="stylesheet" type="text/css">

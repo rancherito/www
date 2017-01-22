@@ -1,0 +1,55 @@
+
+input,select{
+	outline: 0;
+	border: 0;
+}
+table{
+	border-spacing: 0;
+}
+body{
+	background: #0CA2C8;
+}
+
+div.lister{
+	background: white;
+	box-sizing: border-box;
+	padding: 10px;
+	div.titleListC{
+		background: #ff225e;
+		padding: 0 15px;
+		box-sizing: border-box;
+		height: 40px;
+		line-height: 40px;
+		margin: 10px 0;
+		float: left;
+		border-radius: 50px;
+		font-weight: bold;
+		color: white;
+
+	}
+	table{
+		width: 100%;
+		overflow: hidden;
+		border-radius: 3px;
+		tr{
+			height: 30px;
+			&:nth-of-type(2n){
+				background: #c4d8ff;
+			}
+			&:nth-of-type(1){
+				background: #0b7de2;
+				color: white;
+				height: 40px;
+			}
+		}
+
+		td{
+			padding: 5px;
+		}
+	}
+	select,input{
+		width: 100%;
+		box-sizing: border-box;
+		padding: 5px;
+	}
+}

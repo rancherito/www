@@ -557,6 +557,7 @@ var tableMake = function () {
   container.append(header);
   this.addClass = function(newClass){
     container.addClass(newClass);
+    return this;
   }
 
   this.setTable= function (newHead,newfilas) {
