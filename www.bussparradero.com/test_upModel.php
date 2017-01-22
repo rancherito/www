@@ -16,5 +16,5 @@
 
 </head>
 <div>
-    <cgimt class='claustro'></cgimt>
+    <cgimt class='claustro'/>
 </div>

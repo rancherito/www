@@ -555,6 +555,10 @@ var tableMake = function () {
   var filas = [];
   var table = [];
   container.append(header);
+  this.addClass = function(newClass){
+    container.addClass(newClass);
+  }
+
   this.setTable= function (newHead,newfilas) {
 
     header.empty();
@@ -585,6 +589,30 @@ var tableMake = function () {
 
   }
 
+  this.addHead = function(head){
+    thHeader.push($('<th></th>').text(head));
+    header.append(thHeader[thHeader.length-1]);
+    for (var i = 0; i < filas.length; i++) {
+      table[i].push($('<td></td>'));
+      filas[i].append(table[i][table[i].length-1]);
+    }
+    return this;
+  }
+
+  this.addRow = function(){
+
+      filas.push($('<tr></tr>'));
+      table.push([]);
+      for (var e = 0; e < thHeader.length; e++) {
+        table[table.length-1].push($('<td></td>'));
+        filas[filas.length-1].append(table[table.length-1][e]);
+      }
+
+      container.append(filas[filas.length-1]);
+
+    return this;
+  }
+
   this.getContainer = function (){
     return container;
   }
@@ -593,10 +621,16 @@ var tableMake = function () {
     return table;
   }
 
+  this.setCells = function(column,row,newValue){
+    table[column][row].append(newValue);
+    return this;
+  }
+
   this.appendTo = function(dom) {
     container.appendTo(dom);
     return this;
   }
+
   this.import = function(dom){
     var importReplace = $('cgimt.'+dom);
     importReplace.after(container);
@@ -605,6 +639,6 @@ var tableMake = function () {
     return this;
   };
 }
-function tableMake(argument) {
-  // body...
+function tableCG() {
+  return new tableMake();
 }
