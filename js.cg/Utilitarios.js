@@ -393,7 +393,9 @@ function call(procedure,proce){
 function dataE(DATA){
   return DATA['PROCESO']==='EXITOSO';
 }
-
+function dataP(DATA){
+  return DATA['PROCESO'];
+}
 function dataR(DATA){
   return DATA['DATA'][0]['resultado'];
 }

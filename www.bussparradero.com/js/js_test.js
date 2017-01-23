@@ -1,37 +1,59 @@
 $(document).ready(function() {
 
 	listarPersonal();
+	agregarPersonal();
+	listarBuses();
+	agregarBuses();
 });
+function listarBuses() {
+	var listBus = listControlCG()
+	.import($('cgimt.listarBuses'))
+	.setFirstFilter({'AREA DE TRABAJO':'select','ESTADO DE LABOR':'select','ESTADO':'select','DNI':'select'})
+	.setSecondFilter({'AREA DE TRABAJO':'select','ESTADO':'select','ESTADO DE LABOR':'select','DNI':'input'})
+	.setTitle('LISTAR BUSES')
+	.addClass('lister');
+	listBus.dataViews[0].import(listBus.tablaList);
+	dataTablas2(callP('busesListarByID',['%','%','%']),listBus.dataViews[0]);
+
+}
+function agregarBuses() {
+	var addBus = newControlCG();
+	addBus
+	.import($('cgimt.agregarBuses'))
+	.addClass('added')
+	.setTitle('AGREGAR BUSES')
+	.setFilter({'TIPO BUS':'select','AFORO PISO 1':'input','AFORO PISO 2':'input','PLACA DEL BUS':'input','ESTADO':'select'})
+	;
+
+	addBus.filters[0].append(optionCG(1,'1R PISO')).append(optionCG(2,'2DO PISO'));
+	dataListas(callP('estadoListarByID',['%','GRAL']),addBus.listViews[1],'estado','nombre',addBus.filters[4]);
+	addBus.relize('busesAgregar');
+}
 
 function listarPersonal() {
 	var listPer = listControlCG()
-	.import($('cgimt.claustro'))
+	.import($('cgimt.listarPersonal'))
 	.setFirstFilter({'AREA DE TRABAJO':'select','ESTADO DE LABOR':'select','ESTADO':'select','DNI':'select'})
-	.setSecondFilter({'AREA DE TRABAJO':'select','ESTADO DE LABOR':'select','ESTADO':'select','DNI':'input'})
+	.setSecondFilter({'AREA DE TRABAJO':'select','ESTADO':'select','ESTADO DE LABOR':'select','DNI':'input'})
 	.setTitle('LISTAR PERSONAL')
 	.addClass('lister');
 	listPer.dataViews[0].import(listPer.tablaList);
-
-	//hideColums
-
-	console.log(listPer.dataViews[0]);
 	listPer.dataViews[0].hideColums(['area_trabajo','estado','categoria','estado_categoria']);
-	//sp_area_trabajo_Listar
+
 	dataListas({procedure:call('areatrabajoListar',[])},listPer.listViews2[0],'area_trabajo','nombre',listPer.filters2[0]);
-	dataListas({procedure:call('estadoListarByID',['%','GRAL'])},listPer.listViews2[2],'estado','nombre',listPer.filters2[2]);
+	dataListas({procedure:call('estadoListarByID',['%','GRAL'])},listPer.listViews2[1],'estado','nombre',listPer.filters2[1]);
 
 	dataListas(upcall('personalListarByID',listPer.filters),listPer.listViews[0],'area_trabajo','AREA TRABAJO',listPer.filters[0],function () {
-		dataListas(upcall('personalListarByID',listPer.filters),listPer.listViews[1],'estado','ESTADO LABOR',listPer.filters[1],function () {
-			dataListas(upcall('personalListarByID',listPer.filters),listPer.listViews[2],'estado_categoria','ESTADO',listPer.filters[2],function () {
+		dataListas(upcall('personalListarByID',listPer.filters),listPer.listViews[1],'estado','ESTADO',listPer.filters[1],function () {
+			dataListas(upcall('personalListarByID',listPer.filters),listPer.listViews[2],'estado_categoria','ESTADO LABOR',listPer.filters[2],function () {
 				dataListas(upcall('personalListarByID',listPer.filters),listPer.listViews[3],'DNI','DNI',listPer.filters[3],function () {
 					dataTablas2(upcall('personalListarByID',listPer.filters),listPer.dataViews[0],function () {
 						if (listPer.dataViews[0].getContainer().find('tr').length ===2) {
 							listPer.addRowToChange.css('display', 'initial');
 							listPer.getTableAlter().getContainer().css('display', 'table');
-							console.log(listPer.dataViews[0].getCells(0,8));
 							dataListas(
-								{procedure:call('estadoListarByID',['%',listPer.dataViews[0].getCells(0,8)])},
-								listPer.listViews2[1],'estado','nombre',listPer.filters2[1]);
+								{procedure:call('estadoListarByID',['%',listPer.dataViews[0].getCells(0,2)])},
+								listPer.listViews2[2],'estado','nombre',listPer.filters2[2]);
 
 						}else {
 							listPer.addRowToChange.css('display', 'none');
@@ -44,13 +66,112 @@ function listarPersonal() {
 		});
 	});
 
-	listPer.relize();
+	listPer.relize('personalActualizarByID');
 }
 
-function functionName() {
-
+function agregarPersonal() {
+	var addPer = newControlCG();
+	addPer
+	.import($('cgimt.agregarPersonal'))
+	.addClass('added')
+	.setTitle('AGREGAR PERSONAL')
+	.setFilter({'NOMBRES':'input','APELLIDOS':'input','AREA DE TRABAJO':'select','DNI':'input',ESTADO:'select','ESTADO LABOR':'select'})
+	;
+	dataListas(callP('areatrabajoListar',[]),addPer.listViews[0],'area_trabajo','nombre',addPer.filters[2],function () {
+		dataListas(callP('estadoListarByID',['%',addPer.filters[2].val()]),addPer.listViews[2],'estado','nombre',addPer.filters[5]);
+	});
+	dataListas(callP('estadoListarByID',['%','GRAL']),addPer.listViews[1],'estado','nombre',addPer.filters[4]);
+	addPer.relize('personalAgregar');
+	//area_trabajo_Listar
 }
 
+
+function callP(procedur,parametros) {
+	return {procedure:call(procedur,parametros)};
+}
+
+var newControl = function () {
+	var container = $etq('div');
+	var title = $etq('div').addClass('titleListC').text('some text');
+	var contentfilters = $etq('div');
+	var notify = $etq('div').text('some text').addClass('notify');
+	var contNtAndChange = $etq('div');
+	this.filters = [];
+	this.listViews = [];
+	this.addRowToChange = $etq('button').text('REGISTRAR');
+
+
+	container
+	.append(title)
+	.append(contentfilters)
+	.append(contNtAndChange.append(this.addRowToChange).append(notify))
+	.append($etq('div').css('clear', 'both'))
+	;
+
+	this.setFilter = function (filter) {
+		console.log(filter);
+
+		var i = 0;
+		for (var variable in filter) {
+			if (filter[variable] === 'select') {
+				this.filters.push($etq('select'));
+				this.listViews.push(listViewCG());
+			}else {
+				this.filters.push($etq('input').attr('type', 'text').attr('placeholder', 'Ingrese su texto'));
+			}
+			contentfilters.append(
+				$etq('div').append($etq('div').text(variable)).append(this.filters[i])
+			);
+			i++;
+		}
+
+
+		return this;
+	}
+
+	this.setTitle = function(newTtile){
+		title.text(newTtile);
+		return this;
+	};
+	this.getContainer = function () {
+		return container;
+	};
+	this.appendTo = function(dom) {
+		container.appendTo(dom);
+		return this;
+	}
+	this.import = function(dom){
+		dom.after(container);
+		dom.remove();
+		return this;
+	}
+
+	this.addClass = function(newClass){
+		container.addClass(newClass);
+		return this;
+	}
+
+	this.relize = function (callName) {
+		var filtr = this.filters;
+		this.addRowToChange.click(function(event) {
+			console.log(upcall(callName,filtr));
+			$.post('php/query.php',upcall(callName,filtr), function(data) {
+				var DATA = $.parseJSON(data);
+				if (dataE(DATA)) {
+					notify.text('CAMBIO EXITOSO');
+				}else {
+					notify.text(dataP(DATA));
+				}
+
+				notify.css('opacity', '1').delay(2000).animate({opacity:0}, 1000);
+
+			});
+		});
+	}
+}
+function newControlCG() {
+	return new newControl();
+}
 
 var listControl = function(){
 	var container = $etq('div');
@@ -151,11 +272,11 @@ var listControl = function(){
 		return this;
 	}
 
-	this.relize = function () {
+	this.relize = function (callName) {
 		var filtr = this.filters2;
 		this.addRowToChange.click(function(event) {
-			console.log(upcall('personalActualizarByID',filtr));
-			$.post('php/query.php',upcall('personalActualizarByID',filtr), function(data) {
+			console.log(upcall(callName,filtr));
+			$.post('php/query.php',upcall(callName,filtr), function(data) {
 				var DATA = $.parseJSON(data);
 				if (dataE(DATA)) {
 					notify.text('CAMBIO EXITOSO');
@@ -163,13 +284,12 @@ var listControl = function(){
 					notify.text(dataR(DATA));
 				}
 
-				notify.css('opacity', '1').animate({opacity:0}, 2000);
+				notify.css('opacity', '1').animate({opacity:0}, 4000);
 			});
 		});
 	}
 
 };
-
 function listControlCG() {
 	return new listControl();
 }

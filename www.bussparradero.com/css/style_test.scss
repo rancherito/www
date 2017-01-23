@@ -91,3 +91,92 @@ div.lister{
 		padding: 5px;
 	}
 }
+
+div.added{
+	background: white;
+	position: relative;
+	margin-bottom: 20px;
+	box-sizing: border-box;
+	padding: 10px;
+
+	div.notify{
+		float: right;
+		height: 30px;
+		line-height: 30px;
+		margin-top: 20px;
+		white-space: nowrap;
+		opacity: 0;
+	}
+	button{
+		border: 0;
+		height: 30px;
+		padding: 0 15px;
+		border-radius: 30px;
+		border: 1px #3a90ff solid;
+		box-sizing: border-box;
+		outline: 0;
+		background: transparent;
+		color: #002c5a;
+		margin-top: 20px;
+		transition: all 0.2s linear;
+		cursor: pointer;
+		font-weight: bold;
+		&:hover{
+			background: #3a90ff;
+			color: white;
+		}
+		&:active{
+			transform: scaleX(1.1);
+		}
+	}
+
+	div.titleListC{
+		background: #ff225e;
+		padding: 0 15px;
+		box-sizing: border-box;
+		height: 35px;
+		line-height: 35px;
+		margin: 10px 0;
+		float: left;
+		border-radius: 50px;
+		font-weight: bold;
+		color: white;
+	}
+	> div:nth-of-type(2){
+		width: 100%;
+		float: left;
+		> div{
+			width: 100%;
+			height: 40px;
+			margin: 10px 0;
+			overflow: hidden;
+			box-sizing: border-box;
+			//background: #0b7de2;
+			> div{
+				background: #0b7de2;
+				float: left;
+				height: 100%;
+				width: 250px;
+				border-radius: 50px;
+				line-height: 40px;
+				text-align: center;
+				font-weight: bold;
+				color: white;
+			}
+			> input,> select{
+				height: 100%;
+				width: calc(100% - 300px);
+				background: rgb(230,230,230);
+				float: right;
+				border-radius: 3px;
+				box-sizing: border-box;
+				padding: 5px 10px;
+			}
+
+		}
+	}
+	> div:nth-of-type(3){
+		float: left;
+		width: 100%;
+	}
+}

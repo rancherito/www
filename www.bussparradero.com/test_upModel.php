@@ -17,5 +17,8 @@
 
 </head>
 <div>
-    <cgimt class='claustro'/>
+    <cgimt class='listarPersonal'></cgimt>
+    <cgimt class='agregarPersonal'></cgimt>
+    <cgimt class='listarBuses'></cgimt>
+    <cgimt class='agregarBuses'></cgimt>
 </div>
