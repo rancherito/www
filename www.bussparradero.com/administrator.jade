@@ -6,7 +6,7 @@
 |   $saa = '';
 |   if(!empty($_SESSION['user']) && !empty($_SESSION['pass'])){
 |     if(count($_SESSION['user']) > 0 && count($_SESSION['pass']) > 0){
-|       $saa = usuarioNombre('nFDGn($'.$_SESSION['user'].',$'.$_SESSION['pass'].',$PERS,$GGRL)')['DATA'][0]['nombre_completo'];
+|       $saa = usuarioNombre('name($'.$_SESSION['user'].',$'.$_SESSION['pass'].',$PERS,$GGRL)')['DATA'][0]['nombre_completo'];
 |     }
 |   }
 |   $content = matrix('widget/login.administrator.php');
@@ -30,7 +30,7 @@ head
 |   $page = <<<EOT
 | 
 body
-  div.controler.control-main
+  div.controler.control-main.page1
     div.controler.control-main_s
       div.controler.control-panel
         div.controler.control-panel_s
@@ -54,13 +54,80 @@ body
 | $logPage = <<<EOT
 | 
 body
-  div.controler.control-main
+  div.controler.control-main.page2
     div.controler.control-main_s
+      div.controler.control-header
+        div.controler.control-header_s
+          div.content-nameUser
+            div.user $saa
+            i.ion-ios-person-outline
+          i.ion-power.closeSesion.iconNav
+          i.ion-arrow-left-c.iconNav
       div.controler.control-panel
         div.controler.control-panel_s
-          button.closeSesion
-            | MY BUTTON
-          div $saa
+          div.contenTitles
+            div.subTitle ADMINISTRADOR
+          div.contentAccesDirects
+            div.contentAccesDirects_s
+            
+              div.contentAcces
+                div.contentAcces_s
+                  i.icon.ion-ios-people
+                  div.text
+                    div.title PERSONAL
+                    div.description En esta seccion podras realizar cambios en el estado de los personales
+                    
+              div.contentAcces
+                div.contentAcces_s
+                  i.icon.ion-android-bus
+                  div.text
+                    div.title BUSES
+                    div.description En esta seccion podras realizar cambios en el estado de los buses
+                    
+              div.contentAcces
+                div.contentAcces_s
+                  i.icon.ion-cube
+                  div.text
+                    div.title PERSONAL
+                    div.description En esta seccion podras realizar cambios en el estado de los personales
+                    
+              div.contentAcces
+                div.contentAcces_s
+                  i.icon.ion-cube
+                  div.text
+                    div.title PERSONAL
+                    div.description En esta seccion podras realizar cambios en el estado de los personales          
+                  
+                    
+              div.contentAcces
+                div.contentAcces_s
+                  i.icon.ion-cube
+                  div.text
+                    div.title PERSONAL
+                    div.description En esta seccion podras realizar cambios en el estado de los personales
+                    
+              div.contentAcces
+                div.contentAcces_s
+                  i.icon.ion-cube
+                  div.text
+                    div.title PERSONAL
+                    div.description En esta seccion podras realizar cambios en el estado de los personales
+                    
+              div.contentAcces
+                div.contentAcces_s
+                  i.icon.ion-cube
+                  div.text
+                    div.title PERSONAL
+                    div.description En esta seccion podras realizar cambios en el estado de los personales
+                    
+              div.contentAcces
+                div.contentAcces_s
+                  i.icon.ion-cube
+                  div.text
+                    div.title PERSONAL
+                    div.description En esta seccion podras realizar cambios en el estado de los personales             
+                    
+                
 | 
 | EOT;
 | 

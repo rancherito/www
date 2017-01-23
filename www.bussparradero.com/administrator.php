@@ -6,7 +6,7 @@
   $saa = '';
   if(!empty($_SESSION['user']) && !empty($_SESSION['pass'])){
     if(count($_SESSION['user']) > 0 && count($_SESSION['pass']) > 0){
-      $saa = usuarioNombre('user($'.$_SESSION['user'].',$'.$_SESSION['pass'].',$PERS,$GGRL)')['DATA'][0]['nombre_completo'];
+      $saa = usuarioNombre('name($'.$_SESSION['user'].',$'.$_SESSION['pass'].',$PERS,$GGRL)')['DATA'][0]['nombre_completo'];
     }
   }
   $content = matrix('widget/login.administrator.php');
@@ -29,7 +29,7 @@ EOT;
   $page = <<<EOT
  
 <body>
-  <div class="controler control-main">
+  <div class="controler control-main page1">
     <div class="controler control-main_s">
       <div class="controler control-panel">
         <div class="controler control-panel_s">
@@ -59,12 +59,88 @@ EOT;
 $logPage = <<<EOT
  
 <body>
-  <div class="controler control-main">
+  <div class="controler control-main page2">
     <div class="controler control-main_s">
+      <div class="controler control-header">
+        <div class="controler control-header_s">
+          <div class="content-nameUser">
+            <div class="user">$saa</div><i class="ion-ios-person-outline"></i>
+          </div><i class="ion-power closeSesion iconNav"></i><i class="ion-arrow-left-c iconNav"></i>
+        </div>
+      </div>
       <div class="controler control-panel">
         <div class="controler control-panel_s">
-          <button class="closeSesion">MY BUTTON</button>
-          <div>$saa</div>
+          <div class="contenTitles">
+            <div class="subTitle">ADMINISTRADOR</div>
+          </div>
+          <div class="contentAccesDirects">
+            <div class="contentAccesDirects_s">
+              <div class="contentAcces">
+                <div class="contentAcces_s"><i class="icon ion-ios-people"></i>
+                  <div class="text">
+                    <div class="title">PERSONAL</div>
+                    <div class="description">En esta seccion podras realizar cambios en el estado de los personales</div>
+                  </div>
+                </div>
+              </div>
+              <div class="contentAcces">
+                <div class="contentAcces_s"><i class="icon ion-android-bus"></i>
+                  <div class="text">
+                    <div class="title">BUSES</div>
+                    <div class="description">En esta seccion podras realizar cambios en el estado de los buses</div>
+                  </div>
+                </div>
+              </div>
+              <div class="contentAcces">
+                <div class="contentAcces_s"><i class="icon ion-cube"></i>
+                  <div class="text">
+                    <div class="title">PERSONAL</div>
+                    <div class="description">En esta seccion podras realizar cambios en el estado de los personales</div>
+                  </div>
+                </div>
+              </div>
+              <div class="contentAcces">
+                <div class="contentAcces_s"><i class="icon ion-cube"></i>
+                  <div class="text">
+                    <div class="title">PERSONAL</div>
+                    <div class="description">En esta seccion podras realizar cambios en el estado de los personales          </div>
+                  </div>
+                </div>
+              </div>
+              <div class="contentAcces">
+                <div class="contentAcces_s"><i class="icon ion-cube"></i>
+                  <div class="text">
+                    <div class="title">PERSONAL</div>
+                    <div class="description">En esta seccion podras realizar cambios en el estado de los personales</div>
+                  </div>
+                </div>
+              </div>
+              <div class="contentAcces">
+                <div class="contentAcces_s"><i class="icon ion-cube"></i>
+                  <div class="text">
+                    <div class="title">PERSONAL</div>
+                    <div class="description">En esta seccion podras realizar cambios en el estado de los personales</div>
+                  </div>
+                </div>
+              </div>
+              <div class="contentAcces">
+                <div class="contentAcces_s"><i class="icon ion-cube"></i>
+                  <div class="text">
+                    <div class="title">PERSONAL</div>
+                    <div class="description">En esta seccion podras realizar cambios en el estado de los personales</div>
+                  </div>
+                </div>
+              </div>
+              <div class="contentAcces">
+                <div class="contentAcces_s"><i class="icon ion-cube"></i>
+                  <div class="text">
+                    <div class="title">PERSONAL</div>
+                    <div class="description">En esta seccion podras realizar cambios en el estado de los personales             </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </div>
