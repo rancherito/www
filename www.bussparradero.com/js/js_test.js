@@ -2,18 +2,54 @@ $(document).ready(function() {
 
 	listarPersonal();
 	agregarPersonal();
-	listarBuses();
-	agregarBuses();
+	agregarSucursal();
+	/*listarBuses();
+	agregarBuses();*/
 });
+function agregarSucursal() {
+	var addSucur = newControlCG();
+	addSucur
+	.import($('cgimt.agregarSucursal'))
+	.addClass('added')
+	.setTitle('AGREGAR SUCURSAL')
+	.setFilter({'CODIGO SUCURSAL':'input','UBICACION':'input','GERENTE A CARGO':'select','ESTADO':'select'})
+	;
+
+	dataListas(callP('personalListarByID',['ADMT','ACT','SSCR','%']),addSucur.listViews[0],'DNI','nombre_completo',addSucur.filters[2]);
+	dataListas(callP('estadoListarByID',['%','GRAL']),addSucur.listViews[1],'estado','nombre',addSucur.filters[3]);
+	addSucur.relize('sucursalAgregar');
+}
+
 function listarBuses() {
 	var listBus = listControlCG()
 	.import($('cgimt.listarBuses'))
-	.setFirstFilter({'AREA DE TRABAJO':'select','ESTADO DE LABOR':'select','ESTADO':'select','DNI':'select'})
-	.setSecondFilter({'AREA DE TRABAJO':'select','ESTADO':'select','ESTADO DE LABOR':'select','DNI':'input'})
+	.setFirstFilter({'TIPO':'select','ESTADO':'select','PLACA DEL BUS':'select'})
+	.setSecondFilter({'ESTADO':'select','PLACA DEL BUS':'input'})
 	.setTitle('LISTAR BUSES')
 	.addClass('lister');
 	listBus.dataViews[0].import(listBus.tablaList);
-	dataTablas2(callP('busesListarByID',['%','%','%']),listBus.dataViews[0]);
+
+	dataListas({procedure:call('estadoListarByID',['%','GRAL'])},listBus.listViews2[0],'estado','nombre',listBus.filters2[0]);
+
+	dataListas(upcall('busesListarByID',listBus.filters),listBus.listViews[0],'tipo','TIPO',listBus.filters[0],function () {
+		dataListas(upcall('busesListarByID',listBus.filters),listBus.listViews[1],'estado','ESTADO BUS',listBus.filters[1],function () {
+			dataListas(upcall('busesListarByID',listBus.filters),listBus.listViews[2],'placa','placa',listBus.filters[2],function () {
+				dataTablas2(upcall('busesListarByID',listBus.filters),listBus.dataViews[0],function () {
+					if (listBus.dataViews[0].getContainer().find('tr').length ===2) {
+						listBus.addRowToChange.css('display', 'initial');
+						listBus.getTableAlter().getContainer().css('display', 'table');
+					}
+					else {
+						listBus.addRowToChange.css('display', 'none');
+						listBus.getTableAlter().getContainer().css('display', 'none');
+					}
+					listBus.filters2[1].val(listBus.dataViews[0].getCells(0,0));
+				});
+			});
+		});
+	});
+	//sp_buses_Listar_ByID
+	listBus.relize('busesActualizarByID');
 
 }
 function agregarBuses() {
@@ -53,7 +89,8 @@ function listarPersonal() {
 							listPer.getTableAlter().getContainer().css('display', 'table');
 							dataListas(
 								{procedure:call('estadoListarByID',['%',listPer.dataViews[0].getCells(0,2)])},
-								listPer.listViews2[2],'estado','nombre',listPer.filters2[2]);
+								listPer.listViews2[2],'estado','nombre',listPer.filters2[2]
+							);
 
 						}else {
 							listPer.addRowToChange.css('display', 'none');
@@ -68,7 +105,6 @@ function listarPersonal() {
 
 	listPer.relize('personalActualizarByID');
 }
-
 function agregarPersonal() {
 	var addPer = newControlCG();
 	addPer
@@ -275,7 +311,6 @@ var listControl = function(){
 	this.relize = function (callName) {
 		var filtr = this.filters2;
 		this.addRowToChange.click(function(event) {
-			console.log(upcall(callName,filtr));
 			$.post('php/query.php',upcall(callName,filtr), function(data) {
 				var DATA = $.parseJSON(data);
 				if (dataE(DATA)) {

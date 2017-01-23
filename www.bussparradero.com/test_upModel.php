@@ -21,4 +21,6 @@
     <cgimt class='agregarPersonal'></cgimt>
     <cgimt class='listarBuses'></cgimt>
     <cgimt class='agregarBuses'></cgimt>
+    <cgimt class='listarSucursal'></cgimt>
+    <cgimt class='agregarSucursal'></cgimt>
 </div>

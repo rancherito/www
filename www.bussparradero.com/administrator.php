@@ -3,6 +3,8 @@
   session_start();
   include 'php/functions.php';
   include 'php/query_php.php';
+
+
   $saa = '';
   if(!empty($_SESSION['user']) && !empty($_SESSION['pass'])){
     if(count($_SESSION['user']) > 0 && count($_SESSION['pass']) > 0){
@@ -24,10 +26,10 @@
   <link rel="stylesheet" href="css/styleInputs-theme01.css" type="text/css">
   <link rel="stylesheet" href="css/styles-theme01.css" type="text/css">
   <link rel="stylesheet" href="css/style.administrator.css" type="text/css">
-</head> 
+</head>
 EOT;
   $page = <<<EOT
- 
+
 <body>
   <div class="controler control-main page1">
     <div class="controler control-main_s">
@@ -53,11 +55,11 @@ EOT;
       </div>
     </div>
   </div>
-</body> 
+</body>
 EOT;
- 
+
 $logPage = <<<EOT
- 
+
 <body>
   <div class="controler control-main page2">
     <div class="controler control-main_s">
@@ -145,9 +147,9 @@ $logPage = <<<EOT
       </div>
     </div>
   </div>
-</body> 
+</body>
 EOT;
- 
+
 if(!empty($_SESSION['user']) && !empty($_SESSION['pass'])){
   if(count($_SESSION['user']) > 0 && count($_SESSION['pass']) > 0){
     echo $head;
