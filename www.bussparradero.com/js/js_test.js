@@ -2,10 +2,31 @@ $(document).ready(function() {
 
 	listarPersonal();
 	agregarPersonal();
+	listarSucursal();
 	agregarSucursal();
 	/*listarBuses();
 	agregarBuses();*/
 });
+function listarSucursal() {
+	var listSucur = listControlCG()
+	.import($('cgimt.listarSucursal'))
+	.setFirstFilter({'ESTADO':'select','SUCURSAL':'select'})
+	.setSecondFilter({'ESTADO':'select','SUCURSAL':'input'})
+	.setTitle('LISTAR SUCURSAL')
+	.addClass('lister');
+	listSucur.dataViews[0].import(listSucur.tablaList);
+
+
+	dataListas(upcall('sucursalListarByID',listSucur.filters),listSucur.listViews[0],'estado','ESTADO',listSucur.filters[0],function () {
+		dataListas(upcall('sucursalListarByID',listSucur.filters),listSucur.listViews[1],'sucursal','nombre',listSucur.filters[1],function () {
+			dataTablas2(upcall('sucursalListarByID',listSucur.filters),listSucur.dataViews[0],function () {
+
+				listSucur.filters2[1].val(listSucur.dataViews[0].getCells(0,0));
+			});
+		});
+	});
+
+}
 function agregarSucursal() {
 	var addSucur = newControlCG();
 	addSucur
@@ -319,7 +340,7 @@ var listControl = function(){
 					notify.text(dataR(DATA));
 				}
 
-				notify.css('opacity', '1').animate({opacity:0}, 4000);
+				notify.css('opacity', '1').delay(2000).animate({opacity:0}, 1000);
 			});
 		});
 	}
