@@ -11,7 +11,7 @@ function listarSucursal() {
 	var listSucur = listControlCG()
 	.import($('cgimt.listarSucursal'))
 	.setFirstFilter({'ESTADO':'select','SUCURSAL':'select'})
-	.setSecondFilter({'ESTADO':'select','SUCURSAL':'input'})
+	.setSecondFilter({'GERENTE':'select','ESTADO':'select','SUCURSAL':'input'})
 	.setTitle('LISTAR SUCURSAL')
 	.addClass('lister');
 	listSucur.dataViews[0].import(listSucur.tablaList);
@@ -20,12 +20,23 @@ function listarSucursal() {
 	dataListas(upcall('sucursalListarByID',listSucur.filters),listSucur.listViews[0],'estado','ESTADO',listSucur.filters[0],function () {
 		dataListas(upcall('sucursalListarByID',listSucur.filters),listSucur.listViews[1],'sucursal','nombre',listSucur.filters[1],function () {
 			dataTablas2(upcall('sucursalListarByID',listSucur.filters),listSucur.dataViews[0],function () {
-
-				listSucur.filters2[1].val(listSucur.dataViews[0].getCells(0,0));
+				if (listSucur.dataViews[0].getContainer().find('tr').length ===2) {
+					listSucur.addRowToChange.css('display', 'initial');
+					listSucur.getTableAlter().getContainer().css('display', 'table');
+				}
+				else {
+					listSucur.addRowToChange.css('display', 'none');
+					listSucur.getTableAlter().getContainer().css('display', 'none');
+				}
+				listSucur.filters2[2]
+				.val(listSucur.dataViews[0].getCells(0,0))
+				.text(listSucur.dataViews[0].getCells(0,2))
+				;
 			});
 		});
 	});
 
+	listSucur.relize('sucursalActualizarByID');
 }
 function agregarSucursal() {
 	var addSucur = newControlCG();
@@ -64,7 +75,9 @@ function listarBuses() {
 						listBus.addRowToChange.css('display', 'none');
 						listBus.getTableAlter().getContainer().css('display', 'none');
 					}
-					listBus.filters2[1].val(listBus.dataViews[0].getCells(0,0));
+					listBus.filters2[1]
+					.val(listBus.dataViews[0].getCells(0,0))
+					.text(listBus.dataViews[0].getCells(0,0));
 				});
 			});
 		});
@@ -117,7 +130,11 @@ function listarPersonal() {
 							listPer.addRowToChange.css('display', 'none');
 							listPer.getTableAlter().getContainer().css('display', 'none');
 						}
-						listPer.filters2[3].val(listPer.dataViews[0].getCells(0,3));
+						listPer.filters2[3]
+						.val(listPer.dataViews[0].getCells(0,3))
+						.text(listPer.dataViews[0].getCells(0,3))
+						;
+
 					});
 				});
 			});
@@ -274,10 +291,7 @@ var listControl = function(){
 				this.listViews2.push(listViewCG());
 			}
 			else{
-				this.filters2.push($etq('input')
-				.attr('type', 'text')
-				.attr('placeholder', 'Ingrese su texo')
-				.prop('disabled', true)
+				this.filters2.push($etq('option')
 			);
 			}
 
@@ -332,12 +346,14 @@ var listControl = function(){
 	this.relize = function (callName) {
 		var filtr = this.filters2;
 		this.addRowToChange.click(function(event) {
+			console.log(upcall(callName,filtr));
 			$.post('php/query.php',upcall(callName,filtr), function(data) {
+				console.log(data);
 				var DATA = $.parseJSON(data);
 				if (dataE(DATA)) {
 					notify.text('CAMBIO EXITOSO');
 				}else {
-					notify.text(dataR(DATA));
+					notify.text(dataP(DATA));
 				}
 
 				notify.css('opacity', '1').delay(2000).animate({opacity:0}, 1000);
