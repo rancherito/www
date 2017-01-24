@@ -1,12 +1,65 @@
 $(document).ready(function() {
 
-	listarPersonal();
+	/*listarPersonal();
 	agregarPersonal();
 	listarSucursal();
 	agregarSucursal();
-	/*listarBuses();
+	listarBuses();
 	agregarBuses();*/
+	listarDestino();
+	agregarDestino();
 });
+function listarDestino() {
+	var listDest = listControlCG()
+	.import($('cgimt.listarDestino'))
+	.setFirstFilter({'ESTADO':'select','PLACA DEL BUSS':'select','COD. DESTINO':'select'})
+	.setSecondFilter({'ESTADO':'select','COD. DESTINO':'option'})
+	.setTitle('LISTAR DESTINOS')
+	.addClass('lister');
+	listDest.dataViews[0].import(listDest.tablaList).hideColums(['estado','sucursal_origen','sucursal_destino']);
+
+	dataListas(upcall('destinosbusesListarByID',listDest.filters),listDest.listViews[0],'estado','ESTADO',listDest.filters[0],function () {
+		dataListas(upcall('destinosbusesListarByID',listDest.filters),listDest.listViews[1],'placa_bus','placa_bus',listDest.filters[1],function () {
+			dataListas(upcall('destinosbusesListarByID',listDest.filters),listDest.listViews[2],'cod_destino','cod_destino',listDest.filters[2],function () {
+				dataTablas2(upcall('destinosbusesListarByID',listDest.filters),listDest.dataViews[0],function () {
+					if (listDest.dataViews[0].getContainer().find('tr').length ===2) {
+						listDest.addRowToChange.css('display', 'initial');
+						listDest.getTableAlter().getContainer().css('display', 'table');
+					}
+					else {
+						listDest.addRowToChange.css('display', 'none');
+						listDest.getTableAlter().getContainer().css('display', 'none');
+					}
+					listDest.filters2[1]
+					.val(listDest.dataViews[0].getCells(0,'cod_destino'))
+					.text(listDest.dataViews[0].getCells(0,'cod_destino'))
+					;
+				});
+			});
+		});
+	});
+	dataListas(callP('estadoListarByID',['%','GRAL']),listDest.listViews2[0],'estado','nombre',listDest.filters2[0]);
+
+
+	listDest.realize('destinosbusesActualizarByID');
+
+}
+function agregarDestino() {
+	var addDest = newControlCG()
+	.import($('cgimt.agregarDestino'))
+	.addClass('added')
+	.setTitle('AGREGAR DESTINO')
+	.setFilter({'PLACA DEL BUS':'select','SUCURSAL A':'select','SUCURSAL B':'select','ESTADO':'select'})
+	;
+
+	dataListas(callP('busesListarByID',['%','ACT','%']),addDest.listViews[0],'placa','placa',addDest.filters[0]);
+	dataListas(callP('sucursalListarByID',['ACT','%']),addDest.listViews[1],'sucursal','nombre',addDest.filters[1]);
+	dataListas(callP('sucursalListarByID',['ACT','%']),addDest.listViews[2],'sucursal','nombre',addDest.filters[2]);
+	dataListas(callP('estadoListarByID',['%','GRAL']),addDest.listViews[3],'estado','nombre',addDest.filters[3]);
+
+	addDest.realize('destinosbusesAgregar');
+}
+
 function listarSucursal() {
 	var listSucur = listControlCG()
 	.import($('cgimt.listarSucursal'))
@@ -36,7 +89,7 @@ function listarSucursal() {
 		});
 	});
 
-	listSucur.relize('sucursalActualizarByID');
+	listSucur.realize('sucursalActualizarByID');
 }
 function agregarSucursal() {
 	var addSucur = newControlCG();
@@ -49,7 +102,7 @@ function agregarSucursal() {
 
 	dataListas(callP('personalListarByID',['ADMT','ACT','SSCR','%']),addSucur.listViews[0],'DNI','nombre_completo',addSucur.filters[2]);
 	dataListas(callP('estadoListarByID',['%','GRAL']),addSucur.listViews[1],'estado','nombre',addSucur.filters[3]);
-	addSucur.relize('sucursalAgregar');
+	addSucur.realize('sucursalAgregar');
 }
 
 function listarBuses() {
@@ -83,7 +136,7 @@ function listarBuses() {
 		});
 	});
 	//sp_buses_Listar_ByID
-	listBus.relize('busesActualizarByID');
+	listBus.realize('busesActualizarByID');
 
 }
 function agregarBuses() {
@@ -97,7 +150,7 @@ function agregarBuses() {
 
 	addBus.filters[0].append(optionCG(1,'1R PISO')).append(optionCG(2,'2DO PISO'));
 	dataListas(callP('estadoListarByID',['%','GRAL']),addBus.listViews[1],'estado','nombre',addBus.filters[4]);
-	addBus.relize('busesAgregar');
+	addBus.realize('busesAgregar');
 }
 
 function listarPersonal() {
@@ -141,7 +194,7 @@ function listarPersonal() {
 		});
 	});
 
-	listPer.relize('personalActualizarByID');
+	listPer.realize('personalActualizarByID');
 }
 function agregarPersonal() {
 	var addPer = newControlCG();
@@ -155,10 +208,9 @@ function agregarPersonal() {
 		dataListas(callP('estadoListarByID',['%',addPer.filters[2].val()]),addPer.listViews[2],'estado','nombre',addPer.filters[5]);
 	});
 	dataListas(callP('estadoListarByID',['%','GRAL']),addPer.listViews[1],'estado','nombre',addPer.filters[4]);
-	addPer.relize('personalAgregar');
+	addPer.realize('personalAgregar');
 	//area_trabajo_Listar
 }
-
 
 function callP(procedur,parametros) {
 	return {procedure:call(procedur,parametros)};
@@ -225,7 +277,7 @@ var newControl = function () {
 		return this;
 	}
 
-	this.relize = function (callName) {
+	this.realize = function (callName) {
 		var filtr = this.filters;
 		this.addRowToChange.click(function(event) {
 			console.log(upcall(callName,filtr));
@@ -343,7 +395,7 @@ var listControl = function(){
 		return this;
 	}
 
-	this.relize = function (callName) {
+	this.realize = function (callName) {
 		var filtr = this.filters2;
 		this.addRowToChange.click(function(event) {
 			console.log(upcall(callName,filtr));

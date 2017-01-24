@@ -549,8 +549,11 @@ var dataView = function () {
     this.makeTables();
     return this;
   }
-  this.getCells= function (column,row) {
-    return table[column][row].text();
+  this.getCells= function (row,column) {
+    if (typeof(column)==='string') {
+      column = this.dataQuery.getHeaders().indexOf(column);
+    }
+    return table[row][column].text();
   }
   this.getContainer = function () {
     return container;

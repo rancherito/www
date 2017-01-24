@@ -23,4 +23,8 @@
     <cgimt class='agregarBuses'></cgimt>
     <cgimt class='listarSucursal'></cgimt>
     <cgimt class='agregarSucursal'></cgimt>
+    <cgimt class='listarDestino'></cgimt>
+    <cgimt class='agregarDestino'></cgimt>
+    <cgimt class='listarPago'></cgimt>
+    <cgimt class='agregarPago'></cgimt>
 </div>
