@@ -110,7 +110,7 @@ var inputsCG = function () {
   this.show = function() {
     container.show();
   }
-  this.void = function() {
+  this.vacio = function() {
     return !(this.getValue().length > 0);
   }
   this.addClass = function (newClass) {
@@ -259,7 +259,7 @@ function skinInputLeyenda(jclass) {
     jclass.getlegenda().addClass('skinInputLeyendaTop');
   })
   .focusout(function(event) {
-    if (jclass.inputs.void()) {
+    if (jclass.inputs.vacio()) {
       jclass.getlegenda().removeClass('skinInputLeyendaTop');
     }
   });
@@ -453,7 +453,7 @@ var dataView = function () {
     return this;
   }
 
-  this.import = function(dom){
+  this.Import = function(dom){
     dom.replaceWith(container);
     return this;
   };
@@ -648,7 +648,7 @@ var tableMake = function () {
     return this;
   }
 
-  this.import = function(dom){
+  this.Import = function(dom){
     var importReplace = $('cgimt.'+dom);
     importReplace.after(container);
     importReplace.remove();
@@ -685,8 +685,13 @@ cg.CajaMensaje = function () {
   var pnlBotones = util.$('div');
   var _contenedor = util.$('div');
   var contenedor_ = util.$('div');
+  var mensaje = util.$('div');
+
 
   this.constructor = function () {
+    mensaje
+    .text('Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.');
+
     btnAceptar
     .css({height:'30px',width:'100px',float:'right'})
     .text('Aceptar');
@@ -696,18 +701,15 @@ cg.CajaMensaje = function () {
     .text('Cerrar');
 
     pnlBotones
-    .css({position:'absolute',bottom:0,width:'100%',height:'30px',padding:'15px 0 0'})
-    .append(btnAceptar)
+    .css({width:'100%',height:'30px',padding:'15px 0 0'})
     .append(btnCerrar);
 
     contenedor
-    .css({background:'blue',position:'absolute',left:'50%',top:'50%'})
+    .css({background:'white',position:'absolute',left:'50%',top:'50%'})
     .css({width:'320px','box-sizing':'border-box',padding:'15px'})
-    .append(contenedor_);
-
-    contenedor_
-    .css({position:'relative',overflow:'hidden','min-height':'45px'})
+    .append(mensaje)
     .append(pnlBotones);
+
 
     util.centrarSelector(contenedor);
     _contenedor
@@ -715,6 +717,16 @@ cg.CajaMensaje = function () {
     .append(contenedor);
   }
   this.constructor();
+
+  this.tipo = function (editarTipo) {
+    if (editarTipo === 'MENSAJE') {
+      btnAceptar.remove();
+    }
+    else if (editarTipo === 'MENSAJE_CONFIRMACION') {
+      btnCerrar.after(btnAceptar);
+    }
+    return this;
+  }
 
   this.contenedor = function (getContenedor) {
     if (getContenedor) {

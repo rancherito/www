@@ -1,6 +1,6 @@
-var test = cg.cajaMensaje();
+
 
 $(document).ready(function() {
-
+  var test = cg.cajaMensaje();
   test.mostrar();
 });
