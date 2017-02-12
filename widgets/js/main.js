@@ -1,6 +1,5 @@
-var attt;
 $(document).ready(function() {
-  attt = $('.na');
+  var attt = $('.na');
   attt.text('lalall').resize(function(event) {
     console.log('las');
   });;
