@@ -270,7 +270,6 @@ function skinButton(jclass) {
 function skinInputLeyenda_theme01(jclass){
   jclass.addClass('inputLeyenda-theme01');
 }
-
 var dataQuery = function (DATA) {
   var data = DATA;
   var proceso = data.PROCESO==='EXITOSO';
@@ -329,7 +328,6 @@ var processData = function () {
     return this;
   }
 }
-
 var listView = function () {
   processData.call(this);
   var view = 0;
@@ -661,3 +659,68 @@ var tableMake = function () {
 function tableCG() {
   return new tableMake();
 }
+
+var util = {};
+util.$ = function (selector) {
+  if (selector) return $('<'+selector+'></'+selector+'>');
+  return $('<div></div>');
+}
+util.centrarSelector = function (selector) {
+  var w = selector.outerWidth();
+  var h = selector.outerHeight();
+  selector.css({'margin-top':'-'+(h/2)+'px','margin-left':'-'+(w/2)+'px'});
+  selector.resize(function () {
+    w = selector.outerWidth();
+    h = selector.outerHeight();
+    selector.css({'margin-top':'-'+(h/2)+'px','margin-left':'-'+(w/2)+'px'});
+  });
+}
+
+var cg = {};
+cg.ERROR_SELECTOR = 'cg.error: selector inexistente';
+cg.CajaMensaje = function () {
+  var contenedor = util.$('div');
+  var _contenedor = util.$('div');
+
+  this.constructor = function () {
+    contenedor
+    .text('ADIOS A TODOS')
+    .css({background:'blue',position:'absolute',left:'50%',top:'50%'})
+    .css({width:'320px',height:'200px','box-sizing':'border-box',padding:'15px'})
+    ;
+    util.centrarSelector(contenedor);
+    _contenedor
+    .css({background:'rgba(0,0,0,0.5)',position:'fixed',top:0,left:0,width:'100%',height:'100%'})
+    .append(contenedor);
+  }
+  this.constructor();
+
+  this.contenedor = function (getContenedor) {
+    if (getContenedor) {
+      getContenedor(contenedor);
+      return this;
+    }else {
+      return contenedor
+    }
+  }
+
+  this.mostrar = function () {
+    _contenedor.appendTo('body');
+    return this;
+  }
+  this.close = function () {
+    _contenedor.remove();
+    return this;
+  }
+
+  this.dentroDe = function (selector) {
+    if (selector) {
+      contenedor.appendTo(selector);
+    }else {
+      console.log(cg.ERROR_SELECTOR);
+    }
+
+    return this;
+  }
+}
+cg.cajaMensaje = function () {return new cg.CajaMensaje()}
