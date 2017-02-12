@@ -680,14 +680,35 @@ var cg = {};
 cg.ERROR_SELECTOR = 'cg.error: selector inexistente';
 cg.CajaMensaje = function () {
   var contenedor = util.$('div');
+  var btnAceptar = util.$('button');
+  var btnCerrar = util.$('button');
+  var pnlBotones = util.$('div');
   var _contenedor = util.$('div');
+  var contenedor_ = util.$('div');
 
   this.constructor = function () {
+    btnAceptar
+    .css({height:'30px',width:'100px',float:'right'})
+    .text('Aceptar');
+
+    btnCerrar
+    .css({height:'30px',width:'100px',float:'right'})
+    .text('Cerrar');
+
+    pnlBotones
+    .css({position:'absolute',bottom:0,width:'100%',height:'30px',padding:'15px 0 0'})
+    .append(btnAceptar)
+    .append(btnCerrar);
+
     contenedor
-    .text('ADIOS A TODOS')
     .css({background:'blue',position:'absolute',left:'50%',top:'50%'})
-    .css({width:'320px',height:'200px','box-sizing':'border-box',padding:'15px'})
-    ;
+    .css({width:'320px','box-sizing':'border-box',padding:'15px'})
+    .append(contenedor_);
+
+    contenedor_
+    .css({position:'relative',overflow:'hidden','min-height':'45px'})
+    .append(pnlBotones);
+
     util.centrarSelector(contenedor);
     _contenedor
     .css({background:'rgba(0,0,0,0.5)',position:'fixed',top:0,left:0,width:'100%',height:'100%'})
@@ -704,15 +725,6 @@ cg.CajaMensaje = function () {
     }
   }
 
-  this.mostrar = function () {
-    _contenedor.appendTo('body');
-    return this;
-  }
-  this.close = function () {
-    _contenedor.remove();
-    return this;
-  }
-
   this.dentroDe = function (selector) {
     if (selector) {
       contenedor.appendTo(selector);
@@ -722,5 +734,16 @@ cg.CajaMensaje = function () {
 
     return this;
   }
+
+  this.mostrar = function () {
+    _contenedor.appendTo('body');
+    return this;
+  }
+  this.close = function () {
+    _contenedor.remove();
+    return this;
+  }
+
+
 }
 cg.cajaMensaje = function () {return new cg.CajaMensaje()}
