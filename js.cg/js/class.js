@@ -330,9 +330,6 @@ var processData = function () {
   }
 }
 
-//processData.prototype = Object.create(processData.prototype);
-//processData.prototype.constructor = li;
-
 var listView = function () {
   processData.call(this);
   var view = 0;
@@ -559,15 +556,12 @@ var dataView = function () {
     return container;
   }
 }
-
 var dataViewCG = function(newDataQuery) {
   if (newDataQuery) {
     return new dataView().setDataQuery(newDataQuery);
   }
   return new dataView();
 }
-
-
 var tableMake = function () {
   var container = $('<table></table>');
   var header = $('<tr></tr>');
