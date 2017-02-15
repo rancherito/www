@@ -1,4 +1,6 @@
 
+
+
 String.prototype.clStr = function (clear) {
   console.log(clear);
   var cgar = '';
@@ -318,7 +320,6 @@ function existObjtJson(element,objtJson) {
   return false;
 }
 
-
 function jsonIndex(p_json) {
   var indice = 0;
   var newJson = p_json;
@@ -382,14 +383,12 @@ function parametros(proce){
   valor+=')';
   return valor;
 }
-
 function call(procedure,proce){
   var valor = '(';
   for (var i=0; i < proce.length; i++)valor+=(i!=0?",":"")+"$"+proce[i];
   valor+=')';
   return procedure+valor;
 }
-
 function dataE(DATA){
   return DATA['PROCESO']==='EXITOSO';
 }
