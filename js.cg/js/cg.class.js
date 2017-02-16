@@ -15,7 +15,26 @@ tool.centerSelector = function (selector) {
 }
 
 var cg = {};
-cg.ERROR_SELECTOR = 'cg.error: selector inexistente';
+cg.error = {
+  selector:'cg.error: Selector no exist',
+  typeOf:'cg.error: typeof incorrect'
+};
+cg.ERROR_SELECTOR = 'cg.error: Selector no exist';
+cg.ERROR_TYPE_ICORRECT = 'cg.error: typeof incorrect';
+cg.$ = function (selector) {
+  if (selector) return $('<'+selector+'></'+selector+'>');
+  return $('<div></div>');
+}
+cg.centerSelector = function (selector) {
+  var w = selector.outerWidth();
+  var h = selector.outerHeight();
+  selector.css({'margin-top':'-'+(h/2)+'px','margin-left':'-'+(w/2)+'px'});
+  selector.resize(function () {
+    w = selector.outerWidth();
+    h = selector.outerHeight();
+    selector.css({'margin-top':'-'+(h/2)+'px','margin-left':'-'+(w/2)+'px'});
+  });
+}
 cg.MessageBox = function (setTypeBox) {
   var container = tool.$('div');
   var btnAceptar = tool.$('button');
@@ -122,4 +141,30 @@ cg.MessageBox = function (setTypeBox) {
   this.constructor();
 
 }
+cg.DataTable = function(){
+  var data = {};
+  this.addColumn= function(nameColumn){
+    data[nameColumn] = null;
+    return this;
+  }
+  this.source = function(newData){
+    if (typeof newData === 'object') {
+      data = newData;
+      return this;
+    }else
+      console.log(cg.error.typeOf);
+    return data;
+  }
+  this.status = function(bool){
+    var countData = 0;
+    for (var variable in data) { countData++; if(countData > 0)break;}
+
+    if (typeof boolean === 'string'){
+      if(bool === 'bool') return countData > 0;
+    }
+
+    return countData === 0 ? 'NO_DATA':'CORRECT';
+  }
+}
+cg.dataTable = function(){return new cg.DataTable()}
 cg.messageBox = function (param) { return new cg.MessageBox(param)}
