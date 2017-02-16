@@ -109,20 +109,23 @@ cg.MessageBox = function (setTypeBox) {
     }else {
       console.log(cg.ERROR_SELECTOR);
     }
-
     return this;
   }
 
   this.show = function () {
-    _container.appendTo('body');
+    _container.css('opacity','0').appendTo('body').animate({'opacity':1}, 250);
     return this;
   }
-  this.close = function () {
-    (_container).detach();
+  this.close = function (setTime) {
+    var time = typeof setTime === 'number' ? setTime : 250;
+
+    _container.animate({'opacity':0}, time,function () {
+      _container.detach();
+    });
     return this;
   }
 
-  this.messageView = function (newcontentMessage) {
+  this.messageSee = function (newcontentMessage) {
     if (typeof newcontentMessage === 'string') {
       newcontentMessage = newcontentMessage.replace(/\n/g,'<br>');
     }
