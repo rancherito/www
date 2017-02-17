@@ -19,8 +19,6 @@ cg.error = {
   selector:'cg.error: Selector no exist',
   typeOf:'cg.error: typeof incorrect'
 };
-cg.ERROR_SELECTOR = 'cg.error: Selector no exist';
-cg.ERROR_TYPE_ICORRECT = 'cg.error: typeof incorrect';
 cg.$ = function (selector) {
   if (selector) return $('<'+selector+'></'+selector+'>');
   return $('<div></div>');
@@ -144,17 +142,29 @@ cg.MessageBox = function (setTypeBox) {
   this.constructor();
 
 }
-cg.DataTable = function(){
+cg.DataTable = function(setSource){
   var data = {};
   this.addColumn= function(nameColumn){
     data[nameColumn] = null;
     return this;
   }
+
+
+
   this.source = function(newData){
+    var maxDimension = 0;
     if (typeof newData === 'object') {
+      for (var column in newData) {
+        var size = newData[column].length;
+        maxDimension = maxDimension < size ? size: maxDimension;
+      }
+      for (var column in newData) {
+        
+      }
+      console.log(maxDimension);
       data = newData;
       return this;
-    }else
+    }else if(typeof newData !='undefined')
       console.log(cg.error.typeOf);
     return data;
   }
@@ -162,12 +172,17 @@ cg.DataTable = function(){
     var countData = 0;
     for (var variable in data) { countData++; if(countData > 0)break;}
 
-    if (typeof boolean === 'string'){
+    if (typeof bool === 'string'){
       if(bool === 'bool') return countData > 0;
     }
 
-    return countData === 0 ? 'NO_DATA':'CORRECT';
+    return countData === 0 ? 'NO_DATA':'DATA_EXISTENT';
   }
+
+  this.constructor = function () {
+    this.source(setSource);
+  }
+  this.constructor();
 }
-cg.dataTable = function(){return new cg.DataTable()}
+cg.dataTable = function(source){return new cg.DataTable(source)}
 cg.messageBox = function (param) { return new cg.MessageBox(param)}

@@ -11,10 +11,17 @@
      <script type="text/javascript" src="js/cg.class.js"></script>
      <script type="text/javascript">
        $(document).ready(function() {
-         
-        var a = cg.dataTable();
-         console.log(a.status('bool'));
-         console.log(typeof true);
+         var data = {
+           nombres:['DAVID','MARCOS','MATHEO','JAZAEL'],
+           apellidoMaterno:['AQUINO','CASERES','CARTAGENA','JUANTORO','ANIELA'],
+           apellidoPaterno:['LARICO','MESTAS','CATEDRA','CARANAS','SANTAS']
+         };
+
+        var a = cg.dataTable(data);
+
+        console.log(a.source());
+
+        console.log(a.status('bool'));
 
        });
      </script>
