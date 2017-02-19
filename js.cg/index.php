@@ -12,16 +12,16 @@
      <script type="text/javascript">
        $(document).ready(function() {
          var data = {
-           nombres:['DAVID','MARCOS','MATHEO','JAZAEL'],
-           apellidoMaterno:['AQUINO','CASERES','CARTAGENA','JUANTORO','ANIELA'],
+           nombres:['DAVID','MARCOS','MATHEO'],
+           apellidoMaterno:['AQUINO','CASERES','CARTAGENA','JUANTORO'],
            apellidoPaterno:['LARICO','MESTAS','CATEDRA','CARANAS','SANTAS']
          };
 
         var a = cg.dataTable(data);
-
+        a.newRows(['gato','perro'], 'holas', 4, 'perro');
         console.log(a.source());
+        console.log(a.isEmpty());
 
-        console.log(a.status('bool'));
 
        });
      </script>
