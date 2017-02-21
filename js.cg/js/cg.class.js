@@ -53,7 +53,15 @@ cg.MessageBox = function (setTypeBox) {
     .append(contentMessage)
     .append(pnlBotones);
 
+<<<<<<< .mine
+
     cg.centerSelector(container);
+||||||| .r54
+
+    tool.centerSelector(container);
+=======
+    cg.centerSelector(container);
+>>>>>>> .r56
     _container
     .css({background: 'rgba(0, 0, 0, 0.5)', position: 'fixed', top: 0, left: 0, width: '100%', height: '100%', 'z-index': 9999})
     .append(container);
@@ -85,7 +93,7 @@ cg.MessageBox = function (setTypeBox) {
     if (selector) {
       container.appendTo(selector);
     } else {
-      console.log(cg.ERROR_SELECTOR);
+      console.log(cg.error.selector);
     }
     return this;
   };
