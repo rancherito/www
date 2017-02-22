@@ -13,15 +13,22 @@
        $(document).ready(function() {
          var data = {
            nombres:['DAVID','MARCOS','MATHEO'],
-           apellidoMaterno:['AQUINO','CASERES','CARTAGENA','JUANTORO'],
-           apellidoPaterno:['LARICO','MESTAS','CATEDRA','CARANAS','SANTAS']
+           apellidoMaterno:['AQUINO','CASERES','CARTAGENA'],
+           apellidoPaterno:['LARICO','MESTAS','CATEDRA']
          };
 
         var a = cg.dataTable(data);
-        a.newRows(['gato','perro'], 'holas', 4, 'perro');
+        a.newRows(['JUANA','YANA','APAZA'],{
+          nombres: 'ANTONIO' ,
+          apellidoMaterno: 'SUCATICONA',
+          apellidoPaterno:'HAMILTON'}
+        );
+
         console.log(a.source());
         console.log(a.isEmpty());
 
+        var a = {};
+        console.log(typeof a.w);
 
        });
      </script>

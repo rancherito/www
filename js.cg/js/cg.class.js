@@ -53,15 +53,7 @@ cg.MessageBox = function (setTypeBox) {
     .append(contentMessage)
     .append(pnlBotones);
 
-<<<<<<< .mine
-
     cg.centerSelector(container);
-||||||| .r54
-
-    tool.centerSelector(container);
-=======
-    cg.centerSelector(container);
->>>>>>> .r56
     _container
     .css({background: 'rgba(0, 0, 0, 0.5)', position: 'fixed', top: 0, left: 0, width: '100%', height: '100%', 'z-index': 9999})
     .append(container);
@@ -70,7 +62,6 @@ cg.MessageBox = function (setTypeBox) {
       this.typeBox(setTypeBox);
     }
   };
-
   this.typeBox = function (editarTipo) {
     if (editarTipo === 'COMMON') {
       btnAceptar.hide();
@@ -79,7 +70,6 @@ cg.MessageBox = function (setTypeBox) {
     }
     return this;
   };
-
   this.container = function (getcontainer) {
     if (getcontainer) {
       getcontainer(container);
@@ -88,7 +78,6 @@ cg.MessageBox = function (setTypeBox) {
       return container;
     }
   };
-
   this.appendTo = function (selector) {
     if (selector) {
       container.appendTo(selector);
@@ -97,7 +86,6 @@ cg.MessageBox = function (setTypeBox) {
     }
     return this;
   };
-
   this.show = function () {
     _container.css('opacity', '0').appendTo('body').animate({'opacity': 1}, 250);
     return this;
@@ -110,7 +98,6 @@ cg.MessageBox = function (setTypeBox) {
     });
     return this;
   };
-
   this.messageSee = function (newcontentMessage) {
     if (typeof newcontentMessage === 'string') {
       newcontentMessage = newcontentMessage.replace(/\n/g, '<br>');
@@ -131,6 +118,7 @@ cg.MessageBox = function (setTypeBox) {
 
 cg.DataTable = function (setSource) {
   var data = {};
+  var rowsData = 0;
   this.addColumn = function (nameColumn) {
     data[nameColumn] = null;
     return this;
@@ -143,9 +131,10 @@ cg.DataTable = function (setSource) {
         var size = newData[column].length;
         maxDimension = maxDimension < size ? size : maxDimension;
       }
+      rowsData = maxDimension;
       for (var variable in newData) {
         for (var i = newData[variable].length; i < maxDimension; i++) {
-          newData[variable].push('null');
+          newData[variable].push(null);
         }
       }
 
@@ -165,9 +154,28 @@ cg.DataTable = function (setSource) {
   this.newRows = function () {
     for (var variable in arguments) {
       var args = arguments[variable];
-      if (typeof args !== 'string' && typeof args !== 'number') {
-        console.log(args);
-      } else {
+      if (args instanceof Array) {
+        var newRow = args;
+        var i = 0,arSize = args.length;
+        if (arSize > 0) {
+          for (var column in data) {
+            if ( arSize > i) {
+              if (typeof args[i] === 'string') data[column].push(args[i]);
+              else data[column].push(null);
+            }
+            else data[column].push(null);
+            i++;
+          }
+          rowsData++;
+        }
+      }
+      else if(args instanceof Object){
+        for (var column in data) {
+          var newArg = typeof args[column] === 'string'? args[column] : null;
+          data[column].push(newArg);
+        }
+      }
+      else {
         console.log(cg.error.argument + '(' + args +')');
       }
     }
