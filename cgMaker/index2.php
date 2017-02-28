@@ -7,8 +7,7 @@
    <head>
      <meta charset="utf-8">
      <title></title>
-     <script type="text/javascript" src="js/jquery-1.12.4.js"></script>
-     <script type="text/javascript" src="js/cg.class.js"></script>
+     <?php include 'php/contents/scripsHeader.php'; ?>
      <script type="text/javascript">
        $(document).ready(function() {
          var data = {
@@ -24,11 +23,17 @@
           apellidoPaterno:'HAMILTON'}
         );
 
-        console.log(a.source());
-        console.log(a.isEmpty());
+        var test = cg.input()
+        .input('label')
+        .appendTo($('body'))
+        .placeholder('locos')
+        .val('gato loco')
+        .text('some text');
 
-        var a = {};
-        console.log(typeof a.w);
+        console.log(cg.function('lalal',['das','sda']));
+
+        test.input('select');
+        //$('body').append(test.input())
 
        });
      </script>

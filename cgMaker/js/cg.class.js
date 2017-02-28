@@ -1,5 +1,6 @@
 
 var cg = {};
+//utils
 cg.error = {
   selector: 'cg.error: Selector no exist',
   typeOf: 'cg.error: typeof incorrect',
@@ -20,6 +21,12 @@ cg.centerSelector = function (selector) {
     selector.css({'margin-top': '-' + (h / 2) + 'px', 'margin-left': '-' + (w / 2) + 'px'});
   });
 };
+cg.function = function (name,values) {
+  var parameters = '(';
+  if (values instanceof Array) for (var i=0; i < values.length; i++) parameters+=(i!=0?",":"")+"$"+values[i];
+  return name+parameters+')';
+}
+//class
 cg.MessageBox = function (setTypeBox) {
   var container = cg.$('div');
   var btnAceptar = cg.$('button');
@@ -115,7 +122,6 @@ cg.MessageBox = function (setTypeBox) {
   };
   this.constructor();
 };
-
 cg.DataTable = function (setSource) {
   var data = {};
   var rowsData = 0;
@@ -187,39 +193,45 @@ cg.DataTable = function (setSource) {
   this.constructor();
 };
 cg.Input = function (type) {
-  var isAppend = false;
+  var isInDom = false;
   var inputType = 'textBox';
   var listInputs =  {
     'textBox': cg.$('input').attr('type', 'text').show().addClass('cg-input'),
     'label': cg.$('option').show().addClass('cg-input'),
     'select': cg.$('select').show().addClass('cg-input')
   };
-
   this.input = function (setInput) {
-    if (typeof setInput !== undefined) {
-      if (typeof setInput === 'string' && listInputs[setInput] !== undefined && input !== setInput) {
-        if (isAppend) listInputs[inputType].after(listInputs[setInput]).detach();
+    if (typeof setInput !== 'undefined') {
+      if (typeof setInput === 'string' && listInputs[setInput] !== 'undefined' && inputType !== setInput) {
+        if (isInDom) listInputs[inputType].after(listInputs[setInput]).detach();
         inputType = setInput;
       }
       return this;
     }
     return listInputs[inputType];
   };
-  this.appendTo = function (newAppend) {
-    if (newAppend.length > 0) {
-      this.input().appendTo(newAppend);
-      isAppend = true;
+  this.appendTo = function (setAppend) {
+    if (setAppend.length > 0) {
+      this.input().appendTo(setAppend);
+      isInDom = true;
     }
     return this;
-  }
+  };
+  this.prependTo = function (setPrepend) {
+    if (setPrepend.length > 0) {
+      this.input().prependTo(setPrepend);
+      isInDom = true;
+    }
+    return this;
+  };
   this.placeholder = function (newPlaceholder) {
     if (typeof newPlaceholder === 'string') {
       listInputs.textBox.prop('placeholder', newPlaceholder);
     }
     return this;
-  }
+  };
   this.val = function (setVal) {
-    if (typeof setVal !== undefined) {
+    if (typeof setVal !== 'undefined') {
       if (typeof setVal !== 'object') {
         this.input().val(setVal);
       }
@@ -227,8 +239,25 @@ cg.Input = function (type) {
     }
     return this.input().val();
   };
+  this.text = function (setText) {
+    if (typeof setText !== 'undefined') {
+      if (typeof setText !== 'object') {
+        this.input().text(setText);
+      }
+      return this;
+    }
+    return this.input().text();
+  }
+  this.addClass = function (addClass) {
+    if (typeof addClass !== 'undefined') {
+      for (var variable in listInputs) {
+        listInputs[variable].addClass(addClass);
+      }
+    }
+    return this;
+  };
 }
-
+//delegates
 cg.dataTable = function (source) { return new cg.DataTable(source); };
 cg.messageBox = function (param) { return new cg.MessageBox(param); };
 cg.input = function (type) { return new cg.Input(type); };

@@ -22,8 +22,7 @@ $page_index_cf =
     <div class="_s_body">
       <div class="_ss_body">
         <div class="_ci_text">
-          <div class="">Ingrese el nombre del Proyecto</div>
-          <input type="text" placeholder="ingrese texto"/>
+          <div class="">Nombre del Proyecto</div>
         </div>
         <div class="cgButtom01 createProjet">Create projet</div>
       </div>
@@ -31,8 +30,11 @@ $page_index_cf =
   </div>
   <script type="text/javascript">
     $(document).ready(function() {
+      var txtNameProjet = cg.input().appendTo($('._ci_text')).placeholder('ingrese el nombre del proyecto');
       $('.createProjet').click(function(event) {
-        console.log(typeof []);
+        $.post("php/query.php",{function:cg.function('createProjet',[txtNameProjet.val()])}, function(data) {
+          console.log(data);
+        });
       });
     });
   </script>
@@ -52,7 +54,6 @@ EOT;
         <div class="floor">
           <div class="sub_menus">
             <?php
-            if (!empty($_GET)) {
               if (!empty($_GET['page_index'])) {
                 switch ($_GET['page_index']) {
                   case 'create_projet':
@@ -66,9 +67,6 @@ EOT;
               }else {
                 echo $page_index;
               }
-            }else {
-              echo $page_index;
-            }
             ?>
           </div>
         </div>
