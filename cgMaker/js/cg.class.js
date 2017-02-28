@@ -1,0 +1,234 @@
+
+var cg = {};
+cg.error = {
+  selector: 'cg.error: Selector no exist',
+  typeOf: 'cg.error: typeof incorrect',
+  argument: 'cg.error: arguments invalid'
+};
+cg.$ = function (selector) {
+  if (selector) return $('<' + selector + '></' + selector + '>');
+  return $('<div></div>');
+};
+cg.centerSelector = function (selector) {
+  var w = selector.outerWidth();
+  var h = selector.outerHeight();
+  selector.css({'margin-top': ('-' + (h / 2) + 'px'), 'margin-left': ('-' + (w / 2) + 'px')
+  });
+  selector.resize(function () {
+    w = selector.outerWidth();
+    h = selector.outerHeight();
+    selector.css({'margin-top': '-' + (h / 2) + 'px', 'margin-left': '-' + (w / 2) + 'px'});
+  });
+};
+cg.MessageBox = function (setTypeBox) {
+  var container = cg.$('div');
+  var btnAceptar = cg.$('button');
+  var btnCerrar = cg.$('button');
+  var pnlBotones = cg.$('div');
+  var _container = cg.$('div');
+  var contentMessage = cg.$('div');
+
+  this.constructor = function () {
+    var THIS = this;
+
+    btnAceptar
+    .css({height: '30px', width: '100px', float: 'right'})
+    .hide()
+    .click(function (event) { THIS.close(); })
+    .text('Aceptar');
+
+    btnCerrar
+    .css({height: '30px', width: '100px', float: 'right'})
+    .text('Cerrar')
+    .click(function (event) { THIS.close(); });
+
+    pnlBotones
+    .css({width: '100%', height: '30px', padding: '15px 0 0'})
+    .append(btnCerrar)
+    .append(btnAceptar);
+
+    container
+    .css({background: 'white', position: 'absolute', left: '50%', top: '50%'})
+    .css({width: '320px', 'box-sizing': 'border-box', padding: '15px'})
+    .append(contentMessage)
+    .append(pnlBotones);
+
+    cg.centerSelector(container);
+    _container
+    .css({background: 'rgba(0, 0, 0, 0.5)', position: 'fixed', top: 0, left: 0, width: '100%', height: '100%', 'z-index': 9999})
+    .append(container);
+
+    if (setTypeBox) {
+      this.typeBox(setTypeBox);
+    }
+  };
+  this.typeBox = function (editarTipo) {
+    if (editarTipo === 'COMMON') {
+      btnAceptar.hide();
+    } else if (editarTipo === 'CONFIRMATION') {
+      btnAceptar.show();
+    }
+    return this;
+  };
+  this.container = function (getcontainer) {
+    if (getcontainer) {
+      getcontainer(container);
+      return this;
+    } else {
+      return container;
+    }
+  };
+  this.appendTo = function (selector) {
+    if (selector) {
+      container.appendTo(selector);
+    } else {
+      console.log(cg.error.selector);
+    }
+    return this;
+  };
+  this.show = function () {
+    _container.css('opacity', '0').appendTo('body').animate({'opacity': 1}, 250);
+    return this;
+  };
+  this.close = function (setTime) {
+    var time = typeof setTime === 'number' ? setTime : 250;
+
+    _container.animate({'opacity': 0}, time, function () {
+      _container.detach();
+    });
+    return this;
+  };
+  this.messageSee = function (newcontentMessage) {
+    if (typeof newcontentMessage === 'string') {
+      newcontentMessage = newcontentMessage.replace(/\n/g, '<br>');
+    }
+    contentMessage.append(newcontentMessage);
+    return this;
+  };
+  this.accept = function (callback) {
+    btnAceptar.click(function (event) {
+      if (callback) {
+        callback();
+      }
+    });
+    return this;
+  };
+  this.constructor();
+};
+
+cg.DataTable = function (setSource) {
+  var data = {};
+  var rowsData = 0;
+  this.addColumn = function (nameColumn) {
+    data[nameColumn] = null;
+    return this;
+  };
+
+  this.source = function (newData) {
+    var maxDimension = 0;
+    if (typeof newData === 'object') {
+      for (var column in newData) {
+        var size = newData[column].length;
+        maxDimension = maxDimension < size ? size : maxDimension;
+      }
+      rowsData = maxDimension;
+      for (var variable in newData) {
+        for (var i = newData[variable].length; i < maxDimension; i++) {
+          newData[variable].push(null);
+        }
+      }
+
+      data = newData;
+      return this;
+    } else if (typeof newData !== 'undefined') { console.log(cg.error.typeOf); }
+    return data;
+  };
+  this.isEmpty = function (bool) {
+    var empty = $.isEmptyObject(data);
+
+    if (typeof bool === 'string') {
+      if (bool === 'bool') return !empty;
+    }
+    return empty ? 'YES' : 'NO_EMPTY';
+  };
+  this.newRows = function () {
+    for (var variable in arguments) {
+      var args = arguments[variable];
+      if (args instanceof Array) {
+        var newRow = args;
+        var i = 0,arSize = args.length;
+        if (arSize > 0) {
+          for (var column in data) {
+            if ( arSize > i) {
+              if (typeof args[i] === 'string') data[column].push(args[i]);
+              else data[column].push(null);
+            }
+            else data[column].push(null);
+            i++;
+          }
+          rowsData++;
+        }
+      }
+      else if(args instanceof Object){
+        for (var column in data) {
+          var newArg = typeof args[column] === 'string'? args[column] : null;
+          data[column].push(newArg);
+        }
+      }
+      else {
+        console.log(cg.error.argument + '(' + args +')');
+      }
+    }
+    return this;
+  };
+  this.constructor = function () {
+    this.source(setSource);
+  };
+  this.constructor();
+};
+cg.Input = function (type) {
+  var isAppend = false;
+  var inputType = 'textBox';
+  var listInputs =  {
+    'textBox': cg.$('input').attr('type', 'text').show().addClass('cg-input'),
+    'label': cg.$('option').show().addClass('cg-input'),
+    'select': cg.$('select').show().addClass('cg-input')
+  };
+
+  this.input = function (setInput) {
+    if (typeof setInput !== undefined) {
+      if (typeof setInput === 'string' && listInputs[setInput] !== undefined && input !== setInput) {
+        if (isAppend) listInputs[inputType].after(listInputs[setInput]).detach();
+        inputType = setInput;
+      }
+      return this;
+    }
+    return listInputs[inputType];
+  };
+  this.appendTo = function (newAppend) {
+    if (newAppend.length > 0) {
+      this.input().appendTo(newAppend);
+      isAppend = true;
+    }
+    return this;
+  }
+  this.placeholder = function (newPlaceholder) {
+    if (typeof newPlaceholder === 'string') {
+      listInputs.textBox.prop('placeholder', newPlaceholder);
+    }
+    return this;
+  }
+  this.val = function (setVal) {
+    if (typeof setVal !== undefined) {
+      if (typeof setVal !== 'object') {
+        this.input().val(setVal);
+      }
+      return this;
+    }
+    return this.input().val();
+  };
+}
+
+cg.dataTable = function (source) { return new cg.DataTable(source); };
+cg.messageBox = function (param) { return new cg.MessageBox(param); };
+cg.input = function (type) { return new cg.Input(type); };
