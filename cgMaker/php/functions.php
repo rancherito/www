@@ -27,9 +27,19 @@
 
 
   function createProjet($nameProjet){
-
-    var_dump(is_dir('..'));
-    echo '../';
+    $dir = '../../'.$nameProjet;
+    $id = $dir.'/projet.cginfo';
+    if (is_dir($dir)) {
+      echo '{"PROCESS":"FAIL"}';
+    }else {
+      if(!mkdir($dir, 0777, true)) {
+        die('{"PROCESS":"FAIL"}');
+      }else {
+        echo '{"PROCESS":"CORRECT"}';
+        $myfile = fopen($id, "w");
+        fclose($myfile);
+      }
+    }
   }
 
 

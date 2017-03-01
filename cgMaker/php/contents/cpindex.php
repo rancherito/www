@@ -33,7 +33,12 @@ $page_index_cf =
       var txtNameProjet = cg.input().appendTo($('._ci_text')).placeholder('ingrese el nombre del proyecto');
       $('.createProjet').click(function(event) {
         $.post("php/query.php",{function:cg.function('createProjet',[txtNameProjet.val()])}, function(data) {
-          console.log(data);
+          var DATA = JSON.parse(data);
+          if (DATA.PROCESS === 'CORRECT') {
+            window.open('?page_index=open_projet','_self');
+          }else {
+            var a = cg.messageBox('ONLY_CONFIRMATION').messageSee(DATA.PROCESS).show();
+          }
         });
       });
     });
@@ -45,7 +50,10 @@ EOT;
   <div class="panel_s">
     <div class="n_panel_p n_header">
       <div class="n_panel_s">
-        <div class="">Panel de control</div>
+        <div class="_m_title">Panel de control</div>
+        <div class="_m_home">
+          <a href="?page_index=open_projet"><i class="ion-radio-waves"></i></a>
+        </div>
       </div>
     </div>
     <div class="n_panel_p n_body">

@@ -70,10 +70,22 @@ cg.MessageBox = function (setTypeBox) {
     }
   };
   this.typeBox = function (editarTipo) {
-    if (editarTipo === 'COMMON') {
-      btnAceptar.hide();
-    } else if (editarTipo === 'CONFIRMATION') {
-      btnAceptar.show();
+    switch (editarTipo) {
+      case 'COMMON':
+        btnAceptar.hide();
+        btnCerrar.show();
+        break;
+      case 'CONFIRMATION':
+        btnAceptar.show();
+        btnCerrar.show();
+        break;
+      case 'ONLY_CONFIRMATION':
+        btnAceptar.show();
+        btnCerrar.hide();
+        break;
+      case 'NO_BUTTONS':
+        pnlBotones.hide();
+        break;
     }
     return this;
   };
