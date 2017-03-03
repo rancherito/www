@@ -1,3 +1,7 @@
+<?php
+
+
+ ?>
 <!DOCTYPE html>
 <html>
   <head>
@@ -6,6 +10,15 @@
     <title></title>
   </head>
   <body>
-    <?php include 'php/contents/cpindex.php'; ?>
+    <?php
+
+        if (!empty($_GET['page_projet'])) {
+          echo "wachalala";
+        }else {
+          include_once 'php/contents/cpindex.php';
+        }
+
+
+     ?>
   </body>
 </html>

@@ -1,6 +1,26 @@
 <?php
-$page_index =
-<<<EOT
+$projetsCG = [];
+
+$directorio = '../';
+foreach (scandir($directorio) as $key => $value) {
+  $dir =  $directorio.$value;
+  if (is_dir($dir) && $value != '.' && $value != '..') {
+    foreach (scandir($dir) as $key2 => $value2) {
+      $dir1 = $dir.'/'.$value2;
+      if (is_file($dir1)) {
+        if ($value2 === 'projet.cginfo') {
+          $projetsCG[$value] = $dir;
+        }
+      }
+    }
+  }
+}
+$lala = '';
+foreach ($projetsCG as $key => $value) {
+  $lala.='<div class="textIcon_link"><div class="">'.$key.'</div><a href="?page_projet='.$key.'"><i class="ion-android-exit"></i></a></div>';
+}
+
+$page_index = <<<EOT
   <div class="_s_1">
     <div class="item-1">
       <div class="icon"><i class="ion-android-folder-open"></i></div>
@@ -44,6 +64,16 @@ $page_index_cf =
     });
   </script>
 EOT;
+
+$page_index_op =
+<<<EOT
+  <div class="_s_3">
+  <div class="_s_title">Search Projets</div>
+    <div class="_s_body">
+      $lala
+    </div>
+  </div>
+EOT;
  ?>
 
 <div class="panel_p">
@@ -52,7 +82,7 @@ EOT;
       <div class="n_panel_s">
         <div class="_m_title">Panel de control</div>
         <div class="_m_home">
-          <a href="?page_index=open_projet"><i class="ion-radio-waves"></i></a>
+          <a href="index.php"><i class="ion-radio-waves"></i></a>
         </div>
       </div>
     </div>
@@ -65,9 +95,11 @@ EOT;
               if (!empty($_GET['page_index'])) {
                 switch ($_GET['page_index']) {
                   case 'create_projet':
-                      echo $page_index_cf;
+                    echo $page_index_cf;
                     break;
-
+                  case 'open_projet':
+                    echo $page_index_op;
+                    break;
                   default:
                     echo $page_index;
                     break;
