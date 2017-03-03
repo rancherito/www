@@ -12,8 +12,7 @@
     <?php
         $projet = $_GET['page_projet'];
         if (!empty($projet)) {
-          echo "wachalala";
-          var_dump(isProjet($projet));
+          include_once 'php/contents/projesManagement.php';
         }else {
           include_once 'php/contents/cpindex.php';
         }
