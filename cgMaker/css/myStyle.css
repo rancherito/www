@@ -8,7 +8,7 @@ div.n_header > div.n_panel_s {
 }
 
 div.n_header > div.n_panel_s > div._m_title {
-  padding: 0 100px;
+  padding: 0 50px;
   font-size: 40px;
   height: 70px;
   text-align: center;
@@ -40,7 +40,7 @@ div.n_header > div.n_panel_s > div._m_home > a:hover {
 
 div.n_body {
   height: 90%;
-  background: #32d9f2;
+  background: #f6f6f6;
 }
 
 div.back {
@@ -265,4 +265,29 @@ div.floor > div.sub_menus > div._s_3 > div._s_body > div.textIcon_link > a i {
   box-sizing: border-box;
   border-left: 1px #ff4b8e solid;
   color: white;
+}
+
+div.n_body div._n_open_projet {
+  background: #f6f6f6;
+  box-sizing: border-box;
+  border-bottom: 1px gray solid;
+  height: 40px;
+  padding: 0 20px;
+}
+
+div.n_body div._n_open_projet > a {
+  background: #e91e63;
+  color: white;
+  border-radius: 3px;
+  line-height: 30px;
+  display: block;
+  height: 30px;
+  padding: 0 10px;
+  box-sizing: border-box;
+  float: right;
+  text-decoration: none;
+}
+
+div.projet-management div.cg-multipanel {
+  background: red;
 }
