@@ -1,6 +1,5 @@
 <?php
-
-
+  include_once 'php/functions.php';
  ?>
 <!DOCTYPE html>
 <html>
@@ -11,13 +10,13 @@
   </head>
   <body>
     <?php
-
-        if (!empty($_GET['page_projet'])) {
+        $projet = $_GET['page_projet'];
+        if (!empty($projet)) {
           echo "wachalala";
+          var_dump(isProjet($projet));
         }else {
           include_once 'php/contents/cpindex.php';
         }
-
 
      ?>
   </body>

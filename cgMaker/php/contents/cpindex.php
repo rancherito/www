@@ -1,20 +1,5 @@
 <?php
-$projetsCG = [];
-
-$directorio = '../';
-foreach (scandir($directorio) as $key => $value) {
-  $dir =  $directorio.$value;
-  if (is_dir($dir) && $value != '.' && $value != '..') {
-    foreach (scandir($dir) as $key2 => $value2) {
-      $dir1 = $dir.'/'.$value2;
-      if (is_file($dir1)) {
-        if ($value2 === 'projet.cginfo') {
-          $projetsCG[$value] = $dir;
-        }
-      }
-    }
-  }
-}
+$projetsCG = list_projets();
 $lala = '';
 foreach ($projetsCG as $key => $value) {
   $lala.='<div class="textIcon_link"><div class="">'.$key.'</div><a href="?page_projet='.$key.'"><i class="ion-android-exit"></i></a></div>';
@@ -52,7 +37,7 @@ $page_index_cf =
     $(document).ready(function() {
       var txtNameProjet = cg.input().appendTo($('._ci_text')).placeholder('ingrese el nombre del proyecto');
       $('.createProjet').click(function(event) {
-        $.post("php/query.php",{function:cg.function('createProjet',[txtNameProjet.val()])}, function(data) {
+        $.post("query.php",{function:cg.function('createProjet',[txtNameProjet.val()])}, function(data) {
           var DATA = JSON.parse(data);
           if (DATA.PROCESS === 'CORRECT') {
             window.open('?page_index=open_projet','_self');
