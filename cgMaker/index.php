@@ -6,7 +6,7 @@
   <head>
     <meta charset="utf-8">
     <?php include 'php/contents/scripsHeader.php'; ?>
-    <title></title>
+    <title>Management cg projets</title>
   </head>
   <body>
     <?php

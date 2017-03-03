@@ -43,18 +43,18 @@ div.n_body {
   background: #32d9f2;
 }
 
-div.n_body > div.n_panel_s > div.back {
+div.back {
   background: #f6f6f6;
   height: 70%;
 }
 
-div.n_body > div.n_panel_s > div.floor {
+div.floor {
   background: #ff8f8f;
   height: 30%;
   position: relative;
 }
 
-div.n_body > div.n_panel_s > div.floor > div.sub_menus {
+div.floor > div.sub_menus {
   background: white;
   height: 400px;
   width: 600px;
@@ -64,23 +64,23 @@ div.n_body > div.n_panel_s > div.floor > div.sub_menus {
   margin-left: -300px;
 }
 
-div.n_body > div.n_panel_s > div.floor > div.sub_menus > div._s_1 {
+div.floor > div.sub_menus > div._s_1 {
   width: 100%;
   height: 100%;
 }
 
-div.n_body > div.n_panel_s > div.floor > div.sub_menus > div._s_1 > div {
+div.floor > div.sub_menus > div._s_1 > div {
   float: left;
   width: 50%;
   height: 100%;
   position: relative;
 }
 
-div.n_body > div.n_panel_s > div.floor > div.sub_menus > div._s_1 > div.item-1 {
+div.floor > div.sub_menus > div._s_1 > div.item-1 {
   background: white;
 }
 
-div.n_body > div.n_panel_s > div.floor > div.sub_menus > div._s_1 > div.item-1 > div.icon {
+div.floor > div.sub_menus > div._s_1 > div.item-1 > div.icon {
   height: 200px;
   width: 100%;
   box-sizing: border-box;
@@ -88,12 +88,12 @@ div.n_body > div.n_panel_s > div.floor > div.sub_menus > div._s_1 > div.item-1 >
   line-height: 200px;
 }
 
-div.n_body > div.n_panel_s > div.floor > div.sub_menus > div._s_1 > div.item-1 > div.icon > i {
+div.floor > div.sub_menus > div._s_1 > div.item-1 > div.icon > i {
   font-size: 130px;
   color: #d0d0d0;
 }
 
-div.n_body > div.n_panel_s > div.floor > div.sub_menus > div._s_1 > div.item-1 > div.title {
+div.floor > div.sub_menus > div._s_1 > div.item-1 > div.title {
   height: 50px;
   width: 80%;
   margin-left: 10%;
@@ -104,17 +104,17 @@ div.n_body > div.n_panel_s > div.floor > div.sub_menus > div._s_1 > div.item-1 >
   border-bottom: 1px gray solid;
 }
 
-div.n_body > div.n_panel_s > div.floor > div.sub_menus > div._s_1 > div.item-1 > a.link {
+div.floor > div.sub_menus > div._s_1 > div.item-1 > a.link {
   width: 80%;
   margin-left: 10%;
   margin-top: 50px;
 }
 
-div.n_body > div.n_panel_s > div.floor > div.sub_menus > div._s_1 > div.item-2 {
+div.floor > div.sub_menus > div._s_1 > div.item-2 {
   background: #dfdfdf;
 }
 
-div.n_body > div.n_panel_s > div.floor > div.sub_menus > div._s_1 > div.item-2 > div.icon {
+div.floor > div.sub_menus > div._s_1 > div.item-2 > div.icon {
   height: 200px;
   width: 100%;
   box-sizing: border-box;
@@ -122,12 +122,12 @@ div.n_body > div.n_panel_s > div.floor > div.sub_menus > div._s_1 > div.item-2 >
   line-height: 200px;
 }
 
-div.n_body > div.n_panel_s > div.floor > div.sub_menus > div._s_1 > div.item-2 > div.icon > i {
+div.floor > div.sub_menus > div._s_1 > div.item-2 > div.icon > i {
   font-size: 130px;
   color: white;
 }
 
-div.n_body > div.n_panel_s > div.floor > div.sub_menus > div._s_1 > div.item-2 > div.title {
+div.floor > div.sub_menus > div._s_1 > div.item-2 > div.title {
   height: 50px;
   width: 80%;
   margin-left: 10%;
@@ -138,23 +138,23 @@ div.n_body > div.n_panel_s > div.floor > div.sub_menus > div._s_1 > div.item-2 >
   border-bottom: 1px gray solid;
 }
 
-div.n_body > div.n_panel_s > div.floor > div.sub_menus > div._s_1 > div.item-2 > a.link {
+div.floor > div.sub_menus > div._s_1 > div.item-2 > a.link {
   width: 80%;
   margin-left: 10%;
   margin-top: 50px;
   border-color: white;
 }
 
-div.n_body > div.n_panel_s > div.floor > div.sub_menus > div._s_1 > div.item-2 > a.link:hover {
+div.floor > div.sub_menus > div._s_1 > div.item-2 > a.link:hover {
   border-color: #ff8f8f;
 }
 
-div.n_body > div.n_panel_s > div.floor > div.sub_menus > div._s_2 {
+div.floor > div.sub_menus > div._s_2 {
   width: 100%;
   height: 100%;
 }
 
-div.n_body > div.n_panel_s > div.floor > div.sub_menus > div._s_2 > div._s_title {
+div.floor > div.sub_menus > div._s_2 > div._s_title {
   height: 50px;
   line-height: 50px;
   padding: 0 20px;
@@ -164,13 +164,13 @@ div.n_body > div.n_panel_s > div.floor > div.sub_menus > div._s_2 > div._s_title
   color: #8bc34a;
 }
 
-div.n_body > div.n_panel_s > div.floor > div.sub_menus > div._s_2 > div._s_body {
+div.floor > div.sub_menus > div._s_2 > div._s_body {
   height: 350px;
   box-sizing: border-box;
   padding: 0 20px;
 }
 
-div.n_body > div.n_panel_s > div.floor > div.sub_menus > div._s_2 > div._s_body > div._ss_body {
+div.floor > div.sub_menus > div._s_2 > div._s_body > div._ss_body {
   width: 100%;
   height: 100%;
   box-sizing: border-box;
@@ -178,13 +178,13 @@ div.n_body > div.n_panel_s > div.floor > div.sub_menus > div._s_2 > div._s_body 
   padding: 80px 0 0;
 }
 
-div.n_body > div.n_panel_s > div.floor > div.sub_menus > div._s_2 > div._s_body > div._ss_body > div._ci_text > div {
+div.floor > div.sub_menus > div._s_2 > div._s_body > div._ss_body > div._ci_text > div {
   height: 30px;
   font-size: 20px;
   color: #e91e63;
 }
 
-div.n_body > div.n_panel_s > div.floor > div.sub_menus > div._s_2 > div._s_body > div._ss_body > div._ci_text > input {
+div.floor > div.sub_menus > div._s_2 > div._s_body > div._ss_body > div._ci_text > input {
   border-bottom: 1px #cddc39 solid;
   font-size: 18px;
   width: 100%;
@@ -192,14 +192,14 @@ div.n_body > div.n_panel_s > div.floor > div.sub_menus > div._s_2 > div._s_body 
   box-sizing: border-box;
 }
 
-div.n_body > div.n_panel_s > div.floor > div.sub_menus > div._s_2 > div._s_body > div._ss_body > div.createProjet {
+div.floor > div.sub_menus > div._s_2 > div._s_body > div._ss_body > div.createProjet {
   width: 50%;
   position: absolute;
   bottom: 20px;
   right: 0;
 }
 
-div.n_body > div.n_panel_s > div.floor > div.sub_menus > div._s_3 {
+div.floor > div.sub_menus > div._s_3 {
   width: 100%;
   height: 100%;
   padding: 20px;
@@ -207,7 +207,7 @@ div.n_body > div.n_panel_s > div.floor > div.sub_menus > div._s_3 {
   position: relative;
 }
 
-div.n_body > div.n_panel_s > div.floor > div.sub_menus > div._s_3 > div._s_title {
+div.floor > div.sub_menus > div._s_3 > div._s_title {
   width: 100%;
   text-align: right;
   overflow: hidden;
@@ -216,13 +216,13 @@ div.n_body > div.n_panel_s > div.floor > div.sub_menus > div._s_3 > div._s_title
   color: #8bc34a;
 }
 
-div.n_body > div.n_panel_s > div.floor > div.sub_menus > div._s_3 > div._s_body {
+div.floor > div.sub_menus > div._s_3 > div._s_body {
   height: 300px;
   overflow: auto;
   width: 100%;
 }
 
-div.n_body > div.n_panel_s > div.floor > div.sub_menus > div._s_3 > div._s_body > div.textIcon_link {
+div.floor > div.sub_menus > div._s_3 > div._s_body > div.textIcon_link {
   background: #E91E63;
   position: relative;
   overflow: hidden;
@@ -233,11 +233,11 @@ div.n_body > div.n_panel_s > div.floor > div.sub_menus > div._s_3 > div._s_body 
   color: white;
 }
 
-div.n_body > div.n_panel_s > div.floor > div.sub_menus > div._s_3 > div._s_body > div.textIcon_link:hover {
+div.floor > div.sub_menus > div._s_3 > div._s_body > div.textIcon_link:hover {
   background: #ff4e8a;
 }
 
-div.n_body > div.n_panel_s > div.floor > div.sub_menus > div._s_3 > div._s_body > div.textIcon_link > div {
+div.floor > div.sub_menus > div._s_3 > div._s_body > div.textIcon_link > div {
   float: left;
   width: 100%;
   padding-right: 40px;
@@ -245,7 +245,7 @@ div.n_body > div.n_panel_s > div.floor > div.sub_menus > div._s_3 > div._s_body 
   padding: 0 10px;
 }
 
-div.n_body > div.n_panel_s > div.floor > div.sub_menus > div._s_3 > div._s_body > div.textIcon_link > a {
+div.floor > div.sub_menus > div._s_3 > div._s_body > div.textIcon_link > a {
   display: block;
   position: absolute;
   width: 40px;
@@ -256,7 +256,7 @@ div.n_body > div.n_panel_s > div.floor > div.sub_menus > div._s_3 > div._s_body 
   font-size: 24px;
 }
 
-div.n_body > div.n_panel_s > div.floor > div.sub_menus > div._s_3 > div._s_body > div.textIcon_link > a i {
+div.floor > div.sub_menus > div._s_3 > div._s_body > div.textIcon_link > a i {
   width: 100%;
   display: block;
   height: 30px;

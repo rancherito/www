@@ -28,6 +28,33 @@
   function createProjet($nameProjet){
     $dir = '../'.$nameProjet;
     $id = $dir.'/projet.cginfo';
+    $index = $dir.'/index.php';
+
+$bodyIndex = <<<EOT
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>my porjet</title>
+  </head>
+  <body>
+  <div class="panel_p">
+    <div class="panel_s">
+      <div class="n_panel_p n_header">
+        <div class="n_panel_s"></div>
+      </div>
+      <div class="n_panel_p n_body">
+        <div class="n_panel_s">HOLA MUNDO</div>
+      </div>
+      <div class="n_panel_p n_footer">
+        <div class="n_panel_s"></div>
+      </div>
+    </div>
+  </div>
+  </body>
+</html>
+EOT;
+
     if (is_dir($dir)) {
       echo '{"PROCESS":"FAIL"}';
     }else {
@@ -35,7 +62,9 @@
         die('{"PROCESS":"FAIL"}');
       }else {
         echo '{"PROCESS":"CORRECT"}';
-        $myfile = fopen($id, "w");
+        $myfile = fopen($id, "w");fclose($myfile);
+        $myfile = fopen($index, "w");
+        fwrite($myfile, $bodyIndex);
         fclose($myfile);
       }
     }

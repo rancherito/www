@@ -35,202 +35,202 @@ div.n_header {
 div.n_body {
 	height: 90%;
 	background: #32d9f2;
-	> div.n_panel_s > div {
-		&.back {
-			background: #f6f6f6;
-			height: 70%;
-		}
-		&.floor {
-			background: #ff8f8f;
-			height: 30%;
-			position: relative;
-			> div.sub_menus {
-				background: white;
-				height: 400px;
-				width: 600px;
-				position: absolute;
-				top: -350px;
-				left: 50%;
-				margin-left: -300px;
-				> div._s_1{
-					width: 100%;
+}
+div{
+	&.back {
+		background: #f6f6f6;
+		height: 70%;
+	}
+	&.floor {
+		background: #ff8f8f;
+		height: 30%;
+		position: relative;
+		> div.sub_menus {
+			background: white;
+			height: 400px;
+			width: 600px;
+			position: absolute;
+			top: -350px;
+			left: 50%;
+			margin-left: -300px;
+			> div._s_1{
+				width: 100%;
+				height: 100%;
+				> div {
+					float: left;
+					width: 50%;
 					height: 100%;
-					> div {
-	          float: left;
-	          width: 50%;
-	          height: 100%;
-	          position: relative;
-						&.item-1 {
-							background: white;
-	            > div.icon{
-	              height: 200px;
-	              width: 100%;
-	              box-sizing: border-box;
-	              text-align: center;
-	              line-height: 200px;
-	              > i{
-	                font-size: 130px;
-	                color: #d0d0d0;
-	              }
-	            }
-	            > div.title{
-	              height: 50px;
-	              width: 80%;
-	              margin-left: 10%;
-	              line-height: 50px;
-	              text-align: center;
-	              font-size: 24px;
-	              box-sizing: border-box;
-	              border-bottom: 1px gray solid;
-	            }
-							> a.link{
-								width: 80%;
-								margin-left: 10%;
-								margin-top: 50px;
-							}
-						}
-						&.item-2 {
-							background: #dfdfdf;
-							> div.icon{
-	              height: 200px;
-	              width: 100%;
-	              box-sizing: border-box;
-	              text-align: center;
-	              line-height: 200px;
-	              > i{
-	                font-size: 130px;
-	                color: white;
-	              }
-	            }
-	            > div.title{
-	              height: 50px;
-	              width: 80%;
-	              margin-left: 10%;
-	              line-height: 50px;
-	              text-align: center;
-	              font-size: 24px;
-	              box-sizing: border-box;
-	              border-bottom: 1px gray solid;
-	            }
-							> a.link{
-								width: 80%;
-								margin-left: 10%;
-								margin-top: 50px;
-								border-color: white;
-								&:hover{
-									border-color: #ff8f8f;
-								}
-							}
-						}
-					}
-				}
-				> div._s_2{
-					width: 100%;
-					height: 100%;
-					> div._s_title{
-						height: 50px;
-						line-height: 50px;
-						padding: 0 20px;
-						box-sizing: border-box;
-						text-align: right;
-						font-size: 24px;
-						color: #8bc34a;
-					}
-					> div._s_body{
-						height: 350px;
-						box-sizing: border-box;
-						padding: 0 20px;
-						> div._ss_body{
-							width: 100%;
-							height: 100%;
-							box-sizing: border-box;
-							position: relative;
-							padding: 80px 0 0;
-							> div._ci_text{
-								> div{
-									height: 30px;
-									font-size: 20px;
-									color: #e91e63;
-								}
-								> input{
-									border-bottom: 1px #cddc39 solid;
-									font-size: 18px;
-									width: 100%;
-									padding: 5px;
-									box-sizing: border-box;
-								}
-							}
-							> div.createProjet{
-								width: 50%;
-								position: absolute;
-								bottom: 20px;
-								right: 0;
-							}
-						}
-					}
-				}
-				> div._s_3{
-					width: 100%;
-					height: 100%;
-					padding: 20px;
-					box-sizing: border-box;
 					position: relative;
-					> div._s_title{
-						width: 100%;
-						text-align: right;
-						overflow: hidden;
-						height: 55px;
-						font-size: 24px;
-						color: #8bc34a;
+					&.item-1 {
+						background: white;
+						> div.icon{
+							height: 200px;
+							width: 100%;
+							box-sizing: border-box;
+							text-align: center;
+							line-height: 200px;
+							> i{
+								font-size: 130px;
+								color: #d0d0d0;
+							}
+						}
+						> div.title{
+							height: 50px;
+							width: 80%;
+							margin-left: 10%;
+							line-height: 50px;
+							text-align: center;
+							font-size: 24px;
+							box-sizing: border-box;
+							border-bottom: 1px gray solid;
+						}
+						> a.link{
+							width: 80%;
+							margin-left: 10%;
+							margin-top: 50px;
+						}
 					}
-					> div._s_body{
-						height: 300px;
-						overflow: auto;
-						width: 100%;
-						> div.textIcon_link{
-							background: #E91E63;
-							position: relative;
-							overflow: hidden;
-							height: 40px;
-							margin-bottom: 3px;
-							line-height: 40px;
-							border-radius: 3px;
-							color: white;
+					&.item-2 {
+						background: #dfdfdf;
+						> div.icon{
+							height: 200px;
+							width: 100%;
+							box-sizing: border-box;
+							text-align: center;
+							line-height: 200px;
+							> i{
+								font-size: 130px;
+								color: white;
+							}
+						}
+						> div.title{
+							height: 50px;
+							width: 80%;
+							margin-left: 10%;
+							line-height: 50px;
+							text-align: center;
+							font-size: 24px;
+							box-sizing: border-box;
+							border-bottom: 1px gray solid;
+						}
+						> a.link{
+							width: 80%;
+							margin-left: 10%;
+							margin-top: 50px;
+							border-color: white;
 							&:hover{
-								background: #ff4e8a;
-							}
-							> div{
-								float: left;
-								width: 100%;
-								padding-right: 40px;
-								box-sizing: border-box;
-								padding: 0 10px;
-							}
-							> a{
-								display: block;
-								position: absolute;
-								width: 40px;
-								height: 40px;
-								right: 0;
-								top: 0;
-								text-align: center;
-								font-size: 24px;
-								i{
-									width: 100%;
-									display: block;
-									height: 30px;
-									margin-top: 5px;
-									line-height: 30px;
-									box-sizing: border-box;
-									border-left: 1px #ff4b8e solid;
-									color: white;
-								}
+								border-color: #ff8f8f;
 							}
 						}
 					}
 				}
 			}
-
+			> div._s_2{
+				width: 100%;
+				height: 100%;
+				> div._s_title{
+					height: 50px;
+					line-height: 50px;
+					padding: 0 20px;
+					box-sizing: border-box;
+					text-align: right;
+					font-size: 24px;
+					color: #8bc34a;
+				}
+				> div._s_body{
+					height: 350px;
+					box-sizing: border-box;
+					padding: 0 20px;
+					> div._ss_body{
+						width: 100%;
+						height: 100%;
+						box-sizing: border-box;
+						position: relative;
+						padding: 80px 0 0;
+						> div._ci_text{
+							> div{
+								height: 30px;
+								font-size: 20px;
+								color: #e91e63;
+							}
+							> input{
+								border-bottom: 1px #cddc39 solid;
+								font-size: 18px;
+								width: 100%;
+								padding: 5px;
+								box-sizing: border-box;
+							}
+						}
+						> div.createProjet{
+							width: 50%;
+							position: absolute;
+							bottom: 20px;
+							right: 0;
+						}
+					}
+				}
+			}
+			> div._s_3{
+				width: 100%;
+				height: 100%;
+				padding: 20px;
+				box-sizing: border-box;
+				position: relative;
+				> div._s_title{
+					width: 100%;
+					text-align: right;
+					overflow: hidden;
+					height: 55px;
+					font-size: 24px;
+					color: #8bc34a;
+				}
+				> div._s_body{
+					height: 300px;
+					overflow: auto;
+					width: 100%;
+					> div.textIcon_link{
+						background: #E91E63;
+						position: relative;
+						overflow: hidden;
+						height: 40px;
+						margin-bottom: 3px;
+						line-height: 40px;
+						border-radius: 3px;
+						color: white;
+						&:hover{
+							background: #ff4e8a;
+						}
+						> div{
+							float: left;
+							width: 100%;
+							padding-right: 40px;
+							box-sizing: border-box;
+							padding: 0 10px;
+						}
+						> a{
+							display: block;
+							position: absolute;
+							width: 40px;
+							height: 40px;
+							right: 0;
+							top: 0;
+							text-align: center;
+							font-size: 24px;
+							i{
+								width: 100%;
+								display: block;
+								height: 30px;
+								margin-top: 5px;
+								line-height: 30px;
+								box-sizing: border-box;
+								border-left: 1px #ff4b8e solid;
+								color: white;
+							}
+						}
+					}
+				}
+			}
 		}
+
 	}
 }
