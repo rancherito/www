@@ -332,3 +332,7 @@ div.projet-management div._s_n_body div.cg-multipanel > div.cg-multipanel-view >
   width: 100%;
   height: 100%;
 }
+
+.CodeMirror {
+  height: 100%;
+}
