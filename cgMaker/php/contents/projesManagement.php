@@ -17,11 +17,17 @@
             <div class="_s_p_3">CUALQUIER OTRA COSA</div>
             <script type="text/javascript">
             $(document).ready(function() {
+
               var panels = cg.multiPanelView()
               .addPanel({text:'Código fuente',panel:$('div._s_p_1')})
               .addPanel({text:'Arquitectura',panel:$('div._s_p_2')})
               .addPanel({text:'panel3',panel:$('div._s_p_3')})
               .prependTo($('._s_n_body'));
+
+              $('div._s_n_body').heightCalc(100,-40);
+              panels.container().find('> div').eq(0).width(200);
+              panels.container().find('> div').eq(1).widthCalc(100,-200);
+
             });
             </script>
         </div>

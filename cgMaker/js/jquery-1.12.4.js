@@ -11162,3 +11162,24 @@ return jQuery;
 		}
 	}
 }( jQuery ));
+
+jQuery.fn.extend({
+	widthCalc: function(percent,added) {
+		if (typeof percent === 'number' && typeof added === 'number') {
+			var me = this;
+			me.parent().resize(function(event) {
+				me.outerWidth($(this).outerWidth()*(percent/100) + added);
+			});
+		}
+		return this;
+	},
+	heightCalc: function(percent,added) {
+		if (typeof percent === 'number' && typeof added === 'number') {
+			var me = this;
+			me.parent().resize(function(event) {
+				me.outerHeight($(this).outerHeight()*(percent/100) + added);
+			});
+		}
+		return this;
+	}
+});
