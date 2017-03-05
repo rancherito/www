@@ -19,14 +19,12 @@
           <a class="saveChanges">Save changes</a>
         </div>
         <div class="_s_n_body">
-            <div class="_s_p_1"></div>
-            <div class="_s_p_2">PANEL ARQUITECTURA</div>
-            <div class="_s_p_3">CUALQUIER OTRA COSA</div>
             <script type="text/javascript">
-            $(document).ready(function() {
+              $(document).ready(function() {
+              var pnlEditor = cg.$('div');
               var projet = '<?php echo $projet ?>';
               var jaja = '';
-              var editor = CodeMirror($('div._s_p_1')[0],{
+              var editor = CodeMirror(pnlEditor[0],{
                 lineNumbers: true,
                 mode: "htmlmixed",
                 keyMap: "sublime",
@@ -34,7 +32,7 @@
                 matchBrackets: true,
                 showCursorWhenSelecting: true,
                 theme: "base16-light",
-                tabSize: 2
+                tabSize: 5
               });
               editor.setSize("100%", "100%");
 
@@ -43,9 +41,9 @@
               });
 
               var panels = cg.multiPanelView()
-              .addPanel({text:'Código fuente',panel:$('div._s_p_1')})
-              .addPanel({text:'Arquitectura',panel:$('div._s_p_2')})
-              .addPanel({text:'panel3',panel:$('div._s_p_3')})
+              .addPanel({text: 'Código fuente',panel: pnlEditor})
+              .addPanel({text: 'Arquitectura',panel: cg.$('div').text('panel Arquitectura')})
+              .addPanel({text: 'panel3',panel: cg.$('div').text('ALGO')})
               .prependTo($('._s_n_body'));
 
               $('div._s_n_body').heightCalc(100,-40);
@@ -54,8 +52,9 @@
               $('.saveChanges').click(function(event) {
                 var proj = projet;
                 var func = {function: cg.function('saveProjets',[proj,editor.getValue()])};
-                console.log(editor.getValue());
-                $.post('query.php', func);
+                $.post('query.php', func,function () {
+                  location.reload();
+                });
               });
 
             });

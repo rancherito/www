@@ -33,25 +33,25 @@
 $bodyIndex = <<<EOT
 <!DOCTYPE html>
 <html>
-  <head>
-    <meta charset="utf-8">
-    <title>my porjet</title>
-  </head>
-  <body>
-  <div class="panel_p">
-    <div class="panel_s">
-      <div class="n_panel_p n_header">
-        <div class="n_panel_s"></div>
-      </div>
-      <div class="n_panel_p n_body">
-        <div class="n_panel_s">HOLA MUNDO</div>
-      </div>
-      <div class="n_panel_p n_footer">
-        <div class="n_panel_s"></div>
-      </div>
-    </div>
-  </div>
-  </body>
+	<head>
+		<meta charset="utf-8">
+		<title>my projet</title>
+    </head>
+	<body>
+		<div class="panel_p">
+			<div class="panel_s">
+				<div class="n_panel_p n_header">
+					<div class="n_panel_s"></div>
+				</div>
+				<div class="n_panel_p n_body">
+					<div class="n_panel_s">hola mundo</div>
+				</div>
+				<div class="n_panel_p n_footer">
+					<div class="n_panel_s"></div>
+				</div>
+			</div>
+		</div>
+  	</body>
 </html>
 EOT;
 
@@ -99,7 +99,7 @@ EOT;
   function saveProjets($projet,$toWrite){
     $dir = '../'.$projet.'/index.php';
     $myfile = fopen($dir, "w");
-    fwrite($myfile, $toWrite);
+    fwrite($myfile, htmlspecialchars_decode($toWrite));
     fclose($myfile);
   }
 
