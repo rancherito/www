@@ -1,6 +1,6 @@
 div.n_header {
   height: 10%;
-  background: #f6f6f6;
+  background: #eaeaea;
 }
 
 div.n_header > div.n_panel_s {
@@ -40,11 +40,11 @@ div.n_header > div.n_panel_s > div._m_home > a:hover {
 
 div.n_body {
   height: 90%;
-  background: #f6f6f6;
+  background: #eaeaea;
 }
 
 div.back {
-  background: #f6f6f6;
+  background: #eaeaea;
   height: 70%;
 }
 
@@ -268,7 +268,7 @@ div.floor > div.sub_menus > div._s_3 > div._s_body > div.textIcon_link > a i {
 }
 
 div.n_body div._n_open_projet {
-  background: #f6f6f6;
+  background: #eaeaea;
   box-sizing: border-box;
   height: 40px;
   padding: 0 20px;
@@ -285,6 +285,12 @@ div.n_body div._n_open_projet > a {
   box-sizing: border-box;
   float: right;
   text-decoration: none;
+  margin-left: 20px;
+  cursor: pointer;
+}
+
+div.n_body div._n_open_projet > a:hover {
+  background: #f54a84;
 }
 
 div.projet-management div._s_n_body {
@@ -302,7 +308,7 @@ div.projet-management div._s_n_body div.cg-multipanel > div {
 }
 
 div.projet-management div._s_n_body div.cg-multipanel > div.cg-multipanel-access {
-  background: #f6f6f6;
+  background: #eaeaea;
 }
 
 div.projet-management div._s_n_body div.cg-multipanel > div.cg-multipanel-access button {

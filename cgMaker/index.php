@@ -12,7 +12,11 @@
     <?php
         $projet = $_GET['page_projet'];
         if (!empty($projet)) {
-          include_once 'php/contents/projesManagement.php';
+          if (isProjet($projet)) {
+            include_once 'php/contents/projesManagement.php';
+          }else {
+            include_once 'php/contents/cpindex.php';
+          }
         }else {
           include_once 'php/contents/cpindex.php';
         }

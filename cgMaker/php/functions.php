@@ -75,7 +75,7 @@ EOT;
 
     $directorio = '../';
     foreach (scandir($directorio) as $key => $value) {
-      $dir =  $directorio.$value;
+      $dir =  '../'.$value;
       if (is_dir($dir) && $value != '.' && $value != '..') {
         foreach (scandir($dir) as $key2 => $value2) {
           $dir1 = $dir.'/'.$value2;
@@ -94,6 +94,13 @@ EOT;
       return is_writable('../'.$projet.'/projet.cginfo');
     }
     return false;
+  }
+
+  function saveProjets($projet,$toWrite){
+    $dir = '../'.$projet.'/index.php';
+    $myfile = fopen($dir, "w");
+    fwrite($myfile, $toWrite);
+    fclose($myfile);
   }
 
 

@@ -1,6 +1,8 @@
+
+$cgray: #eaeaea;
 div.n_header {
 	height: 10%;
-	background: #f6f6f6;
+	background: $cgray;
 	> div.n_panel_s {
 		overflow: hidden;
 		> div._m_title{
@@ -34,11 +36,11 @@ div.n_header {
 }
 div.n_body {
 	height: 90%;
-	background: #f6f6f6;
+	background: $cgray;
 }
 div{
 	&.back {
-		background: #f6f6f6;
+		background: $cgray;
 		height: 70%;
 	}
 	&.floor {
@@ -236,7 +238,7 @@ div{
 }
 div.n_body{
 	div._n_open_projet{
-		background: #f6f6f6;
+		background: $cgray;
 		box-sizing: border-box;
 		height: 40px;
 		padding: 0 20px;
@@ -251,6 +253,11 @@ div.n_body{
 			box-sizing: border-box;
 			float: right;
 			text-decoration: none;
+			margin-left: 20px;
+			cursor: pointer;
+			&:hover{
+				background: #f54a84;
+			}
 		}
 	}
 }
@@ -265,7 +272,7 @@ div.projet-management{
 				height: 100%;
 			}
 			> div.cg-multipanel-access{
-				background: #f6f6f6;
+				background: $cgray;
 				button{
 					outline: 0;
 					width: 100%;
