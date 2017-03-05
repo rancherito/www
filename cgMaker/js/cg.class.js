@@ -276,6 +276,13 @@ cg.MultiPanelView = function () {
   var list_access = [];
   var list_views = [];
 
+  this.access = function () {
+    return list_access;
+  }
+  this.views = function () {
+    return list_views;
+  }
+
   function addEventClick(access,panel) {
     access.click(function(event) {
       for (var views in list_views) {
