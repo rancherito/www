@@ -63,7 +63,10 @@
 
     panels.access()[1].click(function (event) {
       $.post("../"+projet+'/index.php',{}, function(data) {
-        panels.views()[1].empty().append(data);
+        var DATA = $(data);
+        panels.views()[1].empty().append(DATA);
+        panels.views()[1].find('title').remove();
+        panels.views()[1].find('meta').remove();
       });
     });
 });

@@ -340,5 +340,29 @@ div.projet-management div._s_n_body div.cg-multipanel > div.cg-multipanel-view >
 }
 
 div.projet-management div._s_n_body div.cg-multipanel > div.cg-multipanel-view div.arquitecture {
-  background: red;
+  overflow: auto;
+  /**{
+						all: initial;
+						text-indent:-999px;
+						font: 0/0 a;
+					  text-shadow: transparent;
+					  color: transparent;
+					  text-decoration: none;
+						display: block;
+						overflow: hidden;
+					}*/
+}
+
+div.projet-management div._s_n_body div.cg-multipanel > div.cg-multipanel-view div.arquitecture div.panel_p {
+  box-sizing: border-box;
+  border: 1px black solid;
+  width: 100%;
+  border-radius: 3px;
+}
+
+div.projet-management div._s_n_body div.cg-multipanel > div.cg-multipanel-view div.arquitecture div.panel_p div.n_panel_p {
+  height: 20%;
+  width: 96%;
+  margin: 10px 2%;
+  border: 1px black dashed;
 }
