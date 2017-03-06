@@ -36,3 +36,45 @@ div.n_panel_p{
   color: white;
   border: 1px #ff8f8f solid;
 }
+
+div.textIcon_link{
+	background: #E91E63;
+	position: relative;
+	overflow: hidden;
+	height: 40px;
+	margin-bottom: 3px;
+	line-height: 40px;
+	border-radius: 3px;
+	color: white;
+}
+div.textIcon_link:hover {
+	background: #ff4e8a;
+}
+div.textIcon_link	> div{
+	float: left;
+	width: 100%;
+	padding-right: 40px;
+	box-sizing: border-box;
+	padding: 0 10px;
+}
+
+div.textIcon_link	> a{
+	display: block;
+	position: absolute;
+	width: 40px;
+	height: 40px;
+	right: 0;
+	top: 0;
+	text-align: center;
+	font-size: 24px;
+}
+div.textIcon_link	> a i{
+  width: 100%;
+  display: block;
+  height: 30px;
+  margin-top: 5px;
+  line-height: 30px;
+  box-sizing: border-box;
+  border-left: 1px #ff4b8e solid;
+  color: white;
+}

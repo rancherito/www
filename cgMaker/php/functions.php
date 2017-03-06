@@ -27,8 +27,6 @@
 
   function createProjet($nameProjet){
     $dir = '../'.$nameProjet;
-    $id = $dir.'/projet.cginfo';
-    $index = $dir.'/index.php';
 
 $bodyIndex = <<<EOT
 <!DOCTYPE html>
@@ -62,10 +60,17 @@ EOT;
         die('{"PROCESS":"FAIL"}');
       }else {
         echo '{"PROCESS":"CORRECT"}';
-        $myfile = fopen($id, "w");fclose($myfile);
-        $myfile = fopen($index, "w");
-        fwrite($myfile, $bodyIndex);
-        fclose($myfile);
+        $myfile = fopen($dir.'/index.php', "w");
+        fwrite($myfile, $bodyIndex);fclose($myfile);
+
+        mkdir($dir.'/cgMProjet', 0777, true);
+        $myfile = fopen($dir.'/cgMProjet/head.cgM', "w");fclose($myfile);
+        $myfile = fopen($dir.'/cgMProjet/body.cgM', "w");fclose($myfile);
+        $myfile = fopen($dir.'/projet.cginfo', "w");fclose($myfile);
+
+        mkdir($dir.'/cgMProjet/sources', 0777, true);
+        $myfile = fopen($dir.'/cgMProjet/sources/main.js', "w");fclose($myfile);
+        $myfile = fopen($dir.'/cgMProjet/sources/style.css', "w");fclose($myfile);
       }
     }
   }
@@ -94,6 +99,17 @@ EOT;
       return is_writable('../'.$projet.'/projet.cginfo');
     }
     return false;
+  }
+
+  function sourcesProjet($projet){
+    $dir = '../'.$projet.'/cgMProjet/sources';
+    $files = [];
+    foreach (scandir($dir) as $key => $value) {
+      if (is_file($dir.'/'.$value)) {
+        array_push($files,$value);
+      }
+    }
+    return $files;
   }
 
   function saveProjets($projet,$toWrite){

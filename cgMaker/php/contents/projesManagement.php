@@ -39,15 +39,16 @@
       tabSize: 5
     });
     editor.setSize("100%", "100%");
-
     $.post("../"+projet+'/index.php',{}, function(data) {
       editor.setValue(data);
     });
 
+
+
     var panels = cg.multiPanelView()
     .addPanel({text: 'Código fuente',panel: pnlEditor})
     .addPanel({text: 'Arquitectura',panel: cg.$('div').addClass('arquitecture')})
-    .addPanel({text: 'panel3',panel: cg.$('div').text('ALGO')})
+    .addPanel({text: 'Recursos',panel: cg.$('div')})
     .prependTo($('._s_n_body'));
 
     $('div._s_n_body').heightCalc(100, -40);
@@ -61,13 +62,23 @@
       });
     });
 
-    panels.access()[1].click(function (event) {
+    $.post("query.php",{function:cg.function('sourcesProjet',[projet])}, function(data) {
+      var DATA = JSON.parse(data);
+      for (var variable in DATA) {
+        panels.views()[2].append(cg.$('div').addClass('textIcon_link').append(cg.$('div').text(DATA[variable])));
+      }
+      console.log(DATA);
+    });
+
+    panels.views()[1].append(cg.$('iframe').prop('src', 'php/arquitect.php?projet='+projet));
+
+    /*panels.access()[1].click(function (event) {
       $.post("../"+projet+'/index.php',{}, function(data) {
         var DATA = $(data);
         panels.views()[1].empty().append(DATA);
         panels.views()[1].find('title').remove();
         panels.views()[1].find('meta').remove();
       });
-    });
+    });*/
 });
 </script>

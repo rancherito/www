@@ -9,6 +9,8 @@ if (!empty($_POST['function'])) {
     echo $json;
   }elseif ($n_f[0] === 'saveProjets') {
     saveProjets($n_f[1],$n_f[2]);
+  }elseif ($n_f[0] === 'sourcesProjet') {
+    echo json_encode(sourcesProjet($n_f[1]));
   }
 }
  ?>
