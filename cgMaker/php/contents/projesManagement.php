@@ -48,7 +48,7 @@
     var panels = cg.multiPanelView()
     .addPanel({text: 'Código fuente',panel: pnlEditor})
     .addPanel({text: 'Arquitectura',panel: cg.$('div').addClass('arquitecture')})
-    .addPanel({text: 'Recursos',panel: cg.$('div')})
+    .addPanel({text: 'Recursos',panel: cg.$('div').addClass('sources')})
     .prependTo($('._s_n_body'));
 
     $('div._s_n_body').heightCalc(100, -40);
@@ -64,8 +64,15 @@
 
     $.post("query.php",{function:cg.function('sourcesProjet',[projet])}, function(data) {
       var DATA = JSON.parse(data);
+      var cLink = cg.$('div');
+      panels.views()[2].append(cLink);
       for (var variable in DATA) {
-        panels.views()[2].append(cg.$('div').addClass('textIcon_link').append(cg.$('div').text(DATA[variable])));
+        cLink.append(
+          cg.$('div').addClass('textIcon_link').append(
+            cg.$('div').text(DATA[variable]),
+            cg.$('a').append(cg.$('i').addClass('ion-android-exit'))
+          )
+        );
       }
       console.log(DATA);
     });

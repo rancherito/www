@@ -303,3 +303,13 @@ div.projet-management div._s_n_body div.cg-multipanel > div.cg-multipanel-view d
   height: 100%;
   border: 0;
 }
+
+div.projet-management div._s_n_body div.cg-multipanel > div.cg-multipanel-view div.sources {
+  position: relative;
+  padding: 10px;
+  box-sizing: border-box;
+}
+
+div.projet-management div._s_n_body div.cg-multipanel > div.cg-multipanel-view div.sources > div {
+  position: relative;
+}
