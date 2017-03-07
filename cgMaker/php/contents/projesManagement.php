@@ -28,6 +28,7 @@
     var pnlEditor = cg.$('div');
     var projet = '<?php echo $projet ?>';
     var jaja = '';
+
     var editor = CodeMirror(pnlEditor[0],{
       lineNumbers: true,
       mode: "htmlmixed",
@@ -39,6 +40,8 @@
       tabSize: 5
     });
     editor.setSize("100%", "100%");
+
+
     $.post("../"+projet+'/index.php',{}, function(data) {
       editor.setValue(data);
     });
@@ -51,9 +54,9 @@
     .addPanel({text: 'Recursos',panel: cg.$('div').addClass('sources')})
     .prependTo($('._s_n_body'));
 
-    $('div._s_n_body').heightCalc(100, -40);
+    $('div._s_n_body').heightCalc(100, -41);
     panels.container().find('> div').eq(0).width(200);
-    panels.container().find('> div').eq(1).widthCalc(100, -200);
+    panels.container().find('> div').eq(1).widthCalc(100, -201);
     $('.saveChanges').click(function(event) {
       var proj = projet;
       var func = {function: cg.function('saveProjets',[proj,editor.getValue()])};
@@ -62,15 +65,43 @@
       });
     });
 
+
+    var cont = cg.$('div').css({width:'100%',height:'100%',position:'relative'}).appendTo(panels.views()[2]);
+    var cLink = cg.$('div').appendTo(cont).heightCalc(100,-51);
+    var cclink = cg.$('div').css({width:'100%',height:'100%'}).appendTo(cLink);
+    var ccCode = cg.$('div').css({width:'100%',height:'100%',position: 'relative'}).hide().appendTo(cLink);
+
+    var editorResource = CodeMirror(ccCode[0],{
+      lineNumbers: true,
+      mode: "htmlmixed",
+      keyMap: "sublime",
+      autoCloseBrackets: true,
+      matchBrackets: true,
+      showCursorWhenSelecting: true,
+      theme: "base16-light",
+      tabSize: 5
+    });
+    editorResource.setSize("100%", "100%");
+
     $.post("query.php",{function:cg.function('sourcesProjet',[projet])}, function(data) {
       var DATA = JSON.parse(data);
-      var cLink = cg.$('div');
-      panels.views()[2].append(cLink);
+
+
+      var cOption = cg.$('div').appendTo(cont).css({height:50,background:'#e2ea89'}).append(
+        cg.$('button').text('algo'),
+        cg.$('button').text('Regresar').click(function (event) {
+          ccCode.hide();
+          cclink.show();
+        })
+      );
       for (var variable in DATA) {
-        cLink.append(
+        cclink.append(
           cg.$('div').addClass('textIcon_link').append(
             cg.$('div').text(DATA[variable]),
-            cg.$('a').append(cg.$('i').addClass('ion-android-exit'))
+            cg.$('a').append(cg.$('i').addClass('ion-android-exit')).click(function (event) {
+              ccCode.show();
+              cclink.hide();
+            })
           )
         );
       }
