@@ -67,6 +67,7 @@ div.textIcon_link	> a{
 	top: 0;
 	text-align: center;
 	font-size: 24px;
+  cursor: pointer;
 }
 div.textIcon_link	> a i{
   width: 100%;
