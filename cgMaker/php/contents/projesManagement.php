@@ -18,7 +18,19 @@
           <a href="<?php echo '../'.$projet; ?>" target="_blank"><?php echo 'open '.$projet; ?></a>
           <a class="saveChanges">Save changes</a>
         </div>
-        <div class="_s_n_body"></div>
+        <div class="_s_n_body">
+          <div class="sources2">
+            <div class="">
+              <div class="cLink">
+                <div class="ccLink"></div>
+                <div class="ccCode"></div>
+              </div>
+              <div class="cSettings">
+                <button type="button" name="button" class="btnRegresar">Regresar</button>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </div>
@@ -27,7 +39,6 @@
   $(document).ready(function() {
     var pnlEditor = cg.$('div');
     var projet = '<?php echo $projet ?>';
-    var jaja = '';
 
     var editor = CodeMirror(pnlEditor[0],{
       lineNumbers: true,
@@ -41,18 +52,23 @@
     });
     editor.setSize("100%", "100%");
 
-
     $.post("../"+projet+'/index.php',{}, function(data) {
       editor.setValue(data);
     });
 
-
-
     var panels = cg.multiPanelView()
-    .addPanel({text: 'Código fuente',panel: pnlEditor})
-    .addPanel({text: 'Arquitectura',panel: cg.$('div').addClass('arquitecture')})
-    .addPanel({text: 'Recursos',panel: cg.$('div').addClass('sources')})
-    .prependTo($('._s_n_body'));
+      .addPanel({text: 'Código fuente',panel: pnlEditor})
+      .addPanel({text: 'Arquitectura',panel: cg.$('div').addClass('arquitecture')})
+      .addPanel({text: 'Recursos',panel: cg.$('div').addClass('sources')})
+      .addPanel({text: 'Recursos2',panel: $('div.sources2')})
+      .prependTo($('._s_n_body'));
+
+
+    panels.views()[3].find('div.cLink').heightCalc(100,-51);
+    panels.views()[3].find('.btnRegresar').click(function () {
+      panels.views()[3].find('div.ccLink').show();
+      panels.views()[3].find('div.ccCode').hide();
+    });
 
     $('div._s_n_body').heightCalc(100, -41);
     panels.container().find('> div').eq(0).width(200);
@@ -66,12 +82,7 @@
     });
 
 
-    var cont = cg.$('div').css({width:'100%',height:'100%',position:'relative'}).appendTo(panels.views()[2]);
-    var cLink = cg.$('div').appendTo(cont).heightCalc(100,-51);
-    var cclink = cg.$('div').css({width:'100%',height:'100%'}).appendTo(cLink);
-    var ccCode = cg.$('div').css({width:'100%',height:'100%',position: 'relative'}).hide().appendTo(cLink);
-
-    var editorResource = CodeMirror(ccCode[0],{
+    var editorResource = CodeMirror(panels.views()[3].find('div.ccCode')[0],{
       lineNumbers: true,
       mode: "htmlmixed",
       keyMap: "sublime",
@@ -85,27 +96,17 @@
 
     $.post("query.php",{function:cg.function('sourcesProjet',[projet])}, function(data) {
       var DATA = JSON.parse(data);
-
-
-      var cOption = cg.$('div').appendTo(cont).css({height:50,background:'#e2ea89'}).append(
-        cg.$('button').text('algo'),
-        cg.$('button').text('Regresar').click(function (event) {
-          ccCode.hide();
-          cclink.show();
-        })
-      );
       for (var variable in DATA) {
-        cclink.append(
+        panels.views()[3].find('div.ccLink').append(
           cg.$('div').addClass('textIcon_link').append(
             cg.$('div').text(DATA[variable]),
             cg.$('a').append(cg.$('i').addClass('ion-android-exit')).click(function (event) {
-              ccCode.show();
-              cclink.hide();
+              panels.views()[3].find('div.ccLink').hide();
+              panels.views()[3].find('div.ccCode').show();
             })
           )
         );
       }
-      console.log(DATA);
     });
 
     panels.views()[1].append(cg.$('iframe').prop('src', 'php/arquitect.php?projet='+projet));
