@@ -26,6 +26,9 @@ cg.function = function (name,values) {
   if (values instanceof Array) for (var i=0; i < values.length; i++) parameters+=(i!=0?",":"")+"$"+values[i];
   return name+parameters+')';
 }
+cg.getFileExtension = function (filename) {
+  return filename.slice((filename.lastIndexOf(".") - 1 >>> 0) + 2);
+}
 //class
 cg.MessageBox = function (setTypeBox) {
   var container = cg.$('div');

@@ -13,6 +13,8 @@ if (!empty($_POST['function'])) {
     echo json_encode(sourcesProjet($n_f[1]));
   }elseif ($n_f[0] === 'getCodeSourceProjet') {
     echo getCodeSourceProjet($n_f[1], $n_f[2]);
+  }elseif ($n_f[0] === 'saveSourceProjets') {
+    saveSourceProjets($n_f[1], $n_f[2], $n_f[3]);
   }
 }
  ?>

@@ -127,6 +127,11 @@ EOT;
     fwrite($myfile, htmlspecialchars_decode($toWrite));
     fclose($myfile);
   }
-
+  function saveSourceProjets($projet, $source, $toWrite){
+    $dir = '../'.$projet.'/cgMProjet/sources/'.$source;
+    $myfile = fopen($dir, "w");
+    fwrite($myfile, htmlspecialchars_decode($toWrite));
+    fclose($myfile);
+  }
 
  ?>

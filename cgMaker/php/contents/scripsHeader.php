@@ -8,6 +8,7 @@
 <link rel="stylesheet" href="src/pluggings/codeMirror/addon/fold/foldgutter.css">
 <link rel="stylesheet" href="src/pluggings/codeMirror/addon/dialog/dialog.css">
 <link rel="stylesheet" href="src/pluggings/codeMirror/theme/base16-light.css">
+<link rel="stylesheet" href="src/pluggings/codeMirror/theme/oceanic.css">
 
 <script src="src/pluggings/codeMirror/lib/codemirror.js"></script>
 <script src="src/pluggings/codeMirror/addon/search/searchcursor.js"></script>

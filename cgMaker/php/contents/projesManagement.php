@@ -26,7 +26,8 @@
                 <div class="ccCode"></div>
               </div>
               <div class="cSettings">
-                <button type="button" name="button" class="btnRegresar">Regresar</button>
+                <button type="button" name="button" class="btnReturn">Return</button>
+                <button type="button" name="button" class="btnSave" style="display: none">Save changes</button>
               </div>
             </div>
           </div>
@@ -36,10 +37,13 @@
   </div>
 </div>
 <script type="text/javascript">
+  var source = '';
+  var projet = '<?php echo $projet ?>';
+  var extencion = {css: 'css', js: 'javascript'};
+
   $(document).ready(function() {
     var pnlEditor = cg.$('div');
     var pnlEditorSource = $('div.ccCode');
-    var projet = '<?php echo $projet ?>';
 
     var editor = CodeMirror(pnlEditor[0],{
       lineNumbers: true,
@@ -77,9 +81,13 @@
 
 
     panels.views()[2].find('div.cLink').heightCalc(100,-51);
-    panels.views()[2].find('.btnRegresar').click(function () {
+    panels.views()[2].find('.btnReturn').click(function () {
       panels.views()[2].find('div.ccLink').show();
       panels.views()[2].find('div.ccCode').hide();
+      panels.views()[2].find('.btnSave').hide();
+    });
+    panels.views()[2].find('.btnSave').click(function (event) {
+      $.post('query.php', {function: cg.function('saveSourceProjets',[projet, source, editorResource.getValue()])});
     });
 
     $('div._s_n_body').heightCalc(100, -41);
@@ -109,12 +117,16 @@
 
     panels.views()[1].append(cg.$('iframe').prop('src', 'php/arquitect.php?projet='+projet));
 
-    function openCodeS(selector,source) {
+
+    function openCodeS(selector,newSource) {
+
       selector.click(function (event) {
+        source = newSource;
         panels.views()[2].find('div.ccLink').hide();
         panels.views()[2].find('div.ccCode').show();
+        panels.views()[2].find('.btnSave').show();
         $.post('query.php', {function: cg.function('getCodeSourceProjet',[projet, source])}, function(data) {
-          editorResource.setOption("mode", 'javascript')
+          editorResource.setOption("mode", extencion[cg.getFileExtension(source)]);
           editorResource.setValue(data);
         });
       });
