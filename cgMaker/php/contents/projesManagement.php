@@ -69,7 +69,7 @@
     });
     editorResource.setSize("100%", "100%");
 
-    $.post("../"+projet+'/index.php',{}, function(data) {
+    $.post("../"+projet+'/cgMProjet/index.cgM',{}, function(data) {
       editor.setValue(data);
     });
 
@@ -96,8 +96,8 @@
     $('.saveChanges').click(function(event) {
       var proj = projet;
       var func = {function: cg.function('saveProjets',[proj,editor.getValue()])};
-      $.post('query.php', func,function () {
-        location.reload();
+      $.post('query.php', func,function (data) {
+        console.log(data);
       });
     });
 

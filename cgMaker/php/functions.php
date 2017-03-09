@@ -56,22 +56,20 @@ EOT;
     if (is_dir($dir)) {
       echo '{"PROCESS":"FAIL"}';
     }else {
-      if(!mkdir($dir, 0777, true)) {
-        die('{"PROCESS":"FAIL"}');
-      }else {
-        echo '{"PROCESS":"CORRECT"}';
-        $myfile = fopen($dir.'/index.php', "w");
-        fwrite($myfile, $bodyIndex);fclose($myfile);
+      mkdir($dir, 0777, true);
+      echo '{"PROCESS":"CORRECT"}';
+      $myfile = fopen($dir.'/index.php', "w");fwrite($myfile, $bodyIndex);fclose($myfile);
 
-        mkdir($dir.'/cgMProjet', 0777, true);
-        $myfile = fopen($dir.'/cgMProjet/head.cgM', "w");fclose($myfile);
-        $myfile = fopen($dir.'/cgMProjet/body.cgM', "w");fclose($myfile);
-        $myfile = fopen($dir.'/projet.cginfo', "w");fclose($myfile);
+      mkdir($dir.'/cgMProjet', 0777, true);
+      $myfile = fopen($dir.'/cgMProjet/head.cgM', "w");fclose($myfile);
+      $myfile = fopen($dir.'/cgMProjet/body.cgM', "w");fclose($myfile);
+      $myfile = fopen($dir.'/cgMProjet/index.cgM', "w");fwrite($myfile, $bodyIndex);fclose($myfile);
+      $myfile = fopen($dir.'/projet.cginfo', "w");fclose($myfile);
 
-        mkdir($dir.'/cgMProjet/sources', 0777, true);
-        $myfile = fopen($dir.'/cgMProjet/sources/main.js', "w");fclose($myfile);
-        $myfile = fopen($dir.'/cgMProjet/sources/style.css', "w");fclose($myfile);
-      }
+      mkdir($dir.'/cgMProjet/sources', 0777, true);
+      $myfile = fopen($dir.'/cgMProjet/sources/main.js', "w");fclose($myfile);
+      $myfile = fopen($dir.'/cgMProjet/sources/style.css', "w");fclose($myfile);
+
     }
   }
 
@@ -122,16 +120,56 @@ EOT;
   }
 
   function saveProjets($projet,$toWrite){
-    $dir = '../'.$projet.'/index.php';
+    $extencion = ['css' => '<link rel="stylesheet" href="{{link}}">','js' => '<script src="{{link}}"></script>'];
+
+    $dir = '../'.$projet.'/cgMProjet/index.cgM';
+    $toWriteDoc = htmlspecialchars_decode($toWrite);
     $myfile = fopen($dir, "w");
-    fwrite($myfile, htmlspecialchars_decode($toWrite));
-    fclose($myfile);
+    fwrite($myfile, $toWriteDoc);fclose($myfile);
+
+    preg_match("/{{[a-z:. ]+}}/i",$toWriteDoc,$search);
+    $newstring = preg_replace_callback(
+      '/{{[a-z:. ]+}}/i',
+      function($match) use ($extencion, $projet) {
+
+          $resourceToReplace = preg_replace('/ /i','',$match[0]);
+          preg_match('/[a-z]+\.[a-z]+/i',$resourceToReplace,$resourceToReplace);
+          $resourceEnd = $resourceToReplace[0];
+          $ext = (new SplFileInfo($resourceEnd))->getExtension();
+
+          $newSource = '';
+          //solo si existe archivos fuente
+          $dirSource = '../'.$projet.'/cgMProjet/sources/'.$resourceEnd;
+          $folder = '';
+          if (is_file($dirSource)) {
+            $directories = createDirByExt($projet, $ext);
+            $folder = $directories[1].'/';
+
+            copy($dirSource, $directories[0].'/'.$resourceEnd);
+
+            $newSource = preg_replace('/{{link}}/i',$folder.$resourceEnd,$extencion[$ext]);
+          }
+
+         return (($newSource));
+       },
+      $toWriteDoc
+    );
+    echo $newstring;
   }
   function saveSourceProjets($projet, $source, $toWrite){
     $dir = '../'.$projet.'/cgMProjet/sources/'.$source;
     $myfile = fopen($dir, "w");
     fwrite($myfile, htmlspecialchars_decode($toWrite));
     fclose($myfile);
+  }
+  function createDirByExt($projet,$ext){
+    $extencion = ['css' => 'css', 'js' => 'js'];
+    $ext = !empty($extencion[$ext]) ? $extencion[$ext] : 'others';
+    $dir = '../'.$projet.'/'.$ext;
+    if (!file_exists($dir) && !is_file($dir)) {
+      mkdir($dir, 0777, true);
+    }
+    return [$dir, $ext];
   }
 
  ?>
