@@ -111,6 +111,15 @@ EOT;
     }
     return $files;
   }
+  function getCodeSourceProjet($projet, $source){
+    $dir = '../'.$projet.'/cgMProjet/sources/'.$source;
+    $read = fopen($dir, "r");
+    $size = filesize($dir);
+    $contenido = $size > 0 ? fread($read, $size):'';
+    fclose($read);
+
+    return $contenido;
+  }
 
   function saveProjets($projet,$toWrite){
     $dir = '../'.$projet.'/index.php';

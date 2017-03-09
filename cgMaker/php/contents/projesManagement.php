@@ -38,6 +38,7 @@
 <script type="text/javascript">
   $(document).ready(function() {
     var pnlEditor = cg.$('div');
+    var pnlEditorSource = $('div.ccCode');
     var projet = '<?php echo $projet ?>';
 
     var editor = CodeMirror(pnlEditor[0],{
@@ -52,6 +53,18 @@
     });
     editor.setSize("100%", "100%");
 
+    var editorResource = CodeMirror(pnlEditorSource[0],{
+      lineNumbers: true,
+      mode: "htmlmixed",
+      keyMap: "sublime",
+      autoCloseBrackets: true,
+      matchBrackets: true,
+      showCursorWhenSelecting: true,
+      theme: "base16-light",
+      tabSize: 5
+    });
+    editorResource.setSize("100%", "100%");
+
     $.post("../"+projet+'/index.php',{}, function(data) {
       editor.setValue(data);
     });
@@ -59,15 +72,14 @@
     var panels = cg.multiPanelView()
       .addPanel({text: 'Código fuente',panel: pnlEditor})
       .addPanel({text: 'Arquitectura',panel: cg.$('div').addClass('arquitecture')})
-      .addPanel({text: 'Recursos',panel: cg.$('div').addClass('sources')})
-      .addPanel({text: 'Recursos2',panel: $('div.sources2')})
+      .addPanel({text: 'Recursos',panel: $('div.sources2')})
       .prependTo($('._s_n_body'));
 
 
-    panels.views()[3].find('div.cLink').heightCalc(100,-51);
-    panels.views()[3].find('.btnRegresar').click(function () {
-      panels.views()[3].find('div.ccLink').show();
-      panels.views()[3].find('div.ccCode').hide();
+    panels.views()[2].find('div.cLink').heightCalc(100,-51);
+    panels.views()[2].find('.btnRegresar').click(function () {
+      panels.views()[2].find('div.ccLink').show();
+      panels.views()[2].find('div.ccCode').hide();
     });
 
     $('div._s_n_body').heightCalc(100, -41);
@@ -82,28 +94,14 @@
     });
 
 
-    var editorResource = CodeMirror(panels.views()[3].find('div.ccCode')[0],{
-      lineNumbers: true,
-      mode: "htmlmixed",
-      keyMap: "sublime",
-      autoCloseBrackets: true,
-      matchBrackets: true,
-      showCursorWhenSelecting: true,
-      theme: "base16-light",
-      tabSize: 5
-    });
-    editorResource.setSize("100%", "100%");
-
     $.post("query.php",{function:cg.function('sourcesProjet',[projet])}, function(data) {
       var DATA = JSON.parse(data);
       for (var variable in DATA) {
-        panels.views()[3].find('div.ccLink').append(
+        var link = cg.$('a').append(cg.$('i').addClass('ion-android-exit'));
+        openCodeS(link,DATA[variable]);
+        panels.views()[2].find('div.ccLink').append(
           cg.$('div').addClass('textIcon_link').append(
-            cg.$('div').text(DATA[variable]),
-            cg.$('a').append(cg.$('i').addClass('ion-android-exit')).click(function (event) {
-              panels.views()[3].find('div.ccLink').hide();
-              panels.views()[3].find('div.ccCode').show();
-            })
+            cg.$('div').text(DATA[variable]),link
           )
         );
       }
@@ -111,13 +109,16 @@
 
     panels.views()[1].append(cg.$('iframe').prop('src', 'php/arquitect.php?projet='+projet));
 
-    /*panels.access()[1].click(function (event) {
-      $.post("../"+projet+'/index.php',{}, function(data) {
-        var DATA = $(data);
-        panels.views()[1].empty().append(DATA);
-        panels.views()[1].find('title').remove();
-        panels.views()[1].find('meta').remove();
+    function openCodeS(selector,source) {
+      selector.click(function (event) {
+        panels.views()[2].find('div.ccLink').hide();
+        panels.views()[2].find('div.ccCode').show();
+        $.post('query.php', {function: cg.function('getCodeSourceProjet',[projet, source])}, function(data) {
+          editorResource.setOption("mode", 'javascript')
+          editorResource.setValue(data);
+        });
       });
-    });*/
+    }
 });
+
 </script>

@@ -20,7 +20,6 @@
         }else {
           include_once 'php/contents/cpindex.php';
         }
-
      ?>
   </body>
 </html>
