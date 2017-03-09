@@ -144,8 +144,16 @@ EOT;
           if (is_file($dirSource)) {
             $directories = createDirByExt($projet, $ext);
             $folder = $directories[1].'/';
+            $sourceDestiny = $directories[0].'/'.$resourceEnd;
+            /*//leemos el archivo fuente
+            $read = fopen($dirSource, "r");$size = filesize($dir);
+            $contenido = $size > 0 ? fread($read, $size):'';fclose($read);
 
-            copy($dirSource, $directories[0].'/'.$resourceEnd);
+            //guardamos nuevo contenido
+            $write = fopen($directories[0].'/'.$resourceEnd, "w");
+            fwrite($write, $contenido);fclose($write);
+            */
+            copy($dirSource, $sourceDestiny);
 
             $newSource = preg_replace('/{{link}}/i',$folder.$resourceEnd,$extencion[$ext]);
           }
@@ -154,7 +162,10 @@ EOT;
        },
       $toWriteDoc
     );
-    echo $newstring;
+
+    $dir = '../'.$projet.'/index.php';
+    $myfile = fopen($dir, "w");
+    fwrite($myfile, $newstring);fclose($myfile);
   }
   function saveSourceProjets($projet, $source, $toWrite){
     $dir = '../'.$projet.'/cgMProjet/sources/'.$source;
