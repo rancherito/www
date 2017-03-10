@@ -58,7 +58,19 @@ div.n_panel_p{
   margin: 1px 0;
   border-radius: 4px;
 }
-
+div.n_panel_p::before{
+  content: "Add Gatget";
+  display: block;
+  background: #dcdcdc;
+  height: 30px;
+  font-family: Calibri;
+  text-indent: 0px;
+  font-size: 18px;
+  line-height: 30px;
+  color: #545454;
+  text-align: center;
+  cursor: pointer;
+}
 EOT;
     $dir = '../'.$Projet;
 
