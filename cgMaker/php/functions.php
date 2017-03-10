@@ -44,7 +44,12 @@ EOT;
 $style = <<<EOT
 *{
   color: transparent;
-  background: transparent;
+  background: transparent !important;
+  text-indent:-999px;
+  font: 0/0 a;
+  text-shadow: transparent;
+  color: transparent;
+  text-decoration: none;
 }
 div.n_panel_p{
   border: 1px gray dashed;
@@ -53,6 +58,7 @@ div.n_panel_p{
   margin: 1px 0;
   border-radius: 4px;
 }
+
 EOT;
     $dir = '../'.$Projet;
 
