@@ -1,4 +1,21 @@
 <?php
+
+  function f_parameters($function){
+    $procedure = htmlspecialchars($function);
+    preg_match('/\([\w\W]+\)/i',$procedure,$encontrado);
+    $array_r = array_merge([explode('(',$procedure)[0]],explode(',$',substr($encontrado[0],2,-1)));
+    return $array_r;
+  }
+
+  function completeArray($value){
+    $array_r = array();
+    for ($i=0; $i < count($value); $i++) {
+      $array_r[$value[$i]]=$value[$i];
+    }
+    return $array_r;
+  }
+
+  function createProjet($Projet){
 $bodyIndex = <<<EOT
 <!DOCTYPE html>
 <html>
@@ -24,22 +41,15 @@ $bodyIndex = <<<EOT
 </html>
 EOT;
 
-  function f_parameters($function){
-    $procedure = htmlspecialchars($function);
-    preg_match('/\([\w\W]+\)/i',$procedure,$encontrado);
-    $array_r = array_merge([explode('(',$procedure)[0]],explode(',$',substr($encontrado[0],2,-1)));
-    return $array_r;
-  }
-
-  function completeArray($value){
-    $array_r = array();
-    for ($i=0; $i < count($value); $i++) {
-      $array_r[$value[$i]]=$value[$i];
-    }
-    return $array_r;
-  }
-
-  function createProjet($Projet){
+$style = <<<EOT
+*{
+  color: transparent;
+}
+div.n_panel_p{
+  border: 1px gray solid;
+  box-sizing: border-box;
+}
+EOT;
     $dir = '../'.$Projet;
 
     if (is_dir($dir)) {
@@ -48,10 +58,11 @@ EOT;
       mkdir($dir, 0777, true);
       echo '{"PROCESS":"CORRECT"}';
       $myfile = fopen($dir.'/index.php', "w");fwrite($myfile, $bodyIndex);fclose($myfile);
-      $myfile = fopen($dir.'/indexArq.cgM', "w");fwrite($myfile, $bodyIndex);fclose($myfile);
+      $myfile = fopen($dir.'/indexArq.php', "w");fwrite($myfile, str_replace('</head>',"<link rel='stylesheet' href='cgMProjet/style.css'>\n</head>",$bodyIndex));fclose($myfile);
 
       mkdir($dir.'/cgMProjet', 0777, true);
       $myfile = fopen($dir.'/cgMProjet/index.cgM', "w");fwrite($myfile, $bodyIndex);fclose($myfile);
+      $myfile = fopen($dir.'/cgMProjet/style.css', "w");fwrite($myfile, $style);fclose($myfile);
       $myfile = fopen($dir.'/projet.cginfo', "w");fclose($myfile);
 
       mkdir($dir.'/src', 0777, true);
@@ -155,10 +166,10 @@ EOT;
     $myfile = fopen("../$projet/index.php", "w");
     fwrite($myfile, $newstring);fclose($myfile);
 
+    $indexArq = str_replace('</head>',"<link rel='stylesheet' href='cgMProjet/style.css'>\n</head>",$newstring);
+
     $myfile = fopen("../$projet/indexArq.php", "w");
-    fwrite($myfile, $newstring);fclose($myfile);
-
-
+    fwrite($myfile, $indexArq);fclose($myfile);
 
 
   }
