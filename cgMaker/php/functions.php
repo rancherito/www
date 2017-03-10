@@ -44,10 +44,14 @@ EOT;
 $style = <<<EOT
 *{
   color: transparent;
+  background: transparent;
 }
 div.n_panel_p{
-  border: 1px gray solid;
+  border: 1px gray dashed;
   box-sizing: border-box;
+  padding: 10px 0;
+  margin: 1px 0;
+  border-radius: 4px;
 }
 EOT;
     $dir = '../'.$Projet;
