@@ -37,7 +37,7 @@
   </div>
 </div>
 <script type="text/javascript">
-  var source = '';
+  var source = [];
   var projet = '<?php echo $projet ?>';
   var extencion = {css: 'css', js: 'javascript'};
 
@@ -87,10 +87,7 @@
       panels.views()[2].find('.btnSave').hide();
     });
     panels.views()[2].find('.btnSave').click(function (event) {
-      console.log(editorResource.getValue());
-      $.post('query.php', {function: cg.function('saveSourceProjets',[projet, source, editorResource.getValue()])},function (data) {
-        console.log(data);
-      });
+      $.post('query.php', {function: cg.function('saveSourceProjets',[projet, source[1], editorResource.getValue()])});
     });
 
     $('div._s_n_body').heightCalc(100, -41);
@@ -98,10 +95,7 @@
     panels.container().find('> div').eq(1).widthCalc(100, -201);
     $('.saveChanges').click(function(event) {
       var proj = projet;
-      var func = {function: cg.function('saveProjets',[proj,editor.getValue()])};
-      $.post('query.php', func,function (data) {
-        console.log(data);
-      });
+      $.post('query.php', {function: cg.function('saveProjets',[proj,editor.getValue()])});
     });
 
 
@@ -112,13 +106,13 @@
         openCodeS(link,DATA[variable]);
         panels.views()[2].find('div.ccLink').append(
           cg.$('div').addClass('textIcon_link').append(
-            cg.$('div').text(DATA[variable]),link
+            cg.$('div').text(DATA[variable][0]),link
           )
         );
       }
     });
 
-    panels.views()[1].append(cg.$('iframe').prop('src', 'php/arquitect.php?projet='+projet));
+    panels.views()[1].append(cg.$('iframe').prop('src', '../'+projet+'/indexArq.php'));
 
 
     function openCodeS(selector,newSource) {
@@ -128,8 +122,8 @@
         panels.views()[2].find('div.ccLink').hide();
         panels.views()[2].find('div.ccCode').show();
         panels.views()[2].find('.btnSave').show();
-        $.post('query.php', {function: cg.function('getCodeSourceProjet',[projet, source])}, function(data) {
-          editorResource.setOption("mode", extencion[cg.getFileExtension(source)]);
+        $.post('query.php', {function: cg.function('getCodeSourceProjet',[projet, source[1]])}, function(data) {
+          editorResource.setOption("mode", extencion[cg.getFileExtension(source[0])]);
           editorResource.setValue(data);
         });
       });
