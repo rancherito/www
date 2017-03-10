@@ -1,19 +1,8 @@
 <?php
   function f_parameters($function){
     $procedure = htmlspecialchars($function);
-    $limites = completeArray(str_split("(),"));
-    $array_r = array(); $temm=""; $count=0;
-    for ($i=0; $i < strlen($procedure); $i++) {
-      if (empty($limites[$procedure[$i]])) {
-        $temm = $temm.$procedure[$i];
-      }else {
-        if (strlen($temm)>0) {
-          $array_r[$count]=str_replace("$","",$temm);
-          $count++;
-          $temm="";
-        }
-      }
-    }
+    preg_match('/\([\w\W]+\)/i',$procedure,$encontrado);
+    $array_r = array_merge([explode('(',$procedure)[0]],explode(',$',substr($encontrado[0],2,-1)));
     return $array_r;
   }
 

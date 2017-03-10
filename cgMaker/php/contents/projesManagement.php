@@ -87,7 +87,10 @@
       panels.views()[2].find('.btnSave').hide();
     });
     panels.views()[2].find('.btnSave').click(function (event) {
-      $.post('query.php', {function: cg.function('saveSourceProjets',[projet, source, editorResource.getValue()])});
+      console.log(editorResource.getValue());
+      $.post('query.php', {function: cg.function('saveSourceProjets',[projet, source, editorResource.getValue()])},function (data) {
+        console.log(data);
+      });
     });
 
     $('div._s_n_body').heightCalc(100, -41);

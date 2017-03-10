@@ -32,6 +32,10 @@
 
         console.log(cg.function('lalal',['das','sda']));
 
+        $.post('query.php', {function: cg.function('test',["console.log('wachalatato1áñÑ@--_d3°|#$%&/()=?¡'')))))555555","EL GATOVOLADOR",'tabitopacholino 1255'])}, function(data) {
+          console.log(data);
+        });
+
         test.input('select');
         //$('body').append(test.input())
 

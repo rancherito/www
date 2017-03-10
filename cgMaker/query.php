@@ -15,6 +15,8 @@ if (!empty($_POST['function'])) {
     echo getCodeSourceProjet($n_f[1], $n_f[2]);
   }elseif ($n_f[0] === 'saveSourceProjets') {
     saveSourceProjets($n_f[1], $n_f[2], $n_f[3]);
+  }elseif ($n_f[0] === 'test') {
+    //echo $n_f[1];
   }
 }
  ?>
