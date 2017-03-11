@@ -52,18 +52,32 @@ div.n_panel_p{
   margin: 1px 0;
   border-radius: 4px;
 }
-div.n_panel_p::before{
-  content: "Add Gatget";
-  display: block;
-  background: #dcdcdc;
-  height: 30px;
+.restore{
   font-family: Calibri;
   text-indent: 0px;
   font-size: 18px;
-  line-height: 30px;
-  color: #545454;
+  line-height: normal;
+  color: black;
+}
+div.addGatget{
+  height: 30px;
   text-align: center;
+  padding: 0 10px;
+  box-sizing: border-box;
+  overflow: hidden;
+  position: relative;
+}
+div.addGatget > div{
+  color: #545454;
+  height: 30px;
+  background: #dcdcdc !important;
+  line-height: 30px;
+  border-radius: 4px;
   cursor: pointer;
+  transition: all 0.2s linear;
+}
+div.addGatget > div:hover{
+  background: #afafaf !important;
 }
 EOT;
     $dir = '../'.$Projet;
@@ -74,7 +88,11 @@ EOT;
       mkdir($dir, 0777, true);
       echo '{"PROCESS":"CORRECT"}';
       $myfile = fopen($dir.'/index.php', "w");fwrite($myfile, $bodyIndex);fclose($myfile);
-      $myfile = fopen($dir.'/indexArq.php', "w");fwrite($myfile, str_replace('</head>',"<link rel='stylesheet' href='cgMProjet/style.css'>\n</head>",$bodyIndex));fclose($myfile);
+      $myfile = fopen($dir.'/indexArq.php', "w");
+      $replace = "\t<script src='cgMProjet/jquery-1.12.4.js'></script>\n\t<link rel='stylesheet' href='cgMProjet/style.css'>\n</head>";
+      fwrite($myfile, str_replace('</head>',$replace,$bodyIndex));
+      fclose($myfile);
+
       $myfile = fopen($dir.'/projet.cginfo', "w");fclose($myfile);
 
       mkdir($dir.'/cgMProjet', 0777, true);
@@ -182,8 +200,8 @@ EOT;
 
     $myfile = fopen("../$projet/index.php", "w");
     fwrite($myfile, $newstring);fclose($myfile);
-
-    $indexArq = str_replace('</head>',"<link rel='stylesheet' href='cgMProjet/style.css'>\n</head>",$newstring);
+    $replace = "\t<script src='cgMProjet/jquery-1.12.4.js'></script>\n\t<link rel='stylesheet' href='cgMProjet/style.css'>\n</head>";
+    $indexArq = str_replace('</head>',$replace,$newstring);
 
     $myfile = fopen("../$projet/indexArq.php", "w");
     fwrite($myfile, $indexArq);fclose($myfile);
@@ -207,6 +225,28 @@ EOT;
   }
   function lastModified($path){
     return is_file($path) ? filemtime($path) : '0000000000';
+  }
+  function listFolderSource($projet){
+    $dir = "../$projet/src";
+    $dirsFiles = [];//['asd0' => 'das'];
+    foreach (scandir($dir) as $key => $value) {
+      if ($value != '.' && $value != '..') {
+        $dirDir = "$dir/$value";
+        $numFiles = scandir($dirDir);
+        if (count($numFiles) > 2) {
+          // IDEA: aqui un la direccion
+          //array_push($dirsFiles,([$value => 'llaa']));
+          $dirsFiles[$value] = ['name' => [], 'path' => []];
+          foreach ($numFiles as $key2 => $value2) {
+            if ($value2 != '.' && $value2 != '..') {
+              array_push($dirsFiles[$value]['name'], $value2);
+              array_push($dirsFiles[$value]['path'], "$dirDir/$value2");
+            }
+          }
+        }
+      }
+    }
+    return $dirsFiles;
   }
 
  ?>

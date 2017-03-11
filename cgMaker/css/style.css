@@ -37,6 +37,21 @@ div.n_panel_p{
   border: 1px #ff8f8f solid;
 }
 
+div.cgSquareIcon{
+  height: 100px;
+  width: 100px;
+  color: white;
+  float: left;
+  padding: 5px;
+  box-sizing: border-box;
+}
+div.cgSquareIcon > div{
+  background: red;
+  text-align: center;
+  width: 100%;
+  height: 100%;
+}
+
 div.textIcon_link{
 	background: #E91E63;
 	position: relative;

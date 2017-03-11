@@ -99,7 +99,7 @@
       $.post('query.php', {fn: cg.fn('saveProjets',[proj,editor.getValue()])});
     });
 
-    $.post("query.php",{fn:cg.fn('sourcesProjet',[projet])}, function(data) {
+    /*$.post("query.php",{fn:cg.fn('sourcesProjet',[projet])}, function(data) {
       var DATA = JSON.parse(data);
       for (var variable in DATA) {
         var link = cg.$('a').append(cg.$('i').addClass('ion-android-exit'));
@@ -108,6 +108,20 @@
           cg.$('div').addClass('textIcon_link').append(
             cg.$('div').text(DATA[variable][0]),link
           )
+        );
+      }
+    });*/
+
+    $.post('query.php', {fn: cg.fn('listFolderSource', [projet])}, function(data) {
+      var DATA = JSON.parse(data);
+      for (var variable in DATA) {
+        console.log(variable);
+        panels.views()[2].find('div.ccLink').append(
+          cg.$('div').addClass('cgSquareIcon').append(
+            cg.$('i').addClass('class_name'),
+            cg.$('div').text(variable)
+          )
+
         );
       }
     });
@@ -145,5 +159,4 @@
       });
     }
 });
-
 </script>
