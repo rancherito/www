@@ -19,7 +19,7 @@
           <a class="saveChanges">Save changes</a>
         </div>
         <div class="_s_n_body">
-          <div class="sources2">
+          <div class="sources">
             <div class="">
               <div class="cLink">
                 <div class="ccLink"></div>
@@ -29,6 +29,11 @@
                 <button type="button" name="button" class="btnReturn">Return</button>
                 <button type="button" name="button" class="btnSave" style="display: none">Save changes</button>
               </div>
+            </div>
+          </div>
+          <div class="gallery-gatgets">
+            <div class="">
+              MI GALERIA
             </div>
           </div>
         </div>
@@ -76,11 +81,10 @@
     var panels = cg.multiPanelView()
       .addPanel({text: 'Código fuente',panel: pnlEditor})
       .addPanel({text: 'Arquitectura',panel: cg.$('div').addClass('arquitecture')})
-      .addPanel({text: 'Recursos',panel: $('div.sources2')})
+      .addPanel({text: 'Recursos',panel: $('div.sources')})
+      .addPanel({text: 'Gatget GALLERY',panel: $('div.gallery-gatgets')})
       .prependTo($('._s_n_body'));
 
-
-    panels.views()[2].find('div.cLink').css('height','calc(100% - 50px)');
     panels.views()[2].find('.btnReturn').click(function () {
       panels.views()[2].find('div.ccLink').show();
       panels.views()[2].find('div.ccCode').hide();
@@ -89,10 +93,6 @@
     panels.views()[2].find('.btnSave').click(function (event) {
       $.post('query.php', {fn: cg.fn('saveSourceProjets',[projet, source[1], editorResource.getValue()])});
     });
-
-    $('div._s_n_body').heightCalc(100, -41);
-    panels.container().find('> div').eq(0).width(200);
-    panels.container().find('> div').eq(1).css('width','calc(100% - 200px)');
 
     $('.saveChanges').click(function(event) {
       var proj = projet;
@@ -114,17 +114,17 @@
 
     $.post('query.php', {fn: cg.fn('listFolderSource', [projet])}, function(data) {
       var DATA = JSON.parse(data);
+      console.log(DATA);
       for (var variable in DATA) {
-        console.log(variable);
-        panels.views()[2].find('div.ccLink').append(
-          cg.$('div').addClass('cgSquareIcon').append(
-            cg.$('div').append(
-              cg.$('i').addClass('ion-ios-folder-outline'),
-              cg.$('div').text(variable)
-            )
+        var squareicon = cg.$('div').addClass('cgSquareIcon').append(
+          cg.$('div').append(
+            cg.$('i').addClass('ion-ios-folder-outline'),
+            cg.$('div').text(variable)
           )
-
         );
+        var ee = {};ee[variable] = DATA[variable];
+        openFolderS(squareicon,ee);
+        panels.views()[2].find('div.ccLink').append(squareicon);
       }
     });
 
@@ -146,6 +146,11 @@
         });
       }
     });
+    function openFolderS(selector,folderPath){
+      selector.click(function (event) {
+          console.log(folderPath);
+      });
+    }
     function openCodeS(selector,newSource) {
 
       selector.click(function (event) {

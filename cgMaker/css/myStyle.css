@@ -249,7 +249,7 @@ div.n_body div._n_open_projet > a:hover {
 }
 
 div.projet-management div._s_n_body {
-  height: 100%;
+  height: calc(100% - 40px);
 }
 
 div.projet-management div._s_n_body div.cg-multipanel {
@@ -264,6 +264,7 @@ div.projet-management div._s_n_body div.cg-multipanel > div {
 
 div.projet-management div._s_n_body div.cg-multipanel > div.cg-multipanel-access {
   background: #eaeaea;
+  width: 200px;
 }
 
 div.projet-management div._s_n_body div.cg-multipanel > div.cg-multipanel-access button {
@@ -286,6 +287,7 @@ div.projet-management div._s_n_body div.cg-multipanel > div.cg-multipanel-view {
   box-sizing: border-box;
   padding: 0 20px 10px 0;
   border-left: 1px white solid;
+  width: calc(100% - 200px);
 }
 
 div.projet-management div._s_n_body div.cg-multipanel > div.cg-multipanel-view > div {
@@ -300,69 +302,46 @@ div.projet-management div._s_n_body div.cg-multipanel > div.cg-multipanel-view d
 
 div.projet-management div._s_n_body div.cg-multipanel > div.cg-multipanel-view div.arquitecture iframe {
   width: 100%;
-  height: 100%;
+  height: calc(100% - 10px);
   border: 0;
 }
 
 div.projet-management div._s_n_body div.cg-multipanel > div.cg-multipanel-view div.sources {
   position: relative;
   padding: 10px;
-  box-sizing: border-box;
-}
-
-div.projet-management div._s_n_body div.cg-multipanel > div.cg-multipanel-view div.sources > div {
-  position: relative;
-  width: 100%;
-  height: 100%;
-}
-
-div.projet-management div._s_n_body div.cg-multipanel > div.cg-multipanel-view div.sources > div > div.cLink {
-  height: 100%;
-}
-
-div.projet-management div._s_n_body div.cg-multipanel > div.cg-multipanel-view div.sources > div > div.cLink > div.cclink {
-  width: 100%;
-  height: 100%;
-  position: relative;
-}
-
-div.projet-management div._s_n_body div.cg-multipanel > div.cg-multipanel-view div.sources > div > div.cLink > div.ccCode {
-  width: 100%;
-  height: 100%;
-  position: relative;
-}
-
-div.projet-management div._s_n_body div.cg-multipanel > div.cg-multipanel-view div.sources > div > div.cOption {
-  height: 50px;
-  background: #e2ea89;
-}
-
-div.projet-management div._s_n_body div.cg-multipanel > div.cg-multipanel-view div.sources2 {
-  position: relative;
-  padding: 10px;
   overflow: hidden;
   box-sizing: border-box;
 }
 
-div.projet-management div._s_n_body div.cg-multipanel > div.cg-multipanel-view div.sources2 > div {
+div.projet-management div._s_n_body div.cg-multipanel > div.cg-multipanel-view div.sources > div {
   height: 100%;
   width: 100%;
 }
 
-div.projet-management div._s_n_body div.cg-multipanel > div.cg-multipanel-view div.sources2 > div > div.cLink {
-  height: 100%;
+div.projet-management div._s_n_body div.cg-multipanel > div.cg-multipanel-view div.sources > div > div.cLink {
+  height: calc(100% - 50px);
 }
 
-div.projet-management div._s_n_body div.cg-multipanel > div.cg-multipanel-view div.sources2 > div > div.cLink > div {
+div.projet-management div._s_n_body div.cg-multipanel > div.cg-multipanel-view div.sources > div > div.cLink > div {
   height: 100%;
   width: 100%;
 }
 
-div.projet-management div._s_n_body div.cg-multipanel > div.cg-multipanel-view div.sources2 > div > div.cLink > div.ccCode {
+div.projet-management div._s_n_body div.cg-multipanel > div.cg-multipanel-view div.sources > div > div.cLink > div.ccCode {
   display: none;
 }
 
-div.projet-management div._s_n_body div.cg-multipanel > div.cg-multipanel-view div.sources2 > div > div.cSettings {
+div.projet-management div._s_n_body div.cg-multipanel > div.cg-multipanel-view div.sources > div > div.cSettings {
   height: 50px;
   background: #e2ea89;
+}
+
+div.projet-management div._s_n_body div.cg-multipanel > div.cg-multipanel-view div.gallery-gatgets {
+  padding: 10px;
+  box-sizing: border-box;
+}
+
+div.projet-management div._s_n_body div.cg-multipanel > div.cg-multipanel-view div.gallery-gatgets > div {
+  background: red;
+  height: 100%;
 }
