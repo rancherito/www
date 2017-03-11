@@ -37,7 +37,7 @@ $page_index_cf =
     $(document).ready(function() {
       var txtNameProjet = cg.input().appendTo($('._ci_text')).placeholder('ingrese el nombre del proyecto');
       $('.createProjet').click(function(event) {
-        $.post("query.php",{function:cg.fn('createProjet',[txtNameProjet.val()])}, function(data) {
+        $.post("query.php", {fn: cg.fn('createProjet', [txtNameProjet.val()])}, function(data) {
           var DATA = JSON.parse(data);
           if (DATA.PROCESS === 'CORRECT') {
             window.open('?page_index=open_projet','_self');
