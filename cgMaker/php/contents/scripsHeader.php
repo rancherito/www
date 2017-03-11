@@ -1,8 +1,11 @@
 <link rel="stylesheet" href="css/style.css">
 <link rel="stylesheet" href="css/myStyle.css">
 <link rel="stylesheet" href="src/font/Ionicons/css/ionicons.css">
+<script type="text/javascript" src="js/supportJs.js"></script>
+<script type="text/javascript" src="js/ResizeSensor.js"></script>
 <script type="text/javascript" src="js/jquery-1.12.4.js"></script>
 <script type="text/javascript" src="js/cg.class.js"></script>
+<script type="text/javascript" src="js/main.js"></script>
 
 <link rel="stylesheet" href="src/pluggings/codeMirror/lib/codemirror.css">
 <link rel="stylesheet" href="src/pluggings/codeMirror/addon/fold/foldgutter.css">

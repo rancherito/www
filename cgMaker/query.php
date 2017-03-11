@@ -1,7 +1,8 @@
 <?php
+date_default_timezone_set('America/Lima');
 include_once 'php/functions.php';
-if (!empty($_POST['function'])) {
-  $n_f = f_parameters($_POST['function']);
+if (!empty($_POST['fn'])) {
+  $n_f = f_parameters($_POST['fn']);
   if ($n_f[0] === 'createProjet') {
     createProjet($n_f[1]);
   }elseif ($n_f[0] === 'listProjets') {
@@ -15,8 +16,8 @@ if (!empty($_POST['function'])) {
     echo getCodeSourceProjet($n_f[1], $n_f[2]);
   }elseif ($n_f[0] === 'saveSourceProjets') {
     saveSourceProjets($n_f[1], $n_f[2], $n_f[3]);
-  }elseif ($n_f[0] === 'test') {
-    //echo $n_f[1];
+  }elseif ($n_f[0] === 'lastModified') {
+    echo lastModified($n_f[1]);
   }
 }
  ?>

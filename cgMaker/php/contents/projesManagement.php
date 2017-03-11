@@ -80,26 +80,26 @@
       .prependTo($('._s_n_body'));
 
 
-    panels.views()[2].find('div.cLink').heightCalc(100,-51);
+    panels.views()[2].find('div.cLink').css('height','calc(100% - 50px)');
     panels.views()[2].find('.btnReturn').click(function () {
       panels.views()[2].find('div.ccLink').show();
       panels.views()[2].find('div.ccCode').hide();
       panels.views()[2].find('.btnSave').hide();
     });
     panels.views()[2].find('.btnSave').click(function (event) {
-      $.post('query.php', {function: cg.function('saveSourceProjets',[projet, source[1], editorResource.getValue()])});
+      $.post('query.php', {fn: cg.fn('saveSourceProjets',[projet, source[1], editorResource.getValue()])});
     });
 
     $('div._s_n_body').heightCalc(100, -41);
     panels.container().find('> div').eq(0).width(200);
-    panels.container().find('> div').eq(1).widthCalc(100, -201);
+    panels.container().find('> div').eq(1).css('width','calc(100% - 200px)');
+
     $('.saveChanges').click(function(event) {
       var proj = projet;
-      $.post('query.php', {function: cg.function('saveProjets',[proj,editor.getValue()])});
+      $.post('query.php', {fn: cg.fn('saveProjets',[proj,editor.getValue()])});
     });
 
-
-    $.post("query.php",{function:cg.function('sourcesProjet',[projet])}, function(data) {
+    $.post("query.php",{fn:cg.fn('sourcesProjet',[projet])}, function(data) {
       var DATA = JSON.parse(data);
       for (var variable in DATA) {
         var link = cg.$('a').append(cg.$('i').addClass('ion-android-exit'));
@@ -114,15 +114,31 @@
 
     panels.views()[1].append(cg.$('iframe').prop('src', '../'+projet+'/indexArq.php'));
 
-
+    // others functios
+    new fileAsModified('../'+projet+'/cgMProjet/index.cgM',function (change) {
+      if (change) {
+        $.post("../"+projet+'/cgMProjet/index.cgM',{}, function(data) {
+          editor.setValue(data);
+        });
+      }
+    });
+    var lastModifiedSource = new fileAsModified('',function (change) {
+      if (change) {
+        $.post('query.php', {fn: cg.fn('getCodeSourceProjet',[projet, source[1]])}, function(data) {
+          editorResource.setOption("mode", extencion[cg.getFileExtension(source[0])]);
+          editorResource.setValue(data);
+        });
+      }
+    });
     function openCodeS(selector,newSource) {
 
       selector.click(function (event) {
         source = newSource;
+        lastModifiedSource.path(source[1]);
         panels.views()[2].find('div.ccLink').hide();
         panels.views()[2].find('div.ccCode').show();
         panels.views()[2].find('.btnSave').show();
-        $.post('query.php', {function: cg.function('getCodeSourceProjet',[projet, source[1]])}, function(data) {
+        $.post('query.php', {fn: cg.fn('getCodeSourceProjet',[projet, source[1]])}, function(data) {
           editorResource.setOption("mode", extencion[cg.getFileExtension(source[0])]);
           editorResource.setValue(data);
         });

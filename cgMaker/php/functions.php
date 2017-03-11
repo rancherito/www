@@ -1,5 +1,7 @@
 <?php
 
+
+
   function f_parameters($function){
     $procedure = htmlspecialchars($function);
     preg_match('/\([\w\W]+\)/i',$procedure,$encontrado);
@@ -25,17 +27,9 @@ $bodyIndex = <<<EOT
     </head>
 	<body>
 		<div class="panel_p">
-			<div class="panel_s">
-				<div class="n_panel_p n_header">
-					<div class="n_panel_s"></div>
-				</div>
-				<div class="n_panel_p n_body">
-					<div class="n_panel_s">hola mundo</div>
-				</div>
-				<div class="n_panel_p n_footer">
-					<div class="n_panel_s"></div>
-				</div>
-			</div>
+				<div class="n_panel_p n_header"></div>
+				<div class="n_panel_p n_body">hola mundo</div>
+				<div class="n_panel_p n_footer"></div>
 		</div>
   	</body>
 </html>
@@ -209,6 +203,9 @@ EOT;
       mkdir($dir, 0777, true);
     }
     return [$dir, $ext];
+  }
+  function lastModified($path){
+    return is_file($path) ? filemtime($path) : '0000000000';
   }
 
  ?>

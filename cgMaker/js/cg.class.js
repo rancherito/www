@@ -21,7 +21,7 @@ cg.centerSelector = function (selector) {
     selector.css({'margin-top': '-' + (h / 2) + 'px', 'margin-left': '-' + (w / 2) + 'px'});
   });
 };
-cg.function = function (name,values) {
+cg.fn = function (name,values) {
   var parameters = '(';
   if (values instanceof Array) for (var i=0; i < values.length; i++) parameters+=(i!=0?",":"")+"$"+values[i];
   return name+parameters+')';

@@ -11164,20 +11164,40 @@ return jQuery;
 }( jQuery ));
 
 jQuery.fn.extend({
+	isResize: function (fnCallback) {
+		var originalWidth = this.outerWidth();
+		var originalHeight = this.outerHeight();
+		var me = this;
+		setInterval(function () {
+			var w = me.outerWidth();
+			var h = me.outerHeight();
+			if (originalWidth !== w || originalHeight !== h) {
+				if (typeof fnCallback === 'function') {
+					fnCallback();
+				}
+			}
+			originalHeight = h;
+			originalWidth = w;
+		}, 13);
+		return this;
+	},
 	widthCalc: function(percent,added) {
 		if (typeof percent === 'number' && typeof added === 'number') {
 			var me = this;
-			me.parent().resize(function(event) {
-				me.outerWidth($(this).outerWidth()*(percent/100) + added);
+			me.outerWidth(me.parent().outerWidth()*(percent/100) + added - 1);
+			me.parent().isResize(function(event) {
+				me.outerWidth(me.parent().outerWidth()*(percent/100) + added - 1);
 			});
 		}
 		return this;
 	},
 	heightCalc: function(percent,added) {
+
 		if (typeof percent === 'number' && typeof added === 'number') {
 			var me = this;
-			me.parent().resize(function(event) {
-				me.outerHeight($(this).outerHeight()*(percent/100) + added);
+			me.outerHeight(me.parent().outerHeight()*(percent/100) + added - 1);
+			me.parent().isResize(function(event) {
+				me.outerHeight(me.parent().outerHeight()*(percent/100) + added - 1);
 			});
 		}
 		return this;
