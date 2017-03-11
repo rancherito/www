@@ -196,7 +196,6 @@ div{
 
 	}
 }
-
 div.n_body{
 	div._n_open_projet{
 		background: $cgray;
@@ -296,7 +295,6 @@ div.projet-management{
 					padding: 10px;
 					box-sizing: border-box;
 					> div{
-						background: red;
 						height: 100%;
 					}
 				}
@@ -304,4 +302,14 @@ div.projet-management{
 		}
 	}
 
+}
+div.gatget-factory{
+	div.n_body{
+		padding: 10px;
+		box-sizing: border-box;
+		> div.n_body_s{
+			background: purple;
+			height: 100%;
+		}
+	}
 }

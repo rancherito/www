@@ -342,6 +342,15 @@ div.projet-management div._s_n_body div.cg-multipanel > div.cg-multipanel-view d
 }
 
 div.projet-management div._s_n_body div.cg-multipanel > div.cg-multipanel-view div.gallery-gatgets > div {
-  background: red;
+  height: 100%;
+}
+
+div.gatget-factory div.n_body {
+  padding: 10px;
+  box-sizing: border-box;
+}
+
+div.gatget-factory div.n_body > div.n_body_s {
+  background: purple;
   height: 100%;
 }

@@ -294,6 +294,10 @@ cg.MultiPanelView = function () {
       panel.appendTo(pnl_view);
     });
   }
+  this.style = function (newStyle) {
+    container.addClass(newStyle);
+    return this;
+  }
 
   this.addPanel = function (custom) {
     if (typeof custom !== 'undefined' && typeof custom === 'object') {

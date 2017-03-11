@@ -33,7 +33,11 @@
           </div>
           <div class="gallery-gatgets">
             <div class="">
-              MI GALERIA
+              <div class="cgSquareIcon2 add-gatget">
+                <div class="">
+                  <i class="ion-android-add"></i>
+                </div>
+              </div>
             </div>
           </div>
         </div>
@@ -49,6 +53,7 @@
   $(document).ready(function() {
     var pnlEditor = cg.$('div');
     var pnlEditorSource = $('div.ccCode');
+    var btnAddGatget = $('div.add-gatget');
 
     var editor = CodeMirror(pnlEditor[0],{
       lineNumbers: true,
@@ -97,6 +102,11 @@
     $('.saveChanges').click(function(event) {
       var proj = projet;
       $.post('query.php', {fn: cg.fn('saveProjets',[proj,editor.getValue()])});
+    });
+
+    btnAddGatget.click(function (event) {
+      console.log('lalala');
+      window.open("?page_gatgets=true",'_self');
     });
 
     /*$.post("query.php",{fn:cg.fn('sourcesProjet',[projet])}, function(data) {
