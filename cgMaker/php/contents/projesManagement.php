@@ -118,8 +118,10 @@
         console.log(variable);
         panels.views()[2].find('div.ccLink').append(
           cg.$('div').addClass('cgSquareIcon').append(
-            cg.$('i').addClass('class_name'),
-            cg.$('div').text(variable)
+            cg.$('div').append(
+              cg.$('i').addClass('ion-ios-folder-outline'),
+              cg.$('div').text(variable)
+            )
           )
 
         );
