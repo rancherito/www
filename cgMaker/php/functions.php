@@ -75,11 +75,12 @@ EOT;
       echo '{"PROCESS":"CORRECT"}';
       $myfile = fopen($dir.'/index.php', "w");fwrite($myfile, $bodyIndex);fclose($myfile);
       $myfile = fopen($dir.'/indexArq.php', "w");fwrite($myfile, str_replace('</head>',"<link rel='stylesheet' href='cgMProjet/style.css'>\n</head>",$bodyIndex));fclose($myfile);
+      $myfile = fopen($dir.'/projet.cginfo', "w");fclose($myfile);
 
       mkdir($dir.'/cgMProjet', 0777, true);
       $myfile = fopen($dir.'/cgMProjet/index.cgM', "w");fwrite($myfile, $bodyIndex);fclose($myfile);
       $myfile = fopen($dir.'/cgMProjet/style.css', "w");fwrite($myfile, $style);fclose($myfile);
-      $myfile = fopen($dir.'/projet.cginfo', "w");fclose($myfile);
+      copy("js/jquery-1.12.4.js","$dir/cgMProjet/jquery-1.12.4.js");
 
       mkdir($dir.'/src', 0777, true);
 

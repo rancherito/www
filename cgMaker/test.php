@@ -56,7 +56,7 @@
           .val('gato loco')
           .text('some text');
 
-          $.post('query.php', {function: cg.function('test',["console.log('wachalatato1áñÑ@--_d3°|#$%&/()=?¡'')))))555555","EL GATOVOLADOR",'tabitopacholino 1255'])}, function(data) {
+          $.post('query.php', {function: cg.fn('test',["console.log('wachalatato1áñÑ@--_d3°|#$%&/()=?¡'')))))555555","EL GATOVOLADOR",'tabitopacholino 1255'])}, function(data) {
             console.log(data);
           });
           test.input('select');
