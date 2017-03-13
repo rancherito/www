@@ -62,6 +62,26 @@ $page_index_op = <<<EOT
     </div>
   </div>
 EOT;
+
+$page_index_gg = <<<EOT
+<div class="_s_4">
+  <div class="_s_title">Gatgets</div>
+  <div class="_s_body">
+    <div class="cgSquareIcon2 add-gatget">
+      <div class="">
+        <i class="ion-android-add"></i>
+      </div>
+    </div>
+  </div>
+</div>
+<script>
+  $(document).ready(function() {
+    $('div.add-gatget').click(function (event){
+      window.open("?page_gatgets=new",'_self');
+    });
+  });
+</script>
+EOT;
  ?>
 
 <div class="panel_p">
@@ -87,6 +107,9 @@ EOT;
                     break;
                   case 'open_projet':
                     echo $page_index_op;
+                    break;
+                  case 'gatget-factory':
+                    echo $page_index_gg;
                     break;
                   default:
                     echo $page_index;
