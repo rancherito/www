@@ -6,8 +6,7 @@ if (!empty($_POST['fn'])) {
   if ($n_f[0] === 'createProjet') {
     createProjet($n_f[1]);
   }elseif ($n_f[0] === 'listProjets') {
-    $json = json_encode(list_projets());
-    echo $json;
+    echo json_encode(list_projets());
   }elseif ($n_f[0] === 'saveProjets') {
     saveProjets($n_f[1],$n_f[2]);
   }elseif ($n_f[0] === 'sourcesProjet') {
