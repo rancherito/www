@@ -57,11 +57,11 @@ div.floor {
 div.floor > div.sub_menus {
   background: white;
   height: 400px;
-  width: 600px;
+  width: 800px;
   position: absolute;
   top: -350px;
   left: 50%;
-  margin-left: -300px;
+  margin-left: -400px;
 }
 
 div.floor > div.sub_menus > div._s_1 {
@@ -71,16 +71,12 @@ div.floor > div.sub_menus > div._s_1 {
 
 div.floor > div.sub_menus > div._s_1 > div {
   float: left;
-  width: 50%;
+  width: 33.3%;
   height: 100%;
   position: relative;
 }
 
-div.floor > div.sub_menus > div._s_1 > div.item-1 {
-  background: white;
-}
-
-div.floor > div.sub_menus > div._s_1 > div.item-1 > div.icon {
+div.floor > div.sub_menus > div._s_1 > div > div.icon {
   height: 200px;
   width: 100%;
   box-sizing: border-box;
@@ -88,12 +84,11 @@ div.floor > div.sub_menus > div._s_1 > div.item-1 > div.icon {
   line-height: 200px;
 }
 
-div.floor > div.sub_menus > div._s_1 > div.item-1 > div.icon > i {
+div.floor > div.sub_menus > div._s_1 > div > div.icon > i {
   font-size: 130px;
-  color: #d0d0d0;
 }
 
-div.floor > div.sub_menus > div._s_1 > div.item-1 > div.title {
+div.floor > div.sub_menus > div._s_1 > div > div.title {
   height: 50px;
   width: 80%;
   margin-left: 10%;
@@ -104,44 +99,25 @@ div.floor > div.sub_menus > div._s_1 > div.item-1 > div.title {
   border-bottom: 1px gray solid;
 }
 
-div.floor > div.sub_menus > div._s_1 > div.item-1 > a.link {
+div.floor > div.sub_menus > div._s_1 > div > a.link {
   width: 80%;
   margin-left: 10%;
   margin-top: 50px;
+}
+
+div.floor > div.sub_menus > div._s_1 > div.item-1 > div.icon > i, div.floor > div.sub_menus > div._s_1 > div.item-3 > div.icon > i {
+  color: #d0d0d0;
 }
 
 div.floor > div.sub_menus > div._s_1 > div.item-2 {
   background: #dfdfdf;
 }
 
-div.floor > div.sub_menus > div._s_1 > div.item-2 > div.icon {
-  height: 200px;
-  width: 100%;
-  box-sizing: border-box;
-  text-align: center;
-  line-height: 200px;
-}
-
 div.floor > div.sub_menus > div._s_1 > div.item-2 > div.icon > i {
-  font-size: 130px;
   color: white;
 }
 
-div.floor > div.sub_menus > div._s_1 > div.item-2 > div.title {
-  height: 50px;
-  width: 80%;
-  margin-left: 10%;
-  line-height: 50px;
-  text-align: center;
-  font-size: 24px;
-  box-sizing: border-box;
-  border-bottom: 1px gray solid;
-}
-
 div.floor > div.sub_menus > div._s_1 > div.item-2 > a.link {
-  width: 80%;
-  margin-left: 10%;
-  margin-top: 50px;
   border-color: white;
 }
 

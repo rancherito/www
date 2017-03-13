@@ -17,11 +17,15 @@ $page_index = <<<EOT
       <div class="title">OPEN PROJET EXSTENT</div>
       <a class="cgButtom01 link" href="?page_index=open_projet">GO</a>
     </div>
+    <div class="item-3">
+      <div class="icon"><i class="ion-cube"></i></div>
+      <div class="title">OPEN PROJET EXSTENT</div>
+      <a class="cgButtom01 link" href="?page_index=gatget-factory">GO</a>
+    </div>
   </div>
 EOT;
 
-$page_index_cf =
-<<<EOT
+$page_index_cf = <<<EOT
   <div class="_s_2">
     <div class="_s_title">Create your projet</div>
     <div class="_s_body">
@@ -50,8 +54,7 @@ $page_index_cf =
   </script>
 EOT;
 
-$page_index_op =
-<<<EOT
+$page_index_op = <<<EOT
   <div class="_s_3">
   <div class="_s_title">Search Projets</div>
     <div class="_s_body">

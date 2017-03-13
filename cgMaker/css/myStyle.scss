@@ -50,75 +50,59 @@ div{
 		> div.sub_menus {
 			background: white;
 			height: 400px;
-			width: 600px;
+			width: 800px;
 			position: absolute;
 			top: -350px;
 			left: 50%;
-			margin-left: -300px;
+			margin-left: -400px;
 			> div._s_1{
 				width: 100%;
 				height: 100%;
 				> div {
 					float: left;
-					width: 50%;
+					width: 33.3%;
 					height: 100%;
 					position: relative;
-					&.item-1 {
-						background: white;
+					> div.icon{
+						height: 200px;
+						width: 100%;
+						box-sizing: border-box;
+						text-align: center;
+						line-height: 200px;
+						> i{
+							font-size: 130px;
+						}
+					}
+					> div.title{
+						height: 50px;
+						width: 80%;
+						margin-left: 10%;
+						line-height: 50px;
+						text-align: center;
+						font-size: 24px;
+						box-sizing: border-box;
+						border-bottom: 1px gray solid;
+					}
+					> a.link{
+						width: 80%;
+						margin-left: 10%;
+						margin-top: 50px;
+					}
+					&.item-1, &.item-3 {
 						> div.icon{
-							height: 200px;
-							width: 100%;
-							box-sizing: border-box;
-							text-align: center;
-							line-height: 200px;
 							> i{
-								font-size: 130px;
 								color: #d0d0d0;
 							}
-						}
-						> div.title{
-							height: 50px;
-							width: 80%;
-							margin-left: 10%;
-							line-height: 50px;
-							text-align: center;
-							font-size: 24px;
-							box-sizing: border-box;
-							border-bottom: 1px gray solid;
-						}
-						> a.link{
-							width: 80%;
-							margin-left: 10%;
-							margin-top: 50px;
 						}
 					}
 					&.item-2 {
 						background: #dfdfdf;
 						> div.icon{
-							height: 200px;
-							width: 100%;
-							box-sizing: border-box;
-							text-align: center;
-							line-height: 200px;
 							> i{
-								font-size: 130px;
 								color: white;
 							}
 						}
-						> div.title{
-							height: 50px;
-							width: 80%;
-							margin-left: 10%;
-							line-height: 50px;
-							text-align: center;
-							font-size: 24px;
-							box-sizing: border-box;
-							border-bottom: 1px gray solid;
-						}
 						> a.link{
-							width: 80%;
-							margin-left: 10%;
-							margin-top: 50px;
 							border-color: white;
 							&:hover{
 								border-color: #ff8f8f;
