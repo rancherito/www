@@ -1,21 +1,23 @@
-var fileAsModified = function (path, fnCallback) {
-  var originalPath = '0000000000'
-  $.post('query.php', {fn: cg.fn('lastModified', [path])}, function (data) {
-    originalPath = data
-  })
+var fileAsModified = function (path,fnCallback) {
+  var originalPath = path;
+  var originalTime = '';
+  $.post('query.php',{fn: cg.fn('lastModified',[originalPath])}, function(data) {
+    originalTime = data;
+  });
   setInterval(function () {
-    $.post('query.php', {fn: cg.fn('lastModified', [path])}, function (data) {
+    $.post('query.php',{fn: cg.fn('lastModified',[originalPath])}, function(data) {
       if (typeof fnCallback === 'function') {
-        fnCallback(originalPath !== data)
+        fnCallback(originalTime !== data);
       }
-      originalPath = data
-    })
-  }, 1000)
+      originalTime = data;
+    });
+  }, 100);
   this.path = function (path) {
-    if (typeof path !== 'undefined' && typeof path === 'string') {
-      originalPath = path
-      return this
+
+    if (typeof path === 'string') {
+      originalPath = path;
+      return this;
     }
-    return path
+    return originalPath;
   }
 }
