@@ -357,6 +357,17 @@ div.gatget-factory div.n_body > div.n_body_s > div.gf-settings {
   height: 50px;
 }
 
+div.gatget-factory div.n_body > div.n_body_s > div.gf-settings input, div.gatget-factory div.n_body > div.n_body_s > div.gf-settings option {
+  float: right;
+  width: 300px;
+}
+
+div.gatget-factory div.n_body > div.n_body_s > div.gf-settings button {
+  width: 80px;
+  float: right;
+  margin-left: 10px;
+}
+
 div.gatget-factory div.n_body > div.n_body_s > div.pnl_multi {
   height: calc(100% - 50px);
 }

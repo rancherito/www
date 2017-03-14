@@ -11,8 +11,8 @@
     <div class="n_panel_p n_body">
       <div class="n_body_s">
         <div class="gf-settings">
-          <cgObjet type='Input' name='manati'></cgObjet>
-          <button type="button" name="button">lalal</button>
+          <button class="themeButton01">Save</button>
+          <cgObjet type='Input' name='nameGatget'></cgObjet>
         </div>
         <div class="pnl_multi">
           <div class="pnlScript">Los script</div>
@@ -26,15 +26,12 @@
 </div>
 <script type="text/javascript">
   $(document).ready(function() {
-    var cgO = {Input:{}};
-
-    $('cgObjet').each(function( index ) {
-      var type = $(this).attr('type');
-      var name = $(this).attr('name');
-      eval('cgO.'+type+'.'+name+' = new cg.'+type+'();');
-      $(this).after(cgO[type][name].dom());
-    });
-    console.log(cgO.Input);
+    cg.readyObj();
+    var inputs = cg.obj.Input;
+    inputs.nameGatget
+    .style('themeInput01')
+    .placeholder('Name gatget')
+    .input('label');
 
     var panels = cg.multiPanelView()
       .addPanel({text: 'Javescript',panel: $('div.pnlScript')})

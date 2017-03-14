@@ -218,7 +218,7 @@ cg.Input = function (type) {
   this.input = function (setInput) {
     if (typeof setInput !== 'undefined') {
       if (typeof setInput === 'string' && listInputs[setInput] !== 'undefined' && inputType !== setInput) {
-        if (isInDom) listInputs[inputType].after(listInputs[setInput]).detach();
+        if (listInputs[inputType].parent().length)listInputs[inputType].after(listInputs[setInput]).detach();
         inputType = setInput;
       }
       return this;
@@ -274,6 +274,9 @@ cg.Input = function (type) {
     }
     return this;
   };
+  this.style = function (newStyle) {
+    return this.addClass(newStyle);
+  }
 }
 cg.MultiPanelView = function () {
   var container = cg.$('div').addClass('cg-multipanel');
@@ -344,3 +347,14 @@ cg.dataTable = function (source) { return new cg.DataTable(source); };
 cg.messageBox = function (param) { return new cg.MessageBox(param); };
 cg.input = function (type) { return new cg.Input(type); };
 cg.multiPanelView = function () { return new cg.MultiPanelView(); };
+cg.obj = {Input:{}};
+cg.readyObj = function () {
+  $('cgObjet').each(function( index ) {
+    var type = $(this).attr('type');
+    var name = $(this).attr('name');
+    if (typeof cg.obj[type][name] === 'undefined') {
+      eval('cg.obj.' + type + '.' + name + ' = new cg.' + type + '();');
+      $(this).after(cg.obj[type][name].dom()).remove();
+    }
+  });
+};

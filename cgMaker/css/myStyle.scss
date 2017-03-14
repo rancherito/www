@@ -315,6 +315,15 @@ div.gatget-factory{
 			height: 100%;
 			> div.gf-settings{
 				height: 50px;
+				input, option{
+					float: right;
+					width: 300px;
+				}
+				button{
+					width: 80px;
+					float: right;
+					margin-left: 10px;
+				}
 			}
 			> div.pnl_multi{
 				height: calc(100% - 50px);

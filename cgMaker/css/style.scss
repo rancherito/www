@@ -174,3 +174,27 @@ div.themeMultipanel01{
     height: 100%;
   }
 }
+.themeButton01{
+  background: #e91e63;
+  color: white;
+  height: 30px;
+  line-height: 30px;
+  border-style: solid;
+  border: 0;
+  cursor: pointer;
+  border-radius: 3px;
+  font-size: 16px;
+  outline: 0;
+  &:hover{
+    background: #f54a84;
+  }
+}
+option.themeInput01, input.themeInput01{
+  background: white;
+  color: #676262;
+  height: 20px;
+  padding: 5px;
+  border-radius: 3px;
+  outline: 0;
+  font-size: 16px;
+}
