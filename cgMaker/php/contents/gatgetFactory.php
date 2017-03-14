@@ -12,7 +12,6 @@
       <div class="n_body_s">
         <div class="gf-settings">
           <cgObjet type='Input' name='manati'></cgObjet>
-          <cgObjet type='Input' name='manati2'></cgObjet>
           <button type="button" name="button">lalal</button>
         </div>
         <div class="pnl_multi">
@@ -27,19 +26,15 @@
 </div>
 <script type="text/javascript">
   $(document).ready(function() {
-    var cgObj = {};
+    var cgO = {Input:{}};
 
-
-    var cgO = $('cgObjet');
-    cgO.each(function( index ) {
-      var type = $( this ).attr('type');
-      var name = $( this ).attr('name');
-      var str = 'cgObj.'+type+'.'+name+' = new cg.'+type+'();';
-      console.log(str);
-      //cgObj[$( this ).attr('type')][$( this ).attr('name')] = eval('new cg.' + $( this ).attr('type') + '()');
+    $('cgObjet').each(function( index ) {
+      var type = $(this).attr('type');
+      var name = $(this).attr('name');
+      eval('cgO.'+type+'.'+name+' = new cg.'+type+'();');
+      $(this).after(cgO[type][name].dom());
     });
-
-    eval('console.log("hola mundo")');
+    console.log(cgO.Input);
 
     var panels = cg.multiPanelView()
       .addPanel({text: 'Javescript',panel: $('div.pnlScript')})
