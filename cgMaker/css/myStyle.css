@@ -371,3 +371,11 @@ div.gatget-factory div.n_body > div.n_body_s > div.gf-settings button {
 div.gatget-factory div.n_body > div.n_body_s > div.pnl_multi {
   height: calc(100% - 50px);
 }
+
+div.gatget-factory div.n_body > div.n_body_s > div.pnl_multi > div.cg-multipanel > div.cg-multipanel-view {
+  background: gray;
+}
+
+div.gatget-factory div.n_body > div.n_body_s > div.pnl_multi > div.cg-multipanel > div.cg-multipanel-view > div {
+  height: 100%;
+}

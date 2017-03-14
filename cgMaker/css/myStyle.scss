@@ -327,6 +327,14 @@ div.gatget-factory{
 			}
 			> div.pnl_multi{
 				height: calc(100% - 50px);
+				> div.cg-multipanel{
+					> div.cg-multipanel-view{
+						background: gray;
+						> div{
+							height: 100%;
+						}
+					}
+				}
 			}
 		}
 	}

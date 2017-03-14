@@ -181,7 +181,6 @@ div.themeMultipanel01 > div.cg-multipanel-access > button:hover {
 
 div.themeMultipanel01 > div.cg-multipanel-view {
   width: calc(100% - 200px);
-  background: green;
   float: left;
   height: 100%;
 }
