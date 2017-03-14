@@ -352,3 +352,11 @@ div.gatget-factory div.n_body {
 div.gatget-factory div.n_body > div.n_body_s {
   height: 100%;
 }
+
+div.gatget-factory div.n_body > div.n_body_s > div.gf-settings {
+  height: 50px;
+}
+
+div.gatget-factory div.n_body > div.n_body_s > div.pnl_multi {
+  height: calc(100% - 50px);
+}

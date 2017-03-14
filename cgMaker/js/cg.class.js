@@ -92,13 +92,13 @@ cg.MessageBox = function (setTypeBox) {
     }
     return this;
   };
-  this.container = function (getcontainer) {
-    if (getcontainer) {
+  this.dom = function (getcontainer) {
+    if ( typeof getcontainer === 'function') {
       getcontainer(container);
       return this;
-    } else {
-      return container;
     }
+    return container;
+
   };
   this.appendTo = function (selector) {
     if (selector) {
@@ -225,6 +225,9 @@ cg.Input = function (type) {
     }
     return listInputs[inputType];
   };
+  this.dom = function (setInput) {
+    return this.input(setInput);
+  }
   this.appendTo = function (setAppend) {
     if (setAppend.length > 0) {
       this.input().appendTo(setAppend);
@@ -316,9 +319,13 @@ cg.MultiPanelView = function () {
     return this;
   }
 
-  this.container = function () {
+  this.dom = function (getcontainer) {
+    if ( typeof getcontainer === 'function') {
+      getcontainer(container);
+      return this;
+    }
     return container;
-  }
+  };
   this.appendTo = function (setAppend) {
     if (setAppend.length > 0) {
       container.appendTo(setAppend);

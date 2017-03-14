@@ -313,6 +313,12 @@ div.gatget-factory{
 		box-sizing: border-box;
 		> div.n_body_s{
 			height: 100%;
+			> div.gf-settings{
+				height: 50px;
+			}
+			> div.pnl_multi{
+				height: calc(100% - 50px);
+			}
 		}
 	}
 }
