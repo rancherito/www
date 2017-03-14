@@ -19,6 +19,8 @@ if (!empty($_POST['fn'])) {
     echo lastModified($n_f[1]);
   }elseif ($n_f[0] === 'listFolderSource') {
     echo json_encode(listFolderSource($n_f[1]));
+  }elseif ($n_f[0] === 'saveGatget') {
+    echo saveGatget($n_f[1], $n_f[2], $n_f[3], $n_f[4], $n_f[5]);
   }
 }
  ?>

@@ -248,5 +248,20 @@ EOT;
     }
     return $dirsFiles;
   }
-
+  function saveGatget($gatget, $script, $style, $source, $isNew){
+    /*if (array_search($gatget,listgatgets())  === false || count($gatget) === 0) {
+      return 'true';
+    }*/
+    echo "$isNew";
+    return 'false';
+  }
+  function listgatgets(){
+    $a_return = [];
+    foreach (scandir("src/gatgets") as $key => $value) {
+      if ($value != '..' && $value != '.') {
+        array_push($a_return,$value);
+      }
+    }
+    return $a_return;
+  }
  ?>

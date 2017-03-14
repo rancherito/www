@@ -11,7 +11,7 @@
     <div class="n_panel_p n_body">
       <div class="n_body_s">
         <div class="gf-settings">
-          <button class="themeButton01">Save</button>
+          <button class="themeButton01 btnSaveGatget">Save</button>
           <cgObjet type='Input' name='nameGatget'></cgObjet>
         </div>
         <div class="pnl_multi">
@@ -34,18 +34,18 @@ var configEditor = {
   theme: "base16-light",
   tabSize: 5
 };
+var nameGatget = <?php echo "'$gatgets';"; ?>
   $(document).ready(function() {
     cg.readyObj();
     var inputs = cg.obj.Input;
+
     inputs.nameGatget
     .style('themeInput01')
     .placeholder('Name gatget');
 
-    <?php
-      $gatgets = $_GET['page_gatgets'];
-      if ($gatgets != 'new')
-      echo "inputs.nameGatget.input('label').text('$gatgets');";
-     ?>
+    if (nameGatget !== 'new') {
+      inputs.nameGatget.input('label').text(nameGatget);
+    }
 
      var editorJavascript = CodeMirror($('div.pnlScript')[0],configEditor);
      editorJavascript.setSize("100%", "100%");
@@ -66,6 +66,19 @@ var configEditor = {
       .addPanel({text: 'See Gatget',panel: $('div.pnlVeiew')})
       .appendTo($('div.pnl_multi'))
       .style('themeMultipanel01');
+
+    $('button.btnSaveGatget').click(function(event) {
+      $.post('query.php', {fn: cg.fn('saveGatget',[
+        inputs.nameGatget.val(),
+        editorJavascript.getValue(),
+        editorStyle.getValue(),
+        editorSource.getValue(),
+         nameGatget === 'new'
+       ])}, function(data) {
+        console.log(data);
+        
+      });
+    });
 
 
   });
