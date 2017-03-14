@@ -19,7 +19,7 @@ $page_index = <<<EOT
     </div>
     <div class="item-3">
       <div class="icon"><i class="ion-cube"></i></div>
-      <div class="title">OPEN PROJET EXSTENT</div>
+      <div class="title">GATGETS</div>
       <a class="cgButtom01 link" href="?page_index=gatget-factory">GO</a>
     </div>
   </div>

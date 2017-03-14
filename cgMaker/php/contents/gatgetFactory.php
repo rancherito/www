@@ -10,23 +10,27 @@
     </div>
     <div class="n_panel_p n_body">
       <div class="n_body_s">
-        <div class="pnlScript">Los script</div>
-        <div class="pnlStyle">Los style</div>
-        <div class="pnlSource">Los source</div>
-        <div class="pnlVeiew">Los Views</div>
+        <div class="gf-settings">
+          lalal
+        </div>
+        <div class="pnl_multi">
+          <div class="pnlScript">Los script</div>
+          <div class="pnlStyle">Los style</div>
+          <div class="pnlSource">Los source</div>
+          <div class="pnlVeiew">Los Views</div>
+        </div>
       </div>
     </div>
   </div>
 </div>
 <script type="text/javascript">
   $(document).ready(function() {
-    console.log('hola gatgets');
     var panels = cg.multiPanelView()
       .addPanel({text: 'Javescript',panel: $('div.pnlScript')})
       .addPanel({text: 'Style',panel: $('div.pnlStyle')})
       .addPanel({text: 'Code Source',panel: $('div.pnlSource')})
       .addPanel({text: 'See Gatget',panel: $('div.pnlVeiew')})
-      .prependTo($('.n_body_s'))
+      .appendTo($('div.pnl_multi'))
       .style('themeMultipanel01');
   });
 </script>

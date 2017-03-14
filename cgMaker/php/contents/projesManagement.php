@@ -148,7 +148,7 @@
         });
       }
     });
-    var lastModifiedSource = new fileAsModified('',function (change) {
+    var lastModifiedSource = new fileAsModified('ccc',function (change) {
       if (change) {
         $.post('query.php', {fn: cg.fn('getCodeSourceProjet',[projet, source[1]])}, function(data) {
           editorResource.setOption("mode", extencion[cg.getFileExtension(source[0])]);
