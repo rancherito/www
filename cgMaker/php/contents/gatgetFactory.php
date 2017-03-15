@@ -43,21 +43,26 @@ var nameGatget = <?php echo "'$gatgets';"; ?>
     .style('themeInput01')
     .placeholder('Name gatget');
 
+    var editorJavascript = CodeMirror($('div.pnlScript')[0],configEditor);
+    editorJavascript.setSize("100%", "100%");
+    editorJavascript.setOption('mode', 'javascript');
+
+    var editorStyle= CodeMirror($('div.pnlStyle')[0],configEditor);
+    editorStyle.setSize("100%", "100%");
+    editorStyle.setOption('mode', 'css');
+
+    var editorSource= CodeMirror($('div.pnlSource')[0],configEditor);
+    editorSource.setSize("100%", "100%");
+    editorSource.setOption('mode', 'htmlmixed');
+
     if (nameGatget !== 'new') {
       inputs.nameGatget.input('label').text(nameGatget);
+      $.post('src/gatgets/'+nameGatget+'/script.js',{}, function(data) {
+        editorJavascript.setValue(data);
+      });
     }
 
-     var editorJavascript = CodeMirror($('div.pnlScript')[0],configEditor);
-     editorJavascript.setSize("100%", "100%");
-     editorJavascript.setOption('mode', 'javascript');
 
-     var editorStyle= CodeMirror($('div.pnlStyle')[0],configEditor);
-     editorStyle.setSize("100%", "100%");
-     editorStyle.setOption('mode', 'css');
-
-     var editorSource= CodeMirror($('div.pnlSource')[0],configEditor);
-     editorSource.setSize("100%", "100%");
-     editorSource.setOption('mode', 'htmlmixed');
 
     var panels = cg.multiPanelView()
       .addPanel({text: 'JavaScript',panel: $('div.pnlScript')})
@@ -66,6 +71,22 @@ var nameGatget = <?php echo "'$gatgets';"; ?>
       .addPanel({text: 'See Gatget',panel: $('div.pnlVeiew')})
       .appendTo($('div.pnl_multi'))
       .style('themeMultipanel01');
+
+    panels.access()[1].click(function(event) {
+      if (nameGatget !== 'new') {
+        $.post('src/gatgets/'+nameGatget+'/style.css',{}, function(data) {
+          editorStyle.setValue(data);
+        });
+      }
+    });
+
+    panels.access()[2].click(function(event) {
+      if (nameGatget !== 'new') {
+        $.post('src/gatgets/'+nameGatget+'/source.php',{}, function(data) {
+          editorSource.setValue(data);
+        });
+      }
+    });
 
     $('button.btnSaveGatget').click(function(event) {
       $.post('query.php', {fn: cg.fn('saveGatget',[

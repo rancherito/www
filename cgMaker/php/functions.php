@@ -250,9 +250,9 @@ EOT;
   }
   function saveGatget($gatget, $script, $style, $source, $isNew){
     $a_return = ["PROCESS" => "FAIL"];
+    $dir = "src/gatgets/$gatget";
     if ($isNew === "true") {
       if (array_search($gatget,listgatgets())  === false && strlen($gatget) > 0) {
-        $dir = "src/gatgets/$gatget";
         mkdir($dir, 0777, true);
         $myfile = fopen("$dir/script.js", "w");fwrite($myfile, htmlspecialchars_decode($script));fclose($myfile);
         $myfile = fopen("$dir/style.css", "w");fwrite($myfile, htmlspecialchars_decode($style));fclose($myfile);
@@ -261,7 +261,10 @@ EOT;
         $a_return["PROCESS"] = "CORRECT";
       }
     }else {
-      echo "guardar Proyecto: $gatget";
+      $myfile = fopen("$dir/script.js", "w");fwrite($myfile, htmlspecialchars_decode($script));fclose($myfile);
+      $myfile = fopen("$dir/style.css", "w");fwrite($myfile, htmlspecialchars_decode($style));fclose($myfile);
+      $myfile = fopen("$dir/source.php", "w");fwrite($myfile, htmlspecialchars_decode($source));fclose($myfile);
+      $a_return["PROCESS"] = "CORRECT";
     }
     return $a_return;
   }
