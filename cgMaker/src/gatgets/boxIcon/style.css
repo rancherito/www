@@ -1,5 +1,27 @@
 .boxIcon{
-  	background: purple;
-  	height: 100px;
-  	width: 100px;
+	height: 100px;
+	width: 100px;
+	overflow: hidden;
+	box-sizing: border-box;
+	padding: 5px;
+}
+.boxIcon > div{
+	width: 90px;
+	height: 90px;
+	border: 1px purple solid;
+	border-radius: 3px;
+}
+.boxIcon > div i{
+	display: block;
+  line-height: 60px;
+  height: 65px;
+  text-align: center;
+  font-size: 40px;
+}
+.boxIcon > div div{
+  background: purple;
+  height: 25px;
+  text-align: center;
+  color: white;
+  line-height: 25px;
 }
