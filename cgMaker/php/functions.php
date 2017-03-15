@@ -248,9 +248,20 @@ EOT;
     }
     return $dirsFiles;
   }
-  function saveGatget($gatget, $script, $style, $source, $isNew){
+  function saveGatget($gatget, $script, $style, $globalStyle, $source, $isNew){
     $a_return = ["PROCESS" => "FAIL"];
     $dir = "src/gatgets/$gatget";
+    $exec = "<?php
+      echo '<style media=\"screen\">';
+        include_once '../gatgets.php';
+      echo '</style>';
+      include_once 'source.php';
+      echo '<script type=\"text/javascript\">';
+        include_once 'script.js';
+      echo '</script>';
+     ?>"
+
+    $myfile = fopen("src/gatgets/style.css", "w");fwrite($myfile, htmlspecialchars_decode($globalStyle));fclose($myfile);
     if ($isNew === "true") {
       if (array_search($gatget,listgatgets())  === false && strlen($gatget) > 0) {
         mkdir($dir, 0777, true);

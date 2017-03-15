@@ -20,7 +20,7 @@ if (!empty($_POST['fn'])) {
   }elseif ($n_f[0] === 'listFolderSource') {
     echo json_encode(listFolderSource($n_f[1]));
   }elseif ($n_f[0] === 'saveGatget') {
-    echo json_encode(saveGatget($n_f[1], $n_f[2], $n_f[3], $n_f[4], $n_f[5]));
+    echo json_encode(saveGatget($n_f[1], $n_f[2], $n_f[3], $n_f[4], $n_f[5], $n_f[6]));
   }elseif ($n_f[0] === 'listgatgets') {
     echo json_encode(listgatgets());
   }

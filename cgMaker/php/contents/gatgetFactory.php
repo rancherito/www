@@ -53,12 +53,17 @@ var nameGatget = <?php echo "'$gatgets';"; ?>
     editorStyle.setOption('mode', 'css');
 
     var editorGlobalStyle= CodeMirror($('div.pnlGlobalStyle')[0],configEditor);
-    editorStyle.setSize("100%", "100%");
-    editorStyle.setOption('mode', 'css');
+    editorGlobalStyle.setSize("100%", "100%");
+    editorGlobalStyle.setOption('mode', 'css');
 
     var editorSource= CodeMirror($('div.pnlSource')[0],configEditor);
     editorSource.setSize("100%", "100%");
     editorSource.setOption('mode', 'htmlmixed');
+
+
+    $.post('src/gatgets/style.css',{}, function(data) {
+      editorGlobalStyle.setValue(data);
+    });
 
     if (nameGatget !== 'new') {
       inputs.nameGatget.input('label').text(nameGatget);
@@ -93,6 +98,12 @@ var nameGatget = <?php echo "'$gatgets';"; ?>
       }
     });
 
+    panels.access()[2].click(function(event) {
+      $.post('src/gatgets/style.css',{}, function(data) {
+        editorGlobalStyle.setValue(data);
+      });
+    });
+
     panels.access()[3].click(function(event) {
       if (nameGatget !== 'new') {
         $.post('src/gatgets/'+nameGatget+'/source.php',{}, function(data) {
@@ -106,6 +117,7 @@ var nameGatget = <?php echo "'$gatgets';"; ?>
         inputs.nameGatget.val(),
         editorJavascript.getValue(),
         editorStyle.getValue(),
+        editorGlobalStyle.getValue(),
         editorSource.getValue(),
          nameGatget === 'new'
        ])}, function(data) {
