@@ -329,9 +329,17 @@ div.gatget-factory{
 				height: calc(100% - 50px);
 				> div.cg-multipanel{
 					> div.cg-multipanel-view{
-						background: gray;
 						> div{
 							height: 100%;
+							background: white;
+						}
+						> div.pnlVeiew{
+							iframe{
+								height: 100%;
+								width: 100%;
+								border-style: solid;
+								border: 0;
+							}
 						}
 					}
 				}

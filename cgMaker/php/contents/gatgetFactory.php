@@ -17,8 +17,9 @@
         <div class="pnl_multi">
           <div class="pnlScript"></div>
           <div class="pnlStyle"></div>
+          <div class="pnlGlobalStyle"></div>
           <div class="pnlSource"></div>
-          <div class="pnlVeiew">Los Views</div>
+          <div class="pnlVeiew"></div>
         </div>
       </div>
     </div>
@@ -51,6 +52,10 @@ var nameGatget = <?php echo "'$gatgets';"; ?>
     editorStyle.setSize("100%", "100%");
     editorStyle.setOption('mode', 'css');
 
+    var editorGlobalStyle= CodeMirror($('div.pnlGlobalStyle')[0],configEditor);
+    editorStyle.setSize("100%", "100%");
+    editorStyle.setOption('mode', 'css');
+
     var editorSource= CodeMirror($('div.pnlSource')[0],configEditor);
     editorSource.setSize("100%", "100%");
     editorSource.setOption('mode', 'htmlmixed');
@@ -60,7 +65,13 @@ var nameGatget = <?php echo "'$gatgets';"; ?>
       $.post('src/gatgets/'+nameGatget+'/script.js',{}, function(data) {
         editorJavascript.setValue(data);
       });
-
+      $.post('src/gatgets/'+nameGatget+'/style.css',{}, function(data) {
+        editorStyle.setValue(data);
+      });
+      $.post('src/gatgets/'+nameGatget+'/source.php',{}, function(data) {
+        editorSource.setValue(data);
+      });
+      $('div.pnlVeiew').append(cg.$('iframe').prop('src','src/gatgets/'+nameGatget+'/execGatget.php'));
     }
 
 
@@ -68,6 +79,7 @@ var nameGatget = <?php echo "'$gatgets';"; ?>
     var panels = cg.multiPanelView()
       .addPanel({text: 'JavaScript',panel: $('div.pnlScript')})
       .addPanel({text: 'Style',panel: $('div.pnlStyle')})
+      .addPanel({text: 'Global Style',panel: $('div.pnlGlobalStyle')})
       .addPanel({text: 'Code Source',panel: $('div.pnlSource')})
       .addPanel({text: 'See Gatget',panel: $('div.pnlVeiew')})
       .appendTo($('div.pnl_multi'))
@@ -81,7 +93,7 @@ var nameGatget = <?php echo "'$gatgets';"; ?>
       }
     });
 
-    panels.access()[2].click(function(event) {
+    panels.access()[3].click(function(event) {
       if (nameGatget !== 'new') {
         $.post('src/gatgets/'+nameGatget+'/source.php',{}, function(data) {
           editorSource.setValue(data);

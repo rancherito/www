@@ -271,7 +271,7 @@ EOT;
   function listgatgets(){
     $a_return = [];
     foreach (scandir("src/gatgets") as $key => $value) {
-      if ($value != '..' && $value != '.') {
+      if ($value != '..' && $value != '.' && is_dir("src/gatgets/$value")) {
         array_push($a_return,$value);
       }
     }

@@ -1,2 +1,2 @@
-var hola = "adios patitos bellos";
+var hola = "michilala jaja";
 console.log(hola);
