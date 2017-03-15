@@ -88,16 +88,23 @@ EOT;
       mkdir($dir, 0777, true);
       echo '{"PROCESS":"CORRECT"}';
       $myfile = fopen($dir.'/index.php', "w");fwrite($myfile, $bodyIndex);fclose($myfile);
-      $myfile = fopen($dir.'/indexArq.php', "w");
-      $replace = "\t<script src='cgMProjet/jquery-1.12.4.js'></script>\n\t<link rel='stylesheet' href='cgMProjet/style.css'>\n</head>";
-      fwrite($myfile, str_replace('</head>',$replace,$bodyIndex));
-      fclose($myfile);
+
 
       $myfile = fopen($dir.'/projet.cginfo', "w");fclose($myfile);
 
+      //making de folder cgMProjet and
       mkdir($dir.'/cgMProjet', 0777, true);
       $myfile = fopen($dir.'/cgMProjet/index.cgM', "w");fwrite($myfile, $bodyIndex);fclose($myfile);
       $myfile = fopen($dir.'/cgMProjet/style.css', "w");fwrite($myfile, $style);fclose($myfile);
+      $myfile = fopen($dir.'/cgMProjet/script.js', "w");fwrite($myfile, $style);fclose($myfile);
+
+      //making the index arquitecture and dependent files
+      $myfile = fopen($dir.'/indexArq.php', "w");
+      $replace = "\t<script src='srcNative/js/jquery-1.12.4.js'></script>\n\t<link rel='stylesheet' href='cgMProjet/style.css'>\n</head>";
+      $indexArq = str_replace('</head>',$replace,$bodyIndex);
+      $replace = "\t<script src='cgMProjet/script.js'></script>\n</body>";
+      $indexArq = str_replace('</body>',$replace,$indexArq);
+      fwrite($myfile, $indexArq);fclose($myfile);
 
 
 
@@ -113,7 +120,6 @@ EOT;
 
       mkdir($dir.'/srcNative/js', 0777, true);
       copy("js/jquery-1.12.4.js", "$dir/srcNative/js/jquery-1.12.4.js");
-
       mkdir($dir.'/srcNative/font', 0777, true);
       xcopy("src/font",$dir.'/srcNative/font');
 
@@ -210,8 +216,10 @@ EOT;
 
     $myfile = fopen("../$projet/index.php", "w");
     fwrite($myfile, $newstring);fclose($myfile);
-    $replace = "\t<script src='cgMProjet/jquery-1.12.4.js'></script>\n\t<link rel='stylesheet' href='cgMProjet/style.css'>\n</head>";
+    $replace = "\t<script src='srcNative/js/jquery-1.12.4.js'></script>\n\t<link rel='stylesheet' href='cgMProjet/style.css'>\n</head>";
     $indexArq = str_replace('</head>',$replace,$newstring);
+    $replace = "\t<script src='cgMProjet/script.js'></script>\n</body>";
+    $indexArq = str_replace('</body>',$replace,$indexArq);
 
     $myfile = fopen("../$projet/indexArq.php", "w");
     fwrite($myfile, $indexArq);fclose($myfile);
@@ -305,30 +313,24 @@ EOT;
     return $a_return;
   }
 
+  // this function is provided by community
   function xcopy($source, $dest){
-    // Check for symlinks
     if (is_link($source)) {
         return symlink(readlink($source), $dest);
     }
-    // Simple copy for a file
     if (is_file($source)) {
         return copy($source, $dest);
     }
-    // Make destination directory
     if (!is_dir($dest)) {
         mkdir($dest, 0777, true);
     }
-    // Loop through the folder
     $dir = dir($source);
     while (false !== $entry = $dir->read()) {
-        // Skip pointers
         if ($entry == '.' || $entry == '..') {
             continue;
         }
-        // Deep copy directories
         xcopy("$source/$entry", "$dest/$entry");
     }
-    // Clean up
     $dir->close();
     return true;
 }
