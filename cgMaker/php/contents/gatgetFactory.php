@@ -60,6 +60,7 @@ var nameGatget = <?php echo "'$gatgets';"; ?>
       $.post('src/gatgets/'+nameGatget+'/script.js',{}, function(data) {
         editorJavascript.setValue(data);
       });
+
     }
 
 
