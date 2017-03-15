@@ -8,18 +8,19 @@
 .boxIcon > div{
 	width: 90px;
 	height: 90px;
-	border: 1px purple solid;
+	border: 1px #00bcd4 solid;
 	border-radius: 3px;
 }
 .boxIcon > div i{
-	display: block;
-  line-height: 60px;
-  height: 65px;
-  text-align: center;
-  font-size: 40px;
+    display: block;
+    line-height: 60px;
+    height: 65px;
+    text-align: center;
+    font-size: 40px;
+    color: #00bcd4;
 }
 .boxIcon > div div{
-  background: purple;
+  background: #00bcd4;
   height: 25px;
   text-align: center;
   color: white;

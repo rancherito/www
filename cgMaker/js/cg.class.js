@@ -347,11 +347,14 @@ cg.dataTable = function (source) { return new cg.DataTable(source); };
 cg.messageBox = function (param) { return new cg.MessageBox(param); };
 cg.input = function (type) { return new cg.Input(type); };
 cg.multiPanelView = function () { return new cg.MultiPanelView(); };
-cg.obj = {Input:{}};
+cg.obj = {};
 cg.readyObj = function () {
   $('cgObjet').each(function( index ) {
     var type = $(this).attr('type');
     var name = $(this).attr('name');
+    if (typeof cg.obj[type] === 'undefined') {
+      cg.obj[type] = {};
+    }
     if (typeof cg.obj[type][name] === 'undefined') {
       eval('cg.obj.' + type + '.' + name + ' = new cg.' + type + '();');
       $(this).after(cg.obj[type][name].dom()).remove();
