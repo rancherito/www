@@ -24,6 +24,8 @@ $bodyIndex = <<<EOT
 	<head>
 		<meta charset="utf-8">
 		<title>my projet</title>
+    <script src='srcNative/js/jquery-1.12.4.js'></script>
+    <script src='srcNative/js/cg.class.js'></script>
     </head>
 	<body>
 		<div class="panel_p">
@@ -97,7 +99,6 @@ EOT;
       echo '{"PROCESS":"CORRECT"}';
       $myfile = fopen($dir.'/index.php', "w");fwrite($myfile, $bodyIndex);fclose($myfile);
 
-
       $myfile = fopen($dir.'/projet.cginfo', "w");fclose($myfile);
 
       //making de folder cgMProjet and
@@ -108,7 +109,7 @@ EOT;
 
       //making the index arquitecture and dependent files
       $myfile = fopen($dir.'/indexArq.php', "w");
-      $replace = "\t<script src='srcNative/js/jquery-1.12.4.js'></script>\n\t<link rel='stylesheet' href='cgMProjet/style.css'>\n</head>";
+      $replace = "\t<link rel='stylesheet' href='cgMProjet/style.css'>\n</head>";
       $indexArq = str_replace('</head>',$replace,$bodyIndex);
       $replace = "\t<script src='cgMProjet/script.js'></script>\n</body>";
       $indexArq = str_replace('</body>',$replace,$indexArq);
@@ -127,6 +128,7 @@ EOT;
       mkdir($dir.'/srcNative', 0777, true);
 
       mkdir($dir.'/srcNative/js', 0777, true);
+      copy("js/cg.class.js", "$dir/srcNative/js/cg.class.js");
       copy("js/jquery-1.12.4.js", "$dir/srcNative/js/jquery-1.12.4.js");
       mkdir($dir.'/srcNative/font', 0777, true);
       xcopy("src/font",$dir.'/srcNative/font');
@@ -224,7 +226,7 @@ EOT;
 
     $myfile = fopen("../$projet/index.php", "w");
     fwrite($myfile, $newstring);fclose($myfile);
-    $replace = "\t<script src='srcNative/js/jquery-1.12.4.js'></script>\n\t<link rel='stylesheet' href='cgMProjet/style.css'>\n</head>";
+    $replace = "\t<link rel='stylesheet' href='cgMProjet/style.css'>\n</head>";
     $indexArq = str_replace('</head>',$replace,$newstring);
     $replace = "\t<script src='cgMProjet/script.js'></script>\n</body>";
     $indexArq = str_replace('</body>',$replace,$indexArq);
