@@ -79,8 +79,6 @@ var nameGatget = <?php echo "'$gatgets';"; ?>
       $('div.pnlVeiew').append(cg.$('iframe').prop('src','src/gatgets/'+nameGatget+'/execGatget.php'));
     }
 
-
-
     var panels = cg.multiPanelView()
       .addPanel({text: 'JavaScript',panel: $('div.pnlScript')})
       .addPanel({text: 'Style',panel: $('div.pnlStyle')})
@@ -121,7 +119,11 @@ var nameGatget = <?php echo "'$gatgets';"; ?>
         editorSource.getValue(),
          nameGatget === 'new'
        ])}, function(data) {
-        console.log(data);
+         var DATA = JSON.parse(data);
+         console.log(DATA);
+         if (nameGatget === 'new') {
+           window.open("?page_gatgets=" + inputs.nameGatget.val(),'_self');
+         }
 
       });
     });

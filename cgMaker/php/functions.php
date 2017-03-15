@@ -259,7 +259,7 @@ EOT;
       echo '<script type=\"text/javascript\">';
         include_once 'script.js';
       echo '</script>';
-     ?>"
+     ?>";
 
     $myfile = fopen("src/gatgets/style.css", "w");fwrite($myfile, htmlspecialchars_decode($globalStyle));fclose($myfile);
     if ($isNew === "true") {
@@ -268,6 +268,7 @@ EOT;
         $myfile = fopen("$dir/script.js", "w");fwrite($myfile, htmlspecialchars_decode($script));fclose($myfile);
         $myfile = fopen("$dir/style.css", "w");fwrite($myfile, htmlspecialchars_decode($style));fclose($myfile);
         $myfile = fopen("$dir/source.php", "w");fwrite($myfile, htmlspecialchars_decode($source));fclose($myfile);
+        $myfile = fopen("$dir/execGatget.php", "w");fwrite($myfile, $exec);fclose($myfile);
 
         $a_return["PROCESS"] = "CORRECT";
       }
