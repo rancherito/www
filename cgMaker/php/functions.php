@@ -98,7 +98,8 @@ EOT;
       mkdir($dir.'/cgMProjet', 0777, true);
       $myfile = fopen($dir.'/cgMProjet/index.cgM', "w");fwrite($myfile, $bodyIndex);fclose($myfile);
       $myfile = fopen($dir.'/cgMProjet/style.css', "w");fwrite($myfile, $style);fclose($myfile);
-      copy("js/jquery-1.12.4.js","$dir/cgMProjet/jquery-1.12.4.js");
+
+
 
       mkdir($dir.'/src', 0777, true);
 
@@ -106,6 +107,15 @@ EOT;
       $myfile = fopen($dir.'/src/js/main.js', "w");fclose($myfile);
       mkdir($dir.'/src/css', 0777, true);
       $myfile = fopen($dir.'/src/css/style.css', "w");fclose($myfile);
+
+
+      mkdir($dir.'/srcNative', 0777, true);
+
+      mkdir($dir.'/srcNative/js', 0777, true);
+      copy("js/jquery-1.12.4.js", "$dir/srcNative/js/jquery-1.12.4.js");
+
+      mkdir($dir.'/srcNative/font', 0777, true);
+      xcopy("src/font",$dir.'/srcNative/font');
 
     }
   }
@@ -289,19 +299,32 @@ EOT;
     }
     return $a_return;
   }
-  function copyDirectory($src,$dst) {
-    $dir = opendir($src);
-    @mkdir($dst);
-    while(false !== ( $file = readdir($dir)) ) {
-        if (( $file != '.' ) && ( $file != '..' )) {
-            if ( is_dir($src . '/' . $file) ) {
-                recurse_copy($src . '/' . $file,$dst . '/' . $file);
-            }
-            else {
-                copy($src . '/' . $file,$dst . '/' . $file);
-            }
-        }
+
+  function xcopy($source, $dest){
+    // Check for symlinks
+    if (is_link($source)) {
+        return symlink(readlink($source), $dest);
     }
-    closedir($dir);
-  }
+    // Simple copy for a file
+    if (is_file($source)) {
+        return copy($source, $dest);
+    }
+    // Make destination directory
+    if (!is_dir($dest)) {
+        mkdir($dest, 0777, true);
+    }
+    // Loop through the folder
+    $dir = dir($source);
+    while (false !== $entry = $dir->read()) {
+        // Skip pointers
+        if ($entry == '.' || $entry == '..') {
+            continue;
+        }
+        // Deep copy directories
+        xcopy("$source/$entry", "$dest/$entry");
+    }
+    // Clean up
+    $dir->close();
+    return true;
+}
  ?>
