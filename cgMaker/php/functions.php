@@ -261,15 +261,20 @@ EOT;
   function saveGatget($gatget, $script, $style, $globalStyle, $source, $isNew){
     $a_return = ["PROCESS" => "FAIL"];
     $dir = "src/gatgets/$gatget";
-    $exec = "<?php
-      echo '<style media=\"screen\">';
-        include_once '../gatgets.php';
-      echo '</style>';
-      include_once 'source.php';
-      echo '<script type=\"text/javascript\">';
-        include_once 'script.js';
-      echo '</script>';
-     ?>";
+    $exec =
+     "<?php
+       echo '<link rel=\"stylesheet\" href=\"../../font/font-awesome/font.css\">';
+       echo '<link rel=\"stylesheet\" href=\"../../font/Ionicons/font.css\">';
+       echo '<script type=\"text/javascript\" src=\"../../../js/jquery-1.12.4.js\"></script>';
+       echo '<style media=\"screen\">';
+         include_once '../gatgets.php';
+       echo '</style>';
+       include_once 'source.php';
+       echo '<script type=\"text/javascript\">';
+         include_once 'script.js';
+       echo '</script>';
+      ?>";
+
 
     $myfile = fopen("src/gatgets/style.css", "w");fwrite($myfile, htmlspecialchars_decode($globalStyle));fclose($myfile);
     if ($isNew === "true") {

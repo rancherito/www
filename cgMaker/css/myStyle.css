@@ -326,7 +326,7 @@ div.projet-management div._s_n_body div.cg-multipanel > div.cg-multipanel-view d
   width: 100%;
 }
 
-div.projet-management div._s_n_body div.cg-multipanel > div.cg-multipanel-view div.sources > div > div.cLink > div.ccCode {
+div.projet-management div._s_n_body div.cg-multipanel > div.cg-multipanel-view div.sources > div > div.cLink > div.ccCode, div.projet-management div._s_n_body div.cg-multipanel > div.cg-multipanel-view div.sources > div > div.cLink > div.ccSource {
   display: none;
 }
 

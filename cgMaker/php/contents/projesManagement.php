@@ -23,6 +23,7 @@
             <div class="">
               <div class="cLink">
                 <div class="ccLink"></div>
+                <div class="ccSource"></div>
                 <div class="ccCode"></div>
               </div>
               <div class="cSettings">
@@ -105,7 +106,6 @@
     });
 
     btnAddGatget.click(function (event) {
-      console.log('lalala');
       window.open("?page_gatgets=true",'_self');
     });
 
