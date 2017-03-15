@@ -75,7 +75,25 @@ $page_index_gg = <<<EOT
   </div>
 </div>
 <script>
+  function goGatget(selector, url){
+    selector.click(function (event){
+      window.open("?page_gatgets="+url,'_self');
+    });
+  }
   $(document).ready(function() {
+    $.post('query.php',{fn: cg.fn('listgatgets',[])},function (data){
+      var DATA = JSON.parse(data);
+      for(var i in DATA) {
+        var iconGatget = cg.$('div');
+        iconGatget.addClass('cgSquareIcon').append(
+            cg.$('div').append(
+              cg.$('i').addClass('ion-ios-cog'),
+              cg.$('div').text(DATA[i])
+            )
+        ).prependTo($('div._s_body'));
+        goGatget(iconGatget,DATA[i]);
+      }
+    });
     $('div.add-gatget').click(function (event){
       window.open("?page_gatgets=new",'_self');
     });

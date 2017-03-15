@@ -76,7 +76,7 @@ var nameGatget = <?php echo "'$gatgets';"; ?>
          nameGatget === 'new'
        ])}, function(data) {
         console.log(data);
-        
+
       });
     });
 

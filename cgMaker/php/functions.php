@@ -249,11 +249,21 @@ EOT;
     return $dirsFiles;
   }
   function saveGatget($gatget, $script, $style, $source, $isNew){
-    /*if (array_search($gatget,listgatgets())  === false || count($gatget) === 0) {
-      return 'true';
-    }*/
-    echo "$isNew";
-    return 'false';
+    $a_return = ["PROCESS" => "FAIL"];
+    if ($isNew === "true") {
+      if (array_search($gatget,listgatgets())  === false && strlen($gatget) > 0) {
+        $dir = "src/gatgets/$gatget";
+        mkdir($dir, 0777, true);
+        $myfile = fopen("$dir/script.js", "w");fwrite($myfile, htmlspecialchars_decode($script));fclose($myfile);
+        $myfile = fopen("$dir/style.css", "w");fwrite($myfile, htmlspecialchars_decode($style));fclose($myfile);
+        $myfile = fopen("$dir/source.php", "w");fwrite($myfile, htmlspecialchars_decode($source));fclose($myfile);
+
+        $a_return["PROCESS"] = "CORRECT";
+      }
+    }else {
+      echo "guardar Proyecto: $gatget";
+    }
+    return $a_return;
   }
   function listgatgets(){
     $a_return = [];
