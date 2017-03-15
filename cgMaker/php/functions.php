@@ -80,6 +80,14 @@ div.addGatget > div:hover{
   background: #afafaf !important;
 }
 EOT;
+$scriptCode = <<<EOT
+$(document).ready(function() {
+	var addGatget = $('<div></div>')
+	.addClass('addGatget restore')
+	.append($('<div></div>').text('Add your Gatget').addClass('restore'));
+	$('div.n_panel_p').prepend(addGatget);
+});
+EOT;
     $dir = '../'.$Projet;
 
     if (is_dir($dir)) {
@@ -96,7 +104,7 @@ EOT;
       mkdir($dir.'/cgMProjet', 0777, true);
       $myfile = fopen($dir.'/cgMProjet/index.cgM', "w");fwrite($myfile, $bodyIndex);fclose($myfile);
       $myfile = fopen($dir.'/cgMProjet/style.css', "w");fwrite($myfile, $style);fclose($myfile);
-      $myfile = fopen($dir.'/cgMProjet/script.js', "w");fwrite($myfile, $style);fclose($myfile);
+      $myfile = fopen($dir.'/cgMProjet/script.js', "w");fwrite($myfile, $scriptCode);fclose($myfile);
 
       //making the index arquitecture and dependent files
       $myfile = fopen($dir.'/indexArq.php', "w");
