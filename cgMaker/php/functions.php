@@ -146,7 +146,7 @@ EOT;
     return false;
   }
 
-  function sourcesProjet($projet){
+  function listSourcesProjet($projet){
     $dir = '../'.$projet.'/src';
     $files = [];
     if (is_dir($dir)) {

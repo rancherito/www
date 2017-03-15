@@ -94,6 +94,7 @@
     panels.views()[2].find('.btnReturn').click(function () {
       panels.views()[2].find('div.ccLink').show();
       panels.views()[2].find('div.ccCode').hide();
+      panels.views()[2].find('div.ccSource').hide();
       panels.views()[2].find('.btnSave').hide();
     });
     panels.views()[2].find('.btnSave').click(function (event) {
@@ -109,19 +110,6 @@
       window.open("?page_gatgets=true",'_self');
     });
 
-    /*$.post("query.php",{fn:cg.fn('sourcesProjet',[projet])}, function(data) {
-      var DATA = JSON.parse(data);
-      for (var variable in DATA) {
-        var link = cg.$('a').append(cg.$('i').addClass('ion-android-exit'));
-        openCodeS(link,DATA[variable]);
-        panels.views()[2].find('div.ccLink').append(
-          cg.$('div').addClass('textIcon_link').append(
-            cg.$('div').text(DATA[variable][0]),link
-          )
-        );
-      }
-    });*/
-
     $.post('query.php', {fn: cg.fn('listFolderSource', [projet])}, function(data) {
       var DATA = JSON.parse(data);
       console.log(DATA);
@@ -132,7 +120,7 @@
             cg.$('div').text(variable)
           )
         );
-        var ee = {};ee[variable] = DATA[variable];
+        var ee = {type: variable, files: DATA[variable]};
         openFolderS(squareicon,ee);
         panels.views()[2].find('div.ccLink').append(squareicon);
       }
@@ -158,7 +146,19 @@
     });
     function openFolderS(selector,folderPath){
       selector.click(function (event) {
-          console.log(folderPath);
+          panels.views()[2].find('div.ccLink').hide();
+          panels.views()[2].find('div.ccSource').empty().show();
+          for (var file in folderPath['files']['name']) {
+            var link = cg.$('i').addClass('ion-android-apps');
+            openCodeS(link,[folderPath['files']['name'][file],folderPath['files']['path'][file],folderPath['type']]);
+            panels.views()[2].find('div.ccSource').append(
+              cg.$('div').addClass('cgSquareIcon').append(
+                cg.$('div').append(
+                  link,cg.$('div').text(folderPath['files']['name'][file])
+                )
+              )
+            );
+          }
       });
     }
     function openCodeS(selector,newSource) {
@@ -166,11 +166,11 @@
       selector.click(function (event) {
         source = newSource;
         lastModifiedSource.path(source[1]);
-        panels.views()[2].find('div.ccLink').hide();
+        panels.views()[2].find('div.ccSource').hide();
         panels.views()[2].find('div.ccCode').show();
         panels.views()[2].find('.btnSave').show();
         $.post('query.php', {fn: cg.fn('getCodeSourceProjet',[projet, source[1]])}, function(data) {
-          editorResource.setOption("mode", extencion[cg.getFileExtension(source[0])]);
+          editorResource.setOption("mode", extencion[source[2]]);
           editorResource.setValue(data);
         });
       });
