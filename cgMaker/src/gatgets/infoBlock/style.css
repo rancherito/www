@@ -1,0 +1,18 @@
+body{
+  background: gray;
+}
+div.infoBlock{
+	width: 100%;
+  	max-width: 400px;
+  	height: 400px;
+  	background: white;
+  	margin: 5px;
+  	border-radius: 8px;
+  	box-sizing: border-box;
+  	padding: 10px;
+}
+div.infoBlock > div{
+  	background: #ffc267;
+  	height: 100%;
+  	width: 100%;
+}
