@@ -111,6 +111,19 @@ var nameGatget = <?php echo "'$gatgets';"; ?>
     });
 
     $('button.btnSaveGatget').click(function(event) {
+      //console.log($(editorSource.getValue()));
+
+      $(editorSource.getValue()).each(function(index, el) {
+        if ($(el).attr('name') === nameGatget) {
+          var newL = "cg."+nameGatget+" = function{\n";
+          newL+="\tcg.myDom.call(this);\n"
+          $(el).children().each(function(index2, el2) {
+            newL+="\tvar "+$(el2).attr('name')+" = cg.$("+el2.localName+").appendTo(this.container);\n"
+          });
+          newL+="}"
+          console.log(newL);
+        }
+      });
       $.post('query.php', {fn: cg.fn('saveGatget',[
         inputs.nameGatget.val(),
         editorStyle.getValue(),
