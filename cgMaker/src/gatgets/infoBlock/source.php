@@ -1,3 +1,3 @@
 <div class="infoBlock">
-	<div class="title">ALALALLA</div>
+	<div class="title">JUANANJUATO</div>
 </div>

@@ -113,7 +113,6 @@ var nameGatget = <?php echo "'$gatgets';"; ?>
     $('button.btnSaveGatget').click(function(event) {
       $.post('query.php', {fn: cg.fn('saveGatget',[
         inputs.nameGatget.val(),
-        editorJavascript.getValue(),
         editorStyle.getValue(),
         editorGlobalStyle.getValue(),
         editorSource.getValue(),

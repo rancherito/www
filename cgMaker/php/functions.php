@@ -292,7 +292,7 @@ EOT;
     }
     return $dirsFiles;
   }
-  function saveGatget($gatget, $script, $style, $globalStyle, $source, $isNew){
+  function saveGatget($gatget, $style, $globalStyle, $source, $isNew){
     $a_return = ["PROCESS" => "FAIL"];
     $dir = "src/gatgets/$gatget";
     $exec =
@@ -314,7 +314,7 @@ EOT;
     if ($isNew === "true") {
       if (array_search($gatget,listgatgets())  === false && strlen($gatget) > 0) {
         mkdir($dir, 0777, true);
-        $myfile = fopen("$dir/script.js", "w");fwrite($myfile, htmlspecialchars_decode($script));fclose($myfile);
+        $myfile = fopen("$dir/script.js", "w");fclose($myfile);
         $myfile = fopen("$dir/style.css", "w");fwrite($myfile, htmlspecialchars_decode($style));fclose($myfile);
         $myfile = fopen("$dir/source.php", "w");fwrite($myfile, htmlspecialchars_decode($source));fclose($myfile);
         $myfile = fopen("$dir/execGatget.php", "w");fwrite($myfile, $exec);fclose($myfile);
@@ -322,7 +322,6 @@ EOT;
         $a_return["PROCESS"] = "CORRECT";
       }
     }else {
-      $myfile = fopen("$dir/script.js", "w");fwrite($myfile, htmlspecialchars_decode($script));fclose($myfile);
       $myfile = fopen("$dir/style.css", "w");fwrite($myfile, htmlspecialchars_decode($style));fclose($myfile);
       $myfile = fopen("$dir/source.php", "w");fwrite($myfile, htmlspecialchars_decode($source));fclose($myfile);
       $a_return["PROCESS"] = "CORRECT";
