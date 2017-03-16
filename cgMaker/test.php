@@ -18,9 +18,9 @@
      </style>
    </head>
    <body >
-     <div class="lalal">
-
-     </div>
+     <div class="lalal"></div>
+     <cgObjet type="myDom" name="lala"></cgObjet>
+     <cgObjet type="patalo" name="wacha"></cgObjet>
      <script type="text/javascript">
        function lala(selector) {
          var W = selector.outerWidth();
@@ -35,7 +35,15 @@
            H = h;
          }, 10);
        }
+       cg.patalo = function () {
+         cg.myDom.call(this);
+         this.container = cg.$('input');
+         this.style('michilala');
+       }
          $(document).ready(function() {
+
+
+           cg.readyObj();
            var data = {
              nombres:['DAVID','MARCOS','MATHEO'],
              apellidoMaterno:['AQUINO','CASERES','CARTAGENA'],
@@ -65,6 +73,11 @@
             console.log('wachalatato');
           });
           //lala(sa);
+
+
+
+          console.log(cg.obj.patalo);
+
          });
 
      </script>

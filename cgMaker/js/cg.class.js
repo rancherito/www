@@ -30,6 +30,32 @@ cg.getFileExtension = function (filename) {
   return filename.slice((filename.lastIndexOf(".") - 1 >>> 0) + 2);
 }
 //class
+cg.myDom = function () {
+  this.container = cg.$('div');
+  this.style = function (newStyle) {
+    this.container.addClass(newStyle);
+    return this;
+  }
+  this.dom = function (getcontainer) {
+    if ( typeof getcontainer === 'function') {
+      getcontainer(this.container);
+      return this;
+    }
+    return this.container;
+  };
+  this.appendTo = function (setAppend) {
+    if (setAppend.length > 0) {
+      this.container.appendTo(setAppend);
+    }
+    return this;
+  };
+  this.prependTo = function (setPrepend) {
+    if (setPrepend.length > 0) {
+      this.container.prependTo(setPrepend);
+    }
+    return this;
+  };
+}
 cg.MessageBox = function (setTypeBox) {
   var container = cg.$('div');
   var btnAceptar = cg.$('button');
