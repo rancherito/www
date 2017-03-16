@@ -378,12 +378,14 @@ cg.readyObj = function () {
   $('cgObjet').each(function( index ) {
     var type = $(this).attr('type');
     var name = $(this).attr('name');
-    if (typeof cg.obj[type] === 'undefined') {
-      cg.obj[type] = {};
-    }
-    if (typeof cg.obj[type][name] === 'undefined') {
-      eval('cg.obj.' + type + '.' + name + ' = new cg.' + type + '();');
-      $(this).after(cg.obj[type][name].dom()).remove();
+    if (typeof cg[type] !== 'undefined') {
+      if (typeof cg.obj[type] === 'undefined') {
+        cg.obj[type] = {};
+      }
+      if (typeof cg.obj[type][name] === 'undefined') {
+        eval('cg.obj.' + type + '.' + name + ' = new cg.' + type + '();');
+        $(this).after(cg.obj[type][name].dom()).remove();
+      }
     }
   });
 };

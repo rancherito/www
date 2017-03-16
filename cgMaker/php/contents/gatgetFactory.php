@@ -33,7 +33,7 @@ var configEditor = {
   matchBrackets: true,
   showCursorWhenSelecting: true,
   theme: "base16-light",
-  tabSize: 5
+  tabSize: 2
 };
 var nameGatget = <?php echo "'$gatgets';"; ?>
   $(document).ready(function() {
@@ -119,20 +119,44 @@ var nameGatget = <?php echo "'$gatgets';"; ?>
       }
     });
 
+    var cggAttr = {
+      cggeditContent: "\tthis.{{var}}Content = function(){\n\t\tlalal\n\t}\n"
+    };
+    $.post('php/format/setIconFormat.php', {}, function(data) {
+      cggAttr['cggIcon'] = data;
+    });
+    $.post('php/format/contentFormat.php', {}, function(data) {
+      cggAttr['cggeditContent'] = data;
+    });
+
     $('button.btnSaveGatget').click(function(event) {
-      //console.log($(editorSource.getValue()));
-      var dom = editorSource.getValue().replace(/>[\n\t ]+</gi,"><").replace(/[ ]+/gi," ");
+      var dom = editorSource.getValue().replace(/>[\n\t ]+</gi,"><").replace(/[ ]+/gi," ").replace(/\n|\t/,"");
       var sess = "sda";
-      $(editorSource.getValue()).each(function(index, el) {
+      $(dom).each(function(index, el) {
         var jsScript = "";
         if ($(el).attr('cggname') === nameGatget) {
-          var jsScript = "cg."+nameGatget+" = function(){\n";
+          var jsScript = "cg."+nameGatget+" = function(){\n\n";
           jsScript+="\tcg.myDom.call(this);\n"
           jsScript+="\tthis.container = $(\""+(dom.replace(/"/gi,"\\\""))+"\");\n";
           $(dom).find(".cg-gg").each(function(index, el2) {
             var name = $(el2).attr('cggname');
-            jsScript+="\tvar "+name+" = this.container.find(\"[cggname="+name+"]\")\n";
+            jsScript+="\tvar "+name+" = this.container.find(\"[cggname="+name+"]\");\n";
           });
+          jsScript +="\n";
+          $(dom).find(".cg-gg").each(function(index, el2) {
+            var name = $(el2).attr('cggname');
+            for (var i in cggAttr) {
+              var attr = $(el2).attr(i);
+              if (typeof attr !== "undefined" && attr !== false) {
+                jsScript += cggAttr[i].replace(/{{var}}/gi,name);
+                jsScript +="\n";
+              }
+
+            }
+          });
+
+
+
           jsScript+="}";
           sess = jsScript;
         }

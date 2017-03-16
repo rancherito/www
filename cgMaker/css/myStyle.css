@@ -383,3 +383,7 @@ div.gatget-factory div.n_body > div.n_body_s > div.pnl_multi > div.cg-multipanel
   border-style: solid;
   border: 0;
 }
+
+div.CodeMirror span {
+  font-family: Consolas;
+}
