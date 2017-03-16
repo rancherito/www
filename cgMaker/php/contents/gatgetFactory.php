@@ -88,6 +88,15 @@ var nameGatget = <?php echo "'$gatgets';"; ?>
       .appendTo($('div.pnl_multi'))
       .style('themeMultipanel01');
 
+
+      panels.access()[0].click(function(event) {
+        if (nameGatget !== 'new') {
+          $.post('src/gatgets/'+nameGatget+'/script.js',{}, function(data) {
+            editorJavascript.setValue(data);
+          });
+        }
+      });
+
     panels.access()[1].click(function(event) {
       if (nameGatget !== 'new') {
         $.post('src/gatgets/'+nameGatget+'/style.css',{}, function(data) {
@@ -112,20 +121,25 @@ var nameGatget = <?php echo "'$gatgets';"; ?>
 
     $('button.btnSaveGatget').click(function(event) {
       //console.log($(editorSource.getValue()));
-
+      var dom = editorSource.getValue().replace(/>[\n\t ]+</gi,"><").replace(/[ ]+/gi," ");
+      var sess = "sda";
       $(editorSource.getValue()).each(function(index, el) {
-        if ($(el).attr('name') === nameGatget) {
-          var newL = "cg."+nameGatget+" = function{\n";
-          newL+="\tcg.myDom.call(this);\n"
-          $(el).children().each(function(index2, el2) {
-            newL+="\tvar "+$(el2).attr('name')+" = cg.$("+el2.localName+").appendTo(this.container);\n"
+        var jsScript = "";
+        if ($(el).attr('cggname') === nameGatget) {
+          var jsScript = "cg."+nameGatget+" = function(){\n";
+          jsScript+="\tcg.myDom.call(this);\n"
+          jsScript+="\tthis.container = $(\""+(dom.replace(/"/gi,"\\\""))+"\");\n";
+          $(dom).find(".cg-gg").each(function(index, el2) {
+            var name = $(el2).attr('cggname');
+            jsScript+="\tvar "+name+" = this.container.find(\"[cggname="+name+"]\")\n";
           });
-          newL+="}"
-          console.log(newL);
+          jsScript+="}";
+          sess = jsScript;
         }
       });
       $.post('query.php', {fn: cg.fn('saveGatget',[
         inputs.nameGatget.val(),
+        sess,
         editorStyle.getValue(),
         editorGlobalStyle.getValue(),
         editorSource.getValue(),

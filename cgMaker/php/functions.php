@@ -292,7 +292,7 @@ EOT;
     }
     return $dirsFiles;
   }
-  function saveGatget($gatget, $style, $globalStyle, $source, $isNew){
+  function saveGatget($gatget, $script, $style, $globalStyle, $source, $isNew){
     $a_return = ["PROCESS" => "FAIL"];
     $dir = "src/gatgets/$gatget";
     $exec =
@@ -300,6 +300,7 @@ EOT;
        echo '<link rel=\"stylesheet\" href=\"../../font/font-awesome/font.css\">';
        echo '<link rel=\"stylesheet\" href=\"../../font/Ionicons/font.css\">';
        echo '<script type=\"text/javascript\" src=\"../../../js/jquery-1.12.4.js\"></script>';
+       echo '<script type=\"text/javascript\" src=\"../../../js/cg.class.js\"></script>';
        echo '<style media=\"screen\">';
          include_once '../gatgets.php';
        echo '</style>';
@@ -322,6 +323,7 @@ EOT;
         $a_return["PROCESS"] = "CORRECT";
       }
     }else {
+      $myfile = fopen("$dir/script.js", "w");fwrite($myfile, htmlspecialchars_decode($script));fclose($myfile);
       $myfile = fopen("$dir/style.css", "w");fwrite($myfile, htmlspecialchars_decode($style));fclose($myfile);
       $myfile = fopen("$dir/source.php", "w");fwrite($myfile, htmlspecialchars_decode($source));fclose($myfile);
       $a_return["PROCESS"] = "CORRECT";
