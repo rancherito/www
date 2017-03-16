@@ -84,9 +84,27 @@ div.addGatget > div:hover{
 EOT;
 $scriptCode = <<<EOT
 $(document).ready(function() {
-	var addGatget = $('<div></div>')
+	var pnlGatget = cg.$('div').addClass('pnl_gatget').hide().appendTo($('body'));
+	var add = cg.$('div').text('Add your Gatget').addClass('restore');
+	var addGatget = cg.$('div')
 	.addClass('addGatget restore')
-	.append($('<div></div>').text('Add your Gatget').addClass('restore'));
+	.append(add);
+
+	pnlGatget.append(
+		cg.$('div').addClass('n_bodyGatget_p'),
+		cg.$('div').addClass('n_settingsGatget_p').append(
+			cg.$('button').addClass('btn_close restore').text('Close Panel'),
+			cg.$('button').addClass('btn_save restore').text('Add Gatget')
+		)
+	);
+	pnlGatget.find('.btn_close').click(function(event) {
+		pnlGatget.hide();
+	});
+
+	add.click(function(event) {
+		$(this).parent().parent().append(cg.$('div').text('some text').addClass('restore'));
+		pnlGatget.show();
+	});
 	$('div.n_panel_p').prepend(addGatget);
 });
 EOT;
@@ -114,8 +132,6 @@ EOT;
       $replace = "\t<script src='cgMProjet/script.js'></script>\n</body>";
       $indexArq = str_replace('</body>',$replace,$indexArq);
       fwrite($myfile, $indexArq);fclose($myfile);
-
-
 
       mkdir($dir.'/src', 0777, true);
 
