@@ -121,7 +121,7 @@ EOT;
       $myfile = fopen($dir.'/cgMProjet/index.cgM', "w");fwrite($myfile, $bodyIndex);fclose($myfile);
       $myfile = fopen($dir.'/cgMProjet/style.css', "w");fwrite($myfile, $style);fclose($myfile);
       $myfile = fopen($dir.'/cgMProjet/script.js', "w");fwrite($myfile, $scriptCode);fclose($myfile);
-      $myfile = fopen($dir.'/cgMProjet/obligatoryDependence.cgM', "w");fwrite($myfile, $scriptCode);fclose($myfile);
+      $myfile = fopen($dir.'/cgMProjet/obligatoryDependence.cgM', "w");fclose($myfile);
 
       //making the index arquitecture and dependent files
       $myfile = fopen($dir.'/indexArq.php', "w");
@@ -217,8 +217,7 @@ EOT;
     fwrite($myfile, $toWriteDoc);fclose($myfile);
 
     preg_match("/{{[a-z:. ]+}}/i",$toWriteDoc,$search);
-    $newstring = preg_replace_callback(
-      '/{{[a-z:. ]+}}/i',
+    $newstring = preg_replace_callback('/{{[a-z:. ]+}}/i',
       function($match) use ($extencion, $projet, $ruta) {
 
           $resourceToReplace = preg_replace('/ /i','',$match[0]);
@@ -237,6 +236,8 @@ EOT;
        },
       $toWriteDoc
     );
+
+    echo "$newstring";
 
     $myfile = fopen("../$projet/index.php", "w");
     fwrite($myfile, $newstring);fclose($myfile);
