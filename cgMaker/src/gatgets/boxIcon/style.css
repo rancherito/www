@@ -9,9 +9,10 @@
 	width: 90px;
 	height: 90px;
 	border: 1px #00bcd4 solid;
-	border-radius: 3px;
+	border-radius: 50%;
   cursor: pointer;
   position: relative;
+  overflow: hidden;
 }
 .boxIcon > div i{
   display: block;
