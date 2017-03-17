@@ -216,7 +216,8 @@ EOT;
     $myfile = fopen($dir, "w");
     fwrite($myfile, $toWriteDoc);fclose($myfile);
 
-    preg_match("/{{[a-z:. ]+}}/i",$toWriteDoc,$search);
+    echo preg_replace("/[\t]*<[a-z ]+src[ ]*=[ ]*'srcNative[a-z\/\-_.0-9]+'[ \/]*>[ \n]*[<>\/a-z]+[ \n]*/i","",$toWriteDoc);
+    //print_r($search);
     $newstring = preg_replace_callback('/{{[a-z:. ]+}}/i',
       function($match) use ($extencion, $projet, $ruta) {
 
@@ -233,11 +234,8 @@ EOT;
           }
 
          return (($newSource));
-       },
-      $toWriteDoc
-    );
+       },$toWriteDoc);
 
-    echo "$newstring";
 
     $myfile = fopen("../$projet/index.php", "w");
     fwrite($myfile, $newstring);fclose($myfile);
