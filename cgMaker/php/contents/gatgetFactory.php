@@ -119,9 +119,7 @@ var nameGatget = <?php echo "'$gatgets';"; ?>
       }
     });
 
-    var cggAttr = {
-      cggeditContent: "\tthis.{{var}}Content = function(){\n\t\tlalal\n\t}\n"
-    };
+    var cggAttr = {};
     $.post('php/format/setIconFormat.php', {}, function(data) {
       cggAttr['cggIcon'] = data;
     });
@@ -131,7 +129,7 @@ var nameGatget = <?php echo "'$gatgets';"; ?>
 
     $('button.btnSaveGatget').click(function(event) {
       var dom = editorSource.getValue().replace(/>[\n\t ]+</gi,"><").replace(/[ ]+/gi," ").replace(/\n|\t/,"");
-      var sess = "sda";
+      var sess = "";
       $(dom).each(function(index, el) {
         var jsScript = "";
         if ($(el).attr('cggname') === nameGatget) {
@@ -151,12 +149,8 @@ var nameGatget = <?php echo "'$gatgets';"; ?>
                 jsScript += cggAttr[i].replace(/{{var}}/gi,name);
                 jsScript +="\n";
               }
-
             }
           });
-
-
-
           jsScript+="}";
           sess = jsScript;
         }
@@ -174,7 +168,6 @@ var nameGatget = <?php echo "'$gatgets';"; ?>
          if (nameGatget === 'new') {
            window.open("?page_gatgets=" + inputs.nameGatget.val(),'_self');
          }
-
       });
     });
 

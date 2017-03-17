@@ -23,6 +23,8 @@ if (!empty($_POST['fn'])) {
     echo json_encode(saveGatget($n_f[1], $n_f[2], $n_f[3], $n_f[4], $n_f[5], $n_f[6]));
   }elseif ($n_f[0] === 'listgatgets') {
     echo json_encode(listgatgets());
+  }elseif ($n_f[0] === 'exportGatget') {
+    exportGatget($n_f[1], $n_f[2]);
   }
 
 }

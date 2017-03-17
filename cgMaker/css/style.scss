@@ -184,6 +184,7 @@ div.themeMultipanel01{
   border-radius: 3px;
   font-size: 16px;
   outline: 0;
+  transition: all 0.2s linear;
   &:hover{
     background: #f54a84;
   }
@@ -196,4 +197,21 @@ option.themeInput01, input.themeInput01{
   border-radius: 3px;
   outline: 0;
   font-size: 16px;
+}
+
+.themeButton02{
+  background: #ff5722;
+  color: white;
+  height: 30px;
+  line-height: 30px;
+  border-style: solid;
+  border: 0;
+  cursor: pointer;
+  border-radius: 3px;
+  font-size: 16px;
+  outline: 0;
+  transition: all 0.2s linear;
+  &:hover{
+    background: #ff855f;
+  }
 }

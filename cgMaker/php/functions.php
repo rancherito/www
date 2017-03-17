@@ -1,7 +1,4 @@
 <?php
-
-
-
   function f_parameters($function){
     $procedure = htmlspecialchars($function);
     preg_match('/\([\w\W]+\)/i',$procedure,$encontrado);
@@ -297,15 +294,15 @@ EOT;
     $dir = "src/gatgets/$gatget";
     $exec =
      "<?php
-       echo '<link rel=\"stylesheet\" href=\"../../font/font-awesome/font.css\">';
-       echo '<link rel=\"stylesheet\" href=\"../../font/Ionicons/font.css\">';
-       echo '<script type=\"text/javascript\" src=\"../../../js/jquery-1.12.4.js\"></script>';
-       echo '<script type=\"text/javascript\" src=\"../../../js/cg.class.js\"></script>';
+       echo '<link rel=\"stylesheet\" href=\"../../font/font-awesome/font.css\">'.\"\n\";
+       echo '<link rel=\"stylesheet\" href=\"../../font/Ionicons/font.css\">'.\"\n\";
+       echo '<script type=\"text/javascript\" src=\"../../../js/jquery-1.12.4.js\"></script>'.\"\n\";
+       echo '<script type=\"text/javascript\" src=\"../../../js/cg.class.js\"></script>'.\"\n\";
        echo '<style media=\"screen\">';
          include_once '../gatgets.php';
-       echo '</style>';
+       echo '</style>'.\"\n\";
        include_once 'source.php';
-       echo '<script type=\"text/javascript\">';
+       echo '<script type=\"text/javascript\">'.\"\n\";
          include_once 'script.js';
        echo '</script>';
       ?>";
@@ -360,5 +357,47 @@ EOT;
     }
     $dir->close();
     return true;
-}
- ?>
+  }
+
+  function recursiveDelete($str) {
+      if (is_file($str)) {
+          return @unlink($str);
+      }
+      elseif (is_dir($str)) {
+          $scan = glob(rtrim($str,'/').'/*');
+          foreach($scan as $index=>$path) {
+              recursiveDelete($path);
+          }
+          return @rmdir($str);
+      }
+  }
+
+  function exportGatget($source,$gatget){
+    $dirSrc = "../$source/cgMProjet/src";
+    $dir = "$dirSrc/gatgets";
+    if (!is_dir($dirSrc)) {mkdir($dirSrc, 0777, true);}
+    if (!is_dir($dir)) {mkdir($dir, 0777, true);}
+
+    if (!is_dir("$dir/$gatget")){
+      mkdir("$dir/$gatget", 0777, true);
+    }
+    copy("src/gatgets/$gatget/script.js","$dir/$gatget/script.js");
+    copy("src/gatgets/$gatget/style.css","$dir/$gatget/style.css");
+
+    print_r(listGatgetProjets($source));
+  }
+
+  function listGatgetProjets($projet){
+    $r_array = [];
+    $dir = "../$projet/cgMProjet/src/gatgets";
+    if (is_dir($dir)) {
+      foreach (scandir($dir) as $key => $value) {
+        if ($value != "." && $value != ".." && is_dir("$dir/$value")) {
+          array_push($r_array,$value);
+        }
+      }
+    }
+    return $r_array;
+  }
+
+?>

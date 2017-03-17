@@ -344,6 +344,28 @@ div.projet-management div._s_n_body div.cg-multipanel > div.cg-multipanel-view d
   height: 100%;
 }
 
+div.projet-management div._s_n_body div.cg-multipanel > div.cg-multipanel-view div.gallery-gatgets > div > div.cont-listGatget {
+  height: calc(100% - 50px);
+}
+
+div.projet-management div._s_n_body div.cg-multipanel > div.cg-multipanel-view div.gallery-gatgets > div > div.cont-settingsGatget {
+  background: #ffb266;
+  height: 50px;
+  padding: 10px;
+  box-sizing: border-box;
+}
+
+div.projet-management div._s_n_body div.cg-multipanel > div.cg-multipanel-view div.gallery-gatgets > div > div.cont-settingsGatget > button {
+  width: 100px;
+  float: right;
+  margin-left: 10px;
+}
+
+div.projet-management div._s_n_body div.cg-multipanel > div.cg-multipanel-view div.gallery-gatgets > div > div.cont-settingsGatget > option {
+  width: 200px;
+  float: right;
+}
+
 div.gatget-factory div.n_body {
   padding: 10px;
   box-sizing: border-box;

@@ -57,13 +57,44 @@
         padding-top: 10px;
         text-align: center;
       }
+      .boxIcon{
+      	height: 100px;
+      	width: 100px;
+      	overflow: hidden;
+      	box-sizing: border-box;
+      	padding: 5px;
+      }
+      .boxIcon > div{
+      	width: 90px;
+      	height: 90px;
+      	border: 1px #00bcd4 solid;
+      	border-radius: 3px;
+        cursor: pointer;
+        position: relative;
+      }
+      .boxIcon > div i{
+        display: block;
+        line-height: 65px;
+        height: 65px;
+        text-align: center;
+        font-size: 40px;
+        color: #00bcd4;
+      }
+      .boxIcon > div div{
+        background: #00bcd4;
+        height: 25px;
+        text-align: center;
+        color: white;
+        line-height: 25px;
+      }
+
      </style>
    </head>
    <body >
      <div class="lalal"></div>
      <cgObjet type="myDom" name="lala"></cgObjet>
      <cgObjet type="infoBlock" name="wacha"></cgObjet>
-     <cgObjet type="infoBlock" name="wachalo"></cgObjet>
+     <cgObjet type="boxIcon" name="wachalo"></cgObjet>
      <script type="text/javascript">
        function lala(selector) {
          var W = selector.outerWidth();
@@ -78,7 +109,7 @@
            H = h;
          }, 10);
        }
-       cg.infoBlock = function(){
+cg.infoBlock = function(){
 
 	cg.myDom.call(this);
 	this.container = $("<div class=\"infoBlock\" cggname=\"infoBlock\"><div><div class=\"title\"><div class=\"txt-title cg-gg\" cggeditContent=\"true\" cggname=\"txtTitle\">YOUR TITLE</div><i class=\"icon cg-gg\" cggIcon=\"true\" cggname=\"icon\"></i></div><div class=\"ifBody cg-gg\" cggeditContent=\"true\" cggname=\"ifBody\">your content</div></div></div>");
@@ -91,7 +122,7 @@
     return this;
   }
 
-  var iconIcon = "ion-android-archive";
+  var iconIcon = "fa-heart";
 	this.iconIcon = function(setIcon){
     if(typeof setIcon !== "undefined" && typeof setIcon === "string"){
       icon.removeClass(iconIcon);
@@ -109,8 +140,14 @@
   }
 
 }
-       $(document).ready(function() {
 
+cg.boxIcon = function(){
+
+	cg.myDom.call(this);
+	this.container = $("<div class=\"boxIcon\" cggname=\"boxIcon\"><div class=\"\"><i class=\"ion-alert-circled\"></i><div class=\"\">hola mundo</div></div></div>");
+
+}
+       $(document).ready(function() {
 
          cg.readyObj();
          var data = {

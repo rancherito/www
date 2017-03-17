@@ -1,8 +1,6 @@
-<div class="boxIcon">
+<div class="boxIcon" cggname="boxIcon">
   <div class="">
-    <i class="fa fa-paper-plane"></i>
-    <div class="">
-		hola mundo
-    </div>
+    <i class="ion-alert-circled"></i>
+    <div class="">hola mundo</div>
   </div>
 </div>

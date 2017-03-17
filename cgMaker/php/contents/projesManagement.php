@@ -33,11 +33,13 @@
             </div>
           </div>
           <div class="gallery-gatgets">
-            <div class="">
-              <div class="cgSquareIcon2 add-gatget">
-                <div class="">
-                  <i class="ion-android-add"></i>
-                </div>
+            <div>
+              <div class="cont-listGatget"></div>
+              <div class="cont-settingsGatget">
+                <button class="btn_insert themeButton02">Insert Gatget</button>
+                <cgObjet type='Input' name='nameGatget'></cgObjet>
+              </div>
+
               </div>
             </div>
           </div>
@@ -51,10 +53,22 @@
   var projet = '<?php echo $projet ?>';
   var extencion = {css: 'css', js: 'javascript'};
 
+
   $(document).ready(function() {
+    cg.readyObj();
     var pnlEditor = cg.$('div');
     var pnlEditorSource = $('div.ccCode');
     var btnAddGatget = $('div.add-gatget');
+    var insertGatget = $('button.btn_insert');
+
+    insertGatget.click(function(event) {
+      var nameGatgetInsert = cg.obj.Input.nameGatget.val();
+      if (nameGatgetInsert.length > 0) {
+        $.post('query.php', {fn: cg.fn('exportGatget', [projet, nameGatgetInsert])}, function(data) {
+          console.log(data);
+        });
+      }
+    });
 
     var editor = CodeMirror(pnlEditor[0],{
       lineNumbers: true,
@@ -64,7 +78,7 @@
       matchBrackets: true,
       showCursorWhenSelecting: true,
       theme: "base16-light",
-      tabSize: 5
+      tabSize: 2
     });
     editor.setSize("100%", "100%");
 
@@ -79,6 +93,9 @@
       tabSize: 5
     });
     editorResource.setSize("100%", "100%");
+
+
+    cg.obj.Input.nameGatget.input('label').style('themeInput01');
 
     $.post("../"+projet+'/cgMProjet/index.cgM',{}, function(data) {
       editor.setValue(data);
@@ -108,6 +125,22 @@
 
     btnAddGatget.click(function (event) {
       window.open("?page_gatgets=true",'_self');
+    });
+
+    $.post('query.php', {fn: cg.fn('listgatgets', [])}, function(data) {
+      var DATA = JSON.parse(data);
+      for (var variable in DATA) {
+        var iconPanel = cg.$('div').addClass('cgSquareIcon');
+        selectGatget(iconPanel,DATA[variable]);
+        iconPanel.append(
+          cg.$('div').append(
+            cg.$('i').addClass('ion-ios-cog'),
+            cg.$('div').text(DATA[variable])
+          )
+        );
+        panels.views()[3].find('div.cont-listGatget').append(iconPanel);
+      }
+
     });
 
     $.post('query.php', {fn: cg.fn('listFolderSource', [projet])}, function(data) {
@@ -144,6 +177,14 @@
         });
       }
     });
+
+    function selectGatget(selector,name) {
+      selector.click(function(event) {
+        cg.obj.Input.nameGatget.text(name).val(name);
+      });
+
+    }
+
     function openFolderS(selector,folderPath){
       selector.click(function (event) {
           panels.views()[2].find('div.ccLink').hide();
