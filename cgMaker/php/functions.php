@@ -389,14 +389,45 @@ EOT;
 
   function listGatgetProjets($projet){
     $r_array = [];
+    $script = "";
+    $style = "";
+
     $dir = "../$projet/cgMProjet/src/gatgets";
+    $dirNative = "../$projet/srcNative";
     if (is_dir($dir)) {
       foreach (scandir($dir) as $key => $value) {
-        if ($value != "." && $value != ".." && is_dir("$dir/$value")) {
-          array_push($r_array,$value);
+        $dirGG = "$dir/$value";
+        if ($value != "." && $value != ".." && is_dir($dirGG)) {
+          foreach (scandir($dirGG) as $key2 => $value2) {
+            if (is_file("$dirGG/$value2")) {
+              $extsn = pathinfo("$dirGG/$value2")['extension'];
+              $filename = "$dirGG/$value2";
+              $contenido = "";
+              if($extsn === "js" || $extsn === "css"){
+                $gestor = fopen($filename, "rb");
+                $contenido = fread($gestor, filesize($filename));
+                fclose($gestor);
+              }
+              if ($extsn === "js") {
+                $script.= "/*file from gatget $value scripts*"."/\n";
+                $script .= "$contenido\n";
+              }
+              if ($extsn === "css") {
+                $style.= "/*file from gatget $value styles*"."/\n";
+                $style .= "$contenido\n";
+              }
+
+              array_push($r_array,"$dirGG/$value2");
+            }
+          }
         }
       }
     }
+    if (!is_dir("$dirNative/css")) {mkdir("$dirNative/css", 0777, true);}
+
+    $myfile = fopen("$dirNative/js/gatgetScript.js", "w");fwrite($myfile, $script);fclose($myfile);
+    $myfile = fopen("$dirNative/css/gatgetStyle.css", "w");fwrite($myfile, $style);fclose($myfile);
+
     return $r_array;
   }
 
