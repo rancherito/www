@@ -121,6 +121,7 @@ EOT;
       $myfile = fopen($dir.'/cgMProjet/index.cgM', "w");fwrite($myfile, $bodyIndex);fclose($myfile);
       $myfile = fopen($dir.'/cgMProjet/style.css', "w");fwrite($myfile, $style);fclose($myfile);
       $myfile = fopen($dir.'/cgMProjet/script.js', "w");fwrite($myfile, $scriptCode);fclose($myfile);
+      $myfile = fopen($dir.'/cgMProjet/obligatoryDependence.cgM', "w");fwrite($myfile, $scriptCode);fclose($myfile);
 
       //making the index arquitecture and dependent files
       $myfile = fopen($dir.'/indexArq.php', "w");
