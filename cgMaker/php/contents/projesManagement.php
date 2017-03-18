@@ -107,6 +107,7 @@
       .addPanel({text: 'Recursos',panel: $('div.sources')})
       .addPanel({text: 'Gatget GALLERY',panel: $('div.gallery-gatgets')})
       .addPanel({text: 'Pagina',panel: $('div.paginaEdicion')})
+      .addPanel({text: 'Pagina',panel: cg.$('div').addClass('listPages')})
       .prependTo($('._s_n_body'));
 
     panels.views()[2].find('.btnReturn').click(function () {
