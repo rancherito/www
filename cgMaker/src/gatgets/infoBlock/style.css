@@ -1,14 +1,11 @@
-body{
-  background: gray;
-}
 div.infoBlock{
   width: 100%;
   max-width: 400px;
   background: white;
-  margin: 5px;
   border-radius: 8px;
   box-sizing: border-box;
   padding: 10px;
+  margin: 0 auto;
 }
 div.infoBlock > div{
   width: 100%;
@@ -39,4 +36,11 @@ div.infoBlock > div > div.title i{
 div.infoBlock > div > div.ifBody{
   padding-top: 10px;
   text-align: center;
+  color: #373737;
+}
+
+@media only screen and (max-width: 400px) {
+  div.infoBlock{
+    border-radius: 0px;
+  }
 }

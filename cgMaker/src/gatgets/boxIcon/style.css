@@ -1,31 +1,30 @@
-.boxIcon{
-	height: 100px;
-	width: 100px;
-	overflow: hidden;
-	box-sizing: border-box;
-	padding: 5px;
+div.boxIcon{
+  height: 180px;
 }
-.boxIcon > div{
-	width: 90px;
-	height: 90px;
-	border: 1px #00bcd4 solid;
-	border-radius: 50%;
-  cursor: pointer;
-  position: relative;
-  overflow: hidden;
+div.boxIcon > div.biIcon{
+  border: 1px #ffb266 solid;
+  border-radius: 50%;
+  margin: 0 auto;
+  width: 150px;
+  height: 150px;
+  padding: 10px;
+  box-sizing: border-box;
 }
-.boxIcon > div i{
+div.boxIcon > div.biIcon > i{
+  background: #ffb266;
   display: block;
-  line-height: 65px;
-  height: 65px;
+  line-height: 130px;
   text-align: center;
-  font-size: 40px;
-  color: #00bcd4;
-}
-.boxIcon > div div{
-  background: #00bcd4;
-  height: 25px;
-  text-align: center;
+  width: 130px;
+  height: 130px;
+  border-radius: 50%;
+  font-size: 70px;
   color: white;
-  line-height: 25px;
+}
+div.boxIcon > div.biText{
+  text-align: center;
+  height: 30px;
+  line-height: 30px;
+  font-size: 18px;
+  font-weight: bold;
 }

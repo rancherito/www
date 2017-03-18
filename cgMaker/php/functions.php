@@ -216,7 +216,7 @@ EOT;
     $myfile = fopen($dir, "w");
     fwrite($myfile, $toWriteDoc);fclose($myfile);
 
-    echo preg_replace("/[\t]*<[a-z ]+src[ ]*=[ ]*'srcNative[a-z\/\-_.0-9]+'[ \/]*>[ \n]*[<>\/a-z]+[ \n]*/i","",$toWriteDoc);
+    //echo preg_replace("/[\t]*<[a-z ]+src[ ]*=[ ]*'srcNative[a-z\/\-_.0-9]+'[ \/]*>[ \n]*[<>\/a-z]+[ \n]*/i","",$toWriteDoc);
     //print_r($search);
     $newstring = preg_replace_callback('/{{[a-z:. ]+}}/i',
       function($match) use ($extencion, $projet, $ruta) {
@@ -292,20 +292,27 @@ EOT;
   function saveGatget($gatget, $script, $style, $globalStyle, $source, $isNew){
     $a_return = ["PROCESS" => "FAIL"];
     $dir = "src/gatgets/$gatget";
-    $exec =
-     "<?php
-       echo '<link rel=\"stylesheet\" href=\"../../font/font-awesome/font.css\">'.\"\n\";
-       echo '<link rel=\"stylesheet\" href=\"../../font/Ionicons/font.css\">'.\"\n\";
-       echo '<script type=\"text/javascript\" src=\"../../../js/jquery-1.12.4.js\"></script>'.\"\n\";
-       echo '<script type=\"text/javascript\" src=\"../../../js/cg.class.js\"></script>'.\"\n\";
-       echo '<style media=\"screen\">';
-         include_once '../gatgets.php';
-       echo '</style>'.\"\n\";
-       include_once 'source.php';
-       echo '<script type=\"text/javascript\">'.\"\n\";
-         include_once 'script.js';
-       echo '</script>';
-      ?>";
+    $exec = "
+    <?php
+      echo '<link rel=\"stylesheet\" href=\"../../font/font-awesome/font.css\">'.\"\n\";
+      echo '<link rel=\"stylesheet\" href=\"../../font/Ionicons/font.css\">'.\"\n\";
+      echo '<script type=\"text/javascript\" src=\"../../../js/jquery-1.12.4.js\"></script>'.\"\n\";
+      echo '<script type=\"text/javascript\" src=\"../../../js/cg.class.js\"></script>'.\"\n\";
+
+      $nameExec = ;
+
+      echo '<style media=\"screen\">';
+        include_once '../gatgets.php';
+      echo '</style>'.\"\n\";
+      echo \"<body></body>\";
+      echo '<script type=\"text/javascript\">'.\"\n\";
+        include_once 'script.js';
+      echo \"
+        var test = new cg.\".basename(realpath(\".\")).\"();
+        test.appendTo($('body'));
+      </script>\";
+     ?>
+      ";
 
 
     $myfile = fopen("src/gatgets/style.css", "w");fwrite($myfile, htmlspecialchars_decode($globalStyle));fclose($myfile);

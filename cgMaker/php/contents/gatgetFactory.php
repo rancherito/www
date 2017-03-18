@@ -88,7 +88,9 @@ var nameGatget = <?php echo "'$gatgets';"; ?>
       .appendTo($('div.pnl_multi'))
       .style('themeMultipanel01');
 
-
+      var s02 = true;
+      var s03 = true;
+      var s04 = true;
       panels.access()[0].click(function(event) {
         if (nameGatget !== 'new') {
           $.post('src/gatgets/'+nameGatget+'/script.js',{}, function(data) {
@@ -99,23 +101,35 @@ var nameGatget = <?php echo "'$gatgets';"; ?>
 
     panels.access()[1].click(function(event) {
       if (nameGatget !== 'new') {
-        $.post('src/gatgets/'+nameGatget+'/style.css',{}, function(data) {
-          editorStyle.setValue(data);
-        });
+        if (s02) {
+          s02 = false;
+          $.post('src/gatgets/'+nameGatget+'/style.css',{}, function(data) {
+            editorStyle.setValue(data);
+          });
+        }
+
       }
     });
 
     panels.access()[2].click(function(event) {
-      $.post('src/gatgets/style.css',{}, function(data) {
-        editorGlobalStyle.setValue(data);
-      });
+      if (s03) {
+        s03 = false;
+        $.post('src/gatgets/style.css',{}, function(data) {
+          editorGlobalStyle.setValue(data);
+        });
+      }
+
     });
 
     panels.access()[3].click(function(event) {
       if (nameGatget !== 'new') {
-        $.post('src/gatgets/'+nameGatget+'/source.php',{}, function(data) {
-          editorSource.setValue(data);
-        });
+        if (s04) {
+          s04 = false;
+          $.post('src/gatgets/'+nameGatget+'/source.php',{}, function(data) {
+            editorSource.setValue(data);
+          });
+        }
+
       }
     });
 

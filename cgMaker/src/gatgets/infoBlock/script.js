@@ -10,6 +10,7 @@ cg.infoBlock = function(){
     txtTitle.empty().append(setContent);
     return this;
   }
+  this.txtTitleContent("Your content");
 
   var iconIcon = "ion-android-archive";
 	this.iconIcon = function(setIcon){
@@ -27,5 +28,6 @@ cg.infoBlock = function(){
     ifBody.empty().append(setContent);
     return this;
   }
+  this.ifBodyContent("Your content");
 
 }

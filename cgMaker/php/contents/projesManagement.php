@@ -19,29 +19,29 @@
           <a class="saveChanges">Save changes</a>
         </div>
         <div class="_s_n_body">
-          <div class="sources">
-            <div class="">
-              <div class="cLink">
-                <div class="ccLink"></div>
-                <div class="ccSource"></div>
-                <div class="ccCode"></div>
-              </div>
-              <div class="cSettings">
-                <button type="button" name="button" class="btnReturn">Return</button>
-                <button type="button" name="button" class="btnSave" style="display: none">Save changes</button>
-              </div>
-            </div>
-          </div>
-          <div class="gallery-gatgets">
-            <div>
-              <div class="cont-listGatget"></div>
-              <div class="cont-settingsGatget">
-                <button class="btn_insert themeButton02">Insert Gatget</button>
-                <cgObjet type='Input' name='nameGatget'></cgObjet>
-              </div>
-
+            <div class="sources">
+              <div class="">
+                <div class="cLink">
+                  <div class="ccLink"></div>
+                  <div class="ccSource"></div>
+                  <div class="ccCode"></div>
+                </div>
+                <div class="cSettings">
+                  <button type="button" name="button" class="btnReturn">Return</button>
+                  <button type="button" name="button" class="btnSave" style="display: none">Save changes</button>
+                </div>
               </div>
             </div>
+            <div class="gallery-gatgets">
+              <div>
+                <div class="cont-listGatget"></div>
+                <div class="cont-settingsGatget">
+                  <button class="btn_insert themeButton02">Insert Gatget</button>
+                  <cgObjet type='Input' name='nameGatget'></cgObjet>
+                </div>
+              </div>
+            </div>
+            <div class="paginaEdicion"></div>
           </div>
         </div>
       </div>
@@ -106,6 +106,7 @@
       .addPanel({text: 'Arquitectura',panel: cg.$('div').addClass('arquitecture')})
       .addPanel({text: 'Recursos',panel: $('div.sources')})
       .addPanel({text: 'Gatget GALLERY',panel: $('div.gallery-gatgets')})
+      .addPanel({text: 'Pagina',panel: $('div.paginaEdicion')})
       .prependTo($('._s_n_body'));
 
     panels.views()[2].find('.btnReturn').click(function () {
