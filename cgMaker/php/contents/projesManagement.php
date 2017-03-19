@@ -1,5 +1,9 @@
 <?php
   $lala = print_r(list_projets(),true);
+  $pageName = "index.php";
+  if (!empty($_GET['pageEdit'])) {
+    $pageName = $_GET['pageEdit'];
+  }
  ?>
 
 <div class="panel_p projet-management">
@@ -42,6 +46,9 @@
               </div>
             </div>
             <div class="paginaEdicion"></div>
+            <div class="listPages">
+              <div class="n_listPages"></div>
+            </div>
           </div>
         </div>
       </div>
@@ -51,8 +58,8 @@
 <script type="text/javascript">
   var source = [];
   var projet = '<?php echo $projet ?>';
+  var page = '<? echo $pageName ?>';
   var extencion = {css: 'css', js: 'javascript'};
-
 
   $(document).ready(function() {
     cg.readyObj();
@@ -90,10 +97,24 @@
       matchBrackets: true,
       showCursorWhenSelecting: true,
       theme: "base16-light",
-      tabSize: 5
+      tabSize: 2
     });
     editorResource.setSize("100%", "100%");
 
+    var editorPage = CodeMirror($('div.paginaEdicion')[0],{
+      lineNumbers: true,
+      mode: "htmlmixed",
+      keyMap: "sublime",
+      autoCloseBrackets: true,
+      matchBrackets: true,
+      showCursorWhenSelecting: true,
+      theme: "base16-light",
+      tabSize: 2
+    });
+    editorPage.setSize("100%", "100%");
+    $.post('../'+projet+'/pages/'+page, {}, function(data) {
+      console.log(data);
+    });
 
     cg.obj.Input.nameGatget.input('label').style('themeInput01');
 
@@ -106,8 +127,8 @@
       .addPanel({text: 'Arquitectura',panel: cg.$('div').addClass('arquitecture')})
       .addPanel({text: 'Recursos',panel: $('div.sources')})
       .addPanel({text: 'Gatget GALLERY',panel: $('div.gallery-gatgets')})
-      .addPanel({text: 'Pagina',panel: $('div.paginaEdicion')})
-      .addPanel({text: 'Pagina',panel: cg.$('div').addClass('listPages')})
+      .addPanel({text: 'Edit Page',panel: $('div.paginaEdicion')})
+      .addPanel({text: 'List Page',panel: $('div.listPages')})
       .prependTo($('._s_n_body'));
 
     panels.views()[2].find('.btnReturn').click(function () {
@@ -149,7 +170,6 @@
 
     $.post('query.php', {fn: cg.fn('listFolderSource', [projet])}, function(data) {
       var DATA = JSON.parse(data);
-      console.log(DATA);
       for (var variable in DATA) {
         var squareicon = cg.$('div').addClass('cgSquareIcon').append(
           cg.$('div').append(
@@ -162,6 +182,28 @@
         panels.views()[2].find('div.ccLink').append(squareicon);
       }
     });
+
+    $.post('query.php',{fn: cg.fn('listPagesProjet',[projet])}, function(data) {
+        var DATA = JSON.parse(data);
+        if (DATA.indexOf(page) === -1) {
+          window.open('?page_projet='+projet+'&pageEdit=index.php','_self');
+        }
+        for (var variable in DATA) {
+          var squareicon = cg.$('div').addClass('cgSquareIcon').append(
+            cg.$('div').append(
+              cg.$('i').addClass('ion-android-list'),
+              cg.$('div').text(DATA[variable])
+            )
+          );
+          openPage(squareicon,DATA[variable]);
+          panels.views()[5].find('div.n_listPages').append(squareicon);
+        }
+    });
+    function openPage(selector,page) {
+      selector.click(function(event) {
+        window.open('?page_projet='+projet+'&pageEdit='+page,'_self');
+      });
+    }
 
     panels.views()[1].append(cg.$('iframe').prop('src', '../'+projet+'/indexArq.php'));
 

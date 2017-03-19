@@ -393,7 +393,16 @@ EOT;
 
     print_r(listGatgetProjets($source));
   }
-
+  function listPagesProjet($projet){
+    $listPage = [];
+    $dir = ("../$projet/pages");
+    foreach (scandir($dir) as $key => $value) {
+      if (is_dir("$dir/$values") && $value != "." && $value != "..") {
+        array_push($listPage,$value);
+      }
+    }
+    return $listPage;
+  }
   function listGatgetProjets($projet){
     $r_array = [];
     $script = "";
@@ -437,5 +446,10 @@ EOT;
 
     return $r_array;
   }
-
+  function openSource($path){
+    $gestor = fopen($path, "rb");
+    $contenido = fread($gestor, filesize($path));
+    fclose($gestor);
+    return $contenido;
+  }
 ?>

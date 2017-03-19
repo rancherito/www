@@ -25,6 +25,10 @@ if (!empty($_POST['fn'])) {
     echo json_encode(listgatgets());
   }elseif ($n_f[0] === 'exportGatget') {
     exportGatget($n_f[1], $n_f[2]);
+  }elseif ($n_f[0] === 'listPagesProjet') {
+    echo json_encode(listPagesProjet($n_f[1]));
+  }elseif ($n_f[0] === 'openSource') {
+    echo openSource($n_f[1]);
   }
 
 }
