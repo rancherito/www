@@ -113,6 +113,7 @@ EOT;
       mkdir($dir, 0777, true);
       echo '{"PROCESS":"CORRECT"}';
       $myfile = fopen($dir.'/index.php', "w");fwrite($myfile, $bodyIndex);fclose($myfile);
+      $myfile = fopen($dir.'/base.php', "w");fwrite($myfile, $bodyIndex);fclose($myfile);
 
       $myfile = fopen($dir.'/projet.cginfo', "w");fclose($myfile);
 
@@ -208,6 +209,11 @@ EOT;
   }
 
   function saveProjets($projet,$toWrite){
+    $pageInclude = '
+      <?php
+         include_once "pages/".pathinfo($_SERVER[PHP_SELF])["basename"];
+      ?>
+      ';
     $extencion = ['css' => '<link rel="stylesheet" href="{{link}}">','js' => '<script src="{{link}}"></script>'];
     $ruta = ['css' => 'css','js' => 'js'];
 
@@ -236,16 +242,13 @@ EOT;
          return (($newSource));
        },$toWriteDoc);
 
+    $newstring = str_replace('[[outputPage]]',"<div class=\"n_panel_a\">$pageInclude</div>",$newstring);
 
-    $myfile = fopen("../$projet/index.php", "w");
-    fwrite($myfile, $newstring);fclose($myfile);
-    $replace = "\t<link rel='stylesheet' href='cgMProjet/style.css'>\n</head>";
-    $indexArq = str_replace('</head>',$replace,$newstring);
-    $replace = "\t<script src='cgMProjet/script.js'></script>\n</body>";
-    $indexArq = str_replace('</body>',$replace,$indexArq);
+    $myfile = fopen("../$projet/base.php", "w");fwrite($myfile, $newstring);fclose($myfile);
 
-    $myfile = fopen("../$projet/indexArq.php", "w");
-    fwrite($myfile, $indexArq);fclose($myfile);
+    $indexArq = str_replace('</head>',"\t<link rel='stylesheet' href='cgMProjet/style.css'>\n</head>",$newstring);
+    $indexArq = str_replace('</body>',"\t<script src='cgMProjet/script.js'></script>\n</body>",$indexArq);
+    $myfile = fopen("../$projet/indexArq.php", "w");fwrite($myfile, $indexArq);fclose($myfile);
 
 
   }
@@ -397,7 +400,7 @@ EOT;
     $listPage = [];
     $dir = ("../$projet/pages");
     foreach (scandir($dir) as $key => $value) {
-      if (is_dir("$dir/$values") && $value != "." && $value != "..") {
+      if (is_dir("$dir/$values") && $value != "." && $value != ".." && $value != "base.php") {
         array_push($listPage,$value);
       }
     }
@@ -451,5 +454,9 @@ EOT;
     $contenido = fread($gestor, filesize($path));
     fclose($gestor);
     return $contenido;
+  }
+  function savePageProjet($projet,$page,$source){
+    $dir = "../$projet/pages/$page";
+    $myfile = fopen($dir, "w");fwrite($myfile, htmlspecialchars_decode($source));fclose($myfile);
   }
 ?>

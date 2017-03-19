@@ -103,7 +103,7 @@
 
     var editorPage = CodeMirror($('div.paginaEdicion')[0],{
       lineNumbers: true,
-      mode: "htmlmixed",
+      mode: "php",
       keyMap: "sublime",
       autoCloseBrackets: true,
       matchBrackets: true,
@@ -112,9 +112,6 @@
       tabSize: 2
     });
     editorPage.setSize("100%", "100%");
-    $.post('../'+projet+'/pages/'+page, {}, function(data) {
-      console.log(data);
-    });
 
     cg.obj.Input.nameGatget.input('label').style('themeInput01');
 
@@ -143,7 +140,8 @@
 
     $('.saveChanges').click(function(event) {
       var proj = projet;
-      $.post('query.php', {fn: cg.fn('saveProjets',[proj,editor.getValue()])},function (data) {
+      $.post('query.php', {fn: cg.fn('saveProjets',[proj,editor.getValue()])});
+      $.post('query.php', {fn: cg.fn('savePageProjet',[proj,page,editorPage.getValue()])}, function(data) {
         console.log(data);
       });
     });
@@ -187,6 +185,10 @@
         var DATA = JSON.parse(data);
         if (DATA.indexOf(page) === -1) {
           window.open('?page_projet='+projet+'&pageEdit=index.php','_self');
+        }else {
+          $.post('query.php', {fn: cg.fn('openSource',['../'+projet+'/pages/'+page])}, function(data) {
+            editorPage.setValue(data);
+          });
         }
         for (var variable in DATA) {
           var squareicon = cg.$('div').addClass('cgSquareIcon').append(
@@ -204,6 +206,17 @@
         window.open('?page_projet='+projet+'&pageEdit='+page,'_self');
       });
     }
+
+    var view04 = true;
+    panels.access()[4].click(function(event) {
+      if (view04) {
+        view04 = false;
+        $.post('query.php', {fn: cg.fn('openSource',['../'+projet+'/pages/'+page])}, function(data) {
+          editorPage.setValue(data);
+        });
+      }
+
+    });
 
     panels.views()[1].append(cg.$('iframe').prop('src', '../'+projet+'/indexArq.php'));
 

@@ -27,4 +27,6 @@
 <script src="src/pluggings/codeMirror/mode/javascript/javascript.js"></script>
 <script src="src/pluggings/codeMirror/mode/css/css.js"></script>
 <script src="src/pluggings/codeMirror/mode/htmlmixed/htmlmixed.js"></script>
+<script src="src/pluggings/codeMirror/mode/clike/clike.js"></script>
+<script src="src/pluggings/codeMirror/mode/php/php.js"></script>
 <script src="src/pluggings/codeMirror/keymap/sublime.js"></script>
