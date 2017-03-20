@@ -32,8 +32,15 @@ cg.getFileExtension = function (filename) {
 //class
 cg.myDom = function () {
   this.container = cg.$('div');
+  var style = 'myDom';
   this.style = function (newStyle) {
-    this.container.addClass(newStyle);
+    this.container.removeClass(style);
+    style = newStyle;
+    this.container.addClass(style);
+    return this;
+  }
+  this.addClass = function (newClass) {
+    this.container.addClass(newClass);
     return this;
   }
   this.dom = function (getcontainer) {
@@ -384,7 +391,7 @@ cg.readyObj = function () {
       }
       if (typeof cg.obj[type][name] === 'undefined') {
         eval('cg.obj.' + type + '.' + name + ' = new cg.' + type + '();');
-        $(this).after(cg.obj[type][name].dom()).remove();
+        $(this).after(cg.obj[type][name].addClass('cgObjet').dom().attr({'cggname':name, 'cggtype': type})).remove();
       }
     }
   });
