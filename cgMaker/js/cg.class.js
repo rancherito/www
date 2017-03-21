@@ -315,17 +315,24 @@ cg.Input = function (type) {
   this.style = function (newStyle) {
     if (typeof newStyle !== "undefined") {
       this.input().removeClass(style);
+      for (var i in listInputs) {
+        listInputs[i].removeClass(style);
+      }
       style = newStyle;
       this.input().addClass(style);
+      for (var i in listInputs) {
+        listInputs[i].addClass(style);
+      }
       return this;
     }
     return style;
   }
 }
 cg.MultiPanelView = function () {
-  var container = cg.$('div').addClass('cg-multipanel');
-  var pnl_access = cg.$('div').addClass('cg-multipanel-access').appendTo(container);
-  var pnl_view = cg.$('div').addClass('cg-multipanel-view').appendTo(container);
+  cg.myDom.call(this);
+  this.container = cg.$('div').addClass('cg-multipanel');
+  var pnl_access = cg.$('div').addClass('cg-multipanel-access').appendTo(this.container);
+  var pnl_view = cg.$('div').addClass('cg-multipanel-view').appendTo(this.container);
   var list_access = [];
   var list_views = [];
 
@@ -344,16 +351,6 @@ cg.MultiPanelView = function () {
       panel.appendTo(pnl_view);
     });
   }
-  var style = "";
-  this.style = function (newStyle) {
-    if (typeof newStyle !== "undefined") {
-      this.container.removeClass(style);
-      style = newStyle;
-      this.container.addClass(style);
-      return this;
-    }
-    return style;
-  }
 
   this.addPanel = function (custom) {
     if (typeof custom !== 'undefined' && typeof custom === 'object') {
@@ -371,26 +368,6 @@ cg.MultiPanelView = function () {
     }
     return this;
   }
-
-  this.dom = function (getcontainer) {
-    if ( typeof getcontainer === 'function') {
-      getcontainer(container);
-      return this;
-    }
-    return container;
-  };
-  this.appendTo = function (setAppend) {
-    if (setAppend.length > 0) {
-      container.appendTo(setAppend);
-    }
-    return this;
-  };
-  this.prependTo = function (setPrepend) {
-    if (setPrepend.length > 0) {
-      container.prependTo(setPrepend);
-    }
-    return this;
-  };
 }
 //delegates
 cg.dataTable = function (source) { return new cg.DataTable(source); };

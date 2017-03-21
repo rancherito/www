@@ -9,7 +9,8 @@ cg.infoBlock = function(){
   var txtTitleContent = "Your Content";
   this.txtTitleContent = function(setContent){
     if(typeof setContent !== "undefined" && typeof setContent === "string"){
-      txtTitle.empty().append(setContent);
+      txtTitleContent = setContent;
+      txtTitle.empty().append(txtTitleContent);
       return this;
     }
     return txtTitleContent;
@@ -31,7 +32,8 @@ cg.infoBlock = function(){
   var ifBodyContent = "Your Content";
   this.ifBodyContent = function(setContent){
     if(typeof setContent !== "undefined" && typeof setContent === "string"){
-      ifBody.empty().append(setContent);
+      ifBodyContent = setContent;
+      ifBody.empty().append(ifBodyContent);
       return this;
     }
     return ifBodyContent;

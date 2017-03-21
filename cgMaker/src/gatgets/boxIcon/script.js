@@ -20,7 +20,8 @@ cg.boxIcon = function(){
   var txtTitleContent = "Your Content";
   this.txtTitleContent = function(setContent){
     if(typeof setContent !== "undefined" && typeof setContent === "string"){
-      txtTitle.empty().append(setContent);
+      txtTitleContent = setContent;
+      txtTitle.empty().append(txtTitleContent);
       return this;
     }
     return txtTitleContent;
