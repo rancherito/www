@@ -34,10 +34,13 @@ cg.myDom = function () {
   this.container = cg.$('div');
   var style = 'myDom';
   this.style = function (newStyle) {
-    this.container.removeClass(style);
-    style = newStyle;
-    this.container.addClass(style);
-    return this;
+    if (typeof newStyle !== "undefined") {
+      this.container.removeClass(style);
+      style = newStyle;
+      this.container.addClass(style);
+      return this;
+    }
+    return style;
   }
   this.addClass = function (newClass) {
     this.container.addClass(newClass);
@@ -307,8 +310,16 @@ cg.Input = function (type) {
     }
     return this;
   };
+
+  var style = "";
   this.style = function (newStyle) {
-    return this.addClass(newStyle);
+    if (typeof newStyle !== "undefined") {
+      this.input().removeClass(style);
+      style = newStyle;
+      this.input().addClass(style);
+      return this;
+    }
+    return style;
   }
 }
 cg.MultiPanelView = function () {
@@ -333,9 +344,15 @@ cg.MultiPanelView = function () {
       panel.appendTo(pnl_view);
     });
   }
+  var style = "";
   this.style = function (newStyle) {
-    container.addClass(newStyle);
-    return this;
+    if (typeof newStyle !== "undefined") {
+      this.container.removeClass(style);
+      style = newStyle;
+      this.container.addClass(style);
+      return this;
+    }
+    return style;
   }
 
   this.addPanel = function (custom) {

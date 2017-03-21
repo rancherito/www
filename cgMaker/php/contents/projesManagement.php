@@ -140,7 +140,9 @@
 
     $('.saveChanges').click(function(event) {
       var proj = projet;
-      $.post('query.php', {fn: cg.fn('saveProjets',[proj,editor.getValue()])});
+      $.post('query.php', {fn: cg.fn('saveProjets',[proj,editor.getValue()])},function (data) {
+        console.log(data);
+      });
       $.post('query.php', {fn: cg.fn('savePageProjet',[proj,page,editorPage.getValue()])}, function(data) {
         console.log(data);
       });

@@ -17,10 +17,14 @@ cg.boxIcon = function(){
 	}
   this.iconIcon(iconIcon);
 
+  var txtTitleContent = "Your Content";
   this.txtTitleContent = function(setContent){
-    txtTitle.empty().append(setContent);
-    return this;
+    if(typeof setContent !== "undefined" && typeof setContent === "string"){
+      txtTitle.empty().append(setContent);
+      return this;
+    }
+    return txtTitleContent;
   }
-  this.txtTitleContent("Your content");
+  this.txtTitleContent(txtTitleContent);
 
 }

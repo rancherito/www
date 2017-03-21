@@ -6,11 +6,15 @@ cg.infoBlock = function(){
 	var icon = this.container.find("[cggname=icon]");
 	var ifBody = this.container.find("[cggname=ifBody]");
 
+  var txtTitleContent = "Your Content";
   this.txtTitleContent = function(setContent){
-    txtTitle.empty().append(setContent);
-    return this;
+    if(typeof setContent !== "undefined" && typeof setContent === "string"){
+      txtTitle.empty().append(setContent);
+      return this;
+    }
+    return txtTitleContent;
   }
-  this.txtTitleContent("Your content");
+  this.txtTitleContent(txtTitleContent);
 
   var iconIcon = "ion-android-archive";
 	this.iconIcon = function(setIcon){
@@ -24,10 +28,14 @@ cg.infoBlock = function(){
 	}
   this.iconIcon(iconIcon);
 
+  var ifBodyContent = "Your Content";
   this.ifBodyContent = function(setContent){
-    ifBody.empty().append(setContent);
-    return this;
+    if(typeof setContent !== "undefined" && typeof setContent === "string"){
+      ifBody.empty().append(setContent);
+      return this;
+    }
+    return ifBodyContent;
   }
-  this.ifBodyContent("Your content");
+  this.ifBodyContent(ifBodyContent);
 
 }

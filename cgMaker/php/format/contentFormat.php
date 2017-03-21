@@ -1,5 +1,9 @@
+  var {{var}}Content = "Your Content";
   this.{{var}}Content = function(setContent){
-    {{var}}.empty().append(setContent);
-    return this;
+    if(typeof setContent !== "undefined" && typeof setContent === "string"){
+      {{var}}.empty().append(setContent);
+      return this;
+    }
+    return {{var}}Content;
   }
-  this.{{var}}Content("Your content");
+  this.{{var}}Content({{var}}Content);

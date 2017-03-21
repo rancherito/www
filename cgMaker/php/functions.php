@@ -44,7 +44,7 @@ $style = <<<EOT
   color: transparent;
   text-decoration: none;
 }
-div.n_panel_p{
+div.n_panel_p, div.n_panel_a{
   border: 1px gray dashed;
   box-sizing: border-box;
   padding: 10px 0;
@@ -78,6 +78,96 @@ div.addGatget > div{
 div.addGatget > div:hover{
   background: #afafaf !important;
 }
+
+div.pnl_setgatget, div.pnl_gatget{
+  width: 100%;
+  height: 100%;
+  background: gray !important;
+  position: fixed;
+  top: 0;
+  left: 0;
+}
+div.pnl_setgatget > div.n_bodyGatget_p, div.pnl_gatget > div.n_bodyGatget_p{
+  background: white !important;;
+  height: calc(100% - 60px);
+  box-sizing: border-box;
+  padding: 10px;
+  overflow: auto;
+}
+div.pnl_setgatget > div.n_settingsGatget_p, div.pnl_gatget > div.n_settingsGatget_p{
+  background: #ffb266 !important;;
+  height: 60px;
+  box-sizing: border-box;
+  padding: 10px;
+}
+div.pnl_setgatget > div.n_settingsGatget_p > button, div.pnl_gatget > div.n_settingsGatget_p > button{
+  height: 30px;
+  width: 130px;
+  background: #ff5722 !important;
+  float: right;
+  margin-left: 10px;
+  margin-top: 5px;
+  border-style: solid;
+  border: 0;
+  outline: 0;
+  cursor: pointer;
+  border-radius: 3px;
+  color: white;
+  transition: all 0.2s linear;
+}
+div.pnl_setgatget > div.n_settingsGatget_p > button:hover,div.pnl_gatget > div.n_settingsGatget_p > button:hover{
+  background: #ff855f !important;
+}
+div.pnl_setgatget > div.n_bodyGatget_p > div{
+  margin-bottom: 10px;
+  box-sizing: border-box;
+  border: 1px #ff5722 solid;
+  border-radius: 3px;
+}
+div.pnl_setgatget > div.n_bodyGatget_p > div > div {
+  background: #ff5722 !important;
+  height: 30px;
+  line-height: 30px;
+  box-sizing: border-box;
+  padding: 0 10px;
+}
+div.pnl_setgatget > div.n_bodyGatget_p > div > textarea{
+  width: 100%;
+  max-width: 100%;
+  outline: 0;
+  box-sizing: border-box;
+  padding: 10px;
+}
+
+.cgObjet{
+  background: #dcdcdc !important;
+}
+
+.cgObjet > div.editGatget{
+  background: #545454 !important;
+  color: white;
+  padding: 5px;
+  box-sizing: border-box;
+  border-radius: 3px;
+  text-align: center;
+  cursor: pointer;
+  transition: all 0.2s linear;
+  font-size: 14px;
+}
+
+.cgObjet > div.editGatget:hover{
+  background: #afafaf !important
+}
+
+div.contentPage{
+  margin: 0 10px;
+  text-align: center;
+  height: 30px;
+  background: #dcdcdc !important;
+  border-radius: 3px;
+  line-height: 30px;
+}
+
 EOT;
 $scriptCode = <<<EOT
 $(document).ready(function() {
@@ -224,6 +314,22 @@ EOT;
 
     //echo preg_replace("/[\t]*<[a-z ]+src[ ]*=[ ]*'srcNative[a-z\/\-_.0-9]+'[ \/]*>[ \n]*[<>\/a-z]+[ \n]*/i","",$toWriteDoc);
     //print_r($search);
+
+    preg_match_all("/<[ \t\n]*cgObjet[ \t\na-z='\"_\-0-9]*>[ \t\n]*<\/[ \t\n]*cgObjet[ \t\n]*>|<[ \t\n]*cgObjet[ \t\na-z='\"_\-0-9]*\/>/i",$toWriteDoc,$michilala);
+
+    foreach ($michilala[0] as $key => $value) {
+      $createVar = "";
+      preg_match("/type[ \t\n]*=[ \t\n]*('|\")[a-z_\-]+('|\")/i",$value,$typeOut);
+
+      preg_match("/('|\")[a-z_\-]+('|\")/i",$typeOut[0],$typeOut);
+      $createVar .= substr($typeOut[0],1,-1).".";
+
+      preg_match("/name[ \t\n]*=[ \t\n]*('|\")[a-z_\-]+('|\")/i",$value,$typeOut);
+      preg_match("/('|\")[a-z_\-]+('|\")/i",$typeOut[0],$typeOut);
+      $createVar .= substr($typeOut[0],1,-1);
+      echo "\n$createVar\n";
+    }
+
     $newstring = preg_replace_callback('/{{[a-z:. ]+}}/i',
       function($match) use ($extencion, $projet, $ruta) {
 
