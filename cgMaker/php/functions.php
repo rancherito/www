@@ -308,7 +308,6 @@ EOT;
     $ruta = ['css' => 'css','js' => 'js'];
 
     $dir = '../'.$projet.'/cgMProjet/index.cgM';
-    $dirGD = "../$projet/cgMProjet/src/gatgetDesign";
     $toWriteDoc = htmlspecialchars_decode($toWrite);
     $myfile = fopen($dir, "w");
     fwrite($myfile, $toWriteDoc);fclose($myfile);
@@ -316,25 +315,19 @@ EOT;
     //echo preg_replace("/[\t]*<[a-z ]+src[ ]*=[ ]*'srcNative[a-z\/\-_.0-9]+'[ \/]*>[ \n]*[<>\/a-z]+[ \n]*/i","",$toWriteDoc);
     //print_r($search);
 
-    preg_match_all("/<[ \t\n]*cgObjet[ \t\na-z='\"_\-0-9]*>[ \t\n]*<\/[ \t\n]*cgObjet[ \t\n]*>|<[ \t\n]*cgObjet[ \t\na-z='\"_\-0-9]*\/>/i",$toWriteDoc,$cgObjetVar);
+    preg_match_all("/<[ \t\n]*cgObjet[ \t\na-z='\"_\-0-9]*>[ \t\n]*<\/[ \t\n]*cgObjet[ \t\n]*>|<[ \t\n]*cgObjet[ \t\na-z='\"_\-0-9]*\/>/i",$toWriteDoc,$michilala);
 
-    foreach ($cgObjetVar[0] as $key => $value) {
-      $tyeVar = "";
-      $nameVar = "";
+    foreach ($michilala[0] as $key => $value) {
+      $createVar = "";
       preg_match("/type[ \t\n]*=[ \t\n]*('|\")[a-z_\-]+('|\")/i",$value,$typeOut);
 
       preg_match("/('|\")[a-z_\-]+('|\")/i",$typeOut[0],$typeOut);
-      $tyeVar = substr($typeOut[0],1,-1);
+      $createVar .= substr($typeOut[0],1,-1).".";
 
       preg_match("/name[ \t\n]*=[ \t\n]*('|\")[a-z_\-]+('|\")/i",$value,$typeOut);
       preg_match("/('|\")[a-z_\-]+('|\")/i",$typeOut[0],$typeOut);
-      $nameVar = substr($typeOut[0],1,-1);
-      $fileVar = "$tyeVar.$nameVar.cgM";
-      echo "$fileVar\n";
-      if (!is_file("$dirGD/$fileVar")) {
-        $myfile = fopen("$dirGD/$fileVar", "w");fclose($myfile);
-      }
-
+      $createVar .= substr($typeOut[0],1,-1);
+      echo "\n$createVar\n";
     }
 
     $newstring = preg_replace_callback('/{{[a-z:. ]+}}/i',
@@ -414,6 +407,9 @@ EOT;
       echo '<link rel=\"stylesheet\" href=\"../../font/Ionicons/font.css\">'.\"\n\";
       echo '<script type=\"text/javascript\" src=\"../../../js/jquery-1.12.4.js\"></script>'.\"\n\";
       echo '<script type=\"text/javascript\" src=\"../../../js/cg.class.js\"></script>'.\"\n\";
+
+      $nameExec = ;
+
       echo '<style media=\"screen\">';
         include_once '../gatgets.php';
       echo '</style>'.\"\n\";
@@ -555,7 +551,6 @@ EOT;
     }
     if (!is_dir("$dirNative/css")) {mkdir("$dirNative/css", 0777, true);}
 
-<<<<<<< .mine
     // NOTE: view this code
     $script .= "//editing values\n";
     $script .= "function initGatgetComponets(){\n";
@@ -575,26 +570,6 @@ EOT;
       }
     $script .= "}";
 
-||||||| .r142
-=======
-    $script .= "//editing values\n";
-    $script .= "function initGatgetComponets(){\n";
-      foreach (scandir($dirGD) as $key => $value) {
-        $filename = "$dirGD/$value";
-        if (is_file($filename)) {
-          $myfile = fopen($filename, "rb");
-          $sizeFile = filesize($filename);
-          $contenido = "";
-          if ($sizeFile > 0) {
-            $contenido = fread($myfile, $sizeFile);
-          }
-          fclose($myfile);
-          $script .= "\t$contenido\n";
-        }
-      }
-    $script .= "}";
-
->>>>>>> .r146
     $myfile = fopen("$dirNative/js/gatgetScript.js", "w");fwrite($myfile, $script);fclose($myfile);
     $myfile = fopen("$dirNative/css/gatgetStyle.css", "w");fwrite($myfile, $style);fclose($myfile);
 
