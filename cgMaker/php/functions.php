@@ -308,6 +308,7 @@ EOT;
     $ruta = ['css' => 'css','js' => 'js'];
 
     $dir = '../'.$projet.'/cgMProjet/index.cgM';
+    $dirGD = "../$projet/cgMProjet/src/gatgetDesign";
     $toWriteDoc = htmlspecialchars_decode($toWrite);
     $myfile = fopen($dir, "w");
     fwrite($myfile, $toWriteDoc);fclose($myfile);
@@ -318,16 +319,22 @@ EOT;
     preg_match_all("/<[ \t\n]*cgObjet[ \t\na-z='\"_\-0-9]*>[ \t\n]*<\/[ \t\n]*cgObjet[ \t\n]*>|<[ \t\n]*cgObjet[ \t\na-z='\"_\-0-9]*\/>/i",$toWriteDoc,$michilala);
 
     foreach ($michilala[0] as $key => $value) {
-      $createVar = "";
+      $tyeVar = "";
+      $nameVar = "";
       preg_match("/type[ \t\n]*=[ \t\n]*('|\")[a-z_\-]+('|\")/i",$value,$typeOut);
 
       preg_match("/('|\")[a-z_\-]+('|\")/i",$typeOut[0],$typeOut);
-      $createVar .= substr($typeOut[0],1,-1).".";
+      $tyeVar = substr($typeOut[0],1,-1);
 
       preg_match("/name[ \t\n]*=[ \t\n]*('|\")[a-z_\-]+('|\")/i",$value,$typeOut);
       preg_match("/('|\")[a-z_\-]+('|\")/i",$typeOut[0],$typeOut);
-      $createVar .= substr($typeOut[0],1,-1);
-      echo "\n$createVar\n";
+      $nameVar = substr($typeOut[0],1,-1);
+      $fileVar = "$tyeVar.$nameVar.cgM";
+      echo "$fileVar\n";
+      if (!is_file("$dirGD/$fileVar")) {
+        $myfile = fopen("$dirGD/$fileVar", "w");fclose($myfile);
+      }
+
     }
 
     $newstring = preg_replace_callback('/{{[a-z:. ]+}}/i',
@@ -407,9 +414,6 @@ EOT;
       echo '<link rel=\"stylesheet\" href=\"../../font/Ionicons/font.css\">'.\"\n\";
       echo '<script type=\"text/javascript\" src=\"../../../js/jquery-1.12.4.js\"></script>'.\"\n\";
       echo '<script type=\"text/javascript\" src=\"../../../js/cg.class.js\"></script>'.\"\n\";
-
-      $nameExec = ;
-
       echo '<style media=\"screen\">';
         include_once '../gatgets.php';
       echo '</style>'.\"\n\";
