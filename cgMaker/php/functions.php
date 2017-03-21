@@ -555,20 +555,22 @@ EOT;
     }
     if (!is_dir("$dirNative/css")) {mkdir("$dirNative/css", 0777, true);}
 
-    /*$script .= "//editing values\n";
-    foreach (scandir($dirGD) as $key => $value) {
-      $filename = "$dirGD/$value";
-      if (is_file($filename)) {
-        $myfile = fopen($filename, "rb");
-        $sizeFile = filesize($filename);
-        $contenido = "";
-        if ($sizeFile > 0) {
-          $contenido = fread($myfile, $sizeFile);
+    $script .= "//editing values\n";
+    $script .= "function initGatgetComponets(){\n";
+      foreach (scandir($dirGD) as $key => $value) {
+        $filename = "$dirGD/$value";
+        if (is_file($filename)) {
+          $myfile = fopen($filename, "rb");
+          $sizeFile = filesize($filename);
+          $contenido = "";
+          if ($sizeFile > 0) {
+            $contenido = fread($myfile, $sizeFile);
+          }
+          fclose($myfile);
+          $script .= "\t$contenido\n";
         }
-        fclose($myfile);
-        $script .= "$contenido\n";
       }
-    }*/
+    $script .= "}";
 
     $myfile = fopen("$dirNative/js/gatgetScript.js", "w");fwrite($myfile, $script);fclose($myfile);
     $myfile = fopen("$dirNative/css/gatgetStyle.css", "w");fwrite($myfile, $style);fclose($myfile);
