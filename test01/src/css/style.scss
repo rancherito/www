@@ -1,0 +1,108 @@
+
+@mixin center-horizontal(){
+  left: 50%;
+	transform: translateX(-50%);
+}
+@mixin center-vertical(){
+  top: 50%;
+	transform: translateY(-50%);
+}
+@mixin center-box(){
+  left: 50%;
+	top: 50%;
+	transform: translate(-50%,-50%);
+}
+
+@mixin linear-gradient($a,$b){
+  background: $a;
+	background: -webkit-linear-gradient($a,$b);
+	background: -o-linear-gradient($a,$b);
+	background: -moz-linear-gradient($a,$b);
+	background: linear-gradient($a,$b);
+}
+
+@mixin width-desde($a){
+  @media only screen and (min-width: $a){
+    @content;
+  }
+}
+
+
+@mixin height-desde($a){
+  @media only screen and (min-height: $a){
+    @content;
+  }
+}
+
+@mixin width-antes($a){
+  @media only screen and (max-width: $a){
+    @content;
+  }
+
+}
+
+@mixin height-antes($a){
+  @media only screen and (max-height: $a){
+    @content;
+  }
+}
+
+@mixin trasition-200($a){
+  transition: $a 0.2s linear;
+}
+
+@mixin border-radius($radius) {
+  border-radius: $radius;
+  -webkit-border-radius: $radius;
+  -moz-border-radius: $radius;
+  -ms-border-radius: $radius;
+  -o-border-radius: $radius;
+}
+
+* {
+	padding: 0;
+	margin: 0;
+	font-family: Calibri;
+}
+html {
+	height: 100%;
+	background: #e8e8e8;
+}
+body {
+	height: 100%;
+	background: #e8e8e8;
+}
+div.panel_p div {
+	&.n_header {
+		overflow: hidden;
+		height: 100px;
+		background: #00bcd4;
+	}
+	&.n_body {
+		overflow: hidden;
+		height: 100%;
+		div.n_panel_p {
+			background: #4e9de8;
+			color: white;
+			float: right;
+      width: 300px;
+      padding: 10px;
+      box-sizing: border-box;
+      @include width-antes(720px){
+        width: 100%;
+        padding: 10px 0;
+      }
+      > div {
+        margin-bottom: 10px;
+      }
+		}
+    div.n_panel_a{
+      background: red;
+      float: right;
+      width: calc(100% - 300px);
+      @include width-antes(720px){
+        width: 100%;
+      }
+    }
+	}
+}

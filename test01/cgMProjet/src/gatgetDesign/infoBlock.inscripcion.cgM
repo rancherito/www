@@ -1,0 +1,4 @@
+cg.obj.infoBlock.inscripcion.style("lalala");
+cg.obj.infoBlock.inscripcion.txtTitleContent("Your Content");
+cg.obj.infoBlock.inscripcion.iconIcon("fa-tag");
+cg.obj.infoBlock.inscripcion.ifBodyContent("Your Content");

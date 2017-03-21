@@ -1,0 +1,4 @@
+cg.obj.infoBlock.evaluaciones.style("my styles");
+cg.obj.infoBlock.evaluaciones.txtTitleContent("Your Content");
+cg.obj.infoBlock.evaluaciones.iconIcon("ion-android-apps");
+cg.obj.infoBlock.evaluaciones.ifBodyContent("Your Content");

@@ -1,0 +1,3 @@
+cg.obj.boxIcon.iconos.style("myDom");
+cg.obj.boxIcon.iconos.iconIcon("ion-android-globe");
+cg.obj.boxIcon.iconos.txtTitleContent("acceso a balas");
