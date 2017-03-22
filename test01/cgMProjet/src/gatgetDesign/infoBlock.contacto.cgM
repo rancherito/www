@@ -1,4 +1,4 @@
 cg.obj.infoBlock.contacto.style("myDom");
 cg.obj.infoBlock.contacto.txtTitleContent("Contacto");
 cg.obj.infoBlock.contacto.iconIcon("ion-android-archive");
-cg.obj.infoBlock.contacto.ifBodyContent("Your Content");
+cg.obj.infoBlock.contacto.ifBodyContent("Av. Jorge Chávez N° 1160<br>Ciudad Universitaria - 2do Piso<br>Puerto Maldonado - Madre De Dios<br>RPC-WSP: 978 400 528<br><br>Horario de Atención<br>Lunes a Viernes<br>08:00 - 13:00 14:00 - 17:00");

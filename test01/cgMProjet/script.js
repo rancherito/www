@@ -38,6 +38,7 @@ $(document).ready(function() {
 			var sel = $(s);
 			var variable = sel.find('> div').text();
 			var value = sel.find('> textarea').val();
+			value = value.replace(/\n/g,"<br>");
 			exportVars += "cg.obj."+vartype+"."+varname+"."+variable+"(\""+value+"\");"+"\n";
 		});
 		$.post('cgMProjet/query.php',{fn: cg.fn('editVarGatgets',[varEdir,exportVars])}, function(data) {
@@ -68,6 +69,7 @@ $(document).ready(function() {
 			for (var i in cg.obj[type][name]) {
 				if (notEdit.indexOf(i) === -1) {
 					var value = cg.obj[type][name][i]();
+					value = value.replace(/(<br>|<\/br>)/g,"\n");
 					pnlSetGatget.find('div.n_bodyGatget_p').append(
 						cg.$('div').addClass('varEdit').append(
 							cg.$('div').text(i).addClass('restore'),

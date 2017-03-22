@@ -66,6 +66,22 @@ cg.myDom = function () {
     return this;
   };
 }
+cg.GaleryImages = function () {
+  cg.myDom.call(this);
+  var list_images = ["lista"];
+  this.addImage = function (newImage) {
+    if(typeof newImage !== "undefined"){
+      /*if (typeof newImage !== "string") {
+        newImage
+        if (list_images.indexOf(newImage) === -1) {
+          list_images.push(newImage);
+        }
+      }*/
+      return this;
+    }
+    return list_images;
+  };
+}
 cg.MessageBox = function (setTypeBox) {
   var container = cg.$('div');
   var btnAceptar = cg.$('button');

@@ -34,7 +34,7 @@ cg.boxIcon = function(){
 cg.headerCepre = function(){
 
 	cg.myDom.call(this);
-	this.container = $("<div class=\"headerCepre\" cggname=\"headerCepre\"><a class=\"page_home\"><i class=\"icon cg-gg\" cggIcon=\"true\" cggname=\"icon\"></i></a><div class=\"title\">PORTAL PREUNIVERSITARIO</div></div>");
+	this.container = $("<div class=\"headerCepre\" cggname=\"headerCepre\"><a class=\"page_home\" href=\"index.php\"><i class=\"icon cg-gg\" cggIcon=\"true\" cggname=\"icon\"></i></a><div class=\"title\">PORTAL PREUNIVERSITARIO</div><div class=\"title-2\">CEPRE</div></div>");
 	var icon = this.container.find("[cggname=icon]");
 
   var iconIcon = "ion-android-archive";
@@ -98,7 +98,7 @@ cg.infoBlock = function(){
 function initGatgetComponets(){
 cg.obj.boxIcon.iconos.style("myDom");
 cg.obj.boxIcon.iconos.iconIcon("ion-android-globe");
-cg.obj.boxIcon.iconos.txtTitleContent("este es un globito : )");
+cg.obj.boxIcon.iconos.txtTitleContent("");
 
 cg.obj.headerCepre.header.style("myDom");
 cg.obj.headerCepre.header.iconIcon("ion-android-home");
@@ -106,16 +106,16 @@ cg.obj.headerCepre.header.iconIcon("ion-android-home");
 cg.obj.infoBlock.contacto.style("myDom");
 cg.obj.infoBlock.contacto.txtTitleContent("Contacto");
 cg.obj.infoBlock.contacto.iconIcon("ion-android-archive");
-cg.obj.infoBlock.contacto.ifBodyContent("Your Content");
+cg.obj.infoBlock.contacto.ifBodyContent("Av. Jorge Chávez N° 1160<br>Ciudad Universitaria - 2do Piso<br>Puerto Maldonado - Madre De Dios<br>RPC-WSP: 978 400 528<br><br>Horario de Atención<br>Lunes a Viernes<br>08:00 - 13:00 14:00 - 17:00");
 
 cg.obj.infoBlock.evaluaciones.style("my styles");
 cg.obj.infoBlock.evaluaciones.txtTitleContent("Evaluaciones");
 cg.obj.infoBlock.evaluaciones.iconIcon("ion-android-apps");
-cg.obj.infoBlock.evaluaciones.ifBodyContent("Your Content");
+cg.obj.infoBlock.evaluaciones.ifBodyContent("Resultado de examen<br>admision 2017 - I");
 
 cg.obj.infoBlock.inscripcion.style("lalala");
 cg.obj.infoBlock.inscripcion.txtTitleContent("Inscripción");
 cg.obj.infoBlock.inscripcion.iconIcon("fa-tag");
-cg.obj.infoBlock.inscripcion.ifBodyContent("Your Content");
+cg.obj.infoBlock.inscripcion.ifBodyContent("Inscripción online para admisión");
 
 }
