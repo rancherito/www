@@ -551,7 +551,6 @@ EOT;
     }
     if (!is_dir("$dirNative/css")) {mkdir("$dirNative/css", 0777, true);}
 
-    // NOTE: view this code
     $script .= "//editing values\n";
     $script .= "function initGatgetComponets(){\n";
       foreach (scandir($dirGD) as $key => $value) {
