@@ -25,7 +25,6 @@ div.headerCepre > a.page_home >i{
 }
 
 div.headerCepre > div.title{
-  display: block;
   color: white;
   height: 70px;
   line-height: 70px;
@@ -33,4 +32,35 @@ div.headerCepre > div.title{
   font-size: 30px;
   padding: 0 10px;
   float: left;
+}
+div.headerCepre > div.title-2{
+  color: white;
+  height: 50px;
+  line-height: 50px;
+  font-size: 28px;
+  font-family: Impact;
+  padding: 0 10px;
+  float: left;
+  display: none;
+}
+
+@media only screen and (max-width: 640px) {
+  div.headerCepre{
+    height: 70px;
+  }
+  div.headerCepre > a.page_home{
+    height: 50px;
+    width: 50px;
+  }
+  div.headerCepre > a.page_home >i{
+    height: 50px;
+  	line-height: 50px;
+    font-size: 28px;
+  }
+  div.headerCepre > div.title{
+    display: none;
+  }
+  div.headerCepre > div.title-2{
+    display: block;
+  }
 }

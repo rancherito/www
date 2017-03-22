@@ -46,9 +46,9 @@ cg.myDom = function () {
     this.container.addClass(newClass);
     return this;
   }
+  this.callbackDom = function () {};
   this.dom = function (getcontainer) {
     if ( typeof getcontainer === 'function') {
-      getcontainer(this.container);
       return this;
     }
     return this.container;
@@ -56,14 +56,57 @@ cg.myDom = function () {
   this.appendTo = function (setAppend) {
     if (setAppend.length > 0) {
       this.container.appendTo(setAppend);
+      this.callbackDom();
     }
     return this;
   };
   this.prependTo = function (setPrepend) {
     if (setPrepend.length > 0) {
       this.container.prependTo(setPrepend);
+      this.callbackDom();
     }
     return this;
+  };
+}
+cg.GaleryImages = function () {
+  cg.myDom.call(this);
+  var list_images = [];
+  var list_imagesDom = [];
+  var container = this.container;
+
+  this.callbackDom = function () {
+    container.css({width: "50%", overflow: "hidden"});
+    container.height(container.width() * 0.5);
+    $( window ).resize(function() {
+      container.height(container.width() * 0.5);
+    });
+  }
+
+  this.addImage = function (newImage) {
+    if(typeof newImage !== "undefined"){
+      for (var arg in arguments) {
+        if (typeof arguments[arg] === "string") {
+          var image = arguments[arg];
+          if (list_images.indexOf(image) === -1) {
+            if (cg.getFileExtension(image) !== "") {
+              list_images.push(image);
+              var procImage = cg.$("img").attr("src", image).css('width', '100%');;
+              list_imagesDom.push(procImage);
+              this.container.append(procImage);
+            }
+          }
+        }
+      }
+      for (var i = 0; i < list_imagesDom.length; i++) {
+        if (i === 0) {
+          list_imagesDom[i].show();
+        }else {
+          list_imagesDom[i].hide();
+        }
+      }
+      return this;
+    }
+    return list_images;
   };
 }
 cg.MessageBox = function (setTypeBox) {
@@ -251,6 +294,7 @@ cg.Input = function (type) {
     'label': cg.$('option').show().addClass('cg-input'),
     'select': cg.$('select').show().addClass('cg-input')
   };
+  this.callbackDom = function () {};
   this.input = function (setInput) {
     if (typeof setInput !== 'undefined') {
       if (typeof setInput === 'string' && listInputs[setInput] !== 'undefined' && inputType !== setInput) {
@@ -386,6 +430,7 @@ cg.readyObj = function () {
       if (typeof cg.obj[type][name] === 'undefined') {
         eval('cg.obj.' + type + '.' + name + ' = new cg.' + type + '();');
         $(this).after(cg.obj[type][name].addClass('cgObjet').dom().attr({'cggname':name, 'cggtype': type})).remove();
+        cg.obj[type][name].callbackDom();
       }
     }
   });

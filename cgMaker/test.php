@@ -95,6 +95,7 @@
      <cgObjet type="myDom" name="lala"></cgObjet>
      <cgObjet type="infoBlock" name="wacha"></cgObjet>
      <cgObjet type="boxIcon" name="wachalo"></cgObjet>
+     <cgObjet type="GaleryImages" name="test"></cgObjet>
      <script type="text/javascript">
        function lala(selector) {
          var W = selector.outerWidth();
@@ -179,8 +180,10 @@ cg.boxIcon = function(){
           console.log('wachalatato');
         });
 
-        //console.log(cg.obj.infoBlock);
+        var galImg = cg.obj;
 
+        console.log(galImg.GaleryImages.test.addImage("src/img/A.jpg","src/img/B.jpg"));
+        console.log(galImg.GaleryImages.test.addImage());
        });
 
      </script>
