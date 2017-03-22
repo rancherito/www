@@ -403,18 +403,15 @@ EOT;
     $dir = "src/gatgets/$gatget";
     $exec = "
     <?php
-      echo '<link rel=\"stylesheet\" href=\"../../font/font-awesome/font.css\">'.\"\n\";
-      echo '<link rel=\"stylesheet\" href=\"../../font/Ionicons/font.css\">'.\"\n\";
-      echo '<script type=\"text/javascript\" src=\"../../../js/jquery-1.12.4.js\"></script>'.\"\n\";
-      echo '<script type=\"text/javascript\" src=\"../../../js/cg.class.js\"></script>'.\"\n\";
-
-      $nameExec = ;
-
+      echo '<link rel=\"stylesheet\" href=\"../../font/font-awesome/font.css\">';
+      echo '<link rel=\"stylesheet\" href=\"../../font/Ionicons/font.css\">';
+      echo '<script type=\"text/javascript\" src=\"../../../js/jquery-1.12.4.js\"></script>';
+      echo '<script type=\"text/javascript\" src=\"../../../js/cg.class.js\"></script>';
       echo '<style media=\"screen\">';
         include_once '../gatgets.php';
-      echo '</style>'.\"\n\";
+      echo '</style>';
       echo \"<body></body>\";
-      echo '<script type=\"text/javascript\">'.\"\n\";
+      echo '<script type=\"text/javascript\">';
         include_once 'script.js';
       echo \"
         var test = new cg.\".basename(realpath(\".\")).\"();
