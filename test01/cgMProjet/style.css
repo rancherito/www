@@ -81,6 +81,19 @@ div.pnl_setgatget > div.n_settingsGatget_p > button, div.pnl_gatget > div.n_sett
 div.pnl_setgatget > div.n_settingsGatget_p > button:hover,div.pnl_gatget > div.n_settingsGatget_p > button:hover{
   background: #ff855f !important;
 }
+
+div.pnl_setgatget > div.n_settingsGatget_p > option{
+  background: white !important;
+  float: right !important;
+  width: calc(100% - 300px);
+  height: 30px;
+  border-radius: 3px;
+  line-height: 30px;
+  padding: 0 10px;
+  margin-top: 5px;
+  text-align: center;
+}
+
 div.pnl_setgatget > div.n_bodyGatget_p > div{
   margin-bottom: 10px;
   box-sizing: border-box;

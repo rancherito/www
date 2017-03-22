@@ -78,7 +78,7 @@ cg.infoBlock = function(){
 function initGatgetComponets(){
 cg.obj.boxIcon.iconos.style("myDom");
 cg.obj.boxIcon.iconos.iconIcon("ion-android-globe");
-cg.obj.boxIcon.iconos.txtTitleContent("acceso a balas");
+cg.obj.boxIcon.iconos.txtTitleContent("este es un globito : )");
 
 cg.obj.infoBlock.evaluaciones.style("my styles");
 cg.obj.infoBlock.evaluaciones.txtTitleContent("Your Content");

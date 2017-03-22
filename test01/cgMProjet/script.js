@@ -10,12 +10,14 @@ $(document).ready(function() {
 	.addClass('addGatget restore')
 	.append(add);
 
+	var nameGatget = cg.input().input('label').addClass('restore');
 
 	pnlSetGatget.append(
 		cg.$('div').addClass('n_bodyGatget_p'),
 		cg.$('div').addClass('n_settingsGatget_p').append(
 			cg.$('button').addClass('btn_close restore').text('Close Panel'),
-			cg.$('button').addClass('btn_save restore').text('Save Changes')
+			cg.$('button').addClass('btn_save restore').text('Save Changes'),
+			nameGatget.dom()
 		)
 	);
 
@@ -58,6 +60,8 @@ $(document).ready(function() {
 			pnlSetGatget.find('div.n_bodyGatget_p').empty();
 			varname = name;
 			vartype = type;
+
+			nameGatget.text(type + "." + name);
 
 			varEdir = type + "." + name + ".cgM";
 
