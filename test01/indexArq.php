@@ -16,7 +16,9 @@
 </head>
 <body>
 	<div class="panel_p">
-		<div class="n_panel_p n_header"></div>
+		<div class="n_panel_p n_header">
+      <cgObjet type="headerCepre" name="header"></cgObjet>
+    </div>
 		<div class="panel_s n_body">
       <div class="n_panel_a">
       <?php

@@ -1,0 +1,36 @@
+div.headerCepre{
+  background: #00bcd4;
+  height: 90px;
+  box-sizing: border-box;
+  padding: 10px;
+}
+div.headerCepre > a.page_home{
+  display: block;
+  height: 70px;
+  width: 70px;
+  background: #ff9800;
+  border-radius: 3px;
+  text-align: center;
+  float: left;
+}
+div.headerCepre > a.page_home:hover i{
+  color: #ffdb97;
+  cursor: pointer;
+}
+div.headerCepre > a.page_home >i{
+  color: white;
+  font-size: 50px;
+  line-height: 70px;
+  transition: all 0.2s linear;
+}
+
+div.headerCepre > div.title{
+  display: block;
+  color: white;
+  height: 70px;
+  line-height: 70px;
+  font-family: Impact;
+  font-size: 30px;
+  padding: 0 10px;
+  float: left;
+}

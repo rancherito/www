@@ -30,6 +30,26 @@ cg.boxIcon = function(){
   this.txtTitleContent(txtTitleContent);
 
 }
+/*file from gatget headerCepre scripts*/
+cg.headerCepre = function(){
+
+	cg.myDom.call(this);
+	this.container = $("<div class=\"headerCepre\" cggname=\"headerCepre\"><a class=\"page_home\"><i class=\"icon cg-gg\" cggIcon=\"true\" cggname=\"icon\"></i></a><div class=\"title\">PORTAL PREUNIVERSITARIO</div></div>");
+	var icon = this.container.find("[cggname=icon]");
+
+  var iconIcon = "ion-android-archive";
+	this.iconIcon = function(setIcon){
+    if(typeof setIcon !== "undefined" && typeof setIcon === "string"){
+      icon.removeClass(iconIcon);
+  		iconIcon = setIcon;
+  		icon.addClass(iconIcon);
+      return this;
+    }
+		return iconIcon;
+	}
+  this.iconIcon(iconIcon);
+
+}
 /*file from gatget infoBlock scripts*/
 cg.infoBlock = function(){
 
@@ -80,13 +100,21 @@ cg.obj.boxIcon.iconos.style("myDom");
 cg.obj.boxIcon.iconos.iconIcon("ion-android-globe");
 cg.obj.boxIcon.iconos.txtTitleContent("este es un globito : )");
 
+cg.obj.headerCepre.header.style("myDom");
+cg.obj.headerCepre.header.iconIcon("ion-android-home");
+
+cg.obj.infoBlock.contacto.style("myDom");
+cg.obj.infoBlock.contacto.txtTitleContent("Contacto");
+cg.obj.infoBlock.contacto.iconIcon("ion-android-archive");
+cg.obj.infoBlock.contacto.ifBodyContent("Your Content");
+
 cg.obj.infoBlock.evaluaciones.style("my styles");
-cg.obj.infoBlock.evaluaciones.txtTitleContent("Your Content");
+cg.obj.infoBlock.evaluaciones.txtTitleContent("Evaluaciones");
 cg.obj.infoBlock.evaluaciones.iconIcon("ion-android-apps");
 cg.obj.infoBlock.evaluaciones.ifBodyContent("Your Content");
 
 cg.obj.infoBlock.inscripcion.style("lalala");
-cg.obj.infoBlock.inscripcion.txtTitleContent("Your Content");
+cg.obj.infoBlock.inscripcion.txtTitleContent("Inscripción");
 cg.obj.infoBlock.inscripcion.iconIcon("fa-tag");
 cg.obj.infoBlock.inscripcion.ifBodyContent("Your Content");
 

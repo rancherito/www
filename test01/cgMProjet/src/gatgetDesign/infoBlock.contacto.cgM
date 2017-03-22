@@ -1,0 +1,4 @@
+cg.obj.infoBlock.contacto.style("myDom");
+cg.obj.infoBlock.contacto.txtTitleContent("Contacto");
+cg.obj.infoBlock.contacto.iconIcon("ion-android-archive");
+cg.obj.infoBlock.contacto.ifBodyContent("Your Content");
