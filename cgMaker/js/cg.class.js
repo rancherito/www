@@ -390,6 +390,60 @@ cg.Input = function (type) {
 cg.Option = function (val,view) {
   return cg.$("option").text(view).val(val);
 }
+cg.ImputX = function (setInput) {
+  cg.myDom.call(this);
+  this.container.addClass('ImputX').css({position: "relative"});
+  var styleDefault = {background: "white", "border-style": "solid", "text-align": "left", position: "relative"};
+  var iSel = cg.$("button").css({cursor: "pointer", "font-family": "Tw Cen MT", border: 0, outline: 0, "border-style": "solid", background: "white", position: "absolute", height: "100%",top:0,right:0, width: 30,"font-size": "16px"}).append('V');
+  var listInputs = {
+    input: cg.$("input").attr('type', 'text').addClass('ImputX-input'),
+    label: cg.$("button").addClass('ImputX-input').css(styleDefault),
+    select: cg.$("button").addClass('ImputX-input').css(styleDefault).css({cursor: "pointer"})
+  };
+  var typeInput = "input";
+
+  this.container.append(listInputs["input"]);
+  this.placeholder = function (setPlaceholder) {
+    if (typeof setPlaceholder !== "undefined") {
+      listInputs["input"].attr('placeholder', setPlaceholder);
+      return this;
+    }
+    return listInputs["input"].attr('placeholder');
+  }
+  this.input = function (setInput) {
+    if (typeof setInput !== "undefined") {
+      if (typeof listInputs[setInput] !== "undefined") {
+        if (setInput !== typeInput) {
+          listInputs[typeInput].detach();
+          this.container.append(listInputs[setInput]);
+          typeInput = setInput;
+          if (typeInput === "select") {
+            this.container.append(iSel);
+          }else {
+            iSel.detach();
+          }
+        }
+      }
+      return this;
+    }
+    return listInputs[typeInput];
+  }
+  this.val = function (setVal) {
+    if (typeof setVal !== "undefined") {
+      listInputs[typeInput].val(setVal);
+      return this;
+    }
+    return listInputs[typeInput].val();
+  }
+  this.text = function (setText) {
+    if (typeof setText !== "undefined") {
+      listInputs[typeInput].text(setText);
+      return this;
+    }
+    return listInputs[typeInput].text();
+  }
+  this.input(setInput);
+}
 cg.ImputForm = function () {
   cg.myDom.call(this);
   var input = new cg.Input();
@@ -485,19 +539,18 @@ cg.FormMagic = function () {
     }
     return datatable;
   }
-  this.makeForm = function () {
+  this.makeForm = function (positionForm) {
     if (!datatable.isEmpty("bool")) {
+      var source = datatable.source();var columsGroup = {groups: [], quest:[] ,type: [], alter: [], value: []};
 
-      var ggg = datatable.source();var gg = {};
-      gg['groups'] = ggg['grupo_descripcion'];
-      gg['quest'] = ggg['descripcion_pregunta'];
-      gg['type'] = ggg['tipo_eleccion'];
-      gg['alter'] = ggg['descripcion_alternativas'];
-      gg['value'] = ggg['valor_alternativas'];
+      for (var i in columsGroup) {
+        columsGroup[i] = source[positionForm[i]];
+      }
+
       var newData = [];
       var a = true;
-      for (var i in gg) {
-        for (var e in gg[i]) {if (e !== "unique") {if (a) {newData.push([]);}  newData[e].push(gg[i][e]);}}
+      for (var i in columsGroup) {
+        for (var e in columsGroup[i]) {if (e !== "unique") {if (a) {newData.push([]);}  newData[e].push(columsGroup[i][e]);}}
         a = false;
       }
 
