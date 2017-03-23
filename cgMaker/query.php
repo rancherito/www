@@ -1,6 +1,9 @@
 <?php
 date_default_timezone_set('America/Lima');
+include_once 'php/connections/server.php';
+include_once 'php/connections/procedures.php';
 include_once 'php/functions.php';
+
 if (!empty($_POST['fn'])) {
   $n_f = f_parameters($_POST['fn']);
   if ($n_f[0] === 'createProjet') {
@@ -34,4 +37,13 @@ if (!empty($_POST['fn'])) {
   }
 
 }
+if (!empty($_POST['sql'])) {
+  $n_f = f_parameters($_POST['sql']);
+  $listproc = new listProcedures();
+  if ($n_f[0] === "preguntasCuestionario") {
+    echo json_encode($listproc -> preguntasCuestionario($n_f));
+  }
+}
+
+
  ?>

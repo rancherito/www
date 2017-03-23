@@ -6,12 +6,12 @@
     return $array_r;
   }
 
-  function completeArray($value){
-    $array_r = array();
-    for ($i=0; $i < count($value); $i++) {
-      $array_r[$value[$i]]=$value[$i];
+  function parametros($proce){
+    $valor = '';
+    for ($i=1; $i < count($proce); $i++){
+      $valor.=($i!=1?",":"").(strlen($proce[$i])==0?"''":($proce[$i]=='null'?"null":($proce[$i]=='undefined'?"null":($proce[$i]=='[object Object]'?"null":"'".$proce[$i]."'"))));
     }
-    return $array_r;
+    return $valor;
   }
 
   function createProjet($Projet){

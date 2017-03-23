@@ -1,4 +1,5 @@
 
+
 var cg = {};
 //utils
 cg.error = {
@@ -108,6 +109,10 @@ cg.GaleryImages = function () {
     }
     return list_images;
   };
+}
+cg.vview = function (val,view) {
+  this.val = val;
+  this.view = view;
 }
 cg.MessageBox = function (setTypeBox) {
   var container = cg.$('div');
@@ -226,28 +231,30 @@ cg.DataTable = function (setSource) {
 
   this.source = function (newData) {
     var maxDimension = 0;
-    if (typeof newData === 'object') {
-      for (var column in newData) {
-        var size = newData[column].length;
-        maxDimension = maxDimension < size ? size : maxDimension;
-      }
-      rowsData = maxDimension;
-      for (var variable in newData) {
-        for (var i = newData[variable].length; i < maxDimension; i++) {
-          newData[variable].push(null);
+    if (typeof newData !== "undefined") {
+      if (typeof newData === 'object') {
+        for (var column in newData) {
+          var size = newData[column].length;
+          maxDimension = maxDimension < size ? size : maxDimension;
         }
-      }
+        rowsData = maxDimension;
+        for (var variable in newData) {
+          for (var i = newData[variable].length; i < maxDimension; i++) {
+            newData[variable].push(null);
+          }
+        }
 
-      data = newData;
-      return this;
-    } else if (typeof newData !== 'undefined') { console.log(cg.error.typeOf); }
+        data = newData;
+        return this;
+      }
+    }
     return data;
   };
   this.isEmpty = function (bool) {
     var empty = $.isEmptyObject(data);
 
     if (typeof bool === 'string') {
-      if (bool === 'bool') return !empty;
+      if (bool === 'bool') return empty;
     }
     return empty ? 'YES' : 'NO_EMPTY';
   };
@@ -294,6 +301,14 @@ cg.Input = function (type) {
     'label': cg.$('option').show().addClass('cg-input'),
     'select': cg.$('select').show().addClass('cg-input')
   };
+
+  this.getListInputs = function () {
+    return listInputs;
+  }
+
+  if (typeof type !== "undefined") {
+    this.input(type);
+  }
   this.callbackDom = function () {};
   this.input = function (setInput) {
     if (typeof setInput !== 'undefined') {
@@ -372,6 +387,44 @@ cg.Input = function (type) {
     return style;
   }
 }
+cg.Option = function (val,view) {
+  return cg.$("option").text(view).val(val);
+}
+cg.ImputForm = function () {
+  cg.myDom.call(this);
+  var input = new cg.Input();
+  var boxLeyenda = cg.$("div").addClass("InputForm-boxTitle");
+  var leyenda = 'some text';
+  this.container.append(
+    cg.$("div").append(
+      boxLeyenda,
+      input.placeholder("your text").dom()
+    )
+  );
+  this.input = input.input;
+
+  this.leyenda = function (setLeyenda) {
+    if (typeof setLeyenda !== "undefined") {
+      if (typeof setLeyenda === "string") {
+        leyenda = setLeyenda;
+        boxLeyenda.text(leyenda);
+        return this;
+      }
+    }
+    return leyenda;
+  }
+  this.leyenda(leyenda);
+
+  this.addOption = function (newOption) {
+    for (var arg in arguments) {
+      input.getListInputs()['select'].append(arguments[arg]);
+    }
+
+    return this;
+  }
+
+
+}
 cg.MultiPanelView = function () {
   cg.myDom.call(this);
   this.container = cg.$('div').addClass('cg-multipanel');
@@ -411,6 +464,83 @@ cg.MultiPanelView = function () {
       addEventClick(list_access[access],list_views[access]);
     }
     return this;
+  }
+}
+cg.QuestionsData = function () {
+  this.name = "";
+  this.question = {view: [], val: []};
+  this.type = "";
+}
+cg.FormMagic = function () {
+  cg.myDom.call(this);
+  this.container.addClass('FormMagic');
+  var datatable = new cg.DataTable();
+  var groups = {val: [], view: []};
+  var question = {};
+  this.datatable = function (newDatatable) {
+    if (typeof newDatatable !== "undefined") {
+      if (newDatatable instanceof cg.DataTable) {
+        datatable = newDatatable;
+      }
+    }
+    return datatable;
+  }
+  this.makeForm = function () {
+    if (!datatable.isEmpty("bool")) {
+
+      var ggg = datatable.source();var gg = {};
+      gg['groups'] = ggg['grupo_descripcion'];
+      gg['quest'] = ggg['descripcion_pregunta'];
+      gg['type'] = ggg['tipo_eleccion'];
+      gg['alter'] = ggg['descripcion_alternativas'];
+      gg['value'] = ggg['valor_alternativas'];
+      var newData = [];
+      var a = true;
+      for (var i in gg) {
+        for (var e in gg[i]) {if (e !== "unique") {if (a) {newData.push([]);}  newData[e].push(gg[i][e]);}}
+        a = false;
+      }
+
+      var usedQ = [];
+      for (var i in newData) {
+        if (typeof question[newData[i][0]] === "undefined") {
+          question[newData[i][0]] = [];
+        }
+        if (usedQ.indexOf(newData[i][1]) === -1) {
+          var qq = new cg.QuestionsData();
+          qq.name = newData[i][1];qq.type = newData[i][2];
+          usedQ.push(newData[i][1]);
+          question[newData[i][0]].push(qq);
+        }
+        for (var e = 0; e < question[newData[i][0]].length; e++) {
+          if (question[newData[i][0]][e].name === newData[i][1]) {
+            question[newData[i][0]][e].question['view'].push(newData[i][3]);
+            question[newData[i][0]][e].question['val'].push(newData[i][4]);
+          }
+        }
+      }
+
+      for (var i in question) {
+        var body = cg.$("div").addClass('FormMagic-body');
+          this.container.append(
+            cg.$("div").addClass('FormMagic-group').append(
+              cg.$("div").text(i).addClass('FormMagic-title'),
+              body
+            )
+          );
+          for (var e in question[i]) {
+            var inp = new cg.ImputForm();
+            inp.leyenda(question[i][e].name).input(question[i][e].type);
+            var  viewData = question[i][e].question.view;
+            for (var f in viewData) {
+              inp.addOption(cg.Option(f,viewData[f]))
+            }
+            body.append(inp.dom());
+          }
+          //body.
+      }
+
+    }
   }
 }
 //delegates
