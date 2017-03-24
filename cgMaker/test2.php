@@ -68,14 +68,11 @@
          background: #f0fcfd;
        }
        .ImputXtheme01{
-         border: 1px red solid;
          box-sizing: border-box;
        }
        .ImputXtheme01 .ImputX-input{
          height: 30px;
-         width: 100%;
          border: 0;
-         outline: 0;
          padding: 5px;
          overflow: hidden;
        }
@@ -87,9 +84,15 @@
          var test = cg.obj.FormMagic.test;
          test.style("FormMagictheme01");
 
-         var inputx = cg.obj.ImputX.test;
-         inputx.style("ImputXtheme01").placeholder("my text").input("select").text('un texto').val("lssala");
-         console.log(inputx.input("input"));
+        var inputx = cg.obj.InputX.test;
+         inputx.style("ImputXtheme01").placeholder("my text").input("multiselect").text('un texto');
+         inputx.addItem(
+           cg.Option("0","primer valor"),
+           cg.Option("1","segundo valor"),
+           cg.Option("2","sdada"),
+           cg.Option("3","fdgdfgdfgd")
+         );
+         inputx.val("1");
          var data = new cg.DataTable();
          data.source({
             'grupos':["INDICE INFORMACION PERSONAL","INDICE INFORMACION PERSONAL","INDICE INFORMACION PERSONAL","INDICE INFORMACION PERSONAL","INDICE INFORMACION PERSONAL","INDICE INFORMACION PERSONAL"],
@@ -107,17 +110,28 @@
             value: "valores"
           });
 
+
+
+
          /*$.post('query.php', {sql: cg.fn('preguntasCuestionario',["170001"])}, function(data) {
            var mydata = new cg.DataTable();
+           console.log(JSON.parse(data));
            mydata.source(JSON.parse(data));
            test.datatable(mydata);
-           test.makeForm();
+           test.makeForm({
+             groups: "grupo_descripcion",
+             quest: "descripcion_pregunta" ,
+             type: "tipo_eleccion",
+             alter: "descripcion_alternativas",
+             value: "valor_alternativas"
+           });
          });*/
+
        });
 
      </script>
      <body>
        <cgObjet type="FormMagic" name="test"></cgObjet>
-       <cgObjet type="ImputX" name="test"></cgObjet>
+       <cgObjet type="InputX" name="test"></cgObjet>
      </body>
  </html>

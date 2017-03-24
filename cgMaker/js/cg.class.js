@@ -390,19 +390,43 @@ cg.Input = function (type) {
 cg.Option = function (val,view) {
   return cg.$("option").text(view).val(val);
 }
-cg.ImputX = function (setInput) {
+cg.InputX = function (setInput) {
   cg.myDom.call(this);
-  this.container.addClass('ImputX').css({position: "relative"});
-  var styleDefault = {background: "white", "border-style": "solid", "text-align": "left", position: "relative"};
-  var iSel = cg.$("button").css({cursor: "pointer", "font-family": "Tw Cen MT", border: 0, outline: 0, "border-style": "solid", background: "white", position: "absolute", height: "100%",top:0,right:0, width: 30,"font-size": "16px"}).append('V');
+
+  var styleDefault = {background: "white", "border": "0px solid", "text-align": "left", position: "relative","box-sizing": "border-box",width: "100%", outline: 0};
+  var iSel = cg.$("button").addClass('ion-arrow-down-b').css({cursor: "pointer", "font-family": "Tw Cen MT", border: 0, outline: 0, "border-style": "solid", background: "white", position: "absolute", height: "100%",top:0,right:0, width: 30,"font-size": "16px"});
+  var list = cg.$("div").addClass('ImputX-list').hide().css({background:"white","border-radius": "1px",border: "1px gray solid", top: "100%",padding: "3px", "box-sizing": "border-box", width: "100%", position: "absolute"});
+
+  var mlsave = cg.$("button").addClass('ion-close-round').css({padding: "0px 3px"});
+  var miSel = cg.$("button").addClass('ion-arrow-down-b').css({cursor: "pointer", "font-family": "Tw Cen MT", border: 0, outline: 0, "border-style": "solid", background: "white", position: "absolute", height: "100%",top:0,right:0, width: 30,"font-size": "16px"});
+  var multiList = cg.$("div").addClass('ImputX-list').hide().css({"border-radius": "1px",border: "1px gray solid", top: "100%",padding: "3px", "box-sizing": "border-box", width: "100%", position: "absolute"}).append(
+    cg.$("div").addClass('ImputX-close-panel').append(mlsave),
+    cg.$("div").addClass('ImputX-list-panel').css({"overflow": "hidden"})
+  );
+  mlsave.click(function(event) {
+    multiList.hide();
+  });
   var listInputs = {
-    input: cg.$("input").attr('type', 'text').addClass('ImputX-input'),
+    input: cg.$("input").attr('type', 'text').addClass('ImputX-input').css(styleDefault),
     label: cg.$("button").addClass('ImputX-input').css(styleDefault),
-    select: cg.$("button").addClass('ImputX-input').css(styleDefault).css({cursor: "pointer"})
+    select: cg.$("button").addClass('ImputX-input').css(styleDefault).css({cursor: "pointer"}),
+    multiselect: cg.$("button").addClass('ImputX-input').css(styleDefault).text("sin selección").css({cursor: "pointer"})
   };
+
+  iSel.click(function(event) {list.toggle();}).focusout(function(event) {  if (!hoverOptions) {list.hide();}});
+  listInputs["select"].click(function(event) {list.toggle();}).focusout(function(event) {if (!hoverOptions) {list.hide();}});
+
+  miSel.click(function(event) {multiList.toggle();});
+  listInputs["multiselect"].click(function(event) {multiList.toggle();});
+
+  var hoverOptions = false;
   var typeInput = "input";
 
-  this.container.append(listInputs["input"]);
+  this.container
+    .addClass('ImputX')
+    .css({position: "relative",border: "1px gray solid"})
+    .append(listInputs["input"]);
+
   this.placeholder = function (setPlaceholder) {
     if (typeof setPlaceholder !== "undefined") {
       listInputs["input"].attr('placeholder', setPlaceholder);
@@ -418,9 +442,16 @@ cg.ImputX = function (setInput) {
           this.container.append(listInputs[setInput]);
           typeInput = setInput;
           if (typeInput === "select") {
-            this.container.append(iSel);
+            this.container.append(iSel,list);
           }else {
             iSel.detach();
+            list.detach();
+          }
+          if (typeInput === "multiselect") {
+            this.container.append(miSel,multiList);
+          }else {
+            miSel.detach();
+            multiList.detach();
           }
         }
       }
@@ -430,19 +461,129 @@ cg.ImputX = function (setInput) {
   }
   this.val = function (setVal) {
     if (typeof setVal !== "undefined") {
-      listInputs[typeInput].val(setVal);
+      if (typeInput === "select") {
+        if (list.children().length > 0) {
+          if (list.find('option[value ="'+setVal+'"]').length > 0) {
+            listInputs["select"].val(setVal).text(list.find('option[value ="'+setVal+'"]').text());
+          }
+          else {
+            listInputs["select"].val("").text("");
+          }
+        }
+      }else if (typeInput === "multiselect") {
+        for (var i in optionList) {
+          optionList[i].active = false;
+          optionList[i].option.css("background","transparent");
+        }
+
+        for (var val in setVal) {
+          for (var i in optionList) {
+            if (setVal[val]+"" === optionList[i].val) {
+              optionList[i].active = true;
+              optionList[i].option.css("background",colorOpAct);
+            }
+          }
+        }
+        var e = 0;
+        var testmsel = "";
+        for (var i in optionList) {
+          if (e > 1) {  break;}
+          if (optionList[i].active) {
+            testmsel = optionList[i].option.text();
+            e++;
+          }
+        }
+        var text = ['sin selección',testmsel,"multiple selección"];
+        listInputs["multiselect"].text(text[e]);
+      }
+      else {
+        listInputs[typeInput].val(setVal);
+      }
       return this;
+    }
+    if (typeInput === "multiselect") {
+      var optionVal = [];
+      for (var i in optionList) {
+        if (optionList[i].active) {
+          optionVal.push(optionList[i].option.val());
+        }
+      }
+      return optionVal;
     }
     return listInputs[typeInput].val();
   }
   this.text = function (setText) {
     if (typeof setText !== "undefined") {
-      listInputs[typeInput].text(setText);
+      if (typeInput !== "select" && typeInput !== "multiselect") {
+        listInputs[typeInput].text(setText);
+      }
       return this;
     }
     return listInputs[typeInput].text();
   }
+  var colors = ["red","blue"];
+  var activeOption = [];
+  var optionList = [];
+
+  this.addItem = function (newItem) {
+    if (typeof newItem !== "undefined") {
+      for (var arg in arguments) {
+
+        if (typeInput === "select") {
+          list.append(
+            arguments[arg]
+            .hover(function() {$(this).css({background: "#ddd"}); hoverOptions = true},function() {$(this).css({background: "transparent"}); hoverOptions = false;})
+            .click(function(event) {
+              listInputs["select"].attr("value",$(this).val()).text($(this).text());
+              list.hide();
+            })
+          );
+        }
+        if (typeInput === "multiselect") {
+          var myoption = {option: arguments[arg], active: false,val: arguments[arg].val()};
+          optionList.push(myoption);
+          optionSettings(myoption,listInputs);
+          myoption.option.click(function(event) {
+            var e = 0;
+            var testmsel = "";
+            for (var i in optionList) {
+              if (e > 1) {  break;}
+              if (optionList[i].active) {
+                testmsel = optionList[i].option.text();
+                e++;
+              }
+            }
+            var text = ['sin selección',testmsel,"multiple selección"];
+            listInputs["multiselect"].text(text[e]);
+          });
+          multiList.find("div.ImputX-list-panel").append(myoption.option);
+        }
+      }
+      if (typeInput === "select") {
+        if (list.children().length > 0) {
+          listInputs["select"].attr("value",$(list.children()[0]).val()).text($(list.children()[0]).text());
+        }
+      }
+    }
+    return this;
+  }
   this.input(setInput);
+}
+var colorOpAct = "#ddd";
+function optionSettings(optionList,listInputs) {
+  optionList.option.css({float: "left", margin: "2px" , padding: "3px", cursor: "pointer"})
+  .hover(function() {
+    $(this).css({background: colorOpAct});
+  },function() {
+    if (optionList.active) {
+      $(this).css({background: colorOpAct});
+    }else {
+      $(this).css({background: "transparent"});
+    }
+  })
+  .click(function(event) {
+    optionList.active = !optionList.active;
+  })
 }
 cg.ImputForm = function () {
   cg.myDom.call(this);
@@ -479,6 +620,7 @@ cg.ImputForm = function () {
 
 
 }
+
 cg.MultiPanelView = function () {
   cg.myDom.call(this);
   this.container = cg.$('div').addClass('cg-multipanel');
