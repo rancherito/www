@@ -8,10 +8,9 @@
      <meta charset="utf-8">
      <title></title>
      <?php include 'php/contents/scripsHeader.php'; ?>
-     <style media="screen">
+      <style media="screen">
        .FormMagictheme01{
          padding: 30px 10px;
-         overflow: hidden;
        }
        .FormMagictheme01 > div.FormMagic-group{
          margin-bottom: 30px;
@@ -37,35 +36,24 @@
        .FormMagictheme01 > div.FormMagic-group > div.FormMagic-body{
          padding: 30px 10px 10px;
          width: 100%;
-         overflow: hidden;
          box-sizing: border-box;
        }
-       .FormMagictheme01 > div.FormMagic-group > div.FormMagic-body > div{
+       .FormMagictheme01 > div.FormMagic-group > div.FormMagic-body > div.InputForm{
          padding: 0 0 10px;
          height: 55px;
          width: 50%;
          float: left;
        }
-       .FormMagictheme01 > div.FormMagic-group > div.FormMagic-body > div > div{
+       .FormMagictheme01 > div.FormMagic-group > div.FormMagic-body > div.InputForm > div{
          height: 100%;
          padding: 0 10px;
          box-sizing: border-box;
        }
-       .FormMagictheme01 > div.FormMagic-group > div.FormMagic-body > div .InputForm-boxTitle{
-         height: 20px;
-         color: black;
+       .FormMagictheme01 > div.FormMagic-group > div.FormMagic-body > div.InputForm > div div.ImputX{
+         height: 30px;
        }
-       .FormMagictheme01 > div.FormMagic-group > div.FormMagic-body > div .cg-input{
-         border-radius: 3px;
-         box-sizing: border-box;
-         border: 1px #00bcd4 solid;
-         width: 100%;
-         height: 35px;
-         padding: 5px 10px;
-         outline: 0;
-       }
-       .FormMagictheme01 > div.FormMagic-group > div.FormMagic-body > div .cg-input:focus{
-         background: #f0fcfd;
+       .FormMagictheme01 > div.FormMagic-group > div.FormMagic-body > div.InputForm > div .ImputX .ImputX-input{
+         padding: 5px;
        }
        .ImputXtheme01{
          box-sizing: border-box;
@@ -84,16 +72,16 @@
          var test = cg.obj.FormMagic.test;
          test.style("FormMagictheme01");
 
-        var inputx = cg.obj.InputX.test;
-         inputx.style("ImputXtheme01").placeholder("my text").input("multiselect").text('un texto');
-         inputx.addItem(
-           cg.Option("0","primer valor"),
-           cg.Option("1","segundo valor"),
-           cg.Option("2","sdada"),
-           cg.Option("3","fdgdfgdfgd")
-         );
-         inputx.val("1");
-         var data = new cg.DataTable();
+         var inputf = cg.obj.ImputForm.test;
+          inputf.placeholder("my textlalal").input("select").text('un texto');
+          inputf.addItem(
+            cg.Option("0","primer valosssr"),
+            cg.Option("1","segundo valor"),
+            cg.Option("2","sdada"),
+            cg.Option("3","fdgdfgdfgd")
+          );
+
+         /*var data = new cg.DataTable();
          data.source({
             'grupos':["INDICE INFORMACION PERSONAL","INDICE INFORMACION PERSONAL","INDICE INFORMACION PERSONAL","INDICE INFORMACION PERSONAL","INDICE INFORMACION PERSONAL","INDICE INFORMACION PERSONAL"],
             'preguntas':["CUANTOS AÑOS TIENES","CUANTOS AÑOS TIENES","CUANTOS AÑOS TIENES","PREFERENCIA MUSICAL","PREFERENCIA MUSICAL","PREFERENCIA MUSICAL"],
@@ -108,12 +96,12 @@
             type: "types",
             alter: "alternativas",
             value: "valores"
-          });
+          });*/
 
 
 
 
-         /*$.post('query.php', {sql: cg.fn('preguntasCuestionario',["170001"])}, function(data) {
+         $.post('query.php', {sql: cg.fn('preguntasCuestionario',["170001"])}, function(data) {
            var mydata = new cg.DataTable();
            console.log(JSON.parse(data));
            mydata.source(JSON.parse(data));
@@ -125,13 +113,13 @@
              alter: "descripcion_alternativas",
              value: "valor_alternativas"
            });
-         });*/
+         });
 
        });
 
      </script>
      <body>
        <cgObjet type="FormMagic" name="test"></cgObjet>
-       <cgObjet type="InputX" name="test"></cgObjet>
+       <cgObjet type="ImputForm" name="test"></cgObjet>
      </body>
  </html>

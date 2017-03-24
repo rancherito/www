@@ -393,15 +393,15 @@ cg.Option = function (val,view) {
 cg.InputX = function (setInput) {
   cg.myDom.call(this);
 
-  var styleDefault = {background: "white", "border": "0px solid", "text-align": "left", position: "relative","box-sizing": "border-box",width: "100%", outline: 0};
+  var styleDefault = {background: "white", "border": "0px solid", "text-align": "left", position: "relative","box-sizing": "border-box",width: "100%",height: "100%", outline: 0};
   var iSel = cg.$("button").addClass('ion-arrow-down-b').css({cursor: "pointer", "font-family": "Tw Cen MT", border: 0, outline: 0, "border-style": "solid", background: "white", position: "absolute", height: "100%",top:0,right:0, width: 30,"font-size": "16px"});
-  var list = cg.$("div").addClass('ImputX-list').hide().css({background:"white","border-radius": "1px",border: "1px gray solid", top: "100%",padding: "3px", "box-sizing": "border-box", width: "100%", position: "absolute"});
+  var list = cg.$("div").addClass('ImputX-list').hide().css({"z-index": 99999999 ,background:"white","border-radius": "1px",border: "1px gray solid", top: "100%",padding: "3px", "box-sizing": "border-box", width: "100%", position: "absolute"});
 
   var mlsave = cg.$("button").addClass('ion-close-round').css({padding: "0px 3px"});
   var miSel = cg.$("button").addClass('ion-arrow-down-b').css({cursor: "pointer", "font-family": "Tw Cen MT", border: 0, outline: 0, "border-style": "solid", background: "white", position: "absolute", height: "100%",top:0,right:0, width: 30,"font-size": "16px"});
-  var multiList = cg.$("div").addClass('ImputX-list').hide().css({"border-radius": "1px",border: "1px gray solid", top: "100%",padding: "3px", "box-sizing": "border-box", width: "100%", position: "absolute"}).append(
+  var multiList = cg.$("div").addClass('ImputX-list').hide().css({background: "white","border-radius": "1px",border: "1px gray solid", top: "100%",padding: "3px", "box-sizing": "border-box", width: "100%", position: "absolute"}).append(
     cg.$("div").addClass('ImputX-close-panel').append(mlsave),
-    cg.$("div").addClass('ImputX-list-panel').css({"overflow": "hidden"})
+    cg.$("div").addClass('ImputX-list-panel').css({"overflow": "hidden","z-index": 99999999})
   );
   mlsave.click(function(event) {
     multiList.hide();
@@ -568,36 +568,51 @@ cg.InputX = function (setInput) {
     return this;
   }
   this.input(setInput);
-}
-var colorOpAct = "#ddd";
-function optionSettings(optionList,listInputs) {
-  optionList.option.css({float: "left", margin: "2px" , padding: "3px", cursor: "pointer"})
-  .hover(function() {
-    $(this).css({background: colorOpAct});
-  },function() {
-    if (optionList.active) {
+  var colorOpAct = "#ddd";
+  function optionSettings(optionList,listInputs) {
+    optionList.option.css({float: "left", margin: "2px" , padding: "3px", cursor: "pointer"})
+    .hover(function() {
       $(this).css({background: colorOpAct});
-    }else {
-      $(this).css({background: "transparent"});
-    }
-  })
-  .click(function(event) {
-    optionList.active = !optionList.active;
-  })
+    },function() {
+      if (optionList.active) {
+        $(this).css({background: colorOpAct});
+      }else {
+        $(this).css({background: "transparent"});
+      }
+    })
+    .click(function(event) {
+      optionList.active = !optionList.active;
+    })
+  }
 }
 cg.ImputForm = function () {
   cg.myDom.call(this);
-  var input = new cg.Input();
+  var input = new cg.InputX();
   var boxLeyenda = cg.$("div").addClass("InputForm-boxTitle");
   var leyenda = 'some text';
+  //input.input("select");
   this.container.append(
     cg.$("div").append(
       boxLeyenda,
       input.placeholder("your text").dom()
     )
-  );
-  this.input = input.input;
-
+  ).addClass('InputForm');
+  this.input = function (setInput) {
+    input.input(setInput);
+    return this;
+  };
+  this.placeholder = function (setPlaceholder) {
+    input.placeholder(setPlaceholder);
+    return this;
+  }
+  this.text = function (setText) {
+    input.text(setText);
+    return this;
+  };
+  this.val = function (setVal) {
+    input.val(setVal);
+    return this;
+  }
   this.leyenda = function (setLeyenda) {
     if (typeof setLeyenda !== "undefined") {
       if (typeof setLeyenda === "string") {
@@ -610,13 +625,13 @@ cg.ImputForm = function () {
   }
   this.leyenda(leyenda);
 
-  this.addOption = function (newOption) {
+  this.addItem = function (newitem) {
     for (var arg in arguments) {
-      input.getListInputs()['select'].append(arguments[arg]);
+      input.addItem(arguments[arg]);
     }
-
     return this;
   }
+
 
 
 }
@@ -728,10 +743,11 @@ cg.FormMagic = function () {
             inp.leyenda(question[i][e].name).input(question[i][e].type);
             var  viewData = question[i][e].question.view;
             for (var f in viewData) {
-              inp.addOption(cg.Option(f,viewData[f]))
+              inp.addItem(cg.Option(f,viewData[f]))
             }
             body.append(inp.dom());
           }
+          body.append(cg.$("div").css('clear', 'both'));
           //body.
       }
 
