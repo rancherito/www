@@ -393,13 +393,16 @@ cg.Option = function (val,view) {
 cg.InputX = function (setInput) {
   cg.myDom.call(this);
 
-  var styleDefault = {"white-space": "nowrap", background: "white", "border": "0px solid", "text-align": "left", position: "relative","box-sizing": "border-box",width: "100%",height: "100%", outline: 0};
-  var iSel = cg.$("button").addClass('ion-arrow-down-b').css({cursor: "pointer", "font-family": "Tw Cen MT", border: 0, outline: 0, "border-style": "solid", background: "white", position: "absolute", height: "100%",top:0,right:0, width: 30,"font-size": "16px"});
-  var list = cg.$("div").addClass('ImputX-list').hide().css({"z-index": 99999999 ,background:"white","border-radius": "1px",border: "1px gray solid", top: "100%",padding: "3px", "box-sizing": "border-box", width: "100%", position: "absolute"});
+  var styleDefault = {background: "transparent", "white-space": "nowrap", "border": "0px solid", "text-align": "left", position: "relative","box-sizing": "border-box",width: "100%",height: "100%", outline: 0};
+  var iSel = cg.$("button").addClass('ion-arrow-down-b ImputX-arrow').css({background: "transparent",cursor: "pointer", "font-family": "Tw Cen MT", border: 0, outline: 0, "border-style": "solid", position: "absolute", height: "100%",top:0,right:0, width: 30,"font-size": "16px"});
+  var list = cg.$("div")
+  .addClass('ImputX-list').hide()
+  .css({"z-index": 999 ,background:"white","border-radius": "1px",border: "1px gray solid", top: "100%",padding: "3px", "box-sizing": "border-box", width: "100%", position: "absolute"})
+  .append(cg.Option("-1","Elige una opción").css({cursor: "default"}));
 
-  var mlsave = cg.$("button").addClass('ion-close-round').css({padding: "0px 3px"});
-  var miSel = cg.$("button").addClass('ion-arrow-down-b').css({cursor: "pointer", "font-family": "Tw Cen MT", border: 0, outline: 0, "border-style": "solid", background: "white", position: "absolute", height: "100%",top:0,right:0, width: 30,"font-size": "16px"});
-  var multiList = cg.$("div").addClass('ImputX-list').hide().css({"z-index": 99999999, background: "white","border-radius": "1px",border: "1px gray solid", top: "100%",padding: "3px", "box-sizing": "border-box", width: "100%", position: "absolute"}).append(
+  var mlsave = cg.$("button").addClass('ion-close-round ImputX-close').css({padding: "0px 3px"});
+  var miSel = cg.$("button").addClass('ion-arrow-down-b ImputX-arrow').css({background: "transparent", cursor: "pointer", "font-family": "Tw Cen MT", border: 0, outline: 0, "border-style": "solid", position: "absolute", height: "100%",top:0,right:0, width: 30,"font-size": "16px"});
+  var multiList = cg.$("div").addClass('ImputX-list').hide().css({"z-index": 999,"border-radius": "1px",border: "1px gray solid", top: "100%",padding: "3px", "box-sizing": "border-box", width: "100%", position: "absolute", background: "white",}).append(
     cg.$("div").addClass('ImputX-close-panel').append(mlsave),
     cg.$("div").addClass('ImputX-list-panel').css({"overflow": "hidden"})
   );
@@ -524,14 +527,21 @@ cg.InputX = function (setInput) {
   var colors = ["red","blue"];
   var activeOption = [];
   var optionList = [];
-
+  var soptionList = [];
+  this.mOptionList = function () {
+    return optionList;
+  }
+  this.sOptionList = function () {
+    return soptionList;
+  }
   this.addItem = function (newItem) {
     if (typeof newItem !== "undefined") {
       for (var arg in arguments) {
-
         if (typeInput === "select") {
+          var myoption = {option: arguments[arg], val: arguments[arg].val()};
+          soptionList.push(myoption);
           list.append(
-            arguments[arg]
+            myoption.option
             .css({"white-space": "nowrap", "overflow": "hidden",cursor: "pointer"})
             .hover(function() {$(this).css({background: "#ddd"}); hoverOptions = true},function() {$(this).css({background: "transparent"}); hoverOptions = false;})
             .click(function(event) {
@@ -570,6 +580,7 @@ cg.InputX = function (setInput) {
     }
     return this;
   }
+
   this.input(setInput);
   var colorOpAct = "#ddd";
   function optionSettings(optionList,listInputs) {
@@ -593,7 +604,8 @@ cg.ImputForm = function () {
   var input = new cg.InputX();
   var boxLeyenda = cg.$("div").addClass("InputForm-boxTitle");
   var leyenda = 'some text';
-  //input.input("select");
+
+
   this.container.append(
     cg.$("div").append(
       boxLeyenda,

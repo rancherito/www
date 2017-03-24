@@ -31,60 +31,49 @@
         box-sizing: border-box;
       }
       .FormMagictheme01 .InputForm{
-
+        padding: 10px 10px 20px;
+        box-sizing: border-box;
+        width: 50%;
+        float: left;
       }
-        /*.FormMagictheme01 > div.FormMagic-group{
-         margin-bottom: 30px;
-         border-radius: 3px;
-         border: 1px #e91e63 solid;
-         position: relative;
-       }
-       .FormMagictheme01 > div.FormMagic-group:last-of-type{
-         margin-bottom: 0;
-       }
-       .FormMagictheme01 > div.FormMagic-group > div.FormMagic-title{
-         background: white;
-         height: 20px;
-         position: absolute;
-         padding: 5px;
-         border: 1px #e91e63 solid;
-         border-radius: 3px;
-         left: 10px;
-         top: -15px;
-         color: #e91e63;
-         font-weight: bold;
-       }
-       .FormMagictheme01 > div.FormMagic-group > div.FormMagic-body{
-         padding: 30px 10px 10px;
-         width: 100%;
-         box-sizing: border-box;
-       }
-       .FormMagictheme01 > div.FormMagic-group > div.FormMagic-body > div.InputForm{
-         padding: 0 0 10px;
-         height: 55px;
-         width: 50%;
-         float: left;
-       }
-       .FormMagictheme01 > div.FormMagic-group > div.FormMagic-body > div.InputForm > div{
-         height: 100%;
-         padding: 0 10px;
-         box-sizing: border-box;
-       }
-       .FormMagictheme01 > div.FormMagic-group > div.FormMagic-body > div.InputForm > div div.ImputX{
-         height: 30px;
-       }
-       .FormMagictheme01 > div.FormMagic-group > div.FormMagic-body > div.InputForm > div .ImputX .ImputX-input{
-         padding: 5px;
-       }
-       .ImputXtheme01{
-         box-sizing: border-box;
-       }
-       .ImputXtheme01 .ImputX-input{
-         height: 30px;
-         border: 0;
-         padding: 5px;
-         overflow: hidden;
-       }*/
+      .FormMagictheme01 .InputForm > div{
+      }
+      .FormMagictheme01 .InputForm > div .InputForm-boxTitle{
+        height: 20px;
+        color: #f44336;
+      }
+      .FormMagictheme01 .InputForm > div .ImputX{
+        background: white;
+        height: 35px;
+        border: 0 !important;
+        border-bottom: 1px #c1c1c1 solid !important;
+      }
+      .FormMagictheme01 .InputForm > div .ImputX-input{
+        padding: 5px;
+      }
+      .FormMagictheme01 .InputForm > div .ImputX-list{
+        box-shadow:  0 1px 4px 0 #888888;
+        border: 0 !important;
+        background: #f9f9f9 !important;
+        top: 0 !important;
+        overflow: auto;
+        max-height: 113px;
+      }
+      .FormMagictheme01 .InputForm > div .ImputX-list option{
+        height: 35px;
+        line-height: 35px;
+        padding: 0 10px !important;
+      }
+      .FormMagictheme01 .InputForm .ImputX-close{
+        background: transparent;
+        border-style: solid;
+        outline: 0;
+        border: 0;
+      }
+      .FormMagictheme01 .InputForm .ImputX-close:hover{
+        background: #fb5656;
+        color: white;
+      }
 
      </style>
      <script type="text/javascript">
@@ -93,7 +82,7 @@
          var test = cg.obj.FormMagic.test;
          test.style("FormMagictheme01");
 
-         var inputf = cg.obj.ImputForm.test;
+         /*var inputf = cg.obj.ImputForm.test;
           inputf.placeholder("my textlalal").input("select").text('un texto');
           inputf.addItem(
             cg.Option("0","primer valosssr"),
@@ -118,10 +107,10 @@
             alter: "alternativas",
             value: "valores"
           });
+*/
 
 
-
-        /* $.post('query.php', {sql: cg.fn('preguntasCuestionario',["170001"])}, function(data) {
+        $.post('query.php', {sql: cg.fn('preguntasCuestionario',["170001"])}, function(data) {
            var mydata = new cg.DataTable();
            console.log(JSON.parse(data));
            mydata.source(JSON.parse(data));
@@ -133,7 +122,7 @@
              alter: "descripcion_alternativas",
              value: "valor_alternativas"
            });
-         });*/
+         });
 
        });
 
