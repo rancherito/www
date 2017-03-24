@@ -393,15 +393,15 @@ cg.Option = function (val,view) {
 cg.InputX = function (setInput) {
   cg.myDom.call(this);
 
-  var styleDefault = {background: "white", "border": "0px solid", "text-align": "left", position: "relative","box-sizing": "border-box",width: "100%",height: "100%", outline: 0};
+  var styleDefault = {"white-space": "nowrap", background: "white", "border": "0px solid", "text-align": "left", position: "relative","box-sizing": "border-box",width: "100%",height: "100%", outline: 0};
   var iSel = cg.$("button").addClass('ion-arrow-down-b').css({cursor: "pointer", "font-family": "Tw Cen MT", border: 0, outline: 0, "border-style": "solid", background: "white", position: "absolute", height: "100%",top:0,right:0, width: 30,"font-size": "16px"});
   var list = cg.$("div").addClass('ImputX-list').hide().css({"z-index": 99999999 ,background:"white","border-radius": "1px",border: "1px gray solid", top: "100%",padding: "3px", "box-sizing": "border-box", width: "100%", position: "absolute"});
 
   var mlsave = cg.$("button").addClass('ion-close-round').css({padding: "0px 3px"});
   var miSel = cg.$("button").addClass('ion-arrow-down-b').css({cursor: "pointer", "font-family": "Tw Cen MT", border: 0, outline: 0, "border-style": "solid", background: "white", position: "absolute", height: "100%",top:0,right:0, width: 30,"font-size": "16px"});
-  var multiList = cg.$("div").addClass('ImputX-list').hide().css({background: "white","border-radius": "1px",border: "1px gray solid", top: "100%",padding: "3px", "box-sizing": "border-box", width: "100%", position: "absolute"}).append(
+  var multiList = cg.$("div").addClass('ImputX-list').hide().css({"z-index": 99999999, background: "white","border-radius": "1px",border: "1px gray solid", top: "100%",padding: "3px", "box-sizing": "border-box", width: "100%", position: "absolute"}).append(
     cg.$("div").addClass('ImputX-close-panel').append(mlsave),
-    cg.$("div").addClass('ImputX-list-panel').css({"overflow": "hidden","z-index": 99999999})
+    cg.$("div").addClass('ImputX-list-panel').css({"overflow": "hidden"})
   );
   mlsave.click(function(event) {
     multiList.hide();
@@ -532,6 +532,7 @@ cg.InputX = function (setInput) {
         if (typeInput === "select") {
           list.append(
             arguments[arg]
+            .css({"white-space": "nowrap", "overflow": "hidden"})
             .hover(function() {$(this).css({background: "#ddd"}); hoverOptions = true},function() {$(this).css({background: "transparent"}); hoverOptions = false;})
             .click(function(event) {
               listInputs["select"].attr("value",$(this).val()).text($(this).text());
@@ -543,7 +544,9 @@ cg.InputX = function (setInput) {
           var myoption = {option: arguments[arg], active: false,val: arguments[arg].val()};
           optionList.push(myoption);
           optionSettings(myoption,listInputs);
-          myoption.option.click(function(event) {
+          myoption.option
+          .css({"white-space": "nowrap", "overflow": "hidden"})
+          .click(function(event) {
             var e = 0;
             var testmsel = "";
             for (var i in optionList) {
@@ -631,9 +634,6 @@ cg.ImputForm = function () {
     }
     return this;
   }
-
-
-
 }
 
 cg.MultiPanelView = function () {
@@ -733,10 +733,7 @@ cg.FormMagic = function () {
       for (var i in question) {
         var body = cg.$("div").addClass('FormMagic-body');
           this.container.append(
-            cg.$("div").addClass('FormMagic-group').append(
-              cg.$("div").text(i).addClass('FormMagic-title'),
-              body
-            )
+            cg.$("div").addClass('FormMagic-group').append(cg.$("div").text(i).addClass('FormMagic-title'),body)
           );
           for (var e in question[i]) {
             var inp = new cg.ImputForm();

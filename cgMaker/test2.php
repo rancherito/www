@@ -81,12 +81,12 @@
             cg.Option("3","fdgdfgdfgd")
           );
 
-         /*var data = new cg.DataTable();
+         var data = new cg.DataTable();
          data.source({
             'grupos':["INDICE INFORMACION PERSONAL","INDICE INFORMACION PERSONAL","INDICE INFORMACION PERSONAL","INDICE INFORMACION PERSONAL","INDICE INFORMACION PERSONAL","INDICE INFORMACION PERSONAL"],
             'preguntas':["CUANTOS AÑOS TIENES","CUANTOS AÑOS TIENES","CUANTOS AÑOS TIENES","PREFERENCIA MUSICAL","PREFERENCIA MUSICAL","PREFERENCIA MUSICAL"],
-            'types': ["select","select","select","select","select","select"],
-            'alternativas':["18","19","20","ROCK","ELECTRO","POP"],
+            'types': ["select","select","select","multiselect","multiselect","multiselect"],
+            'alternativas':["DIECIOCO","TRENTA Y NUEVE","SESENTA Y CINCO","ROCK","ELECTRO","POP"],
             'valores':["1","2","3","1","2","3"]
           });
           test.datatable(data);
@@ -96,12 +96,11 @@
             type: "types",
             alter: "alternativas",
             value: "valores"
-          });*/
+          });
 
 
 
-
-         $.post('query.php', {sql: cg.fn('preguntasCuestionario',["170001"])}, function(data) {
+        /* $.post('query.php', {sql: cg.fn('preguntasCuestionario',["170001"])}, function(data) {
            var mydata = new cg.DataTable();
            console.log(JSON.parse(data));
            mydata.source(JSON.parse(data));
@@ -113,7 +112,7 @@
              alter: "descripcion_alternativas",
              value: "valor_alternativas"
            });
-         });
+         });*/
 
        });
 
