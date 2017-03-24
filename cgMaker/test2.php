@@ -12,7 +12,28 @@
        .FormMagictheme01{
          padding: 30px 10px;
        }
-       .FormMagictheme01 > div.FormMagic-group{
+      .FormMagictheme01 .FormMagic-group{
+        background: white;
+        margin: 0 0 20px;
+        box-shadow: 0 1px 4px 0 #888888;
+      }
+      .FormMagictheme01 .FormMagic-title{
+        background: #fb5656;
+        height: 40px;
+        line-height: 20px;
+        font-size: 18px;
+        color: white;
+        padding: 10px;
+        box-sizing: border-box;
+      }
+      .FormMagictheme01 .FormMagic-body{
+        padding: 10px;
+        box-sizing: border-box;
+      }
+      .FormMagictheme01 .InputForm{
+
+      }
+        /*.FormMagictheme01 > div.FormMagic-group{
          margin-bottom: 30px;
          border-radius: 3px;
          border: 1px #e91e63 solid;
@@ -63,7 +84,7 @@
          border: 0;
          padding: 5px;
          overflow: hidden;
-       }
+       }*/
 
      </style>
      <script type="text/javascript">
@@ -83,11 +104,11 @@
 
          var data = new cg.DataTable();
          data.source({
-            'grupos':["INDICE INFORMACION PERSONAL","INDICE INFORMACION PERSONAL","INDICE INFORMACION PERSONAL","INDICE INFORMACION PERSONAL","INDICE INFORMACION PERSONAL","INDICE INFORMACION PERSONAL"],
-            'preguntas':["CUANTOS AÑOS TIENES","CUANTOS AÑOS TIENES","CUANTOS AÑOS TIENES","PREFERENCIA MUSICAL","PREFERENCIA MUSICAL","PREFERENCIA MUSICAL"],
-            'types': ["select","select","select","multiselect","multiselect","multiselect"],
-            'alternativas':["DIECIOCO","TRENTA Y NUEVE","SESENTA Y CINCO","ROCK","ELECTRO","POP"],
-            'valores':["1","2","3","1","2","3"]
+            'grupos':["INDICE INFORMACION PERSONAL","INDICE INFORMACION PERSONAL","INDICE INFORMACION PERSONAL","INDICE INFORMACION PERSONAL","INDICE INFORMACION PERSONAL","INDICE INFORMACION PERSONAL","palala"],
+            'preguntas':["CUANTOS AÑOS TIENES","CUANTOS AÑOS TIENES","CUANTOS AÑOS TIENES","PREFERENCIA MUSICAL","PREFERENCIA MUSICAL","PREFERENCIA MUSICAL","nananna"],
+            'types': ["select","select","select","multiselect","multiselect","multiselect","select"],
+            'alternativas':["DIECIOCO","TRENTA Y NUEVE","SESENTA Y CINCO","ROCK","ELECTRO","POP","wachala tattoo"],
+            'valores':["1","2","3","1","2","3","lala"]
           });
           test.datatable(data);
           test.makeForm({

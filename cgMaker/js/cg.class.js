@@ -532,7 +532,7 @@ cg.InputX = function (setInput) {
         if (typeInput === "select") {
           list.append(
             arguments[arg]
-            .css({"white-space": "nowrap", "overflow": "hidden"})
+            .css({"white-space": "nowrap", "overflow": "hidden",cursor: "pointer"})
             .hover(function() {$(this).css({background: "#ddd"}); hoverOptions = true},function() {$(this).css({background: "transparent"}); hoverOptions = false;})
             .click(function(event) {
               listInputs["select"].attr("value",$(this).val()).text($(this).text());
