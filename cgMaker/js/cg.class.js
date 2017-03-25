@@ -397,12 +397,12 @@ cg.InputX = function (setInput) {
   var iSel = cg.$("button").addClass('ion-arrow-down-b ImputX-arrow').css({background: "transparent",cursor: "pointer", "font-family": "Tw Cen MT", border: 0, outline: 0, "border-style": "solid", position: "absolute", height: "100%",top:0,right:0, width: 30,"font-size": "16px"});
   var list = cg.$("div")
   .addClass('ImputX-list').hide()
-  .css({"z-index": 999 ,background:"white","border-radius": "1px",border: "1px gray solid", top: "100%",padding: "3px", "box-sizing": "border-box", width: "100%", position: "absolute"})
+  .css({"max-height": "150px", "z-index": 999 ,background:"white","border-radius": "1px",border: "1px gray solid", top: "100%",padding: "3px", "box-sizing": "border-box", width: "100%", position: "absolute"})
   .append(cg.Option("-1","Elige una opción").css({cursor: "default"}));
 
-  var mlsave = cg.$("button").addClass('ion-close-round ImputX-close').css({padding: "0px 3px"});
+  var mlsave = cg.$("button").addClass('ion-android-done ImputX-close').css({padding: "0px 3px"});
   var miSel = cg.$("button").addClass('ion-arrow-down-b ImputX-arrow').css({background: "transparent", cursor: "pointer", "font-family": "Tw Cen MT", border: 0, outline: 0, "border-style": "solid", position: "absolute", height: "100%",top:0,right:0, width: 30,"font-size": "16px"});
-  var multiList = cg.$("div").addClass('ImputX-list').hide().css({"z-index": 999,"border-radius": "1px",border: "1px gray solid", top: "100%",padding: "3px", "box-sizing": "border-box", width: "100%", position: "absolute", background: "white",}).append(
+  var multiList = cg.$("div").addClass('ImputX-list').hide().css({"max-height": "150px", "z-index": 999,"border-radius": "1px",border: "1px gray solid", top: "100%",padding: "3px", "box-sizing": "border-box", width: "100%", position: "absolute", background: "white"  }).append(
     cg.$("div").addClass('ImputX-close-panel').append(mlsave),
     cg.$("div").addClass('ImputX-list-panel').css({"overflow": "hidden"})
   );
@@ -413,7 +413,7 @@ cg.InputX = function (setInput) {
     input: cg.$("input").attr('type', 'text').addClass('ImputX-input').css(styleDefault),
     label: cg.$("button").addClass('ImputX-input').css(styleDefault),
     select: cg.$("button").addClass('ImputX-input').css(styleDefault).css({cursor: "pointer"}),
-    multiselect: cg.$("button").addClass('ImputX-input').css(styleDefault).text("sin selección").css({cursor: "pointer"})
+    multiselect: cg.$("button").addClass('ImputX-input').css(styleDefault).text("elija una o mas opciones").css({cursor: "pointer"})
   };
 
   iSel.click(function(event) {list.toggle();}).focusout(function(event) {  if (!hoverOptions) {list.hide();}});
@@ -496,7 +496,7 @@ cg.InputX = function (setInput) {
             e++;
           }
         }
-        var text = ['sin selección',testmsel,"multiple selección"];
+        var text = ['elija una o mas opciones',testmsel,"varias seleciones"];
         listInputs["multiselect"].text(text[e]);
       }
       else {
@@ -528,6 +528,9 @@ cg.InputX = function (setInput) {
   var activeOption = [];
   var optionList = [];
   var soptionList = [];
+  this.typeInput = function () {
+    return typeInput;
+  }
   this.mOptionList = function () {
     return optionList;
   }
@@ -566,7 +569,7 @@ cg.InputX = function (setInput) {
                 e++;
               }
             }
-            var text = ['sin selección',testmsel,"multiple selección"];
+            var text = ['elija una o mas opciones',testmsel,"varias seleciones"];
             listInputs["multiselect"].text(text[e]);
           });
           multiList.find("div.ImputX-list-panel").append(myoption.option);
@@ -603,15 +606,62 @@ cg.ImputForm = function () {
   cg.myDom.call(this);
   var input = new cg.InputX();
   var boxLeyenda = cg.$("div").addClass("InputForm-boxTitle");
+  var textLeyenda = cg.$("span").addClass('InputForm-title').appendTo(boxLeyenda);
+  var textAlert = cg.$("span").addClass('InputForm-alert').appendTo(boxLeyenda).hide().css({cursor: "pointer"}).text('error en el campo');
   var leyenda = 'some text';
+  var textAlerts = {novoid:"Campo vacio",novalues: " Opción no valida"};
+  var validations = {novalues:null, novoid:null};
+  textAlert.click(function(event) {
+    textAlert.hide(200);
+  });
 
+  this.validation = function (setValitations) {
+    for (var i in setValitations) {
+      if (typeof validations[i] !== "undefined") {
+        validations[i] = setValitations[i];
+      }
+    }
 
-  this.container.append(
+    return this;
+  }
+  this.isValid = function () {
+    var valid = true;
+    if (valid) {
+      if (input.typeInput() === "select") {
+        if (validations["novalues"] !== null) {
+          textAlert.text(textAlerts["novalues"]);
+          valid = validations["novalues"].indexOf(input.val()) === -1;
+          //console.log(input.val());
+        }
+      }
+    }
+    if (valid) {
+      if (input.typeInput() === "multiselect") {
+        if (validations["novoid"] !== null) {
+          textAlert.text(textAlerts["novoid"]);
+          valid = input.val().length > 0;
+        }
+      }
+    }
+    if (valid) {
+      textAlert.hide(200);
+    }else {
+      textAlert.show(200);
+    }
+    return valid;
+  }
+  this.container
+  .append(
     cg.$("div").append(
       boxLeyenda,
       input.placeholder("your text").dom()
     )
-  ).addClass('InputForm');
+  )
+  .addClass('InputForm')
+  .click(function(event) {
+    textAlert.hide(200);
+  });
+
   this.input = function (setInput) {
     input.input(setInput);
     return this;
@@ -621,18 +671,22 @@ cg.ImputForm = function () {
     return this;
   }
   this.text = function (setText) {
-    input.text(setText);
+    if (typeof setText === "undefined") {
+      return input.text();
+    }
     return this;
   };
   this.val = function (setVal) {
-    input.val(setVal);
+    if (typeof setVal === "undefined") {
+      return input.val();
+    }
     return this;
   }
   this.leyenda = function (setLeyenda) {
     if (typeof setLeyenda !== "undefined") {
       if (typeof setLeyenda === "string") {
         leyenda = setLeyenda;
-        boxLeyenda.text(leyenda);
+        textLeyenda.text(leyenda);
         return this;
       }
     }
@@ -647,7 +701,6 @@ cg.ImputForm = function () {
     return this;
   }
 }
-
 cg.MultiPanelView = function () {
   cg.myDom.call(this);
   this.container = cg.$('div').addClass('cg-multipanel');
@@ -694,12 +747,12 @@ cg.QuestionsData = function () {
   this.question = {view: [], val: []};
   this.type = "";
 }
-cg.FormMagic = function () {
+cg.FormMagic = function FormMagic() {
   cg.myDom.call(this);
   this.container.addClass('FormMagic');
+  this.question = {};
   var datatable = new cg.DataTable();
   var groups = {val: [], view: []};
-  var question = {};
   this.datatable = function (newDatatable) {
     if (typeof newDatatable !== "undefined") {
       if (newDatatable instanceof cg.DataTable) {
@@ -708,56 +761,55 @@ cg.FormMagic = function () {
     }
     return datatable;
   }
+  this.listFormInput = {};
   this.makeForm = function (positionForm) {
     if (!datatable.isEmpty("bool")) {
       var source = datatable.source();var columsGroup = {groups: [], quest:[] ,type: [], alter: [], value: []};
-
       for (var i in columsGroup) {
         columsGroup[i] = source[positionForm[i]];
       }
-
       var newData = [];
       var a = true;
       for (var i in columsGroup) {
         for (var e in columsGroup[i]) {if (e !== "unique") {if (a) {newData.push([]);}  newData[e].push(columsGroup[i][e]);}}
         a = false;
       }
-
       var usedQ = [];
       for (var i in newData) {
-        if (typeof question[newData[i][0]] === "undefined") {
-          question[newData[i][0]] = [];
+        if (typeof this.question[newData[i][0]] === "undefined") {
+          this.question[newData[i][0]] = [];
         }
         if (usedQ.indexOf(newData[i][1]) === -1) {
           var qq = new cg.QuestionsData();
           qq.name = newData[i][1];qq.type = newData[i][2];
           usedQ.push(newData[i][1]);
-          question[newData[i][0]].push(qq);
+          this.question[newData[i][0]].push(qq);
         }
-        for (var e = 0; e < question[newData[i][0]].length; e++) {
-          if (question[newData[i][0]][e].name === newData[i][1]) {
-            question[newData[i][0]][e].question['view'].push(newData[i][3]);
-            question[newData[i][0]][e].question['val'].push(newData[i][4]);
+        for (var e = 0; e < this.question[newData[i][0]].length; e++) {
+          if (this.question[newData[i][0]][e].name === newData[i][1]) {
+            this.question[newData[i][0]][e].question['view'].push(newData[i][3]);
+            this.question[newData[i][0]][e].question['val'].push(newData[i][4]);
           }
         }
       }
 
-      for (var i in question) {
+      for (var i in this.question) {
         var body = cg.$("div").addClass('FormMagic-body');
           this.container.append(
             cg.$("div").addClass('FormMagic-group').append(cg.$("div").text(i).addClass('FormMagic-title'),body)
           );
-          for (var e in question[i]) {
+          this.listFormInput[i] = [];
+          for (var e in this.question[i]) {
             var inp = new cg.ImputForm();
-            inp.leyenda(question[i][e].name).input(question[i][e].type);
-            var  viewData = question[i][e].question.view;
+            this.listFormInput[i].push(inp);
+            inp.leyenda(this.question[i][e].name).input(this.question[i][e].type);
+            var  viewData = this.question[i][e].question.view;
             for (var f in viewData) {
               inp.addItem(cg.Option(f,viewData[f]))
             }
             body.append(inp.dom());
           }
           body.append(cg.$("div").css('clear', 'both'));
-          //body.
       }
 
     }
