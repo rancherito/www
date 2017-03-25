@@ -1,0 +1,99 @@
+.FormMagictheme01{
+  padding: 20px 10px;
+}
+.FormMagictheme01 .FormMagic-group{
+ background: white;
+ margin: 0 0 20px;
+ box-shadow: 0 1px 4px 0 #888888;
+}
+.FormMagictheme01 .FormMagic-title{
+ background: #6c9bdc;
+ height: 40px;
+ line-height: 20px;
+ font-size: 18px;
+ color: white;
+ padding: 10px;
+ box-sizing: border-box;
+}
+.FormMagictheme01 .FormMagic-body{
+ padding: 10px;
+ box-sizing: border-box;
+}
+.FormMagictheme01 .InputForm{
+ padding: 10px 10px 20px;
+ box-sizing: border-box;
+ width: 50%;
+ float: left;
+}
+@media only screen and (max-width: 520px) {
+  .FormMagictheme01 .InputForm{
+    width: 100%;
+  }
+}
+
+.FormMagictheme01 .InputForm > div{
+}
+.FormMagictheme01 .InputForm > div .InputForm-boxTitle{
+ height: 20px;
+ color: #389ae7;
+ position: relative;
+}
+.FormMagictheme01 .InputForm > div .InputForm-title{
+  display: block;
+  overflow: hidden;
+  height: 20px;
+}
+.FormMagictheme01 .InputForm > div .InputForm-alert{
+ color: gray;
+ position: absolute;
+ right: 0;
+ background: #ff7167;
+ color: white;
+ padding: 3px 6px;
+ top: -14px;
+ border-radius: 3px;
+}
+.FormMagictheme01 .InputForm > div .InputForm-alert::after{
+  font-family: "Ionicons";
+  content: "\f35f";
+  position: absolute;
+  top: 14px;
+  color: #ff7167;
+  width: 90%;
+  left: 0;
+  font-size: 26px;
+  text-align: right;
+}
+
+
+.FormMagictheme01 .InputForm > div .ImputX{
+ background: white;
+ height: 35px;
+ border: 0 !important;
+ border-bottom: 1px #c1c1c1 solid !important;
+}
+.FormMagictheme01 .InputForm > div .ImputX-input{
+ padding: 5px;
+}
+.FormMagictheme01 .InputForm > div .ImputX-list{
+ box-shadow:  0 1px 4px 0 #888888;
+ border: 0 !important;
+ background: #f9f9f9 !important;
+ top: -100% !important;
+ overflow: auto;
+}
+.FormMagictheme01 .InputForm > div .ImputX-list option{
+ height: 35px;
+ line-height: 35px;
+ padding: 0 10px !important;
+}
+.FormMagictheme01 .InputForm .ImputX-close{
+ background: transparent;
+ border-style: solid;
+ outline: 0;
+ border: 0;
+}
+.FormMagictheme01 .InputForm .ImputX-close:hover{
+ background: #fb5656;
+ color: white;
+}
