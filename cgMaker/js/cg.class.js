@@ -1,5 +1,3 @@
-
-
 var cg = {};
 //utils
 cg.error = {
